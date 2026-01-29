@@ -16,7 +16,7 @@ import {
 } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import Image from 'next/image'
+
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -135,10 +135,10 @@ export default function Header() {
               <div className="relative">
                 {/* Desktop Logo */}
                 <div className="hidden lg:block relative w-[180px] h-[60px] transition-all duration-300 group-hover:scale-105">
-                  <Image
+                  <img
                     src="/KVA_logo_2.png"
                     alt="KVA Logistics - Global Logistics & Supply Chain"
-                    width={180}
+                    width={140}
                     height={60}
                     className="object-contain object-left"
                     priority
@@ -167,7 +167,7 @@ export default function Header() {
 
                 {/* Mobile Logo */}
                 <div className="lg:hidden relative w-[140px] h-[50px] transition-all duration-300 group-hover:scale-105">
-                  <Image
+                  <img
                     src="/KVA_logo_2.png"
                     alt="KVA Logistics"
                     width={140}
@@ -328,7 +328,7 @@ export default function Header() {
                   <Link href="/" className="flex items-center" onClick={() => setIsMenuOpen(false)}>
                     {/* Mobile Logo in Menu */}
                     <div className="relative w-[120px] h-[45px]">
-                      <Image
+                      <img
                         src="/KVA_LOGO_2.png"
                         alt="KVA Logistics"
                         width={120}
