@@ -88,7 +88,7 @@ export default function Header() {
   return (
     <>
       {/* Top Information Bar - Desktop Only */}
-      <div className="hidden lg:block" style={{ backgroundColor: colors.darkOrange }}>
+      {/* <div className="hidden lg:block" style={{ backgroundColor: colors.darkOrange }}>
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center py-2 text-sm text-white">
             <div className="flex items-center space-x-8">
@@ -120,7 +120,7 @@ export default function Header() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Main Header */}
       <header className={`sticky top-0 z-50 transition-all duration-300 ${
@@ -142,15 +142,15 @@ export default function Header() {
                     height={60}
                     className="object-contain object-left"
                     priority
-                    onError={(e) => {
-                      console.error('Failed to load desktop logo:', e.target.src);
-                      e.target.style.display = 'none';
-                      const fallback = e.target.parentElement.querySelector('.desktop-logo-fallback');
-                      if (fallback) fallback.style.display = 'flex';
-                    }}
+                    // onError={(e) => {
+                    //   console.error('Failed to load desktop logo:', e.target.src);
+                    //   e.target.style.display = 'none';
+                    //   const fallback = e.target.parentElement.querySelector('.desktop-logo-fallback');
+                    //   if (fallback) fallback.style.display = 'flex';
+                    // }}
                   />
                   {/* Desktop Fallback */}
-                  <div className="desktop-logo-fallback hidden absolute inset-0 items-center">
+                  {/* <div className="desktop-logo-fallback hidden absolute inset-0 items-center">
                     <div className="p-2 rounded-lg" style={{ backgroundColor: colors.darkBrown }}>
                       <Truck className="h-8 w-8" style={{ color: colors.goldenYellow }} />
                     </div>
@@ -162,8 +162,8 @@ export default function Header() {
                         LOGISTICS
                       </span>
                     </div>
-                  </div>
-                </div>
+                  </div>*/}
+                </div> 
 
                 {/* Mobile Logo */}
                 <div className="lg:hidden relative w-[140px] h-[50px] transition-all duration-300 group-hover:scale-105">
