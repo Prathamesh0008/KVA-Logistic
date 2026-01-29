@@ -1,19 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { 
-  Menu, 
-  X, 
-  Truck, 
-  Phone, 
-  Mail, 
-  MapPin, 
-  ChevronDown,
-  Search,
-  Globe,
-  Clock,
-  ShieldCheck
-} from 'lucide-react'
+import { Menu, X, Truck, ChevronDown } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
@@ -23,7 +11,6 @@ export default function Header() {
   const [isServicesOpen, setIsServicesOpen] = useState(false)
   const pathname = usePathname()
 
-  // Color palette based on your logo
   const colors = {
     darkBrown: '#521903',
     goldenYellow: '#f8b936',
@@ -32,28 +19,29 @@ export default function Header() {
     lightTan: '#c29f85'
   }
 
-  // Handle scroll effect
+  /* ---------------- SCROLL EFFECT ---------------- */
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    const onScroll = () => setIsScrolled(window.scrollY > 10)
+    window.addEventListener('scroll', onScroll)
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Close menu when route changes
+  /* ---------------- ROUTE CHANGE RESET ---------------- */
   useEffect(() => {
     setIsMenuOpen(false)
     setIsServicesOpen(false)
   }, [pathname])
 
+  /* ---------------- BODY SCROLL LOCK ---------------- */
+  useEffect(() => {
+    document.body.style.overflow = isMenuOpen ? 'hidden' : ''
+    return () => (document.body.style.overflow = '')
+  }, [isMenuOpen])
+
   const navItems = [
-    { 
-      name: 'Home', 
-      href: '/'
-    },
-    { 
-      name: 'Services', 
+    { name: 'Home', href: '/' },
+    {
+      name: 'Services',
       href: '#',
       dropdown: [
         { name: 'Road Freight', href: '/services#road-freight' },
@@ -61,407 +49,182 @@ export default function Header() {
         { name: 'Air Freight', href: '/services#air-freight' },
         { name: 'Warehousing', href: '/services#warehousing' },
         { name: 'Last-Mile Delivery', href: '/services#last-mile' },
-        { name: 'Logistics Consulting', href: '/services#consulting' },
+        { name: 'Logistics Consulting', href: '/services#consulting' }
       ]
     },
-    { 
-      name: 'Tracking', 
-      href: '/tracking'
-    },
-    { 
-      name: 'About', 
-      href: '/about'
-    },
-    { 
-      name: 'Contact', 
-      href: '/contact'
-    },
-  ]
-
-  const topInfo = [
-    { icon: Phone, text: '+1 (555) 123-4567', subtext: '24/7 Support' },
-    { icon: Clock, text: 'Mon - Fri: 8AM - 6PM', subtext: 'Sat: 9AM - 4PM' },
-    { icon: Mail, text: 'info@logiswift.com', subtext: 'Quick Response' }
+    { name: 'Tracking', href: '/tracking' },
+    { name: 'About', href: '/about' },
+    { name: 'Contact', href: '/contact' }
   ]
 
   return (
-    <>
-      <header className={`sticky top-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-white/95 backdrop-blur-sm shadow-lg' 
-          : 'bg-white shadow-md'
-      }`}>
-        <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center h-16 lg:h-20">
-            {/* Logo */}
-            <Link href="/" className="flex items-center group">
-              <div className="relative">
-                {/* Desktop Logo */}
-                <div className="hidden lg:block relative w-[180px] h-[60px] transition-all duration-300 group-hover:scale-105">
-                  <img
-                    src="/logo.png"
-                    alt="KVA Logistics - Global Logistics & Supply Chain"
-                    width={140}
-                    height={60}
-                    className="object-contain object-left"
-                    priority
-                    onError={(e) => {
-                      console.error('Failed to load desktop logo:', e.target.src);
-                      e.target.style.display = 'none';
-                      const fallback = e.target.parentElement.querySelector('.desktop-logo-fallback');
-                      if (fallback) fallback.style.display = 'flex';
-                    }}
-                  />
-                  {/* Desktop Fallback */}
-                  <div className="desktop-logo-fallback hidden absolute inset-0 items-center">
-                    <div className="p-2 rounded-lg" style={{ backgroundColor: colors.darkBrown }}>
-                      <Truck className="h-8 w-8" style={{ color: colors.goldenYellow }} />
-                    </div>
-                    <div className="ml-4">
-                      <span className="text-2xl font-bold" style={{ color: colors.darkBrown }}>
-                        KVA
-                      </span>
-                      <span className="block text-sm font-semibold" style={{ color: colors.orange }}>
-                        LOGISTICS
-                      </span>
-                    </div>
-                  </div>
-                </div> 
+    <header
+      className={`sticky top-0 z-50 transition-all duration-300 ${
+        isScrolled ? 'bg-white/95 backdrop-blur shadow-lg' : 'bg-white shadow-md'
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-3 sm:px-4">
+        {/* ---------------- MAIN ROW ---------------- */}
+        <div className="flex items-center justify-between h-16 sm:h-20 lg:h-24">
+          {/* ---------------- LOGO ---------------- */}
+          <Link href="/" className="flex  shrink-0">
+            <img
+              src="/logo.png"
+              alt="KVA Logistics"
+              className="h-20 sm:h-25 lg:h-30  object-cover"
+            />
+          </Link>
 
-                {/* Mobile Logo */}
-                <div className="lg:hidden relative w-[140px] h-[50px] transition-all duration-300 group-hover:scale-105">
-                  <img
-                    src="/logo.png"
-                    alt="KVA Logistics"
-                    width={140}
-                    height={50}
-                    className="object-contain"
-                    priority
-                    onError={(e) => {
-                      console.error('Failed to load mobile logo:', e.target.src);
-                      e.target.style.display = 'none';
-                      const fallback = e.target.parentElement.querySelector('.mobile-logo-fallback');
-                      if (fallback) fallback.style.display = 'flex';
-                    }}
-                  />
-                  {/* Mobile Fallback */}
-                  <div className="mobile-logo-fallback hidden absolute inset-0 items-center">
-                    <div className="p-1.5 rounded-lg" style={{ backgroundColor: colors.darkBrown }}>
-                      <Truck className="h-6 w-6" style={{ color: colors.goldenYellow }} />
-                    </div>
-                    <div className="ml-3">
-                      <span className="text-xl font-bold" style={{ color: colors.darkBrown }}>
-                        KVA
-                      </span>
-                      <span className="block text-xs font-semibold" style={{ color: colors.orange }}>
-                        LOGISTICS
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Link>
-
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex text-black items-center space-x-1">
-              {navItems.map((item) => (
-                <div key={item.name} className="relative group">
-                  {item.dropdown ? (
-                    <>
-                      <button
-                        onClick={() => setIsServicesOpen(!isServicesOpen)}
-                        className={`flex cursor-pointer items-center space-x-1 px-5 py-2.5 rounded-lg font-medium transition-all ${
-                          pathname === '/services' || pathname.startsWith('/services#')
-                            ? 'text-white'
-                            : 'text-gray-700 hover:text-black'
-                        }`}
-                        style={pathname === '/services' || pathname.startsWith('/services#') ? {
-                          backgroundColor: colors.darkBrown
-                        } : {}}
-                      >
-                        <span>{item.name}</span>
-                        <ChevronDown className={`h-4 w-4 transition-transform ${
-                          isServicesOpen ? 'rotate-180' : ''
-                        }`} />
-                      </button>
-                      
-                      {/* Services Dropdown */}
-                      {isServicesOpen && (
-                        <div 
-                          className="absolute left-0 top-full mt-1 w-56 rounded-xl shadow-2xl border py-3 "
-                          style={{ 
-                            backgroundColor: colors.darkBrown,
-                            borderColor: colors.lightTan
-                          }}
-                        >
-                          {item.dropdown.map((subItem) => (
-                            <Link
-                              key={subItem.name}
-                              href={subItem.href}
-                              className="block px-5 py-3 transition-colors group hover:opacity-90"
-                              style={{ color: colors.lightTan }}
-                              onClick={() => setIsServicesOpen(false)}
-                            >
-                              <span className="font-medium hover:text-white">
-                                {subItem.name}
-                              </span>
-                            </Link>
-                          ))}
-                        </div>
-                      )}
-                    </>
-                  ) : (
-                    <Link
-                      href={item.href}
-                      className={`px-5 py-2.5 rounded-lg font-medium transition-all hover:text-black ${
-                        pathname === item.href
-                          ? 'text-white'
-                          : 'text-gray-700'
-                      }`}
-                      style={pathname === item.href ? {
-                        backgroundColor: colors.darkBrown
-                      } : {}}
+          {/* ---------------- DESKTOP NAV ---------------- */}
+          <nav className="hidden lg:flex flex-1 justify-center">
+            <div className="flex items-center space-x-1 xl:space-x-2">
+              {navItems.map((item) =>
+                item.dropdown ? (
+                  <div key={item.name} className="relative">
+                    <button
+                      onClick={() => setIsServicesOpen((v) => !v)}
+                      className="flex items-center gap-1 px-4 xl:px-5 py-2.5 rounded-lg font-semibold text-sm xl:text-[15px] text-gray-700 hover:text-gray-900"
                     >
                       {item.name}
-                    </Link>
-                  )}
-                </div>
-              ))}
-              
-              {/* Get Quote Button */}
-              <Link
-                href="/contact"
-                className="ml-4 text-white px-6 py-2.5 rounded-lg font-semibold hover:opacity-90 transition-all shadow-lg"
-                style={{ 
-                  backgroundColor: colors.goldenYellow,
-                  boxShadow: `0 4px 20px ${colors.goldenYellow}40`
-                }}
-              >
-                Get Quote
-              </Link>
-            </nav>
+                      <ChevronDown
+                        className={`h-4 w-4 transition-transform ${
+                          isServicesOpen ? 'rotate-180' : ''
+                        }`}
+                      />
+                    </button>
 
-            {/* Mobile Menu Button */}
-            <div className="flex items-center space-x-3 lg:hidden">
-              <Link
-                href="/contact"
-                className="text-white px-4 py-2 rounded-lg font-medium text-sm hover:opacity-90 transition-colors"
-                style={{ backgroundColor: colors.goldenYellow }}
-              >
-                Quote
-              </Link>
-              <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-                aria-label="Toggle menu"
-              >
-                {isMenuOpen ? (
-                  <X className="h-6 w-6" style={{ color: colors.darkBrown }} />
+                    {isServicesOpen && (
+                      <div
+                        className="absolute left-1/2 -translate-x-1/2 mt-2 w-64 rounded-xl shadow-2xl py-3"
+                        style={{ backgroundColor: colors.darkBrown }}
+                      >
+                        {item.dropdown.map((sub) => (
+                          <Link
+                            key={sub.name}
+                            href={sub.href}
+                            onClick={() => setIsServicesOpen(false)}
+                            className="block px-5 py-3 text-sm font-medium hover:text-white"
+                            style={{ color: colors.lightTan }}
+                          >
+                            {sub.name}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 ) : (
-                  <Menu className="h-6 w-6" style={{ color: colors.darkBrown }} />
-                )}
-              </button>
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={`px-4 xl:px-5 py-2.5 rounded-lg font-semibold text-sm xl:text-[15px] ${
+                      pathname === item.href
+                        ? 'text-white'
+                        : 'text-gray-700 hover:text-gray-900'
+                    }`}
+                    style={
+                      pathname === item.href
+                        ? { backgroundColor: colors.darkBrown }
+                        : {}
+                    }
+                  >
+                    {item.name}
+                  </Link>
+                )
+              )}
             </div>
+          </nav>
+
+          {/* ---------------- DESKTOP CTA ---------------- */}
+          <div className="hidden lg:block">
+            <Link
+              href="/contact"
+              className="px-6 py-3 rounded-xl font-bold text-white shadow-lg"
+              style={{ backgroundColor: colors.goldenYellow }}
+            >
+              Get Quote
+            </Link>
+          </div>
+
+          {/* ---------------- MOBILE BUTTONS ---------------- */}
+          <div className="flex lg:hidden items-center gap-2">
+            <Link
+              href="/contact"
+              className="px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold text-white"
+              style={{ backgroundColor: colors.goldenYellow }}
+            >
+              Quote
+            </Link>
+            <button
+              onClick={() => setIsMenuOpen(true)}
+              className="p-2 rounded-lg"
+            >
+              <Menu className="h-6 w-6" style={{ color: colors.darkBrown }} />
+            </button>
           </div>
         </div>
+      </div>
 
-        {/* Mobile Navigation */}
-        <div className={`lg:hidden fixed inset-0 z-40 transition-all duration-300 ease-in-out ${
-          isMenuOpen
-            ? 'opacity-100 visible'
-            : 'opacity-0 invisible pointer-events-none'
-        }`}>
-          {/* Backdrop */}
-          <div 
+      {/* ---------------- MOBILE DRAWER ---------------- */}
+      {isMenuOpen && (
+        <div className="fixed inset-0 z-999 lg:hidden">
+          <div
             className="absolute inset-0 bg-black/50"
             onClick={() => setIsMenuOpen(false)}
           />
-          
-          {/* Menu Panel */}
-          <div 
-            className={`absolute right-0 top-0 h-full w-full max-w-sm shadow-2xl transform transition-transform duration-300 ${
-              isMenuOpen ? 'translate-x-0' : 'translate-x-full'
-            }`}
+          <div
+            className="absolute right-0 top-0 h-[100vh] w-[85%] max-w-md shadow-2xl flex flex-col"
             style={{ backgroundColor: colors.darkBrown }}
           >
-            <div className="h-full flex flex-col">
-              {/* Header */}
-              <div className="p-6 border-b" style={{ borderColor: colors.lightTan }}>
-                <div className="flex items-center justify-between mb-4">
-                  <Link href="/" className="flex items-center" onClick={() => setIsMenuOpen(false)}>
-                    {/* Mobile Logo in Menu */}
-                    <div className="relative w-[120px] h-[45px]">
-                      <img
-                        src="/logo.png"
-                        alt="KVA Logistics"
-                        width={120}
-                        height={45}
-                        className="object-contain"
-                        onError={(e) => {
-                          console.error('Failed to load menu logo:', e.target.src);
-                          e.target.style.display = 'none';
-                          const fallback = e.target.parentElement.querySelector('.menu-logo-fallback');
-                          if (fallback) fallback.style.display = 'flex';
-                        }}
+            <div className="p-5 flex items-center justify-between border-b border-white/20">
+              <span className="text-white font-bold text-lg">KVA LOGISTICS</span>
+              <button onClick={() => setIsMenuOpen(false)}>
+                <X className="h-6 w-6 text-white" />
+              </button>
+            </div>
+
+            <div className="flex-1 overflow-y-auto">
+              {navItems.map((item) =>
+                item.dropdown ? (
+                  <div key={item.name}>
+                    <button
+                      onClick={() => setIsServicesOpen((v) => !v)}
+                      className="w-full flex justify-between items-center px-6 py-4 text-white font-semibold"
+                    >
+                      {item.name}
+                      <ChevronDown
+                        className={`h-5 w-5 ${
+                          isServicesOpen ? 'rotate-180' : ''
+                        }`}
                       />
-                      {/* Menu Fallback */}
-                      <div className="menu-logo-fallback hidden absolute inset-0 items-center">
-                        <div className="p-1 rounded-lg" style={{ backgroundColor: colors.goldenYellow }}>
-                          <Truck className="h-5 w-5 text-white" />
-                        </div>
-                        <div className="ml-2">
-                          <span className="text-lg font-bold text-white">KVA</span>
-                          <span className="block text-xs text-gray-300">LOGISTICS</span>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-                  <button
-                    onClick={() => setIsMenuOpen(false)}
-                    className="p-2 hover:opacity-80 rounded-lg transition-opacity"
-                    aria-label="Close menu"
-                  >
-                    <X className="h-5 w-5" style={{ color: colors.lightTan }} />
-                  </button>
-                </div>
-                
-                {/* Quick Contact Info */}
-                <div className="space-y-3">
-                  {topInfo.slice(0, 2).map((item, index) => (
-                    <div key={index} className="flex items-center space-x-3">
-                      <div 
-                        className="p-1.5 rounded-lg"
-                        style={{ backgroundColor: colors.orange, opacity: 0.9 }}
-                      >
-                        <item.icon className="h-4 w-4 text-white" />
-                      </div>
-                      <div>
-                        <p className="font-medium text-sm text-white">{item.text}</p>
-                        <p className="text-xs" style={{ color: colors.lightTan }}>{item.subtext}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Navigation Items */}
-              <div className="flex-grow overflow-y-auto py-4">
-                {navItems.map((item) => (
-                  <div key={item.name} className="border-b last:border-b-0" style={{ borderColor: colors.lightTan, opacity: 0.3 }}>
-                    {item.dropdown ? (
-                      <div className="px-6">
-                        <button
-                          onClick={() => setIsServicesOpen(!isServicesOpen)}
-                          className="flex items-center justify-between w-full py-4 text-left"
+                    </button>
+                    {isServicesOpen &&
+                      item.dropdown.map((sub) => (
+                        <Link
+                          key={sub.name}
+                          href={sub.href}
+                          onClick={() => setIsMenuOpen(false)}
+                          className="block px-10 py-3 text-sm"
+                          style={{ color: colors.lightTan }}
                         >
-                          <span className={`font-medium ${
-                            pathname === '/services' || pathname.startsWith('/services#')
-                              ? 'text-white'
-                              : 'text-white'
-                          }`}>
-                            {item.name}
-                          </span>
-                          <ChevronDown className={`h-5 w-5 transition-transform ${
-                            isServicesOpen ? 'rotate-180' : ''
-                          }`} style={{ color: colors.lightTan }} />
-                        </button>
-                        {isServicesOpen && (
-                          <div className="pl-4 pb-4 space-y-1">
-                            {item.dropdown.map((subItem) => (
-                              <Link
-                                key={subItem.name}
-                                href={subItem.href}
-                                className="block py-2.5 px-4 rounded-lg hover:opacity-90 transition-opacity"
-                                style={{ color: colors.lightTan }}
-                                onClick={() => setIsMenuOpen(false)}
-                              >
-                                {subItem.name}
-                              </Link>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    ) : (
-                      <Link
-                        href={item.href}
-                        className="flex items-center justify-between px-6 py-4 hover:opacity-90 transition-opacity"
-                        style={{ color: colors.lightTan }}
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        <span className={`font-medium ${
-                          pathname === item.href
-                            ? 'text-white'
-                            : 'text-inherit'
-                        }`}>
-                          {item.name}
-                        </span>
-                        <span style={{ color: colors.goldenYellow }}>→</span>
-                      </Link>
-                    )}
+                          {sub.name}
+                        </Link>
+                      ))}
                   </div>
-                ))}
-              </div>
-
-              {/* Mobile Footer */}
-              <div className="border-t p-6 space-y-6" style={{ borderColor: colors.lightTan }}>
-                {/* Trust Badges */}
-                <div className="flex items-center justify-center space-x-4">
-                  <div className="text-center">
-                    <div 
-                      className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-1"
-                      style={{ backgroundColor: colors.orange, opacity: 0.9 }}
-                    >
-                      <ShieldCheck className="h-5 w-5 text-white" />
-                    </div>
-                    <p className="text-xs" style={{ color: colors.lightTan }}>Certified</p>
-                  </div>
-                  <div className="text-center">
-                    <div 
-                      className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-1"
-                      style={{ backgroundColor: colors.orange, opacity: 0.9 }}
-                    >
-                      <Globe className="h-5 w-5 text-white" />
-                    </div>
-                    <p className="text-xs" style={{ color: colors.lightTan }}>150+ Countries</p>
-                  </div>
-                  <div className="text-center">
-                    <div 
-                      className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-1"
-                      style={{ backgroundColor: colors.orange, opacity: 0.9 }}
-                    >
-                      <Clock className="h-5 w-5 text-white" />
-                    </div>
-                    <p className="text-xs" style={{ color: colors.lightTan }}>24/7 Support</p>
-                  </div>
-                </div>
-                
-                {/* CTA Buttons */}
-                <div className="space-y-3">
+                ) : (
                   <Link
-                    href="/tracking"
-                    className="block w-full text-white px-4 py-3 rounded-lg font-semibold text-center hover:opacity-90 transition-opacity shadow-lg"
-                    style={{ backgroundColor: colors.goldenYellow }}
+                    key={item.name}
+                    href={item.href}
                     onClick={() => setIsMenuOpen(false)}
+                    className="block px-6 py-4 text-white font-semibold"
                   >
-                    Track Shipment
+                    {item.name}
                   </Link>
-                  <Link
-                    href="/contact"
-                    className="block w-full border-2 px-4 py-3 rounded-lg font-semibold text-center hover:opacity-90 transition-opacity"
-                    style={{ 
-                      borderColor: colors.goldenYellow,
-                      color: colors.goldenYellow
-                    }}
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    Request Quote
-                  </Link>
-                </div>
-              </div>
+                )
+              )}
             </div>
           </div>
         </div>
-      </header>
-    </>
+      )}
+    </header>
   )
 }
