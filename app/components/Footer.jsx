@@ -21,7 +21,7 @@ export default function Footer() {
             <Link href="/" className="flex items-center ">
               <div className="relative w-[150px] h-[160px] ">
                 <Image
-                  src="/KVA_logo_2.png"
+                  src="/logo.png"
                   alt="KVA Logistics"
                   fill
                   className="object-cover"
