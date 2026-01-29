@@ -17,7 +17,6 @@ import {
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
@@ -26,11 +25,11 @@ export default function Header() {
 
   // Color palette based on your logo
   const colors = {
-    darkBrown: '#521903',     // Primary dark - borders, text
-    goldenYellow: '#f8b936',  // Primary accent - buttons, highlights
-    orange: '#dc8c18',       // Secondary accent - hover states
-    darkOrange: '#9f4409',   // Dark accent - backgrounds
-    lightTan: '#c29f85'      // Light accent - backgrounds, borders
+    darkBrown: '#521903',
+    goldenYellow: '#f8b936',
+    orange: '#dc8c18',
+    darkOrange: '#9f4409',
+    lightTan: '#c29f85'
   }
 
   // Handle scroll effect
@@ -87,42 +86,6 @@ export default function Header() {
 
   return (
     <>
-      {/* Top Information Bar - Desktop Only */}
-      {/* <div className="hidden lg:block" style={{ backgroundColor: colors.darkOrange }}>
-        <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center py-2 text-sm text-white">
-            <div className="flex items-center space-x-8">
-              {topInfo.map((item, index) => (
-                <div key={index} className="flex items-center space-x-2 group">
-                  <div 
-                    className="p-1.5 rounded-lg transition-colors group-hover:opacity-90"
-                    style={{ backgroundColor: colors.orange }}
-                  >
-                    <item.icon className="h-3.5 w-3.5" />
-                  </div>
-                  <div>
-                    <p className="font-medium">{item.text}</p>
-                    <p className="opacity-80 text-xs">{item.subtext}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-1 opacity-90">
-                <ShieldCheck className="h-3.5 w-3.5" /> 
-                <span className="text-xs">ISO 9001 Certified</span> 
-              </div>
-              <div className="h-4 w-px" style={{ backgroundColor: colors.orange, opacity: 0.5 }}></div>
-              <button className="flex items-center space-x-1 hover:opacity-90 transition-opacity text-sm">
-                <Globe className="h-3.5 w-3.5" /> 
-                <span>Global Network</span> 
-              </button>
-            </div>
-          </div>
-        </div>
-      </div> */}
-
-      {/* Main Header */}
       <header className={`sticky top-0 z-50 transition-all duration-300 ${
         isScrolled 
           ? 'bg-white/95 backdrop-blur-sm shadow-lg' 
@@ -130,27 +93,27 @@ export default function Header() {
       }`}>
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center h-16 lg:h-20">
-            {/* Logo - Fixed with explicit dimensions */}
+            {/* Logo */}
             <Link href="/" className="flex items-center group">
               <div className="relative">
                 {/* Desktop Logo */}
                 <div className="hidden lg:block relative w-[180px] h-[60px] transition-all duration-300 group-hover:scale-105">
                   <img
-                    src="/KVA_logo_2.png"
+                    src="/logo.png"
                     alt="KVA Logistics - Global Logistics & Supply Chain"
                     width={140}
                     height={60}
                     className="object-contain object-left"
                     priority
-                    // onError={(e) => {
-                    //   console.error('Failed to load desktop logo:', e.target.src);
-                    //   e.target.style.display = 'none';
-                    //   const fallback = e.target.parentElement.querySelector('.desktop-logo-fallback');
-                    //   if (fallback) fallback.style.display = 'flex';
-                    // }}
+                    onError={(e) => {
+                      console.error('Failed to load desktop logo:', e.target.src);
+                      e.target.style.display = 'none';
+                      const fallback = e.target.parentElement.querySelector('.desktop-logo-fallback');
+                      if (fallback) fallback.style.display = 'flex';
+                    }}
                   />
                   {/* Desktop Fallback */}
-                  {/* <div className="desktop-logo-fallback hidden absolute inset-0 items-center">
+                  <div className="desktop-logo-fallback hidden absolute inset-0 items-center">
                     <div className="p-2 rounded-lg" style={{ backgroundColor: colors.darkBrown }}>
                       <Truck className="h-8 w-8" style={{ color: colors.goldenYellow }} />
                     </div>
@@ -162,13 +125,13 @@ export default function Header() {
                         LOGISTICS
                       </span>
                     </div>
-                  </div>*/}
+                  </div>
                 </div> 
 
                 {/* Mobile Logo */}
                 <div className="lg:hidden relative w-[140px] h-[50px] transition-all duration-300 group-hover:scale-105">
                   <img
-                    src="/KVA_logo_2.png"
+                    src="/logo.png"
                     alt="KVA Logistics"
                     width={140}
                     height={50}
@@ -329,7 +292,7 @@ export default function Header() {
                     {/* Mobile Logo in Menu */}
                     <div className="relative w-[120px] h-[45px]">
                       <img
-                        src="/KVA_LOGO_2.png"
+                        src="/logo.png"
                         alt="KVA Logistics"
                         width={120}
                         height={45}
