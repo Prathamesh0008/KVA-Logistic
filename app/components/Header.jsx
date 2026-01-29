@@ -136,7 +136,7 @@ export default function Header() {
                 {/* Desktop Logo */}
                 <div className="hidden lg:block relative w-[180px] h-[60px] transition-all duration-300 group-hover:scale-105">
                   <Image
-                    src="/KVA_logo_2.png"
+                    src="/KVA_LOGO_2.png"
                     alt="KVA Logistics - Global Logistics & Supply Chain"
                     width={180}
                     height={60}
@@ -168,7 +168,7 @@ export default function Header() {
                 {/* Mobile Logo */}
                 <div className="lg:hidden relative w-[140px] h-[50px] transition-all duration-300 group-hover:scale-105">
                   <Image
-                    src="/KVA_logo_2.png"
+                    src="/KVA_LOGO_2.png"
                     alt="KVA Logistics"
                     width={140}
                     height={50}
@@ -329,7 +329,7 @@ export default function Header() {
                     {/* Mobile Logo in Menu */}
                     <div className="relative w-[120px] h-[45px]">
                       <Image
-                        src="/KVA_logo_2.png"
+                        src="/KVA_LOGO_2.png"
                         alt="KVA Logistics"
                         width={120}
                         height={45}
