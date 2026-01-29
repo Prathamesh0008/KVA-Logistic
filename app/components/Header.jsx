@@ -136,7 +136,7 @@ export default function Header() {
                 {/* Desktop Logo */}
                 <div className="hidden lg:block relative w-[180px] h-[60px] transition-all duration-300 group-hover:scale-105">
                   <Image
-                    src="/KVA logo 2.png"
+                    src="/KVA_logo_2.png"
                     alt="KVA Logistics - Global Logistics & Supply Chain"
                     width={180}
                     height={60}
