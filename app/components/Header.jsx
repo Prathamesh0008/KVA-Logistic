@@ -80,16 +80,16 @@ export default function Header() {
   ]
 
   const topInfo = [
-    // { icon: Phone, text: '+1 (555) 123-4567', subtext: '24/7 Support' },
-    // { icon: Clock, text: 'Mon - Fri: 8AM - 6PM', subtext: 'Sat: 9AM - 4PM' },
-    // { icon: Mail, text: 'info@logiswift.com', subtext: 'Quick Response' }
+    { icon: Phone, text: '+1 (555) 123-4567', subtext: '24/7 Support' },
+    { icon: Clock, text: 'Mon - Fri: 8AM - 6PM', subtext: 'Sat: 9AM - 4PM' },
+    { icon: Mail, text: 'info@logiswift.com', subtext: 'Quick Response' }
   ]
 
   return (
     <>
       {/* Top Information Bar - Desktop Only */}
       <div className="hidden lg:block" style={{ backgroundColor: colors.darkOrange }}>
-        {/* <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4">
           <div className="flex justify-between items-center py-2 text-sm text-white">
             <div className="flex items-center space-x-8">
               {topInfo.map((item, index) => (
@@ -109,17 +109,17 @@ export default function Header() {
             </div>
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-1 opacity-90">
-                 <ShieldCheck className="h-3.5 w-3.5" /> 
-                 <span className="text-xs">ISO 9001 Certified</span> 
+                <ShieldCheck className="h-3.5 w-3.5" /> 
+                <span className="text-xs">ISO 9001 Certified</span> 
               </div>
               <div className="h-4 w-px" style={{ backgroundColor: colors.orange, opacity: 0.5 }}></div>
               <button className="flex items-center space-x-1 hover:opacity-90 transition-opacity text-sm">
-                 <Globe className="h-3.5 w-3.5" /> 
+                <Globe className="h-3.5 w-3.5" /> 
                 <span>Global Network</span> 
               </button>
             </div>
           </div>
-        </div> */}
+        </div>
       </div>
 
       {/* Main Header */}
@@ -129,28 +129,69 @@ export default function Header() {
           : 'bg-white shadow-md'
       }`}>
         <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center h-20 lg:h-20">
-            {/* Logo - RESPONSIVE IMAGE LOGO */}
+          <div className="flex justify-between items-center h-16 lg:h-20">
+            {/* Logo - Fixed with explicit dimensions */}
             <Link href="/" className="flex items-center group">
               <div className="relative">
-                {/* Image Logo Container - Fully Responsive */}
-                <div className="relative w-[150px] h-[100px]  transition-all duration-300 group-hover:scale-105">
+                {/* Desktop Logo */}
+                <div className="hidden lg:block relative w-[180px] h-[60px] transition-all duration-300 group-hover:scale-105">
                   <Image
                     src="/KVA logo 2.png"
                     alt="KVA Logistics - Global Logistics & Supply Chain"
-                    fill
+                    width={180}
+                    height={60}
                     className="object-contain object-left"
                     priority
-                
+                    onError={(e) => {
+                      console.error('Failed to load desktop logo:', e.target.src);
+                      e.target.style.display = 'none';
+                      const fallback = e.target.parentElement.querySelector('.desktop-logo-fallback');
+                      if (fallback) fallback.style.display = 'flex';
+                    }}
                   />
-                  {/* Fallback if image doesn't load */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0">
+                  {/* Desktop Fallback */}
+                  <div className="desktop-logo-fallback hidden absolute inset-0 items-center">
                     <div className="p-2 rounded-lg" style={{ backgroundColor: colors.darkBrown }}>
+                      <Truck className="h-8 w-8" style={{ color: colors.goldenYellow }} />
+                    </div>
+                    <div className="ml-4">
+                      <span className="text-2xl font-bold" style={{ color: colors.darkBrown }}>
+                        KVA
+                      </span>
+                      <span className="block text-sm font-semibold" style={{ color: colors.orange }}>
+                        LOGISTICS
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Mobile Logo */}
+                <div className="lg:hidden relative w-[140px] h-[50px] transition-all duration-300 group-hover:scale-105">
+                  <Image
+                    src="/KVA logo.png"
+                    alt="KVA Logistics"
+                    width={140}
+                    height={50}
+                    className="object-contain"
+                    priority
+                    onError={(e) => {
+                      console.error('Failed to load mobile logo:', e.target.src);
+                      e.target.style.display = 'none';
+                      const fallback = e.target.parentElement.querySelector('.mobile-logo-fallback');
+                      if (fallback) fallback.style.display = 'flex';
+                    }}
+                  />
+                  {/* Mobile Fallback */}
+                  <div className="mobile-logo-fallback hidden absolute inset-0 items-center">
+                    <div className="p-1.5 rounded-lg" style={{ backgroundColor: colors.darkBrown }}>
                       <Truck className="h-6 w-6" style={{ color: colors.goldenYellow }} />
                     </div>
                     <div className="ml-3">
-                      <span className="text-2xl font-bold" style={{ color: colors.darkBrown }}>
+                      <span className="text-xl font-bold" style={{ color: colors.darkBrown }}>
                         KVA
+                      </span>
+                      <span className="block text-xs font-semibold" style={{ color: colors.orange }}>
+                        LOGISTICS
                       </span>
                     </div>
                   </div>
@@ -284,20 +325,30 @@ export default function Header() {
               {/* Header */}
               <div className="p-6 border-b" style={{ borderColor: colors.lightTan }}>
                 <div className="flex items-center justify-between mb-4">
-                  <Link href="/" className="flex items-center space-x-3" onClick={() => setIsMenuOpen(false)}>
-                    {/* Mobile Logo Image - Responsive */}
-                    <div className="relative w-[100px] h-[100px] xs:w-[100px] xs:h-[100px] sm:w-[100px] sm:h-[100px]">
+                  <Link href="/" className="flex items-center" onClick={() => setIsMenuOpen(false)}>
+                    {/* Mobile Logo in Menu */}
+                    <div className="relative w-[120px] h-[45px]">
                       <Image
                         src="/KVA logo.png"
                         alt="KVA Logistics"
-                        fill
+                        width={120}
+                        height={45}
                         className="object-contain"
-                        sizes="(max-width: 600px) 90px, (max-width: 640px) 100px, 120px"
+                        onError={(e) => {
+                          console.error('Failed to load menu logo:', e.target.src);
+                          e.target.style.display = 'none';
+                          const fallback = e.target.parentElement.querySelector('.menu-logo-fallback');
+                          if (fallback) fallback.style.display = 'flex';
+                        }}
                       />
-                      {/* Fallback */}
-                      <div className="absolute inset-0 flex items-center justify-center opacity-0">
-                        <div className="p-2 rounded-lg" style={{ backgroundColor: colors.goldenYellow }}>
+                      {/* Menu Fallback */}
+                      <div className="menu-logo-fallback hidden absolute inset-0 items-center">
+                        <div className="p-1 rounded-lg" style={{ backgroundColor: colors.goldenYellow }}>
                           <Truck className="h-5 w-5 text-white" />
+                        </div>
+                        <div className="ml-2">
+                          <span className="text-lg font-bold text-white">KVA</span>
+                          <span className="block text-xs text-gray-300">LOGISTICS</span>
                         </div>
                       </div>
                     </div>
