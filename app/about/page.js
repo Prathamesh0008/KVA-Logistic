@@ -43,7 +43,17 @@ export default function AboutPage() {
               className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
               style={{ color: colors.darkBrown }}
             >
-              <span className="block">About</span>
+<span
+  className="block"
+  style={{
+    background: `linear-gradient(90deg, ${colors.darkBrown}, ${colors.goldenYellow})`,
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
+  }}
+>
+  About
+</span>
               <span 
                 className="block"
                 style={{
@@ -57,12 +67,19 @@ export default function AboutPage() {
               </span>
             </h1>
             
-            <p 
-              className="text-lg md:text-xl max-w-2xl mx-auto mb-8"
-              style={{ color: colors.darkBrown, opacity: 0.8 }}
-            >
-              Leading the logistics industry with innovation, reliability, and customer-first approach for over two decades
-            </p>
+           <p
+  className="text-lg md:text-xl max-w-2xl mx-auto mb-8 text-center"
+  style={{
+    background: `linear-gradient(90deg, ${colors.darkBrown}, ${colors.goldenYellow})`,
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
+    opacity: 0.9, // slightly transparent if you want
+  }}
+>
+  Leading the logistics industry with innovation, reliability, and customer-first approach for over two decades
+</p>
+
           </div>
         </div>
       </section>
@@ -242,12 +259,31 @@ export default function AboutPage() {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: colors.darkBrown }}>
-              Our Core Values
-            </h2>
-            <p className="text-lg mb-12 max-w-2xl mx-auto" style={{ color: colors.darkBrown, opacity: 0.8 }}>
-              The principles that guide our decisions and define our culture
-            </p>
+            <h2
+  className="text-3xl md:text-4xl font-bold mb-4 text-center"
+  style={{
+    background: `linear-gradient(90deg, ${colors.darkBrown}, ${colors.goldenYellow})`,
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
+  }}
+>
+  Our Core Values
+</h2>
+
+           <p
+  className="text-lg mb-12 max-w-2xl mx-auto text-center"
+  style={{
+    background: `linear-gradient(90deg, ${colors.darkBrown}, ${colors.goldenYellow})`,
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
+    opacity: 0.9, // adjust if you want softer look
+  }}
+>
+  The principles that guide our decisions and define our culture
+</p>
+
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div 

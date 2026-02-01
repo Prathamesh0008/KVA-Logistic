@@ -7,7 +7,7 @@ export default function ServicesPage() {
     darkOrange: '#9f4409',   // Dark accent
     lightTan: '#c29f85'      // Light accent
   }
-
+ 
   return (
     <div className="">
       {/* Hero Section - Matches home page */}
@@ -36,31 +36,49 @@ export default function ServicesPage() {
               <span className="text-sm font-semibold">PREMIUM LOGISTICS SERVICES</span>
             </div>
             
-            <h1 
-              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
-              style={{ color: colors.darkBrown }}
-            >
-              <span className="block">Comprehensive</span>
-              <span 
-                className="block"
-                style={{
-                  background: `linear-gradient(90deg, ${colors.goldenYellow}, ${colors.orange})`,
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text'
-                }}
-              >
-                Logistics Solutions
-              </span>
-            </h1>
-            
-            <p 
-              className="text-lg md:text-xl max-w-2xl mx-auto mb-8"
-              style={{ color: colors.darkBrown, opacity: 0.8 }}
-            >
-              End-to-end supply chain management designed to optimize efficiency, 
-              reduce costs, and deliver exceptional reliability
-            </p>
+           <h1 
+  className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 p-10"
+>
+  <span
+    className="block"
+    style={{
+      background: `linear-gradient(90deg, ${colors.darkBrown}, ${colors.goldenYellow})`,
+      WebkitBackgroundClip: 'text',
+      WebkitTextFillColor: 'transparent',
+      backgroundClip: 'text'
+    }}
+  >
+    Comprehensive
+  </span>
+
+  <span
+    className="block"
+    style={{
+      background: `linear-gradient(90deg, ${colors.goldenYellow}, ${colors.orange})`,
+      WebkitBackgroundClip: 'text',
+      WebkitTextFillColor: 'transparent',
+      backgroundClip: 'text'
+    }}
+  >
+    Logistics Solutions
+  </span>
+</h1>
+
+ <p
+  className="text-lg md:text-xl max-w-2xl mx-auto mb-8"
+  style={{
+    background: 'linear-gradient(90deg, #8B5A2B 200%, #D99A3E 100%, #F4A261 200%)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
+    opacity: 0.95
+  }}
+>
+  End-to-end supply chain management designed to optimize efficiency,
+  reduce costs, and deliver exceptional reliability
+</p>
+
+
           </div>
         </div>
       </section>

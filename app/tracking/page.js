@@ -138,29 +138,31 @@ export default function TrackingPage() {
             </div>
             
             <h1 
-              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
-              style={{ color: colors.darkBrown }}
-            >
-              <span className="block">Track Your</span>
-              <span 
-                className="block"
-                style={{
-                  background: `linear-gradient(90deg, ${colors.goldenYellow}, ${colors.orange})`,
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text'
-                }}
-              >
-                Shipment
-              </span>
-            </h1>
+  className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
+  style={{ color: colors.darkBrown }}
+>
+  <span className="block">Track Your</span>
+
+  <span
+    className="block bg-clip-text text-transparent"
+    style={{
+      backgroundImage: `linear-gradient(90deg, ${colors.darkBrown}, ${colors.goldenYellow})`,
+    }}
+  >
+    Shipment
+  </span>
+</h1>
+
             
-            <p 
-              className="text-lg md:text-xl max-w-2xl mx-auto mb-8"
-              style={{ color: colors.darkBrown, opacity: 0.8 }}
-            >
-              Monitor your shipments in real-time with our advanced tracking system
-            </p>
+            <p
+  className="text-lg md:text-xl max-w-2xl mx-auto mb-8 bg-clip-text text-transparent"
+  style={{
+    backgroundImage: `linear-gradient(90deg, ${colors.darkBrown}, ${colors.goldenYellow})`,
+  }}
+>
+  Monitor your shipments in real-time with our advanced tracking system
+</p>
+
           </div>
         </div>
       </section>
@@ -178,7 +180,14 @@ export default function TrackingPage() {
               }}
             >
               <div className="text-center mb-8">
-                <h2 className="text-2xl md:text-3xl font-bold mb-4" style={{ color: colors.darkBrown }}>Enter Tracking Number</h2>
+<h2
+  className="text-2xl md:text-3xl font-bold mb-4 bg-clip-text text-transparent"
+  style={{
+    backgroundImage: `linear-gradient(90deg, ${colors.darkBrown}, ${colors.goldenYellow})`,
+  }}
+>
+  Enter Tracking Number
+</h2>
                 <p style={{ color: colors.darkBrown, opacity: 0.8 }}>Track multiple shipments by entering tracking numbers separated by commas</p>
               </div>
               
@@ -213,13 +222,29 @@ export default function TrackingPage() {
                 </div>
                 
                 <div className="text-sm text-center" style={{ color: colors.darkBrown, opacity: 0.7 }}>
-                  <p>Example tracking numbers: LGSW123456789, LGSW987654321, LGSW456123789</p>
+<p
+  className="bg-clip-text text-transparent"
+  style={{
+    backgroundImage: `linear-gradient(90deg, ${colors.darkBrown}, ${colors.goldenYellow})`,
+  }}
+>
+  Example tracking numbers: LGSW123456789, LGSW987654321, LGSW456123789
+</p>
                 </div>
               </form>
 
               {/* Recent Tracking Numbers */}
               <div className="mt-8 pt-8 border-t" style={{ borderColor: colors.lightTan + '30' }}>
-                <h3 className="text-lg font-semibold mb-4 text-center" style={{ color: colors.darkBrown }}>Recent Tracking Numbers</h3>
+<h3
+  className="text-lg font-semibold mb-4 text-center"
+  style={{
+    background: 'linear-gradient(90deg, #5A3A1E, #F8B936)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+  }}
+>
+  Recent Tracking Numbers
+</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                   {['LGSW123456789', 'LGSW987654321', 'LGSW456123789'].map((num) => (
                     <button
@@ -290,7 +315,7 @@ export default function TrackingPage() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> 
 
               {/* Shipment Info Cards */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
@@ -306,7 +331,7 @@ export default function TrackingPage() {
                     <h3 className="font-semibold" style={{ color: colors.darkBrown }}>Origin</h3>
                   </div>
                   <p className="text-lg font-medium" style={{ color: colors.darkBrown }}>{trackingData.origin}</p>
-                </div>
+                </div> 
                 
                 <div 
                   className="p-6 rounded-xl border"

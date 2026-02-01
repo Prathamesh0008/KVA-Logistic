@@ -66,18 +66,24 @@ export default function Stats() {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-12 sm:mb-16">
-          <h2 
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4"
-            style={{ color: colors.darkBrown }}
-          >
-            Our Impact in Numbers
-          </h2>
-          <p 
-            className="text-lg sm:text-xl max-w-2xl mx-auto"
-            style={{ color: colors.darkBrown, opacity: 0.7 }}
-          >
-            Trusted by businesses worldwide for reliable logistics solutions
-          </p>
+          <h2
+  className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 bg-clip-text text-transparent"
+  style={{
+    backgroundImage: `linear-gradient(90deg, ${colors.darkBrown}, ${colors.goldenYellow})`,
+  }}
+>
+  Our Impact in Numbers
+</h2>
+
+          <p
+  className="text-lg sm:text-xl max-w-2xl mx-auto bg-clip-text text-transparent"
+  style={{
+    backgroundImage: `linear-gradient(90deg, ${colors.darkBrown}, ${colors.orange || '#e67e22'})`,
+  }}
+>
+  Trusted by businesses worldwide for reliable logistics solutions
+</p>
+
         </div>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-6xl mx-auto">

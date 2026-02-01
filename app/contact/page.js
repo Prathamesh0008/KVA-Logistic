@@ -68,7 +68,17 @@ export default function ContactPage() {
               }}
             >
               <MessageSquare className="w-4 h-4" />
-              <span className="text-sm font-semibold">GET IN TOUCH</span>
+<span
+  className="text-sm font-semibold"
+  style={{
+    background: `linear-gradient(90deg, ${colors.darkBrown}, ${colors.goldenYellow})`,
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
+  }}
+>
+  GET IN TOUCH
+</span>
             </div>
             
             <h1 
@@ -89,12 +99,15 @@ export default function ContactPage() {
               </span>
             </h1>
             
-            <p 
-              className="text-lg md:text-xl max-w-2xl mx-auto mb-8"
-              style={{ color: colors.darkBrown, opacity: 0.8 }}
-            >
-              Get in touch with our logistics experts for customized solutions and personalized support
-            </p>
+            <p
+  className="text-lg md:text-xl max-w-2xl mx-auto mb-8 bg-clip-text text-transparent"
+  style={{
+    backgroundImage: `linear-gradient(90deg, ${colors.darkBrown}, ${colors.goldenYellow})`,
+  }}
+>
+  Get in touch with our logistics experts for customized solutions and personalized support
+</p>
+
           </div>
         </div>
       </section>

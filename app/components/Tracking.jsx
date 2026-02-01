@@ -48,7 +48,7 @@ const highlightText = {
   background: `linear-gradient(90deg, ${colors.goldenYellow}, ${colors.orange})`,
   WebkitBackgroundClip: 'text',
   WebkitTextFillColor: 'transparent',
-  backgroundClip: 'text',
+  backgroundClip: 'text', 
 }
 
 export default function Tracking() {
@@ -213,14 +213,15 @@ export default function Tracking() {
               <span className="text-sm font-semibold">LIVE TRACKING</span>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
-              {/* ✅ highlight */}
-              <span style={highlightText}>Track Your</span>
-              {/* ✅ highlight */}
-              <span className="block" style={highlightText}>
-                Shipment in Real-Time
-              </span>
-            </h2>
+       <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+  <span style={{ color: '#f8b936' }}>
+    Track Your
+  </span>
+  <span className="block" style={{ color: '#8B5A2B' }}>
+    Shipment in Real-Time
+  </span>
+</h2>
+
 
             <p className="text-base sm:text-lg max-w-2xl mx-auto" style={{ color: colors.darkBrown, opacity: 0.7 }}>
               Enter your tracking number for live updates, estimated delivery times, and detailed shipment information
@@ -242,17 +243,26 @@ export default function Tracking() {
                 <div className="mb-8">
                   <div className="flex items-center justify-between mb-4">
                     {/* ✅ highlight */}
-                    <h3 className="text-xl font-bold" style={highlightText}>
+                    <h3 className="text-xl font-bold" style={{ color: '#f8b936' }}>
+
                       Enter Tracking Number
                     </h3>
 
                     <button
                       onClick={() => setTrackingId('LGSW123456789')}
                       className="text-sm flex items-center gap-1 hover:opacity-80 transition-opacity"
-                      style={{ color: colors.darkBrown }}
+                      style={{
+  background: 'linear-gradient(90deg, #8B5A2B, #D99A3E)',
+  color: '#FFFFFF',
+}}
+
                     >
                       <QrCode className="h-4 w-4" />
-                      <span style={highlightText}>Scan QR Code</span>
+                      <span style={{
+  background: 'linear-gradient(90deg, #8B5A2B, #D99A3E)',
+  color: '#FFFFFF',
+}}
+>Scan QR Code</span>
                     </button>
                   </div>
 
@@ -286,8 +296,9 @@ export default function Tracking() {
                         }}
                       >
                         <Search className="h-5 w-5" />
-                        <span style={highlightText}>Track Shipment</span>
-                        <Zap className="h-4 w-4 group-hover:animate-pulse" />
+<span style={{ color: '#8B5A2B' }}>Track Shipment</span>
+<Zap className="h-4 w-4 group-hover:animate-pulse" />
+
                       </button>
                     </div>
                   </form>
@@ -462,47 +473,48 @@ export default function Tracking() {
                         }}
                       >
                         <Bell className="h-4 w-4" />
-                        <span style={highlightText}>Get Updates</span>
+                        <span style={{ color: colors.darkBrown }}>Get Updates</span>
                       </button>
 
                       <button
-                        className="flex items-center gap-2 px-4 py-2.5 rounded-lg transition-colors hover:bg-gray-50"
-                        style={{
-                          backgroundColor: 'white',
-                          color: colors.darkBrown,
-                          border: `1px solid ${colors.lightTan}`,
-                        }}
-                      >
-                        <Share2 className="h-4 w-4" />
-                        <span style={highlightText}>Share Status</span>
-                      </button>
+  className="flex items-center gap-2 px-4 py-2.5 rounded-lg transition-colors hover:opacity-90"
+  style={{
+    backgroundColor: colors.goldenYellow,
+    color: colors.darkBrown,
+    border: `1px solid ${colors.lightTan}`,
+  }}
+>
+  <Share2 className="h-4 w-4" />
+  <span>Share Status</span>
+</button>
+
+
+                     <button
+  className="flex items-center gap-2 px-4 py-2.5 rounded-lg transition-colors hover:opacity-90"
+  style={{
+    backgroundColor: colors.goldenYellow,
+    color: colors.darkBrown,
+    border: `1px solid ${colors.lightTan}`,
+  }}
+>
+  <Download className="h-4 w-4" />
+  <span>Export</span>
+</button>
+
 
                       <button
-                        className="flex items-center gap-2 px-4 py-2.5 rounded-lg transition-colors hover:bg-gray-50"
-                        style={{
-                          backgroundColor: 'white',
-                          color: colors.darkBrown,
-                          border: `1px solid ${colors.lightTan}`,
-                        }}
-                      >
-                        <Download className="h-4 w-4" />
-                        <span style={highlightText}>Export</span>
-                      </button>
+  onClick={() => setAutoRefresh(!autoRefresh)}
+  className="flex items-center gap-2 px-4 py-2.5 rounded-lg transition-colors hover:opacity-90"
+  style={{
+    backgroundColor: autoRefresh ? colors.goldenYellow : colors.lightTan,
+    color: colors.darkBrown,
+    border: `1px solid ${autoRefresh ? colors.goldenYellow : colors.lightTan}`,
+  }}
+>
+  <Radio className="h-4 w-4" />
+  <span>{autoRefresh ? 'Auto Refresh ON' : 'Auto Refresh'}</span>
+</button>
 
-                      <button
-                        onClick={() => setAutoRefresh(!autoRefresh)}
-                        className={`flex items-center gap-2 px-4 py-2.5 rounded-lg transition-colors ${
-                          autoRefresh ? 'hover:opacity-90' : 'hover:bg-gray-50'
-                        }`}
-                        style={{
-                          backgroundColor: autoRefresh ? colors.goldenYellow + '30' : `${colors.lightTan}10`,
-                          color: colors.darkBrown,
-                          border: `1px solid ${autoRefresh ? colors.goldenYellow : colors.lightTan}`,
-                        }}
-                      >
-                        <Radio className="h-4 w-4" />
-                        <span style={highlightText}>{autoRefresh ? 'Auto Refresh ON' : 'Auto Refresh'}</span>
-                      </button>
                     </div>
                   </div>
                 )}
@@ -689,11 +701,16 @@ export default function Tracking() {
                   Contact Support
                 </div>
                 <p className="text-sm" style={{ color: colors.darkBrown, opacity: 0.7 }}>
-                  Call <span className="font-bold">+316872022074</span> or email{' '}
-                  <a href="mailto:support@logisticskva.com" style={highlightText}>
-                    support@logisticskva.com
-                  </a>
-                </p>
+  Call <span className="font-bold">+316872022074</span> or email{' '}
+  <a
+    href="mailto:support@logisticskva.com"
+    style={{ color: colors.goldenYellow }}
+    className="font-medium hover:underline"
+  >
+    support@logisticskva.com
+  </a>
+</p>
+
               </div>
             </div>
           </div>

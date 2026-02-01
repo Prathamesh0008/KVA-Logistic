@@ -136,31 +136,40 @@ export default function Header() {
 
           {/* ---------------- DESKTOP CTA ---------------- */}
           <div className="hidden lg:block">
-            <Link
-              href="/contact"
-              className="px-6 py-3 rounded-xl font-bold text-white shadow-lg"
-              style={{ backgroundColor: colors.goldenYellow }}
-            >
-              Get Quote
-            </Link>
-          </div>
+  <Link
+    href="/contact"
+    className="px-6 py-3 rounded-xl font-bold shadow-lg transition hover:opacity-90"
+    style={{
+      backgroundColor: colors.goldenYellow,
+      color: colors.darkBrown,
+    }}
+  >
+    Get Quote
+  </Link>
+</div>
+
 
           {/* ---------------- MOBILE BUTTONS ---------------- */}
           <div className="flex lg:hidden items-center gap-2">
-            <Link
-              href="/contact"
-              className="px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold text-white"
-              style={{ backgroundColor: colors.goldenYellow }}
-            >
-              Quote
-            </Link>
-            <button
-              onClick={() => setIsMenuOpen(true)}
-              className="p-2 rounded-lg"
-            >
-              <Menu className="h-6 w-6" style={{ color: colors.darkBrown }} />
-            </button>
-          </div>
+  <Link
+    href="/contact"
+    className="px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold"
+    style={{
+      backgroundColor: colors.goldenYellow,
+      color: colors.darkBrown,
+    }}
+  >
+    Quote
+  </Link>
+
+  <button
+    onClick={() => setIsMenuOpen(true)}
+    className="p-2 rounded-lg"
+  >
+    <Menu className="h-6 w-6" style={{ color: colors.darkBrown }} />
+  </button>
+</div>
+
         </div>
       </div>
 
