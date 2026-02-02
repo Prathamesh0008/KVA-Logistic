@@ -15,7 +15,7 @@ export default function Header() {
     darkBrown: '#521903',
     goldenYellow: '#f8b936',
     orange: '#dc8c18',
-    darkOrange: '#9f4409',
+    darkOrange: '#9f4409', 
     lightTan: '#c29f85'
   }
 
@@ -41,17 +41,18 @@ export default function Header() {
   const navItems = [
     { name: 'Home', href: '/' },
     {
-      name: 'Services',
-      href: '#',
-      dropdown: [
-        { name: 'Road Freight', href: '/services#road-freight' },
-        { name: 'Ocean Shipping', href: '/services#ocean-shipping' },
-        { name: 'Air Freight', href: '/services#air-freight' },
-        { name: 'Warehousing', href: '/services#warehousing' },
-        { name: 'Last-Mile Delivery', href: '/services#last-mile' },
-        { name: 'Logistics Consulting', href: '/services#consulting' }
-      ]
+     name: 'Services',
+      href: '/services',
+      // dropdown: [
+      //   { name: 'Road Freight', href: '/services#road-freight' },
+      //   { name: 'Ocean Shipping', href: '/services#ocean-shipping' },
+      //   { name: 'Air Freight', href: '/services#air-freight' },
+      //   { name: 'Warehousing', href: '/services#warehousing' },
+      //   { name: 'Last-Mile Delivery', href: '/services#last-mile' },
+      //   { name: 'Logistics Consulting', href: '/services#consulting' }
+      // ]
     },
+     
     { name: 'Tracking', href: '/tracking' },
     { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' }

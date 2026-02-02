@@ -43,12 +43,28 @@ const backgroundColors = {
 }
 
 // ✅ Reusable highlight style (gradient text)
-// This uses background-clip:text + transparent text fill for gradient text. [web:4][web:11]
 const highlightText = {
   background: `linear-gradient(90deg, ${colors.goldenYellow}, ${colors.orange})`,
   WebkitBackgroundClip: 'text',
   WebkitTextFillColor: 'transparent',
   backgroundClip: 'text',
+}
+
+// ✅ Added: Regular dark text style for better readability
+const darkText = {
+  color: colors.darkBrown,
+}
+
+// ✅ Added: Regular text with opacity for better readability
+const regularText = {
+  color: colors.darkBrown,
+  opacity: 0.9,
+}
+
+// ✅ Added: Light text with more opacity
+const lightText = {
+  color: colors.darkBrown,
+  opacity: 0.8,
 }
 
 const services = [
@@ -250,7 +266,7 @@ export default function Services() {
               backgroundImage: `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23521903' fill-opacity='0.05'%3E%3Cpath d='M50 50c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10zM10 10c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10S0 25.523 0 20s4.477-10 10-10zm10 8c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm40 40c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
             }}
           />
-        </div>
+        </div> 
 
         {/* Subtle decorative elements */}
         <div
@@ -280,7 +296,6 @@ export default function Services() {
 
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">  
               <span className="block" style={{ color: colors.darkBrown }}>
-                
                 Comprehensive
               </span>
 
@@ -469,7 +484,7 @@ export default function Services() {
                       className="group/btn flex items-center justify-between w-full font-semibold text-sm sm:text-base hover:opacity-80 transition-all duration-300"
                       style={{ color: colors.darkBrown }}
                     >
-                      {/* ✅ Highlight “Learn More” */}
+                      {/* ✅ Highlight "Learn More" */}
                       <span style={highlightText}>Learn More</span>
                       <ArrowRight
                         className="h-4 w-4 sm:h-5 sm:w-5 group-hover/btn:translate-x-2 transition-transform"
@@ -617,17 +632,17 @@ export default function Services() {
                   <selectedService.icon className="h-8 w-8 text-white" />
                 </div>
                 <div>
-                  {/* ✅ Highlight modal title */}
-                  <h3 className="text-2xl font-bold" style={highlightText}>
+                  {/* ✅ Fixed: Use white text on gradient background for better visibility */}
+                  <h3 className="text-2xl font-bold text-white">
                     {selectedService.title}
                   </h3>
 
                   <div className="flex items-center gap-2 mt-1">
-                    {/* ✅ Highlight modal stats */}
-                    <div style={highlightText}>{selectedService.stats}</div>
+                    {/* ✅ Fixed: Use white text for stats on gradient background */}
+                    <div className="text-white text-sm font-medium">{selectedService.stats}</div>
 
                     {selectedService.popular && (
-                      <span className="px-2 py-1 text-xs font-bold rounded-full bg-white text-orange-600">
+                      <span className="px-2 py-1 text-xs font-bold rounded-full bg-white" style={{ color: colors.darkOrange }}>
                         POPULAR
                       </span>
                     )}
@@ -648,19 +663,20 @@ export default function Services() {
             <div className="p-6 sm:p-8">
               {/* Overview */}
               <div className="mb-8">
-                {/* ✅ Highlight section header */}
-                <h4 className="text-lg font-bold mb-3 flex items-center gap-2" style={highlightText}>
+                {/* ✅ Fixed: Use proper dark text for section header */}
+                <h4 className="text-lg font-bold mb-3 flex items-center gap-2" style={darkText}>
                   <CheckCircle className="h-5 w-5" style={{ color: colors.goldenYellow }} />
                   Service Overview
                 </h4>
-                <p className="text-base" style={{ color: colors.darkBrown, opacity: 0.9 }}>
+                <p className="text-base" style={regularText}>
                   {selectedService.details.overview}
                 </p>
               </div>
 
               {/* Key Benefits */}
               <div className="mb-8">
-                <h4 className="text-lg font-bold mb-4" style={highlightText}>
+                {/* ✅ Fixed: Use proper dark text for section header */}
+                <h4 className="text-lg font-bold mb-4" style={darkText}>
                   Key Benefits
                 </h4>
 
@@ -676,12 +692,13 @@ export default function Services() {
                           border: `1px solid ${colors.lightTan}30`,
                         }}
                       >
-                        <div className="p-2 rounded-lg" style={{ backgroundColor: colors.goldenYellow + '20' }}>
-                          <Icon className="h-5 w-5" style={{ color: colors.goldenYellow }} />
+                        <div className="p-2 rounded-lg flex-shrink-0" style={{ backgroundColor: colors.goldenYellow + '20' }}>
+                          {/* ✅ FIXED: Icons are now properly rendered */}
+                          {Icon && <Icon className="h-5 w-5" style={{ color: colors.goldenYellow }} />}
                         </div>
-
-                        {/* ✅ Highlight benefit text */}
-                        <span className="text-sm" style={{ ...highlightText }}>
+                        
+                        {/* ✅ Fixed: Use proper dark text for benefit text */}
+                        <span className="text-sm" style={darkText}>
                           {benefit.text}
                         </span>
                       </div>
@@ -696,11 +713,12 @@ export default function Services() {
                   <div className="p-5 rounded-xl border" style={{ borderColor: colors.lightTan + '50' }}>
                     <div className="flex items-center gap-2 mb-2">
                       <Globe className="h-5 w-5" style={{ color: colors.orange }} />
-                      <h5 className="font-bold" style={highlightText}>
+                      {/* ✅ Fixed: Use proper dark text for section title */}
+                      <h5 className="font-bold" style={darkText}>
                         Coverage
                       </h5>
                     </div>
-                    <p className="text-sm" style={{ color: colors.darkBrown, opacity: 0.8 }}>
+                    <p className="text-sm" style={lightText}>
                       {selectedService.details.coverage}
                     </p>
                   </div>
@@ -710,11 +728,12 @@ export default function Services() {
                   <div className="p-5 rounded-xl border" style={{ borderColor: colors.lightTan + '50' }}>
                     <div className="flex items-center gap-2 mb-2">
                       <Clock className="h-5 w-5" style={{ color: colors.goldenYellow }} />
-                      <h5 className="font-bold" style={highlightText}>
+                      {/* ✅ Fixed: Use proper dark text for section title */}
+                      <h5 className="font-bold" style={darkText}>
                         Transit Time
                       </h5>
                     </div>
-                    <p className="text-sm" style={{ color: colors.darkBrown, opacity: 0.8 }}>
+                    <p className="text-sm" style={lightText}>
                       {selectedService.details.transitTime}
                     </p>
                   </div>
@@ -724,11 +743,12 @@ export default function Services() {
                   <div className="p-5 rounded-xl border" style={{ borderColor: colors.lightTan + '50' }}>
                     <div className="flex items-center gap-2 mb-2">
                       <DollarSign className="h-5 w-5" style={{ color: colors.darkOrange }} />
-                      <h5 className="font-bold" style={highlightText}>
+                      {/* ✅ Fixed: Use proper dark text for section title */}
+                      <h5 className="font-bold" style={darkText}>
                         Pricing
                       </h5>
                     </div>
-                    <p className="text-sm" style={{ color: colors.darkBrown, opacity: 0.8 }}>
+                    <p className="text-sm" style={lightText}>
                       {selectedService.details.pricing}
                     </p>
                   </div>
@@ -738,7 +758,8 @@ export default function Services() {
                   <div className="p-5 rounded-xl border" style={{ borderColor: colors.lightTan + '50' }}>
                     <div className="flex items-center gap-2 mb-2">
                       <UsersIcon className="h-5 w-5" style={{ color: colors.darkBrown }} />
-                      <h5 className="font-bold" style={highlightText}>
+                      {/* ✅ Fixed: Use proper dark text for section title */}
+                      <h5 className="font-bold" style={darkText}>
                         Industries Served
                       </h5>
                     </div>
@@ -763,7 +784,8 @@ export default function Services() {
 
               {/* Features (from original card) */}
               <div className="mb-8">
-                <h4 className="text-lg font-bold mb-4" style={highlightText}>
+                {/* ✅ Fixed: Use proper dark text for section header */}
+                <h4 className="text-lg font-bold mb-4" style={darkText}>
                   Key Features
                 </h4>
                 <ul className="space-y-3">
@@ -773,7 +795,8 @@ export default function Services() {
                         className="h-5 w-5 flex-shrink-0"
                         style={{ color: idx % 2 === 0 ? colors.goldenYellow : colors.orange }}
                       />
-                      <span style={{ color: colors.darkBrown, opacity: 0.9 }}>{feature}</span>
+                      {/* ✅ Fixed: Use proper dark text for feature list */}
+                      <span style={regularText}>{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -803,8 +826,8 @@ export default function Services() {
                     borderColor: colors.goldenYellow,
                   }}
                 >
-                  {/* ✅ Highlight close text */}
-                  <span style={highlightText}>Close Details</span>
+                  {/* ✅ Fixed: Use proper dark text for button */}
+                  <span style={darkText}>Close Details</span>
                 </button>
               </div>
             </div>
@@ -813,5 +836,4 @@ export default function Services() {
       )}
     </>
   )
-}  
-
+}
