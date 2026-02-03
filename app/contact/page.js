@@ -2,7 +2,6 @@
 
 import { useState, useRef } from 'react'
 import { Mail, Phone, MapPin, Send, Clock, MessageSquare, Truck, Loader2, CheckCircle, AlertCircle } from 'lucide-react'
-import emailjs from '@emailjs/browser'
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -72,41 +71,29 @@ export default function ContactPage() {
     setStatus({ loading: true, success: false, error: false, message: '' })
 
     try {
-      // EmailJS Configuration
-      // ⚠️ IMPORTANT: Sign up at https://www.emailjs.com/ and get these IDs
-      const serviceID = 'service_bqq1nla' // Replace with your Service ID
-      const templateID = 'template_7i8mx87' // Replace with your Template ID
-      const publicKey = 'KfZt7UNuNnWv2P4ch' // Replace with your Public Key
-      
-      // Initialize EmailJS
-      emailjs.init(publicKey)
-      
-      // Send email using EmailJS
-      const result = await emailjs.send(
-        serviceID,
-        templateID,
-        {
-          from_name: formData.name,
-          from_email: formData.email,
-          phone: formData.phone || 'Not provided',
+      // Send email using Resend API
+      const res = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
           subject: formData.subject,
-          message: formData.message,
-          to_name: 'KVA Logistics Team',
-          to_email: 'info@logisticKVA.com',
-          reply_to: formData.email,
-          date: new Date().toLocaleDateString(),
-          time: new Date().toLocaleTimeString()
-        }
-      )
+          message: formData.message
+        }),
+      })
 
-      console.log('EmailJS Result:', result)
+      const data = await res.json()
 
-      if (result.status === 200) {
+      if (res.ok && data.success) {
         setStatus({
           loading: false,
           success: true,
           error: false,
-          message: '✅ Message sent successfully! We will email you back within 2 hours.'
+          message: '✅ Message sent successfully! We will respond within 2 hours.'
         })
         
         // Reset form
@@ -123,7 +110,7 @@ export default function ContactPage() {
           setStatus({ loading: false, success: false, error: false, message: '' })
         }, 5000)
       } else {
-        throw new Error('Failed to send email')
+        throw new Error(data.error || 'Failed to send email')
       }
     } catch (error) {
       console.error('Email sending error:', error)
@@ -131,7 +118,7 @@ export default function ContactPage() {
         loading: false,
         success: false,
         error: true,
-        message: '❌ Failed to send message. Please try again or contact us directly at info@logisticKVA.com'
+        message: `❌ Failed to send message. ${error.message || 'Please try again or contact us directly.'}`
       })
     }
   }
@@ -281,7 +268,7 @@ export default function ContactPage() {
                     </div>
                   )}
                   
-                  <form ref={formRef} onSubmit={handleSubmit} noValidate>
+                  <form onSubmit={handleSubmit} noValidate>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                       <div>
                         <label className="block text-sm font-medium mb-2" style={{ color: colors.darkBrown }}>
@@ -397,19 +384,66 @@ export default function ContactPage() {
                     </div>
                   </form>
 
-                  {/* EmailJS Setup Instructions */}
-                  <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                    <h3 className="text-sm font-semibold mb-2 text-blue-800">📧 Email Setup Required</h3>
-                    <p className="text-xs text-blue-700 mb-2">
-                      To make emails work immediately:
-                    </p>
-                    <ol className="text-xs text-blue-700 list-decimal pl-4 space-y-1">
-                      <li>Sign up at <a href="https://www.emailjs.com" target="_blank" className="underline">EmailJS.com</a></li>
-                      <li>Create a Gmail service connection</li>
-                      <li>Create an email template</li>
-                      <li>Update the serviceID, templateID, and publicKey in the code above</li>
-                    </ol>
-                  </div>
+                  {/* Resend Setup Instructions */}
+                  {/* Email Setup Instructions */}
+<div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+  <h3 className="text-sm font-semibold mb-2 text-blue-800">📧 Email Configuration Required</h3>
+  <p className="text-xs text-blue-700 mb-2">
+    To enable instant email sending:
+  </p>
+  
+  <div className="mb-3">
+    <h4 className="text-xs font-bold text-blue-900 mb-1">1. Update Environment Variables (.env.local):</h4>
+    <pre className="bg-blue-100 p-2 rounded text-xs overflow-x-auto">
+{`EMAIL_USER=your-smtp-email@gmail.com
+EMAIL_PASS=your-app-password
+ADMIN_EMAIL=info@logisticKVA.com
+NEXT_PUBLIC_APP_URL=https://logistickva.com`}
+    </pre>
+  </div>
+
+  <div className="mb-3">
+    <h4 className="text-xs font-bold text-blue-900 mb-1">2. For Gmail (Recommended):</h4>
+    <ul className="text-xs text-blue-700 list-disc pl-4 space-y-1">
+      <li>Enable 2-Factor Authentication</li>
+      <li>Generate App Password at: <a href="https://myaccount.google.com/apppasswords" target="_blank" className="underline">Google App Passwords</a></li>
+      <li>Use 16-character app password as EMAIL_PASS</li>
+    </ul>
+  </div>
+
+  <div className="mb-3">
+    <h4 className="text-xs font-bold text-blue-900 mb-1">3. Alternative Email Providers:</h4>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-1">
+      <div className="text-xs">
+        <strong>Outlook/Office 365:</strong>
+        <pre className="bg-gray-100 p-1 rounded mt-1 text-xs">
+SMTP_HOST=smtp.office365.com
+SMTP_PORT=587
+SMTP_SECURE=false
+EMAIL_USER=your-email@outlook.com
+EMAIL_PASS=your-password
+        </pre>
+      </div>
+      <div className="text-xs">
+        <strong>Yahoo:</strong>
+        <pre className="bg-gray-100 p-1 rounded mt-1 text-xs">
+SMTP_HOST=smtp.mail.yahoo.com
+SMTP_PORT=465
+SMTP_SECURE=true
+EMAIL_USER=your-email@yahoo.com
+EMAIL_PASS=your-app-password
+        </pre>
+      </div>
+    </div>
+  </div>
+
+  <div className="p-2 bg-yellow-50 border border-yellow-200 rounded">
+    <p className="text-xs text-yellow-800 font-semibold">⚠️ For Immediate Testing:</p>
+    <p className="text-xs text-yellow-700 mt-1">
+      Call: <strong>+316872022074</strong> or Email: <a href="mailto:info@logisticKVA.com" className="underline">info@logisticKVA.com</a>
+    </p>
+  </div>
+</div>
                 </div>
 
                 {/* Additional Info */}
@@ -420,13 +454,13 @@ export default function ContactPage() {
                   </div>
                   
                   <div className="p-4 rounded-lg border text-center" style={{ backgroundColor: colors.orange + '10', borderColor: colors.orange }}>
-                    <div className="text-lg font-bold mb-1" style={{ color: colors.darkBrown }}>No Backend</div>
-                    <div className="text-sm" style={{ color: colors.darkBrown, opacity: 0.8 }}>Required</div>
+                    <div className="text-lg font-bold mb-1" style={{ color: colors.darkBrown }}>Professional</div>
+                    <div className="text-sm" style={{ color: colors.darkBrown, opacity: 0.8 }}>Email Service</div>
                   </div>
                   
                   <div className="p-4 rounded-lg border text-center" style={{ backgroundColor: colors.darkBrown + '10', borderColor: colors.darkBrown }}>
-                    <div className="text-lg font-bold mb-1" style={{ color: colors.darkBrown }}>Free</div>
-                    <div className="text-sm" style={{ color: colors.darkBrown, opacity: 0.8 }}>200 emails/month</div>
+                    <div className="text-lg font-bold mb-1" style={{ color: colors.darkBrown }}>Reliable</div>
+                    <div className="text-sm" style={{ color: colors.darkBrown, opacity: 0.8 }}>High Deliverability</div>
                   </div>
                 </div>
 
