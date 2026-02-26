@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react'
 import { Mail, Phone, MapPin, Send, Clock, MessageSquare, Truck, Loader2, CheckCircle, AlertCircle } from 'lucide-react'
-
+import emailjs from '@emailjs/browser'
 export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: '',
@@ -60,71 +60,72 @@ export default function ContactPage() {
     
     return errors
   }
+const handleSubmit = async (e) => {
+  e.preventDefault()
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-
-    const errors = validateForm()
-    if (Object.keys(errors).length > 0) {
-      setFormErrors(errors)
-      return
-    }
-
-    setFormErrors({})
-    setStatus({ loading: true, success: false, error: false, message: '' })
-
-    try {
-      const res = await fetch('/api/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          subject: formData.subject,
-          message: formData.message
-        }),
-      })
-
-      const data = await res.json()
-
-      if (res.ok && data.success) {
-        setStatus({
-          loading: false,
-          success: true,
-          error: false,
-          message: '✅ Message sent successfully!'
-        })
-
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          subject: '',
-          message: ''
-        })
-
-        setTimeout(() => {
-          setStatus({ loading: false, success: false, error: false, message: '' })
-        }, 5000)
-
-      } else {
-        throw new Error(data.error || 'Failed to send email')
-      }
-
-    } catch (error) {
-      console.error('Email sending error:', error)
-      setStatus({
-        loading: false,
-        success: false,
-        error: true,
-        message: '❌ Failed to send message. Please try again or contact us directly.'
-      })
-    }
+  const errors = validateForm()
+  if (Object.keys(errors).length > 0) {
+    setFormErrors(errors)
+    return
   }
 
+  setFormErrors({})
+  setStatus({ loading: true, success: false, error: false, message: '' })
+
+  try {
+
+    // 🔹 1️⃣ Send Email to Admin
+    await emailjs.send(
+      "service_m43r6fq",
+      "template_ysi9wih",
+      {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        subject: formData.subject,
+        message: formData.message,
+      },
+      "ctHzsKvXJvpGEjIvF"
+    )
+
+    // 🔹 2️⃣ Send Confirmation to User
+    await emailjs.send(
+      "service_m43r6fq",
+      "template_ysi9wih",
+      {
+        name: formData.name,
+        email: formData.email,
+        subject: formData.subject,
+      },
+      "ctHzsKvXJvpGEjIvF"
+    )
+
+    setStatus({
+      loading: false,
+      success: true,
+      error: false,
+      message: "✅ Message sent successfully!"
+    })
+
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      subject: '',
+      message: ''
+    })
+
+  } catch (error) {
+    console.error("Email Error:", error)
+
+    setStatus({
+      loading: false,
+      success: false,
+      error: true,
+      message: "❌ Failed to send message."
+    })
+  }
+}
   const handleChange = (e) => {
     const { name, value } = e.target
     setFormData({
