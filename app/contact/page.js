@@ -76,8 +76,8 @@ const handleSubmit = async (e) => {
 
     // 🔹 1️⃣ Send Email to Admin
     await emailjs.send(
-      "service_m43r6fq",
-      "template_ysi9wih",
+      "service_a93w12k",
+      "template_o2mw75i",
       {
         name: formData.name,
         email: formData.email,
@@ -90,7 +90,7 @@ const handleSubmit = async (e) => {
 
     // 🔹 2️⃣ Send Confirmation to User
     await emailjs.send(
-      "service_m43r6fq",
+      "service_a93w12k",
       "template_ysi9wih",
       {
         name: formData.name,
