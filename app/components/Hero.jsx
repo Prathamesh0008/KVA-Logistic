@@ -83,8 +83,7 @@ export default function Hero() {
       <div className="absolute inset-0 block md:hidden bg-gradient-to-t from-[#310F0B] via-transparent to-transparent opacity-80" />
 
       {/* Content */}
-      <div className="relative z-10 w-full py-12 lg:py-0">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+<div className="relative z-10 w-full pt-20 pb-12 lg:pt-24">        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl">
             {/* Badge - improved positioning */}
             <div className="mb-6 md:mb-8 lg:mb-10">
