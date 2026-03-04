@@ -114,7 +114,7 @@ export default function Footer() {
                 },
                 {
                   icon: <Mail className="h-4 w-4" />,
-                  content: "info@kvalogistics.com",
+                  content: "info@kvalogistics.nl",
                   subtitle: "Quick Response",
                   color: colors.darkBrown
                 }

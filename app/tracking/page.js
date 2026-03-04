@@ -110,8 +110,8 @@ export default function TrackingPage() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Hero Section - balanced size */}
-      <section className="relative py-10 md:py-12 bg-gray-50 overflow-hidden flex-shrink-0">
+      {/* Hero Section - reduced padding */}
+      <section className="relative py-6 bg-gray-50 overflow-hidden flex-shrink-0">
         {/* Subtle background pattern */}
         <div className="absolute inset-0 opacity-5">
           <div 
@@ -124,21 +124,8 @@ export default function TrackingPage() {
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
-            {/* Badge */}
-            <div 
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-3"
-              style={{
-                backgroundColor: colors.goldenYellow,
-                color: colors.darkBrown,
-                border: `1px solid ${colors.darkBrown}20`
-              }}
-            >
-              <Package className="w-4 h-4" />
-              <span className="text-xs font-semibold">REAL-TIME TRACKING</span>
-            </div>
-            
             <h1 
-              className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2"
+              className="text-2xl md:text-3xl lg:text-4xl font-bold mb-1"
               style={{ color: colors.darkBrown }}
             >
               <span className="block">Track Your</span>
@@ -165,21 +152,21 @@ export default function TrackingPage() {
         </div>
       </section>
 
-      {/* Tracking Form - balanced size */}
-      <section className="py-6 md:py-8 bg-white flex-grow">
+      {/* Tracking Form - reduced padding */}
+      <section className="py-4 bg-white flex-grow">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <div 
-              className="rounded-xl p-5 md:p-6 border"
+              className="rounded-xl p-4 border"
               style={{
                 backgroundColor: 'white',
                 borderColor: colors.lightTan,
                 boxShadow: '0 4px 15px rgba(0,0,0,0.05)'
               }}
             >
-              <div className="text-center mb-4">
+              <div className="text-center mb-3">
                 <h2
-                  className="text-lg md:text-xl font-bold mb-2"
+                  className="text-lg md:text-xl font-bold mb-1"
                   style={{ color: colors.darkBrown }}
                 >
                   Enter Tracking Number
@@ -188,14 +175,14 @@ export default function TrackingPage() {
               </div>
               
               <form onSubmit={handleSubmit}>
-                <div className="flex flex-col sm:flex-row gap-3 mb-3">
+                <div className="flex flex-col sm:flex-row gap-2 mb-2">
                   <div className="flex-grow">
                     <input
                       type="text"
                       value={trackingId}
                       onChange={(e) => setTrackingId(e.target.value)}
                       placeholder="e.g., LGSW123456789"
-                      className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors"
+                      className="w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 transition-colors"
                       style={{ 
                         borderColor: colors.lightTan,
                         color: colors.darkBrown,
@@ -205,7 +192,7 @@ export default function TrackingPage() {
                   </div>
                   <button
                     type="submit"
-                    className="px-5 py-3 rounded-lg font-bold transition-all hover:shadow-md flex items-center justify-center hover:scale-105"
+                    className="px-5 py-2.5 rounded-lg font-bold transition-all hover:shadow-md flex items-center justify-center hover:scale-105"
                     style={{ 
                       backgroundColor: colors.goldenYellow,
                       color: colors.darkBrown,
@@ -223,9 +210,9 @@ export default function TrackingPage() {
               </form>
 
               {/* Recent Tracking Numbers */}
-              <div className="mt-4 pt-4 border-t" style={{ borderColor: colors.lightTan + '30' }}>
+              <div className="mt-3 pt-3 border-t" style={{ borderColor: colors.lightTan + '30' }}>
                 <h3
-                  className="text-sm font-semibold mb-3 text-center"
+                  className="text-sm font-semibold mb-2 text-center"
                   style={{ color: colors.darkBrown }}
                 >
                   Recent Tracking Numbers
@@ -241,7 +228,7 @@ export default function TrackingPage() {
                           form?.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }))
                         }, 100)
                       }}
-                      className="p-3 rounded-lg border text-center transition-all hover:shadow-md"
+                      className="p-2 rounded-lg border text-center transition-all hover:shadow-md"
                       style={{ 
                         backgroundColor: colors.goldenYellow + '10',
                         borderColor: colors.goldenYellow,
@@ -249,7 +236,7 @@ export default function TrackingPage() {
                       }}
                     >
                       <div className="font-medium text-xs truncate">{num}</div>
-                      <div className="text-[10px] mt-1" style={{ color: colors.darkBrown, opacity: 0.6 }}>Click to track</div>
+                      <div className="text-[10px] mt-0.5" style={{ color: colors.darkBrown, opacity: 0.6 }}>Click to track</div>
                     </button>
                   ))}
                 </div>
@@ -259,19 +246,19 @@ export default function TrackingPage() {
         </div>
       </section>
 
-      {/* Tracking Results - balanced size */}
+      {/* Tracking Results - reduced padding */}
       {trackingData && (
-        <section className="py-6 bg-gray-50">
+        <section className="py-4 bg-gray-50">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               {/* Shipment Header */}
-              <div className="mb-4">
-                <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 mb-2">
+              <div className="mb-3">
+                <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-2 mb-1">
                   <div>
-                    <h2 className="text-lg md:text-xl font-bold mb-1" style={{ color: colors.darkBrown }}>Shipment Details</h2>
+                    <h2 className="text-lg md:text-xl font-bold mb-0.5" style={{ color: colors.darkBrown }}>Shipment Details</h2>
                     <div className="flex items-center gap-3">
                       <div 
-                        className="px-3 py-1 rounded-full font-semibold text-xs"
+                        className="px-3 py-0.5 rounded-full font-semibold text-xs"
                         style={{ 
                           backgroundColor: colors.goldenYellow + '20',
                           color: colors.goldenYellow,
@@ -287,7 +274,7 @@ export default function TrackingPage() {
                   </div>
                   
                   <div 
-                    className="flex items-center gap-2 px-4 py-2 rounded-lg"
+                    className="flex items-center gap-2 px-3 py-1.5 rounded-lg"
                     style={{ 
                       backgroundColor: colors.goldenYellow + '20',
                       border: `1px solid ${colors.goldenYellow}30`
@@ -303,44 +290,44 @@ export default function TrackingPage() {
               </div> 
 
               {/* Shipment Info Cards */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-3">
                 <div 
-                  className="p-3 rounded-lg border"
+                  className="p-2 rounded-lg border"
                   style={{
                     backgroundColor: colors.goldenYellow + '10',
                     borderColor: colors.goldenYellow
                   }}
                 >
-                  <div className="flex items-center mb-1">
-                    <MapPin className="h-4 w-4 mr-2" style={{ color: colors.goldenYellow }} />
+                  <div className="flex items-center mb-0.5">
+                    <MapPin className="h-4 w-4 mr-1" style={{ color: colors.goldenYellow }} />
                     <h3 className="font-semibold text-xs" style={{ color: colors.darkBrown }}>Origin</h3>
                   </div>
                   <p className="text-sm font-medium" style={{ color: colors.darkBrown }}>{trackingData.origin}</p>
                 </div> 
                 
                 <div 
-                  className="p-3 rounded-lg border"
+                  className="p-2 rounded-lg border"
                   style={{
                     backgroundColor: colors.orange + '10',
                     borderColor: colors.orange
                   }}
                 >
-                  <div className="flex items-center mb-1">
-                    <MapPin className="h-4 w-4 mr-2" style={{ color: colors.orange }} />
+                  <div className="flex items-center mb-0.5">
+                    <MapPin className="h-4 w-4 mr-1" style={{ color: colors.orange }} />
                     <h3 className="font-semibold text-xs" style={{ color: colors.darkBrown }}>Destination</h3>
                   </div>
                   <p className="text-sm font-medium" style={{ color: colors.darkBrown }}>{trackingData.destination}</p>
                 </div>
                 
                 <div 
-                  className="p-3 rounded-lg border"
+                  className="p-2 rounded-lg border"
                   style={{
                     backgroundColor: colors.lightTan + '20',
                     borderColor: colors.lightTan
                   }}
                 >
-                  <div className="flex items-center mb-1">
-                    <Package className="h-4 w-4 mr-2" style={{ color: colors.darkBrown }} />
+                  <div className="flex items-center mb-0.5">
+                    <Package className="h-4 w-4 mr-1" style={{ color: colors.darkBrown }} />
                     <h3 className="font-semibold text-xs" style={{ color: colors.darkBrown }}>Package</h3>
                   </div>
                   <p className="text-sm font-medium" style={{ color: colors.darkBrown }}>{trackingData.weight}</p>
@@ -348,14 +335,14 @@ export default function TrackingPage() {
                 </div>
                 
                 <div 
-                  className="p-3 rounded-lg border"
+                  className="p-2 rounded-lg border"
                   style={{
                     backgroundColor: colors.darkOrange + '10',
                     borderColor: colors.darkOrange
                   }}
                 >
-                  <div className="flex items-center mb-1">
-                    <Truck className="h-4 w-4 mr-2" style={{ color: colors.darkOrange }} />
+                  <div className="flex items-center mb-0.5">
+                    <Truck className="h-4 w-4 mr-1" style={{ color: colors.darkOrange }} />
                     <h3 className="font-semibold text-xs" style={{ color: colors.darkBrown }}>Method</h3>
                   </div>
                   <p className="text-sm font-medium" style={{ color: colors.darkBrown }}>{trackingData.shippingMethod}</p>
@@ -364,14 +351,14 @@ export default function TrackingPage() {
 
               {/* Timeline */}
               <div 
-                className="rounded-xl p-4 border mb-4"
+                className="rounded-xl p-3 border mb-3"
                 style={{
                   backgroundColor: 'white',
                   borderColor: colors.lightTan,
                   boxShadow: '0 4px 15px rgba(0,0,0,0.05)'
                 }}
               >
-                <h3 className="text-base font-bold mb-4 text-center" style={{ color: colors.darkBrown }}>Shipment Timeline</h3>
+                <h3 className="text-base font-bold mb-2 text-center" style={{ color: colors.darkBrown }}>Shipment Timeline</h3>
                 
                 <div className="relative">
                   {/* Vertical Line */}
@@ -380,9 +367,9 @@ export default function TrackingPage() {
                   {trackingData.timeline.map((event, index) => {
                     const StatusIcon = getStatusIcon(event.status)
                     return (
-                      <div key={event.id} className="relative flex items-start mb-3 last:mb-0">
+                      <div key={event.id} className="relative flex items-start mb-2 last:mb-0">
                         <div 
-                          className={`z-10 w-9 h-9 rounded-full flex items-center justify-center ${
+                          className={`z-10 w-8 h-8 rounded-full flex items-center justify-center ${
                             event.completed ? 'bg-green-500' : 'bg-gray-300'
                           }`}
                         >
@@ -390,7 +377,7 @@ export default function TrackingPage() {
                         </div>
                         
                         <div 
-                          className="ml-4 flex-grow p-3 rounded-lg border"
+                          className="ml-3 flex-grow p-2 rounded-lg border"
                           style={{ 
                             backgroundColor: event.completed ? colors.goldenYellow + '10' : 'white',
                             borderColor: event.completed ? colors.goldenYellow : colors.lightTan
@@ -399,19 +386,19 @@ export default function TrackingPage() {
                           <div className="flex flex-col md:flex-row md:items-center justify-between">
                             <div>
                               <h4 className="text-sm font-semibold" style={{ color: colors.darkBrown }}>{event.status}</h4>
-                              <div className="flex items-center mt-1">
+                              <div className="flex items-center mt-0.5">
                                 <MapPin className="h-3 w-3 mr-1" style={{ color: colors.goldenYellow }} />
                                 <span className="text-xs" style={{ color: colors.darkBrown, opacity: 0.7 }}>{event.location}</span>
                               </div>
                             </div>
-                            <div className="mt-2 md:mt-0">
+                            <div className="mt-1 md:mt-0">
                               <div className="text-xs font-medium" style={{ color: colors.darkBrown }}>{event.date}</div>
                               <div className="text-xs" style={{ color: colors.darkBrown, opacity: 0.7 }}>{event.time}</div>
                             </div>
                           </div>
                           
                           {event.completed && (
-                            <div className="flex items-center mt-2" style={{ color: colors.goldenYellow }}>
+                            <div className="flex items-center mt-1" style={{ color: colors.goldenYellow }}>
                               <CheckCircle className="h-3 w-3 mr-1" />
                               <span className="text-xs font-medium">Completed</span>
                             </div>
@@ -425,54 +412,54 @@ export default function TrackingPage() {
 
               {/* Help Section */}
               <div 
-                className="rounded-xl p-4 border"
+                className="rounded-xl p-3 border"
                 style={{
                   backgroundColor: colors.lightTan + '10',
                   borderColor: colors.lightTan
                 }}
               >
-                <h3 className="text-base font-bold mb-3 text-center" style={{ color: colors.darkBrown }}>Need Assistance?</h3>
+                <h3 className="text-base font-bold mb-2 text-center" style={{ color: colors.darkBrown }}>Need Assistance?</h3>
                 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
                   <div 
-                    className="p-3 rounded-lg border text-center"
+                    className="p-2 rounded-lg border text-center"
                     style={{
                       backgroundColor: 'white',
                       borderColor: colors.lightTan
                     }}
                   >
-                    <div className="w-8 h-8 rounded-full flex items-center justify-center mx-auto mb-2" style={{ backgroundColor: colors.goldenYellow + '20' }}>
+                    <div className="w-8 h-8 rounded-full flex items-center justify-center mx-auto mb-1" style={{ backgroundColor: colors.goldenYellow + '20' }}>
                       <MessageSquare className="h-4 w-4" style={{ color: colors.goldenYellow }} />
                     </div>
-                    <h4 className="font-semibold text-xs mb-1" style={{ color: colors.darkBrown }}>Can't find number?</h4>
+                    <h4 className="font-semibold text-xs mb-0.5" style={{ color: colors.darkBrown }}>Can't find number?</h4>
                     <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.7 }}>Check your email or shipping documents</p>
                   </div>
                   
                   <div 
-                    className="p-3 rounded-lg border text-center"
+                    className="p-2 rounded-lg border text-center"
                     style={{
                       backgroundColor: 'white',
                       borderColor: colors.lightTan
                     }}
                   >
-                    <div className="w-8 h-8 rounded-full flex items-center justify-center mx-auto mb-2" style={{ backgroundColor: colors.orange + '20' }}>
+                    <div className="w-8 h-8 rounded-full flex items-center justify-center mx-auto mb-1" style={{ backgroundColor: colors.orange + '20' }}>
                       <Clock className="h-4 w-4" style={{ color: colors.orange }} />
                     </div>
-                    <h4 className="font-semibold text-xs mb-1" style={{ color: colors.darkBrown }}>Not updating?</h4>
+                    <h4 className="font-semibold text-xs mb-0.5" style={{ color: colors.darkBrown }}>Not updating?</h4>
                     <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.7 }}>Allow 24-48 hours for updates</p>
                   </div>
                   
                   <div 
-                    className="p-3 rounded-lg border text-center"
+                    className="p-2 rounded-lg border text-center"
                     style={{
                       backgroundColor: 'white',
                       borderColor: colors.lightTan
                     }}
                   >
-                    <div className="w-8 h-8 rounded-full flex items-center justify-center mx-auto mb-2" style={{ backgroundColor: colors.darkBrown + '20' }}>
+                    <div className="w-8 h-8 rounded-full flex items-center justify-center mx-auto mb-1" style={{ backgroundColor: colors.darkBrown + '20' }}>
                       <Phone className="h-4 w-4" style={{ color: colors.darkBrown }} />
                     </div>
-                    <h4 className="font-semibold text-xs mb-1" style={{ color: colors.darkBrown }}>Contact Support</h4>
+                    <h4 className="font-semibold text-xs mb-0.5" style={{ color: colors.darkBrown }}>Contact Support</h4>
                     <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.7 }}>
                       <span style={{ color: colors.goldenYellow, fontWeight: 'bold' }}>+31 68720 2074</span>
                     </p>

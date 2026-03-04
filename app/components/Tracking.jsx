@@ -28,11 +28,11 @@ import {
 
 // Color palette matching your logo
 const colors = {
-  darkBrown: '#521903', // Primary dark
-  goldenYellow: '#f8b936', // Primary accent
-  orange: '#dc8c18', // Secondary accent
-  darkOrange: '#9f4409', // Dark accent
-  lightTan: '#c29f85', // Light accent
+  darkBrown: '#521903',
+  goldenYellow: '#f8b936',
+  orange: '#dc8c18',
+  darkOrange: '#9f4409',
+  lightTan: '#c29f85',
 }
 
 // Light background colors
@@ -140,7 +140,6 @@ export default function Tracking() {
 
   // Mock tracking function
   const mockTrackPackage = (id) => {
-    // Check if it's a known mock ID
     if (mockTrackingData[id]) {
       const data = mockTrackingData[id];
       setActiveStatus(data.status);
@@ -149,7 +148,6 @@ export default function Tracking() {
       setPackageDetails(data.details);
       setShowSample(true);
     } else {
-      // Generate random mock data for new IDs
       const statuses = ['preparing', 'in-transit', 'delivered', 'delayed'];
       const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
       const locations = ['Los Angeles, CA', 'Phoenix, AZ', 'Dallas, TX', 'Houston, TX', 'Chicago, IL', 'New York, NY'];
@@ -214,7 +212,6 @@ export default function Tracking() {
 
   const handleStatusToggle = (statusId) => {
     setActiveStatus(statusId);
-    // Update timeline based on new status
     if (trackingId) {
       mockTrackPackage(trackingId);
     }
@@ -222,7 +219,6 @@ export default function Tracking() {
 
   const toggleNotifications = () => {
     if (!notificationsEnabled) {
-      // Mock notification permission request
       if (window.confirm('Enable notifications for tracking updates? You will receive alerts about delivery status changes.')) {
         setNotificationsEnabled(true);
         alert('Notifications enabled! You will receive updates about your shipment.');
@@ -401,16 +397,598 @@ export default function Tracking() {
   }, [autoRefresh, trackingId])
 
   return (
-    <section className="py-8 sm:py-10 lg:py-12 relative" style={{ backgroundColor: backgroundColors.warmWhite }}>
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23521903' fill-opacity='0.05'%3E%3Cpath d='M50 50c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10zM10 10c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10S0 25.523 0 20s4.477-10 10-10zm10 8c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm40 40c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }}
-        />
-      </div>
+    <div className="min-h-screen flex flex-col" style={{ backgroundColor: backgroundColors.warmWhite }}>
+      {/* Hero Section - matching services page */}
+      <section className="relative py-10 md:py-12 bg-gray-50 overflow-hidden flex-shrink-0">
+        {/* Subtle background pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23521903' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            }}
+          />
+        </div>
+
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-3xl mx-auto text-center">
+            {/* Badge */}
+            <div
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full mb-4"
+              style={{
+                backgroundColor: colors.goldenYellow,
+                color: colors.darkBrown,
+                border: `1px solid ${colors.darkBrown}20`,
+              }}
+            >
+              <Radio className="h-4 w-4" />
+              <span className="text-sm font-semibold">
+                LIVE TRACKING
+              </span>
+            </div>
+
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3">
+              <span
+                className="block"
+                style={{
+                  background: `linear-gradient(90deg, ${colors.darkBrown}, ${colors.goldenYellow})`,
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                Track Your
+              </span>
+              <span
+                className="block"
+                style={{
+                  background: `linear-gradient(90deg, ${colors.goldenYellow}, ${colors.orange})`,
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                Shipment in Real-Time
+              </span>
+            </h1>
+
+            <p
+              className="text-base md:text-lg max-w-2xl mx-auto"
+              style={{
+                background: "linear-gradient(90deg, #8B5A2B 200%, #D99A3E 100%, #F4A261 200%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                opacity: 0.95,
+              }}
+            >
+              Enter your tracking number for live updates and detailed shipment information
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Main Tracking Section - matching services content spacing */}
+      <section className="py-8 md:py-10 bg-white flex-grow">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            {/* Stats Banner - matching services page */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
+              <div
+                className="p-4 rounded-xl text-center"
+                style={{
+                  backgroundColor: colors.goldenYellow + "10",
+                  border: `1px solid ${colors.goldenYellow}30`,
+                  color: colors.darkBrown,
+                }}
+              >
+                <div className="text-xl md:text-2xl font-bold">24/7</div>
+                <div className="text-xs md:text-sm">Live Tracking</div>
+              </div>
+              <div
+                className="p-4 rounded-xl text-center"
+                style={{
+                  backgroundColor: colors.orange + "10",
+                  border: `1px solid ${colors.orange}30`,
+                  color: colors.darkBrown,
+                }}
+              >
+                <div className="text-xl md:text-2xl font-bold">150+</div>
+                <div className="text-xs md:text-sm">Countries</div>
+              </div>
+              <div
+                className="p-4 rounded-xl text-center"
+                style={{
+                  backgroundColor: colors.goldenYellow + "10",
+                  border: `1px solid ${colors.goldenYellow}30`,
+                  color: colors.darkBrown,
+                }}
+              >
+                <div className="text-xl md:text-2xl font-bold">99.8%</div>
+                <div className="text-xs md:text-sm">Accuracy</div>
+              </div>
+              <div
+                className="p-4 rounded-xl text-center"
+                style={{
+                  backgroundColor: colors.orange + "10",
+                  border: `1px solid ${colors.orange}30`,
+                  color: colors.darkBrown,
+                }}
+              >
+                <div className="text-xl md:text-2xl font-bold">1M+</div>
+                <div className="text-xs md:text-sm">Packages Tracked</div>
+              </div>
+            </div>
+
+            {/* Main Content Grid - matching services grid spacing */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-5">
+              {/* Left Column - Tracking Form (2/3 width) */}
+              <div className="lg:col-span-2">
+                <div
+                  className="rounded-xl p-5"
+                  style={{
+                    backgroundColor: 'white',
+                    border: `1px solid ${colors.lightTan}50`,
+                    boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
+                  }}
+                >
+                  {/* Tracking Form */}
+                  <div className="mb-4">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                      <h3 className="text-lg font-bold" style={{ color: colors.darkBrown }}>
+                        Enter Tracking Number
+                      </h3>
+
+                      <div className="flex gap-2">
+                        <button
+                          onClick={generateMockTracking}
+                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all hover:scale-105 text-xs font-bold"
+                          style={{
+                            backgroundColor: colors.darkBrown,
+                            color: 'white',
+                          }}
+                        >
+                          <RefreshCw className="h-3 w-3" />
+                          <span>Generate Mock ID</span>
+                        </button>
+
+                        <button
+                          onClick={simulateQRScan}
+                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all hover:scale-105 text-xs font-bold"
+                          style={{
+                            background: `linear-gradient(90deg, ${colors.goldenYellow}, ${colors.orange})`,
+                            color: colors.darkBrown,
+                          }}
+                        >
+                          <QrCode className="h-3 w-3" />
+                          <span>Scan QR</span>
+                        </button>
+                      </div>
+                    </div>
+
+                    <form onSubmit={handleSubmit}>
+                      <div className="flex flex-col sm:flex-row gap-2">
+                        <div className="flex-grow relative">
+                          <input
+                            type="text"
+                            value={trackingId}
+                            onChange={(e) => setTrackingId(e.target.value)}
+                            placeholder="Enter tracking number"
+                            className="w-full px-4 py-2.5 pl-9 rounded-lg focus:ring-1 transition-all text-sm"
+                            style={{
+                              border: `1px solid ${colors.lightTan}`,
+                              backgroundColor: `${colors.lightTan}10`,
+                              color: colors.darkBrown,
+                            }}
+                          />
+                          <Package
+                            className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4"
+                            style={{ color: colors.darkBrown, opacity: 0.5 }}
+                          />
+                        </div>
+
+                        <button
+                          type="submit"
+                          className="group px-5 py-2.5 rounded-lg font-bold transition-all duration-300 hover:shadow-md flex items-center justify-center gap-2 whitespace-nowrap hover:scale-105 text-sm"
+                          style={{
+                            background: `linear-gradient(90deg, ${colors.goldenYellow}, ${colors.orange})`,
+                            color: colors.darkBrown,
+                          }}
+                        >
+                          <Search className="h-4 w-4" />
+                          <span>Track</span>
+                        </button>
+                      </div>
+                    </form>
+
+                    {/* Sample Tracking IDs */}
+                    <div className="mt-3">
+                      <h4 className="text-xs font-semibold mb-1.5" style={highlightText}>
+                        Try Sample Tracking IDs
+                      </h4>
+                      <div className="flex flex-wrap gap-1.5">
+                        {Object.keys(mockTrackingData).map((sampleId) => (
+                          <button
+                            key={sampleId}
+                            onClick={() => loadSampleTracking(sampleId)}
+                            className="text-xs px-2 py-1 rounded-lg transition-colors flex items-center gap-1 hover:opacity-80"
+                            style={{
+                              backgroundColor: colors.darkBrown,
+                              color: 'white',
+                            }}
+                          >
+                            <span>{sampleId}</span>
+                            <ChevronRight className="h-2.5 w-2.5" />
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Recent Searches */}
+                    {searchHistory.length > 0 && (
+                      <div className="mt-3">
+                        <h4 className="text-xs font-semibold mb-1.5" style={highlightText}>
+                          Recent Searches
+                        </h4>
+                        <div className="flex flex-wrap gap-1.5">
+                          {searchHistory.map((id, idx) => (
+                            <button
+                              key={idx}
+                              onClick={() => loadSampleTracking(id)}
+                              className="text-xs px-2 py-1 rounded-lg transition-colors flex items-center gap-1 hover:opacity-80"
+                              style={{
+                                backgroundColor: `${colors.lightTan}20`,
+                                color: colors.darkBrown,
+                              }}
+                            >
+                              <span style={highlightText}>{id}</span>
+                              <ChevronRight className="h-2.5 w-2.5" />
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Status Toggle */}
+                    <div className="mt-4">
+                      <h4 className="text-xs font-semibold mb-2" style={highlightText}>
+                        Quick Status
+                      </h4>
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
+                        {statusOptions.map((status) => (
+                          <button
+                            key={status.id}
+                            onClick={() => handleStatusToggle(status.id)}
+                            className={`flex items-center gap-1.5 px-2 py-1.5 rounded-lg transition-all text-xs ${
+                              activeStatus === status.id ? 'border shadow-sm' : 'border hover:opacity-90'
+                            }`}
+                            style={{
+                              backgroundColor:
+                                activeStatus === status.id ? status.bgColor + '20' : `${colors.lightTan}10`,
+                              borderColor: activeStatus === status.id ? status.bgColor : colors.lightTan,
+                              color: activeStatus === status.id ? status.textColor : colors.darkBrown,
+                            }}
+                          >
+                            <div className="w-2 h-2 rounded-full" style={{ backgroundColor: status.bgColor }} />
+                            <span style={highlightText}>{status.label}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Sample Tracking Info */}
+                  {showSample && (
+                    <div
+                      className="rounded-xl p-4 border"
+                      style={{
+                        background: `linear-gradient(135deg, ${colors.goldenYellow}10, ${colors.orange}10)`,
+                        borderColor: colors.lightTan,
+                      }}
+                    >
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                        <div>
+                          <div className="text-xs mb-0.5" style={{ color: colors.darkBrown, opacity: 0.7 }}>
+                            Tracking ID
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <h3 className="text-lg font-bold font-mono" style={highlightText}>
+                              {trackingId || 'LGSW123456789'}
+                            </h3>
+                            <button
+                              onClick={copyTrackingId}
+                              className="p-1 hover:bg-white/50 rounded-lg transition-colors"
+                              title="Copy tracking ID"
+                            >
+                              <Copy className="h-3.5 w-3.5" style={{ color: colors.darkBrown, opacity: 0.5 }} />
+                            </button>
+                          </div>
+                        </div>
+
+                        <div className="flex flex-col sm:items-end">
+                          <div
+                            className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full mb-1"
+                            style={{
+                              backgroundColor: colors.goldenYellow + '30',
+                              color: colors.darkBrown,
+                            }}
+                          >
+                            <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: colors.goldenYellow }} />
+                            <span className="text-xs font-semibold" style={highlightText}>
+                              {activeStatus.toUpperCase()}
+                            </span>
+                          </div>
+                          <div className="text-xs" style={{ color: colors.darkBrown, opacity: 0.7 }}>
+                            Last updated: Just now
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Status Badges */}
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4">
+                        <div className="rounded-lg p-2.5" style={{ backgroundColor: 'white' }}>
+                          <div className="text-xs mb-0.5" style={{ color: colors.darkBrown, opacity: 0.7 }}>
+                            Est. Delivery
+                          </div>
+                          <div className="text-sm font-bold" style={highlightText}>
+                            {estimatedDelivery}
+                          </div>
+                        </div>
+
+                        <div className="rounded-lg p-2.5" style={{ backgroundColor: 'white' }}>
+                          <div className="text-xs mb-0.5" style={{ color: colors.darkBrown, opacity: 0.7 }}>
+                            Location
+                          </div>
+                          <div className="text-sm font-bold" style={highlightText}>
+                            {currentLocation}
+                          </div>
+                        </div>
+
+                        <div className="rounded-lg p-2.5" style={{ backgroundColor: 'white' }}>
+                          <div className="text-xs mb-0.5" style={{ color: colors.darkBrown, opacity: 0.7 }}>
+                            Method
+                          </div>
+                          <div className="text-sm font-bold" style={highlightText}>
+                            Express Air
+                          </div>
+                        </div>
+
+                        <div className="rounded-lg p-2.5" style={{ backgroundColor: 'white' }}>
+                          <div className="text-xs mb-0.5" style={{ color: colors.darkBrown, opacity: 0.7 }}>
+                            Status
+                          </div>
+                          <div className="text-sm font-bold" style={highlightText}>
+                            {statusOptions.find(s => s.id === activeStatus)?.label || 'In Transit'}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Package Details */}
+                      <div className="mb-4">
+                        <h4 className="text-sm font-bold mb-2" style={{ color: colors.darkBrown }}>
+                          Package Details
+                        </h4>
+                        <div className="grid grid-cols-2 md:grid-cols-5 gap-1.5">
+                          {Object.entries(packageDetails).map(([key, value]) => (
+                            <div key={key} className="rounded-lg p-2" style={{ backgroundColor: 'white' }}>
+                              <div className="text-xs uppercase tracking-wider" style={{ color: colors.darkBrown, opacity: 0.5 }}>
+                                {key}
+                              </div>
+                              <div className="text-xs font-bold" style={highlightText}>
+                                {value}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Action Buttons */}
+                      <div className="flex flex-wrap gap-2">
+                        <button
+                          onClick={toggleNotifications}
+                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors hover:opacity-90 text-xs font-bold"
+                          style={{
+                            backgroundColor: notificationsEnabled ? colors.goldenYellow : colors.lightTan,
+                            color: colors.darkBrown,
+                          }}
+                        >
+                          <Bell className="h-3.5 w-3.5" />
+                          <span>{notificationsEnabled ? 'ON' : 'Get Updates'}</span>
+                        </button>
+
+                        <button
+                          onClick={shareTrackingStatus}
+                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors hover:opacity-90 text-xs font-bold"
+                          style={{
+                            backgroundColor: colors.goldenYellow,
+                            color: colors.darkBrown,
+                            border: `1px solid ${colors.lightTan}`,
+                          }}
+                        >
+                          <Share2 className="h-3.5 w-3.5" />
+                          <span>Share</span>
+                        </button>
+
+                        <button
+                          onClick={exportTrackingData}
+                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors hover:opacity-90 text-xs font-bold"
+                          style={{
+                            backgroundColor: colors.goldenYellow,
+                            color: colors.darkBrown,
+                            border: `1px solid ${colors.lightTan}`,
+                          }}
+                        >
+                          <Download className="h-3.5 w-3.5" />
+                          <span>Export</span>
+                        </button>
+
+                        <button
+                          onClick={() => setAutoRefresh(!autoRefresh)}
+                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors hover:opacity-90 text-xs font-bold"
+                          style={{
+                            backgroundColor: autoRefresh ? colors.goldenYellow : colors.lightTan,
+                            color: colors.darkBrown,
+                            border: `1px solid ${autoRefresh ? colors.goldenYellow : colors.lightTan}`,
+                          }}
+                        >
+                          <Radio className="h-3.5 w-3.5" />
+                          <span>{autoRefresh ? 'ON' : 'Auto'}</span>
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Right Column - Timeline (1/3 width) */}
+              <div>
+                <div
+                  className="rounded-xl p-5 h-full"
+                  style={{
+                    backgroundColor: 'white',
+                    border: `1px solid ${colors.lightTan}50`,
+                    boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
+                  }}
+                >
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-lg font-bold" style={{ color: colors.darkBrown }}>
+                      Timeline
+                    </h3>
+                    <button
+                      onClick={() => alert('Package is insured and protected by our security system.')}
+                      className="p-1.5 hover:bg-gray-100 rounded-lg transition-colors"
+                      title="Package Security Info"
+                    >
+                      <Shield className="h-4 w-4" style={{ color: colors.goldenYellow }} />
+                    </button>
+                  </div>
+
+                  {/* Timeline */}
+                  <div className="space-y-3">
+                    {timelineSteps.slice(0, 5).map((step, index) => (
+                      <div key={step.id} className="relative">
+                        <div className="flex items-start gap-2">
+                          <div
+                            className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center"
+                            style={{
+                              backgroundColor: step.completed
+                                ? `${colors.goldenYellow}20`
+                                : step.current
+                                  ? `${colors.orange}20`
+                                  : `${colors.lightTan}10`,
+                            }}
+                          >
+                            <step.icon className="h-3 w-3" style={{ color: step.color }} />
+                          </div>
+
+                          <div className="flex-grow">
+                            <div className="flex justify-between items-start">
+                              <h4
+                                className="text-xs font-bold"
+                                style={step.completed ? highlightText : { color: `${colors.darkBrown}80` }}
+                              >
+                                {step.status}
+                              </h4>
+                              <span
+                                className="text-[10px]"
+                                style={{
+                                  color: step.completed ? `${colors.darkBrown}70` : `${colors.darkBrown}40`,
+                                }}
+                              >
+                                {step.time}
+                              </span>
+                            </div>
+
+                            <div className="flex items-center gap-1 mt-0.5">
+                              <MapPin className="h-2.5 w-2.5" style={{ color: colors.darkBrown, opacity: 0.5 }} />
+                              <span className="text-[10px]" style={{ color: colors.darkBrown, opacity: 0.7 }}>
+                                {step.location}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Estimated Delivery Card */}
+                  <div
+                    className="mt-4 rounded-lg p-3 border"
+                    style={{
+                      backgroundColor: `${colors.goldenYellow}10`,
+                      borderColor: colors.lightTan,
+                      color: colors.darkBrown,
+                    }}
+                  >
+                    <div className="text-xs mb-0.5" style={{ color: colors.darkBrown, opacity: 0.7 }}>
+                      Estimated Delivery
+                    </div>
+                    <div className="text-base font-bold" style={highlightText}>
+                      {estimatedDelivery}
+                    </div>
+                    <div className="w-full h-1.5 rounded-full mt-2 overflow-hidden" style={{ backgroundColor: `${colors.lightTan}50` }}>
+                      <div
+                        className="h-full rounded-full"
+                        style={{
+                          width: activeStatus === 'delivered' ? '100%' : '70%',
+                          background: `linear-gradient(90deg, ${colors.goldenYellow}, ${colors.orange})`,
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Quick Help Section - matching services CTA spacing */}
+            <div
+              className="rounded-xl p-5 text-center"
+              style={{
+                background: `linear-gradient(135deg, ${colors.goldenYellow}15, ${colors.orange}15)`,
+                border: `1px solid ${colors.goldenYellow}30`,
+              }}
+            >
+              <h3
+                className="text-lg md:text-xl font-bold mb-2"
+                style={{ color: colors.darkBrown }}
+              >
+                Need Help With Your Shipment?
+              </h3>
+              <p
+                className="mb-3 text-sm max-w-lg mx-auto"
+                style={{ color: colors.darkBrown, opacity: 0.8 }}
+              >
+                Our support team is available 24/7 to assist you with tracking and delivery questions
+              </p>
+              <div className="flex flex-row gap-3 justify-center">
+                <button
+                  onClick={callSupport}
+                  className="px-4 py-2 rounded-md font-bold transition-all hover:shadow-md text-sm flex items-center gap-2"
+                  style={{
+                    backgroundColor: colors.goldenYellow,
+                    color: colors.darkBrown,
+                    boxShadow: `0 2px 8px ${colors.goldenYellow}40`,
+                  }}
+                >
+                  <Phone className="h-4 w-4" />
+                  Call Now
+                </button>
+                <button
+                  onClick={emailSupport}
+                  className="px-4 py-2 rounded-md font-bold transition-all hover:shadow-md border text-sm"
+                  style={{
+                    borderColor: colors.goldenYellow,
+                    color: colors.darkBrown,
+                    backgroundColor: "white",
+                  }}
+                >
+                  Email Support
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* QR Scanner Overlay */}
       {showQRScanner && (
@@ -442,528 +1020,6 @@ export default function Tracking() {
           </div>
         </div>
       )}
-
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-6xl mx-auto">
-          {/* Header - Smaller */}
-          <div className="text-center mb-6 sm:mb-8 lg:mb-10">
-            <div
-              className="inline-flex items-center gap-1.5 rounded-full mb-3 px-3 py-1.5 shadow-sm"
-              style={{
-                backgroundColor: colors.goldenYellow,
-                color: colors.darkBrown,
-                border: `1px solid ${colors.darkBrown}20`,
-              }}
-            >
-              <Radio className="h-3.5 w-3.5" />
-              <span className="text-xs font-semibold">LIVE TRACKING</span>
-            </div>
-
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-2">
-              <span style={{ color: '#f8b936' }}>
-                Track Your
-              </span>
-              <span className="block" style={{ color: '#8B5A2B' }}>
-                Shipment in Real-Time
-              </span>
-            </h2>
-
-            <p className="text-sm sm:text-base max-w-2xl mx-auto" style={{ color: colors.darkBrown, opacity: 0.7 }}>
-              Enter your tracking number for live updates and detailed shipment information
-            </p>
-          </div>
-
-          {/* Main Tracking Section */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6 mb-6">
-            {/* Left Column - Tracking Form */}
-            <div className="lg:col-span-2">
-              <div
-                className="rounded-xl shadow-sm p-4 sm:p-5"
-                style={{
-                  backgroundColor: 'white',
-                  border: `1px solid ${colors.lightTan}50`,
-                }}
-              >
-                {/* Tracking Form */}
-                <div className="mb-5">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
-                    <div className="flex items-center gap-2">
-                      <h3 className="text-lg font-bold" style={{ color: '#f8b936' }}>
-                        Enter Tracking Number
-                      </h3>
-                      <button
-                        onClick={generateMockTracking}
-                        className="flex items-center gap-1.5 px-2 py-1 rounded-lg transition-all hover:scale-105 text-xs"
-                        style={{
-                          backgroundColor: colors.darkBrown,
-                          color: 'white',
-                        }}
-                      >
-                        <RefreshCw className="h-3 w-3" />
-                        <span>Generate Mock ID</span>
-                      </button>
-                    </div>
-
-                    <button
-                      onClick={simulateQRScan}
-                      className="text-xs flex items-center gap-1 hover:opacity-80 transition-opacity px-2 py-1 rounded-lg"
-                      style={{
-                        background: 'linear-gradient(90deg, #8B5A2B, #D99A3E)',
-                        color: '#FFFFFF',
-                      }}
-                    >
-                      <QrCode className="h-3.5 w-3.5" />
-                      <span>Scan QR Code</span>
-                    </button>
-                  </div>
-
-                  <form onSubmit={handleSubmit}>
-                    <div className="flex flex-col sm:flex-row gap-2">
-                      <div className="flex-grow relative">
-                        <input
-                          type="text"
-                          value={trackingId}
-                          onChange={(e) => setTrackingId(e.target.value)}
-                          placeholder="Enter tracking number"
-                          className="w-full px-4 py-2.5 pl-9 rounded-lg focus:ring-1 transition-all text-sm"
-                          style={{
-                            border: `1px solid ${colors.lightTan}`,
-                            backgroundColor: `${colors.lightTan}10`,
-                            color: colors.darkBrown,
-                          }}
-                        />
-                        <Package
-                          className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4"
-                          style={{ color: colors.darkBrown, opacity: 0.5 }}
-                        />
-                      </div>
-
-                      <button
-                        type="submit"
-                        className="group px-5 py-2.5 rounded-lg font-semibold transition-all duration-300 shadow-sm hover:shadow-md flex items-center justify-center gap-2 whitespace-nowrap hover:scale-105 text-sm"
-                        style={{
-                          background: `linear-gradient(90deg, ${colors.goldenYellow}, ${colors.orange})`,
-                          color: colors.darkBrown,
-                        }}
-                      >
-                        <Search className="h-4 w-4" />
-                        <span style={{ color: '#8B5A2B' }}>Track</span>
-                      </button>
-                    </div>
-                  </form>
-
-                  {/* Sample Tracking IDs */}
-                  <div className="mt-3">
-                    <h4 className="text-xs font-semibold mb-1.5" style={highlightText}>
-                      Try Sample Tracking IDs
-                    </h4>
-                    <div className="flex flex-wrap gap-1.5">
-                      {Object.keys(mockTrackingData).map((sampleId) => (
-                        <button
-                          key={sampleId}
-                          onClick={() => loadSampleTracking(sampleId)}
-                          className="text-xs px-2 py-1 rounded-lg transition-colors flex items-center gap-1 hover:opacity-80"
-                          style={{
-                            backgroundColor: colors.darkBrown,
-                            color: 'white',
-                          }}
-                        >
-                          <span>{sampleId}</span>
-                          <ChevronRight className="h-2.5 w-2.5" />
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Recent Searches */}
-                  {searchHistory.length > 0 && (
-                    <div className="mt-3">
-                      <h4 className="text-xs font-semibold mb-1.5" style={highlightText}>
-                        Recent Searches
-                      </h4>
-                      <div className="flex flex-wrap gap-1.5">
-                        {searchHistory.map((id, idx) => (
-                          <button
-                            key={idx}
-                            onClick={() => loadSampleTracking(id)}
-                            className="text-xs px-2 py-1 rounded-lg transition-colors flex items-center gap-1 hover:opacity-80"
-                            style={{
-                              backgroundColor: `${colors.lightTan}20`,
-                              color: colors.darkBrown,
-                            }}
-                          >
-                            <span style={highlightText}>{id}</span>
-                            <ChevronRight className="h-2.5 w-2.5" />
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Status Toggle */}
-                  <div className="mt-4">
-                    <h4 className="text-xs font-semibold mb-2" style={highlightText}>
-                      Quick Status
-                    </h4>
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
-                      {statusOptions.map((status) => (
-                        <button
-                          key={status.id}
-                          onClick={() => handleStatusToggle(status.id)}
-                          className={`flex items-center gap-1.5 px-2 py-1.5 rounded-lg transition-all text-xs ${
-                            activeStatus === status.id ? 'border shadow-sm' : 'border hover:opacity-90'
-                          }`}
-                          style={{
-                            backgroundColor:
-                              activeStatus === status.id ? status.bgColor + '20' : `${colors.lightTan}10`,
-                            borderColor: activeStatus === status.id ? status.bgColor : colors.lightTan,
-                            color: activeStatus === status.id ? status.textColor : colors.darkBrown,
-                          }}
-                        >
-                          <div className="w-2 h-2 rounded-full" style={{ backgroundColor: status.bgColor }} />
-                          <span style={highlightText}>{status.label}</span>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Sample Tracking Info */}
-                {showSample && (
-                  <div
-                    className="rounded-xl p-4 border shadow-sm"
-                    style={{
-                      background: `linear-gradient(135deg, ${colors.goldenYellow}10, ${colors.orange}10)`,
-                      borderColor: colors.lightTan,
-                    }}
-                  >
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
-                      <div>
-                        <div className="text-xs mb-0.5" style={{ color: colors.darkBrown, opacity: 0.7 }}>
-                          Tracking ID
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <h3 className="text-lg font-bold font-mono" style={highlightText}>
-                            {trackingId || 'LGSW123456789'}
-                          </h3>
-                          <button
-                            onClick={copyTrackingId}
-                            className="p-1 hover:bg-white/50 rounded-lg transition-colors"
-                            title="Copy tracking ID"
-                          >
-                            <Copy className="h-3.5 w-3.5" style={{ color: colors.darkBrown, opacity: 0.5 }} />
-                          </button>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-col sm:items-end">
-                        <div
-                          className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full mb-1"
-                          style={{
-                            backgroundColor: colors.goldenYellow + '30',
-                            color: colors.darkBrown,
-                          }}
-                        >
-                          <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: colors.goldenYellow }} />
-                          <span className="text-xs font-semibold" style={highlightText}>
-                            {activeStatus.toUpperCase()}
-                          </span>
-                        </div>
-                        <div className="text-xs" style={{ color: colors.darkBrown, opacity: 0.7 }}>
-                          Last updated: Just now
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Status Badges */}
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4">
-                      <div className="rounded-lg p-2.5" style={{ backgroundColor: 'white' }}>
-                        <div className="text-xs mb-0.5" style={{ color: colors.darkBrown, opacity: 0.7 }}>
-                          Est. Delivery
-                        </div>
-                        <div className="text-sm font-bold" style={highlightText}>
-                          {estimatedDelivery}
-                        </div>
-                      </div>
-
-                      <div className="rounded-lg p-2.5" style={{ backgroundColor: 'white' }}>
-                        <div className="text-xs mb-0.5" style={{ color: colors.darkBrown, opacity: 0.7 }}>
-                          Location
-                        </div>
-                        <div className="text-sm font-bold" style={highlightText}>
-                          {currentLocation}
-                        </div>
-                      </div>
-
-                      <div className="rounded-lg p-2.5" style={{ backgroundColor: 'white' }}>
-                        <div className="text-xs mb-0.5" style={{ color: colors.darkBrown, opacity: 0.7 }}>
-                          Method
-                        </div>
-                        <div className="text-sm font-bold" style={highlightText}>
-                          Express Air
-                        </div>
-                      </div>
-
-                      <div className="rounded-lg p-2.5" style={{ backgroundColor: 'white' }}>
-                        <div className="text-xs mb-0.5" style={{ color: colors.darkBrown, opacity: 0.7 }}>
-                          Status
-                        </div>
-                        <div className="text-sm font-bold" style={highlightText}>
-                          {statusOptions.find(s => s.id === activeStatus)?.label || 'In Transit'}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Package Details */}
-                    <div className="mb-4">
-                      <h4 className="text-sm font-semibold mb-2" style={highlightText}>
-                        Package Details
-                      </h4>
-                      <div className="grid grid-cols-2 md:grid-cols-5 gap-1.5">
-                        {Object.entries(packageDetails).map(([key, value]) => (
-                          <div key={key} className="rounded-lg p-2" style={{ backgroundColor: 'white' }}>
-                            <div className="text-xs uppercase tracking-wider" style={{ color: colors.darkBrown, opacity: 0.5 }}>
-                              {key}
-                            </div>
-                            <div className="text-xs font-semibold" style={highlightText}>
-                              {value}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Action Buttons */}
-                    <div className="flex flex-wrap gap-2">
-                      <button
-                        onClick={toggleNotifications}
-                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors hover:opacity-90 text-xs"
-                        style={{
-                          backgroundColor: notificationsEnabled ? colors.goldenYellow : colors.lightTan,
-                          color: colors.darkBrown,
-                        }}
-                      >
-                        <Bell className="h-3.5 w-3.5" />
-                        <span>{notificationsEnabled ? 'ON' : 'Get Updates'}</span>
-                      </button>
-
-                      <button
-                        onClick={shareTrackingStatus}
-                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors hover:opacity-90 text-xs"
-                        style={{
-                          backgroundColor: colors.goldenYellow,
-                          color: colors.darkBrown,
-                          border: `1px solid ${colors.lightTan}`,
-                        }}
-                      >
-                        <Share2 className="h-3.5 w-3.5" />
-                        <span>Share</span>
-                      </button>
-
-                      <button
-                        onClick={exportTrackingData}
-                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors hover:opacity-90 text-xs"
-                        style={{
-                          backgroundColor: colors.goldenYellow,
-                          color: colors.darkBrown,
-                          border: `1px solid ${colors.lightTan}`,
-                        }}
-                      >
-                        <Download className="h-3.5 w-3.5" />
-                        <span>Export</span>
-                      </button>
-
-                      <button
-                        onClick={() => setAutoRefresh(!autoRefresh)}
-                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors hover:opacity-90 text-xs"
-                        style={{
-                          backgroundColor: autoRefresh ? colors.goldenYellow : colors.lightTan,
-                          color: colors.darkBrown,
-                          border: `1px solid ${autoRefresh ? colors.goldenYellow : colors.lightTan}`,
-                        }}
-                      >
-                        <Radio className="h-3.5 w-3.5" />
-                        <span>{autoRefresh ? 'ON' : 'Auto'}</span>
-                      </button>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Right Column - Timeline */}
-            <div>
-              <div
-                className="rounded-xl shadow-sm p-4 sm:p-5 h-full"
-                style={{
-                  backgroundColor: 'white',
-                  border: `1px solid ${colors.lightTan}50`,
-                }}
-              >
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-bold" style={highlightText}>
-                    Timeline
-                  </h3>
-                  <button
-                    onClick={() => alert('Package is insured and protected by our security system.')}
-                    className="p-1.5 hover:bg-gray-100 rounded-lg transition-colors"
-                    title="Package Security Info"
-                  >
-                    <Shield className="h-4 w-4" style={{ color: colors.goldenYellow }} />
-                  </button>
-                </div>
-
-                {/* Timeline */}
-                <div className="space-y-3">
-                  {timelineSteps.slice(0, 5).map((step, index) => (
-                    <div key={step.id} className="relative">
-                      <div className="flex items-start gap-2">
-                        <div
-                          className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center"
-                          style={{
-                            backgroundColor: step.completed
-                              ? `${colors.goldenYellow}20`
-                              : step.current
-                                ? `${colors.orange}20`
-                                : `${colors.lightTan}10`,
-                          }}
-                        >
-                          <step.icon className="h-3 w-3" style={{ color: step.color }} />
-                        </div>
-
-                        <div className="flex-grow">
-                          <div className="flex justify-between items-start">
-                            <h4
-                              className="text-xs font-semibold"
-                              style={step.completed ? highlightText : { color: `${colors.darkBrown}80` }}
-                            >
-                              {step.status}
-                            </h4>
-                            <span
-                              className="text-[10px]"
-                              style={{
-                                color: step.completed ? `${colors.darkBrown}70` : `${colors.darkBrown}40`,
-                              }}
-                            >
-                              {step.time}
-                            </span>
-                          </div>
-
-                          <div className="flex items-center gap-1 mt-0.5">
-                            <MapPin className="h-2.5 w-2.5" style={{ color: colors.darkBrown, opacity: 0.5 }} />
-                            <span className="text-[10px]" style={{ color: colors.darkBrown, opacity: 0.7 }}>
-                              {step.location}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Estimated Delivery Card */}
-                <div
-                  className="mt-4 rounded-lg p-3 border"
-                  style={{
-                    backgroundColor: `${colors.goldenYellow}10`,
-                    borderColor: colors.lightTan,
-                    color: colors.darkBrown,
-                  }}
-                >
-                  <div className="text-xs mb-0.5" style={{ color: colors.darkBrown, opacity: 0.7 }}>
-                    Estimated Delivery
-                  </div>
-                  <div className="text-base font-bold" style={highlightText}>
-                    {estimatedDelivery}
-                  </div>
-                  <div className="w-full h-1.5 rounded-full mt-2 overflow-hidden" style={{ backgroundColor: `${colors.lightTan}50` }}>
-                    <div
-                      className="h-full rounded-full"
-                      style={{
-                        width: activeStatus === 'delivered' ? '100%' : '70%',
-                        background: `linear-gradient(90deg, ${colors.goldenYellow}, ${colors.orange})`,
-                      }}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Quick Help Section */}
-          <div
-            className="rounded-xl p-4 sm:p-5 shadow-sm"
-            style={{
-              backgroundColor: 'white',
-              border: `1px solid ${colors.lightTan}50`,
-              background: `linear-gradient(135deg, white, ${backgroundColors.lighter})`,
-            }}
-          >
-            <h3 className="text-base font-bold mb-3" style={highlightText}>
-              Need Help?
-            </h3>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-              <div
-                className="rounded-lg p-3 hover:shadow-sm transition-shadow cursor-pointer"
-                style={{
-                  backgroundColor: `${colors.goldenYellow}10`,
-                  border: `1px solid ${colors.goldenYellow}30`,
-                }}
-                onClick={() => alert('Check your email for the tracking number. It usually starts with "LGSW" followed by 9 digits.')}
-              >
-                <div className="font-bold text-sm mb-1 flex items-center gap-1.5" style={highlightText}>
-                  <HelpCircle className="h-3.5 w-3.5" />
-                  Can't find tracking number?
-                </div>
-                <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.7 }}>
-                  Check your email confirmation.
-                </p>
-              </div>
-
-              <div
-                className="rounded-lg p-3 hover:shadow-sm transition-shadow cursor-pointer"
-                style={{
-                  backgroundColor: `${colors.orange}10`,
-                  border: `1px solid ${colors.orange}30`,
-                }}
-                onClick={() => alert('Tracking updates may take 24-48 hours to appear in our system.')}
-              >
-                <div className="font-bold text-sm mb-1 flex items-center gap-1.5" style={highlightText}>
-                  <Clock className="h-3.5 w-3.5" />
-                  Tracking not updating?
-                </div>
-                <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.7 }}>
-                  Updates may take 24-48 hours.
-                </p>
-              </div>
-
-              <div
-                className="rounded-lg p-3"
-                style={{
-                  backgroundColor: `${colors.darkBrown}10`,
-                  border: `1px solid ${colors.darkBrown}20`,
-                }}
-              >
-                <div className="font-bold text-sm mb-1 flex items-center gap-1.5" style={highlightText}>
-                  <Phone className="h-3.5 w-3.5" />
-                  Contact Support
-                </div>
-                <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.7 }}>
-                  Call{' '}
-                  <button
-                    onClick={callSupport}
-                    className="font-bold hover:underline"
-                    style={{ color: colors.goldenYellow }}
-                  >
-                    +316872022074
-                  </button>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    </div>
   )
 }

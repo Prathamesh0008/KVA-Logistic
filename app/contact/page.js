@@ -36,17 +36,7 @@ export default function ContactPage() {
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-2xl mx-auto text-center">
-            <div 
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full mb-4"
-              style={{
-                backgroundColor: colors.goldenYellow,
-                color: colors.darkBrown,
-                border: `1px solid ${colors.darkBrown}20`
-              }}
-            >
-              <MessageSquare className="w-3.5 h-3.5" />
-              <span className="text-xs font-semibold">GET IN TOUCH</span>
-            </div>
+          
             
             <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3">
               <span
@@ -105,7 +95,7 @@ export default function ContactPage() {
                   <Phone className="h-5 w-5 text-white" />
                 </div>
                 <h3 className="text-xs font-semibold mb-1" style={{ color: colors.darkBrown }}>Phone</h3>
-                <p className="text-sm font-medium break-all" style={{ color: colors.darkBrown }}>+31 68720 2074</p>
+                <p className="text-sm font-medium break-all" style={{ color: colors.darkBrown }}>+31 6 84987360</p>
                 <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.7 }}>24/7 Support</p>
               </div>
 
@@ -121,7 +111,7 @@ export default function ContactPage() {
                   <Mail className="h-5 w-5 text-white" />
                 </div>
                 <h3 className="text-xs font-semibold mb-1" style={{ color: colors.darkBrown }}>Email</h3>
-                <p className="text-sm font-medium break-all" style={{ color: colors.darkBrown }}>info@kva.com</p>
+                <p className="text-sm font-medium break-all" style={{ color: colors.darkBrown }}>info@kvalogistics.nl</p>
                 <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.7 }}>Response within 2h</p>
               </div>
 
@@ -295,7 +285,7 @@ export default function ContactPage() {
                       </div>
                       <div>
                         <p className="text-xs font-medium" style={{ color: colors.darkBrown }}>Emergency</p>
-                        <p className="text-sm font-bold" style={{ color: colors.darkBrown }}>+31 68720 2074</p>
+                        <p className="text-sm font-bold" style={{ color: colors.darkBrown }}>+31 6 84987360</p>
                       </div>
                     </div>
                   </div>
@@ -313,7 +303,7 @@ export default function ContactPage() {
                       </div>
                       <div>
                         <p className="text-xs font-medium" style={{ color: colors.darkBrown }}>Sales</p>
-                        <p className="text-sm font-bold break-all" style={{ color: colors.darkBrown }}>sales@kva.com</p>
+                        <p className="text-sm font-bold break-all" style={{ color: colors.darkBrown }}>info@kvalogistics.nl</p>
                       </div>
                     </div>
                   </div>

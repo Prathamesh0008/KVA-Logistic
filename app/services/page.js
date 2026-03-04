@@ -10,8 +10,8 @@ export default function ServicesPage() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Hero Section - larger */}
-      <section className="relative py-10 md:py-12 bg-gray-50 overflow-hidden flex-shrink-0">
+      {/* Hero Section - smaller */}
+      <section className="relative py-8 md:py-10 bg-gray-50 overflow-hidden flex-shrink-0">
         {/* Subtle background pattern */}
         <div className="absolute inset-0 opacity-5">
           <div
@@ -25,20 +25,9 @@ export default function ServicesPage() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             {/* Badge */}
-            <div
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full mb-4"
-              style={{
-                backgroundColor: colors.goldenYellow,
-                color: colors.darkBrown,
-                border: `1px solid ${colors.darkBrown}20`,
-              }}
-            >
-              <span className="text-sm font-semibold">
-                PREMIUM LOGISTICS SERVICES
-              </span>
-            </div>
+            
 
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2">
               <span
                 className="block"
                 style={{
@@ -65,7 +54,7 @@ export default function ServicesPage() {
             </h1>
 
             <p
-              className="text-base md:text-lg max-w-2xl mx-auto"
+              className="text-sm md:text-base max-w-2xl mx-auto"
               style={{
                 background:
                   "linear-gradient(90deg, #8B5A2B 200%, #D99A3E 100%, #F4A261 200%)",
@@ -82,97 +71,97 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Services Content - larger */}
-      <section className="py-8 md:py-10 bg-white flex-grow">
+      {/* Services Content - smaller */}
+      <section className="py-6 md:py-8 bg-white flex-grow">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            {/* Stats Banner - larger */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
+            {/* Stats Banner - smaller */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4">
               <div
-                className="p-4 rounded-xl text-center"
+                className="p-3 rounded-xl text-center"
                 style={{
                   backgroundColor: colors.goldenYellow + "10",
                   border: `1px solid ${colors.goldenYellow}30`,
                   color: colors.darkBrown,
                 }}
               >
-                <div className="text-xl md:text-2xl font-bold">99.8%</div>
-                <div className="text-xs md:text-sm">On-Time Delivery</div>
+                <div className="text-lg md:text-xl font-bold">99.8%</div>
+                <div className="text-xs">On-Time Delivery</div>
               </div>
               <div
-                className="p-4 rounded-xl text-center"
+                className="p-3 rounded-xl text-center"
                 style={{
                   backgroundColor: colors.orange + "10",
                   border: `1px solid ${colors.orange}30`,
                   color: colors.darkBrown,
                 }}
               >
-                <div className="text-xl md:text-2xl font-bold">150+</div>
-                <div className="text-xs md:text-sm">Countries</div>
+                <div className="text-lg md:text-xl font-bold">150+</div>
+                <div className="text-xs">Countries</div>
               </div>
               <div
-                className="p-4 rounded-xl text-center"
+                className="p-3 rounded-xl text-center"
                 style={{
                   backgroundColor: colors.goldenYellow + "10",
                   border: `1px solid ${colors.goldenYellow}30`,
                   color: colors.darkBrown,
                 }}
               >
-                <div className="text-xl md:text-2xl font-bold">24/7</div>
-                <div className="text-xs md:text-sm">Support</div>
+                <div className="text-lg md:text-xl font-bold">24/7</div>
+                <div className="text-xs">Support</div>
               </div>
               <div
-                className="p-4 rounded-xl text-center"
+                className="p-3 rounded-xl text-center"
                 style={{
                   backgroundColor: colors.orange + "10",
                   border: `1px solid ${colors.orange}30`,
                   color: colors.darkBrown,
                 }}
               >
-                <div className="text-xl md:text-2xl font-bold">25+</div>
-                <div className="text-xs md:text-sm">Years Experience</div>
+                <div className="text-lg md:text-xl font-bold">25+</div>
+                <div className="text-xs">Years Experience</div>
               </div>
             </div>
 
-            {/* Services Grid - larger */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            {/* Services Grid - smaller */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
               {/* Road Freight */}
               <div
-                className="group p-5 rounded-xl transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+                className="group p-4 rounded-xl transition-all duration-300 hover:shadow-md hover:-translate-y-1"
                 style={{
                   backgroundColor: "white",
                   border: `1px solid ${colors.lightTan}50`,
-                  boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
+                  boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
                 }}
               >
                 <div
-                  className="w-12 h-12 rounded-lg flex items-center justify-center mb-4 transition-transform group-hover:scale-110"
+                  className="w-10 h-10 rounded-lg flex items-center justify-center mb-3 transition-transform group-hover:scale-110"
                   style={{
                     background: `linear-gradient(135deg, ${colors.goldenYellow}, ${colors.orange})`,
                   }}
                 >
-                  <div className="text-white font-bold text-xl">🚚</div>
+                  <div className="text-white font-bold text-lg">🚚</div>
                 </div>
 
                 <h3
-                  className="text-lg md:text-xl font-bold mb-2"
+                  className="text-base md:text-lg font-bold mb-1.5"
                   style={{ color: colors.darkBrown }}
                 >
                   Road Freight
                 </h3>
 
                 <p
-                  className="text-sm mb-3 line-clamp-2"
+                  className="text-xs mb-2 line-clamp-2"
                   style={{ color: colors.darkBrown, opacity: 0.8 }}
                 >
                   Comprehensive overland transportation solutions across North
                   America with real-time GPS tracking.
                 </p>
 
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-2 gap-1.5">
                   <div className="flex items-center">
                     <div
-                      className="w-2 h-2 rounded-full mr-2"
+                      className="w-1.5 h-1.5 rounded-full mr-1.5"
                       style={{ backgroundColor: colors.goldenYellow }}
                     ></div>
                     <span className="text-xs" style={{ color: colors.darkBrown }}>
@@ -181,7 +170,7 @@ export default function ServicesPage() {
                   </div>
                   <div className="flex items-center">
                     <div
-                      className="w-2 h-2 rounded-full mr-2"
+                      className="w-1.5 h-1.5 rounded-full mr-1.5"
                       style={{ backgroundColor: colors.orange }}
                     ></div>
                     <span className="text-xs" style={{ color: colors.darkBrown }}>
@@ -190,7 +179,7 @@ export default function ServicesPage() {
                   </div>
                   <div className="flex items-center">
                     <div
-                      className="w-2 h-2 rounded-full mr-2"
+                      className="w-1.5 h-1.5 rounded-full mr-1.5"
                       style={{ backgroundColor: colors.darkOrange }}
                     ></div>
                     <span className="text-xs" style={{ color: colors.darkBrown }}>
@@ -199,7 +188,7 @@ export default function ServicesPage() {
                   </div>
                   <div className="flex items-center">
                     <div
-                      className="w-2 h-2 rounded-full mr-2"
+                      className="w-1.5 h-1.5 rounded-full mr-1.5"
                       style={{ backgroundColor: colors.goldenYellow }}
                     ></div>
                     <span className="text-xs" style={{ color: colors.darkBrown }}>
@@ -211,41 +200,41 @@ export default function ServicesPage() {
 
               {/* Ocean Shipping */}
               <div
-                className="group p-5 rounded-xl transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+                className="group p-4 rounded-xl transition-all duration-300 hover:shadow-md hover:-translate-y-1"
                 style={{
                   backgroundColor: "white",
                   border: `1px solid ${colors.lightTan}50`,
-                  boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
+                  boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
                 }}
               >
                 <div
-                  className="w-12 h-12 rounded-lg flex items-center justify-center mb-4 transition-transform group-hover:scale-110"
+                  className="w-10 h-10 rounded-lg flex items-center justify-center mb-3 transition-transform group-hover:scale-110"
                   style={{
                     background: `linear-gradient(135deg, ${colors.orange}, ${colors.darkOrange})`,
                   }}
                 >
-                  <div className="text-white font-bold text-xl">🚢</div>
+                  <div className="text-white font-bold text-lg">🚢</div>
                 </div>
 
                 <h3
-                  className="text-lg md:text-xl font-bold mb-2"
+                  className="text-base md:text-lg font-bold mb-1.5"
                   style={{ color: colors.darkBrown }}
                 >
                   Ocean Shipping
                 </h3>
 
                 <p
-                  className="text-sm mb-3 line-clamp-2"
+                  className="text-xs mb-2 line-clamp-2"
                   style={{ color: colors.darkBrown, opacity: 0.8 }}
                 >
                   Global sea freight with container optimization and full
                   customs clearance services.
                 </p>
 
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-2 gap-1.5">
                   <div className="flex items-center">
                     <div
-                      className="w-2 h-2 rounded-full mr-2"
+                      className="w-1.5 h-1.5 rounded-full mr-1.5"
                       style={{ backgroundColor: colors.orange }}
                     ></div>
                     <span className="text-xs" style={{ color: colors.darkBrown }}>
@@ -254,7 +243,7 @@ export default function ServicesPage() {
                   </div>
                   <div className="flex items-center">
                     <div
-                      className="w-2 h-2 rounded-full mr-2"
+                      className="w-1.5 h-1.5 rounded-full mr-1.5"
                       style={{ backgroundColor: colors.darkOrange }}
                     ></div>
                     <span className="text-xs" style={{ color: colors.darkBrown }}>
@@ -263,7 +252,7 @@ export default function ServicesPage() {
                   </div>
                   <div className="flex items-center">
                     <div
-                      className="w-2 h-2 rounded-full mr-2"
+                      className="w-1.5 h-1.5 rounded-full mr-1.5"
                       style={{ backgroundColor: colors.goldenYellow }}
                     ></div>
                     <span className="text-xs" style={{ color: colors.darkBrown }}>
@@ -272,7 +261,7 @@ export default function ServicesPage() {
                   </div>
                   <div className="flex items-center">
                     <div
-                      className="w-2 h-2 rounded-full mr-2"
+                      className="w-1.5 h-1.5 rounded-full mr-1.5"
                       style={{ backgroundColor: colors.orange }}
                     ></div>
                     <span className="text-xs" style={{ color: colors.darkBrown }}>
@@ -284,41 +273,41 @@ export default function ServicesPage() {
 
               {/* Air Freight */}
               <div
-                className="group p-5 rounded-xl transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+                className="group p-4 rounded-xl transition-all duration-300 hover:shadow-md hover:-translate-y-1"
                 style={{
                   backgroundColor: "white",
                   border: `1px solid ${colors.lightTan}50`,
-                  boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
+                  boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
                 }}
               >
                 <div
-                  className="w-12 h-12 rounded-lg flex items-center justify-center mb-4 transition-transform group-hover:scale-110"
+                  className="w-10 h-10 rounded-lg flex items-center justify-center mb-3 transition-transform group-hover:scale-110"
                   style={{
                     background: `linear-gradient(135deg, ${colors.darkBrown}, ${colors.lightTan})`,
                   }}
                 >
-                  <div className="text-white font-bold text-xl">✈️</div>
+                  <div className="text-white font-bold text-lg">✈️</div>
                 </div>
 
                 <h3
-                  className="text-lg md:text-xl font-bold mb-2"
+                  className="text-base md:text-lg font-bold mb-1.5"
                   style={{ color: colors.darkBrown }}
                 >
                   Air Freight
                 </h3>
 
                 <p
-                  className="text-sm mb-3 line-clamp-2"
+                  className="text-xs mb-2 line-clamp-2"
                   style={{ color: colors.darkBrown, opacity: 0.8 }}
                 >
                   Express air cargo with priority handling for time-critical
                   shipments and global coverage.
                 </p>
 
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-2 gap-1.5">
                   <div className="flex items-center">
                     <div
-                      className="w-2 h-2 rounded-full mr-2"
+                      className="w-1.5 h-1.5 rounded-full mr-1.5"
                       style={{ backgroundColor: colors.darkBrown }}
                     ></div>
                     <span className="text-xs" style={{ color: colors.darkBrown }}>
@@ -327,7 +316,7 @@ export default function ServicesPage() {
                   </div>
                   <div className="flex items-center">
                     <div
-                      className="w-2 h-2 rounded-full mr-2"
+                      className="w-1.5 h-1.5 rounded-full mr-1.5"
                       style={{ backgroundColor: colors.lightTan }}
                     ></div>
                     <span className="text-xs" style={{ color: colors.darkBrown }}>
@@ -336,7 +325,7 @@ export default function ServicesPage() {
                   </div>
                   <div className="flex items-center">
                     <div
-                      className="w-2 h-2 rounded-full mr-2"
+                      className="w-1.5 h-1.5 rounded-full mr-1.5"
                       style={{ backgroundColor: colors.darkBrown }}
                     ></div>
                     <span className="text-xs" style={{ color: colors.darkBrown }}>
@@ -345,7 +334,7 @@ export default function ServicesPage() {
                   </div>
                   <div className="flex items-center">
                     <div
-                      className="w-2 h-2 rounded-full mr-2"
+                      className="w-1.5 h-1.5 rounded-full mr-1.5"
                       style={{ backgroundColor: colors.lightTan }}
                     ></div>
                     <span className="text-xs" style={{ color: colors.darkBrown }}>
@@ -356,39 +345,39 @@ export default function ServicesPage() {
               </div>
             </div>
 
-            {/* CTA Section - larger */}
+            {/* CTA Section - smaller */}
             <div
-              className="mt-5 p-5 rounded-xl text-center"
+              className="mt-4 p-4 rounded-xl text-center"
               style={{
                 background: `linear-gradient(135deg, ${colors.goldenYellow}15, ${colors.orange}15)`,
                 border: `1px solid ${colors.goldenYellow}30`,
               }}
             >
               <h3
-                className="text-lg md:text-xl font-bold mb-2"
+                className="text-base md:text-lg font-bold mb-1.5"
                 style={{ color: colors.darkBrown }}
               >
                 Need Custom Logistics Solutions?
               </h3>
               <p
-                className="mb-3 text-sm max-w-lg mx-auto"
+                className="mb-2 text-xs max-w-lg mx-auto"
                 style={{ color: colors.darkBrown, opacity: 0.8 }}
               >
                 Our logistics experts will design a tailored solution for your business
               </p>
-              <div className="flex flex-row gap-3 justify-center">
+              <div className="flex flex-row gap-2 justify-center">
                 <button
-                  className="px-4 py-2 rounded-md font-bold transition-all hover:shadow-md text-sm"
+                  className="px-3 py-1.5 rounded-md font-bold transition-all hover:shadow-md text-xs"
                   style={{
                     backgroundColor: colors.goldenYellow,
                     color: colors.darkBrown,
-                    boxShadow: `0 2px 8px ${colors.goldenYellow}40`,
+                    boxShadow: `0 2px 4px ${colors.goldenYellow}40`,
                   }}
                 >
                   Custom Quote
                 </button>
                 <button
-                  className="px-4 py-2 rounded-md font-bold transition-all hover:shadow-md border text-sm"
+                  className="px-3 py-1.5 rounded-md font-bold transition-all hover:shadow-md border text-xs"
                   style={{
                     borderColor: colors.goldenYellow,
                     color: colors.darkBrown,

@@ -27,17 +27,6 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             {/* Badge */}
-            <div 
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-3"
-              style={{
-                backgroundColor: colors.goldenYellow,
-                color: colors.darkBrown,
-                border: `1px solid ${colors.darkBrown}20`
-              }}
-            >
-              <Award className="w-4 h-4" />
-              <span className="text-xs font-semibold">TRUSTED SINCE 1998</span>
-            </div>
             
             <h1 
               className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2"
