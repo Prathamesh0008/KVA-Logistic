@@ -389,12 +389,7 @@ const handleSubmit = async (e) => {
                   </form>
 
                   {/* Email Setup Instructions (can be removed in production) */}
-                  <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                    <h3 className="text-sm font-semibold mb-2 text-blue-800">📧 Email Configuration</h3>
-                    <p className="text-xs text-blue-700">
-                      Your emails will be sent via SMTP using the credentials in <code className="bg-blue-100 p-1 rounded">.env.local</code>.
-                    </p>
-                  </div>
+                
                 </div>
 
                 {/* Additional Info */}
