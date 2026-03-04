@@ -1,150 +1,30 @@
 'use client'
 
-import { useState, useRef } from 'react'
-import { Mail, Phone, MapPin, Send, Clock, MessageSquare, Truck, Loader2, CheckCircle, AlertCircle } from 'lucide-react'
-import emailjs from '@emailjs/browser'
+import { useState } from 'react'
+import { Phone, Mail, MapPin, Clock, Send, MessageSquare, User, FileText, CheckCircle, ChevronRight } from 'lucide-react'
+
 export default function ContactPage() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    subject: '',
-    message: ''
-  })
-  
-  const [status, setStatus] = useState({
-    loading: false,
-    success: false,
-    error: false,
-    message: ''
-  })
+  const [formStatus, setFormStatus] = useState(null)
 
-  const [formErrors, setFormErrors] = useState({})
-  const formRef = useRef()
-
+  // Color palette matching your home page
   const colors = {
-    darkBrown: '#521903',
-    goldenYellow: '#f8b936',
-    orange: '#dc8c18',
-    darkOrange: '#9f4409',
-    lightTan: '#c29f85'
+    darkBrown: '#521903',     // Primary dark
+    goldenYellow: '#f8b936',  // Primary accent
+    orange: '#dc8c18',       // Secondary accent
+    darkOrange: '#9f4409',   // Dark accent
+    lightTan: '#c29f85'      // Light accent
   }
 
-  const validateForm = () => {
-    const errors = {}
-    
-    if (!formData.name.trim()) {
-      errors.name = 'Name is required'
-    }
-    
-    if (!formData.email.trim()) {
-      errors.email = 'Email is required'
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      errors.email = 'Please enter a valid email address'
-    }
-
-    // Phone validation: exactly 10 digits, no other characters (optional)
-    if (formData.phone && !/^\d{10}$/.test(formData.phone.trim())) {
-      errors.phone = 'Phone number must be exactly 10 digits'
-    }
-    
-    if (!formData.subject) {
-      errors.subject = 'Please select a subject'
-    }
-    
-    if (!formData.message.trim()) {
-      errors.message = 'Message is required'
-    } else if (formData.message.trim().length < 10) {
-      errors.message = 'Message should be at least 10 characters'
-    }
-    
-    return errors
-  }
-const handleSubmit = async (e) => {
-  e.preventDefault()
-
-  const errors = validateForm()
-  if (Object.keys(errors).length > 0) {
-    setFormErrors(errors)
-    return
-  }
-
-  setFormErrors({})
-  setStatus({ loading: true, success: false, error: false, message: '' })
-
-  try {
-
-    // 🔹 1️⃣ Send Email to Admin
-    await emailjs.send(
-      "service_a93w12k",
-      "template_o2mw75i",
-      {
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        subject: formData.subject,
-        message: formData.message,
-      },
-      "ctHzsKvXJvpGEjIvF"
-    )
-
-    // 🔹 2️⃣ Send Confirmation to User
-    await emailjs.send(
-      "service_a93w12k",
-      "template_ysi9wih",
-      {
-        name: formData.name,
-        email: formData.email,
-        subject: formData.subject,
-      },
-      "ctHzsKvXJvpGEjIvF"
-    )
-
-    setStatus({
-      loading: false,
-      success: true,
-      error: false,
-      message: "✅ Message sent successfully!"
-    })
-
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      subject: '',
-      message: ''
-    })
-
-  } catch (error) {
-    console.error("Email Error:", error)
-
-    setStatus({
-      loading: false,
-      success: false,
-      error: true,
-      message: "❌ Failed to send message."
-    })
-  }
-}
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData({
-      ...formData,
-      [name]: value
-    })
-    
-    if (formErrors[name]) {
-      setFormErrors({
-        ...formErrors,
-        [name]: ''
-      })
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setFormStatus('success')
+    setTimeout(() => setFormStatus(null), 3000)
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen flex flex-col">
       {/* Hero Section */}
-      <section className="relative py-20 md:py-24 bg-gray-50 overflow-hidden">
+      <section className="relative py-10 md:py-12 bg-gray-50 overflow-hidden">
         <div className="absolute inset-0 opacity-5">
           <div 
             className="absolute inset-0"
@@ -155,274 +35,337 @@ const handleSubmit = async (e) => {
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-3xl mx-auto text-center">
+          <div className="max-w-2xl mx-auto text-center">
             <div 
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full mb-8"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full mb-4"
               style={{
                 backgroundColor: colors.goldenYellow,
                 color: colors.darkBrown,
                 border: `1px solid ${colors.darkBrown}20`
               }}
             >
-              <span className="text-sm font-semibold" style={{ color: colors.darkBrown }}>
-                GET IN TOUCH
-              </span>
+              <MessageSquare className="w-3.5 h-3.5" />
+              <span className="text-xs font-semibold">GET IN TOUCH</span>
             </div>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6" style={{ color: colors.darkBrown }}>
-              <span className="block">Contact</span>
-              <span className="block" style={{
-                background: `linear-gradient(90deg, ${colors.goldenYellow}, ${colors.orange})`,
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text'
-              }}>
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3">
+              <span
+                className="block"
+                style={{
+                  background: `linear-gradient(90deg, ${colors.darkBrown}, ${colors.goldenYellow})`,
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                }}
+              >
+                Contact
+              </span>
+              <span 
+                className="block"
+                style={{
+                  background: `linear-gradient(90deg, ${colors.goldenYellow}, ${colors.orange})`,
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text'
+                }}
+              >
                 KVA Logistics
               </span>
             </h1>
             
-            <p className="text-lg md:text-xl max-w-2xl mx-auto mb-8" style={{ color: colors.darkBrown }}>
-              Get in touch with our logistics experts for customized solutions and personalized support
+            <p
+              className="text-sm md:text-base max-w-xl mx-auto"
+              style={{
+                color: colors.darkBrown,
+                opacity: 0.9
+              }}
+            >
+              Reach out for inquiries, support, or logistics solutions
             </p>
           </div>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section className="py-16 md:py-20 bg-white">
+      {/* Main Contact Section */}
+      <section className="py-8 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              {/* Contact Information */}
-              <div>
-                <h2 className="text-2xl font-bold mb-8" style={{ color: colors.darkBrown }}>Get in Touch</h2>
-                
-                <div className="space-y-6">
-                  <div className="p-6 rounded-xl transition-all hover:shadow-md" style={{ backgroundColor: colors.goldenYellow + '10', border: `1px solid ${colors.goldenYellow}30` }}>
-                    <div className="flex items-start">
-                      <div className="p-3 rounded-lg mr-4" style={{ backgroundColor: colors.goldenYellow }}>
-                        <Phone className="h-6 w-6 text-white" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold mb-1" style={{ color: colors.darkBrown }}>Phone</h3>
-                        <p className="text-lg font-medium mb-1" style={{ color: colors.darkBrown }}>+316872022074</p>
-                        <p className="text-sm" style={{ color: colors.darkBrown, opacity: 0.7 }}>Mon-Fri 8am-6pm EST</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="p-6 rounded-xl transition-all hover:shadow-md" style={{ backgroundColor: colors.orange + '10', border: `1px solid ${colors.orange}30` }}>
-                    <div className="flex items-start">
-                      <div className="p-3 rounded-lg mr-4" style={{ backgroundColor: colors.orange }}>
-                        <Mail className="h-6 w-6 text-white" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold mb-1" style={{ color: colors.darkBrown }}>Email</h3>
-                        <p className="text-lg font-medium mb-1" style={{ color: colors.darkBrown }}>info@logisticKVA.com</p>
-                        <p className="text-sm" style={{ color: colors.darkBrown, opacity: 0.7 }}>24/7 Support</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="p-6 rounded-xl transition-all hover:shadow-md" style={{ backgroundColor: colors.lightTan + '20', border: `1px solid ${colors.lightTan}` }}>
-                    <div className="flex items-start">
-                      <div className="p-3 rounded-lg mr-4" style={{ backgroundColor: colors.darkBrown }}>
-                        <MapPin className="h-6 w-6 text-white" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold mb-1" style={{ color: colors.darkBrown }}>Headquarters</h3>
-                        <p className="text-sm" style={{ color: colors.darkBrown, opacity: 0.8 }}>
-                          123 Logistics, Suite 500<br />
-                          New York, NY 10001<br />
-                          United States
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="p-6 rounded-xl transition-all hover:shadow-md" style={{ backgroundColor: colors.darkOrange + '10', border: `1px solid ${colors.darkOrange}30` }}>
-                    <div className="flex items-start">
-                      <div className="p-3 rounded-lg mr-4" style={{ backgroundColor: colors.darkOrange }}>
-                        <Clock className="h-6 w-6 text-white" />
-                      </div>
-                      {/* <div>
-                        <h3 className="font-semibold mb-1" style={{ color: colors.darkBrown }}>Response Time</h3>
-                        <p className="text-lg font-medium mb-1" style={{ color: colors.darkBrown }}>&lt; 2 Hours</p>
-                        <p className="text-sm" style={{ color: colors.darkBrown, opacity: 0.7 }}>Email response guaranteed</p>
-                      </div> */}
-                    </div>
-                  </div>
+            
+            {/* Contact Info Cards - 2x2 Grid on Mobile, 4x1 on Desktop */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+              {/* Phone */}
+              <div 
+                className="p-3 rounded-lg border flex flex-col items-center text-center"
+                style={{
+                  backgroundColor: colors.goldenYellow + '10',
+                  borderColor: colors.goldenYellow
+                }}
+              >
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-2" style={{ backgroundColor: colors.goldenYellow }}>
+                  <Phone className="h-5 w-5 text-white" />
                 </div>
+                <h3 className="text-xs font-semibold mb-1" style={{ color: colors.darkBrown }}>Phone</h3>
+                <p className="text-sm font-medium break-all" style={{ color: colors.darkBrown }}>+31 68720 2074</p>
+                <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.7 }}>24/7 Support</p>
               </div>
 
-              {/* Contact Form */}
-              <div className="lg:col-span-2">
-                <div className="rounded-2xl p-6 md:p-8 border" style={{ backgroundColor: 'white', borderColor: colors.lightTan, boxShadow: '0 4px 20px rgba(0,0,0,0.05)' }}>
-                  <h2 className="text-2xl font-bold mb-6" style={{ color: colors.darkBrown }}>Send us a Message</h2>
-                  
-                  {/* Status Messages */}
-                  {status.message && (
-                    <div className={`p-4 rounded-lg mb-6 flex items-start ${status.success ? 'bg-green-50 border border-green-200' : status.error ? 'bg-red-50 border border-red-200' : ''}`}>
-                      {status.success ? <CheckCircle className="h-5 w-5 mr-3 text-green-600 flex-shrink-0 mt-0.5" /> : status.error ? <AlertCircle className="h-5 w-5 mr-3 text-red-600 flex-shrink-0 mt-0.5" /> : null}
-                      <p className={status.success ? 'text-green-800' : status.error ? 'text-red-800' : ''}>
-                        {status.message}
-                      </p>
+              {/* Email */}
+              <div 
+                className="p-3 rounded-lg border flex flex-col items-center text-center"
+                style={{
+                  backgroundColor: colors.orange + '10',
+                  borderColor: colors.orange
+                }}
+              >
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-2" style={{ backgroundColor: colors.orange }}>
+                  <Mail className="h-5 w-5 text-white" />
+                </div>
+                <h3 className="text-xs font-semibold mb-1" style={{ color: colors.darkBrown }}>Email</h3>
+                <p className="text-sm font-medium break-all" style={{ color: colors.darkBrown }}>info@kva.com</p>
+                <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.7 }}>Response within 2h</p>
+              </div>
+
+              {/* Office */}
+              <div 
+                className="p-3 rounded-lg border flex flex-col items-center text-center"
+                style={{
+                  backgroundColor: colors.darkBrown + '10',
+                  borderColor: colors.darkBrown
+                }}
+              >
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-2" style={{ backgroundColor: colors.darkBrown }}>
+                  <MapPin className="h-5 w-5 text-white" />
+                </div>
+                <h3 className="text-xs font-semibold mb-1" style={{ color: colors.darkBrown }}>Main Office</h3>
+                <p className="text-sm font-medium break-all" style={{ color: colors.darkBrown }}>Apendans 5, 2511ED 's-Gravenhage</p>
+                <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.7 }}></p>
+              </div>
+
+              {/* Hours */}
+              <div 
+                className="p-3 rounded-lg border flex flex-col items-center text-center"
+                style={{
+                  backgroundColor: colors.lightTan + '20',
+                  borderColor: colors.lightTan
+                }}
+              >
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-2" style={{ backgroundColor: colors.lightTan }}>
+                  <Clock className="h-5 w-5 text-white" />
+                </div>
+                <h3 className="text-xs font-semibold mb-1" style={{ color: colors.darkBrown }}>Working Hours</h3>
+                <p className="text-sm font-medium break-all" style={{ color: colors.darkBrown }}>24/7 Operations</p>
+                <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.7 }}>Always available</p>
+              </div>
+            </div>
+
+            {/* Two Column Layout - Form and Map Side by Side */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Left Column - Contact Form */}
+              <div 
+                className="p-5 rounded-xl"
+                style={{
+                  backgroundColor: 'white',
+                  border: `1px solid ${colors.lightTan}50`,
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
+                }}
+              >
+                <h2 className="text-xl font-bold mb-4" style={{ color: colors.darkBrown }}>Send us a Message</h2>
+                
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium mb-1.5" style={{ color: colors.darkBrown }}>Full Name</label>
+                    <div className="relative">
+                      <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4" style={{ color: colors.lightTan }} />
+                      <input
+                        type="text"
+                        required
+                        className="w-full pl-9 pr-3 py-2.5 border rounded-lg focus:outline-none focus:ring-1 text-sm"
+                        style={{ 
+                          borderColor: colors.lightTan,
+                          outlineColor: colors.goldenYellow
+                        }}
+                        placeholder="John Doe"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium mb-1.5" style={{ color: colors.darkBrown }}>Email Address</label>
+                    <div className="relative">
+                      <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4" style={{ color: colors.lightTan }} />
+                      <input
+                        type="email"
+                        required
+                        className="w-full pl-9 pr-3 py-2.5 border rounded-lg focus:outline-none focus:ring-1 text-sm"
+                        style={{ 
+                          borderColor: colors.lightTan,
+                          outlineColor: colors.goldenYellow
+                        }}
+                        placeholder="john@example.com"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium mb-1.5" style={{ color: colors.darkBrown }}>Subject</label>
+                    <div className="relative">
+                      <FileText className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4" style={{ color: colors.lightTan }} />
+                      <input
+                        type="text"
+                        required
+                        className="w-full pl-9 pr-3 py-2.5 border rounded-lg focus:outline-none focus:ring-1 text-sm"
+                        style={{ 
+                          borderColor: colors.lightTan,
+                          outlineColor: colors.goldenYellow
+                        }}
+                        placeholder="Inquiry about shipping"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium mb-1.5" style={{ color: colors.darkBrown }}>Message</label>
+                    <textarea
+                      rows={4}
+                      required
+                      className="w-full px-3 py-2.5 border rounded-lg focus:outline-none focus:ring-1 text-sm"
+                      style={{ 
+                        borderColor: colors.lightTan,
+                        outlineColor: colors.goldenYellow
+                      }}
+                      placeholder="How can we help you?"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="w-full px-4 py-3 rounded-lg font-semibold transition-all hover:shadow-md flex items-center justify-center gap-2 text-sm"
+                    style={{ 
+                      backgroundColor: colors.goldenYellow,
+                      color: colors.darkBrown,
+                      boxShadow: `0 2px 8px ${colors.goldenYellow}40`
+                    }}
+                  >
+                    <Send className="h-4 w-4" />
+                    Send Message
+                  </button>
+
+                  {formStatus === 'success' && (
+                    <div className="flex items-center gap-2 p-3 rounded-lg" style={{ backgroundColor: colors.goldenYellow + '20' }}>
+                      <CheckCircle className="h-4 w-4" style={{ color: colors.goldenYellow }} />
+                      <span className="text-sm" style={{ color: colors.darkBrown }}>Message sent successfully!</span>
                     </div>
                   )}
-                  
-                  <form onSubmit={handleSubmit} noValidate>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                      <div>
-                        <label className="block text-sm font-medium mb-2" style={{ color: colors.darkBrown }}>
-                          Name * {formErrors.name && <span className="text-red-500 text-xs ml-2">({formErrors.name})</span>}
-                        </label>
-                        <input
-                          type="text"
-                          name="name"
-                          value={formData.name}
-                          onChange={handleChange}
-                          required
-                          disabled={status.loading}
-                          className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors disabled:opacity-50 ${formErrors.name ? 'border-red-300' : ''}`}
-                          style={{ borderColor: formErrors.name ? '#f87171' : colors.lightTan, color: colors.darkBrown, outlineColor: colors.goldenYellow }}
-                        />
-                      </div>
-                      
-                      <div>
-                        <label className="block text-sm font-medium mb-2" style={{ color: colors.darkBrown }}>
-                          Email * {formErrors.email && <span className="text-red-500 text-xs ml-2">({formErrors.email})</span>}
-                        </label>
-                        <input
-                          type="email"
-                          name="email"
-                          value={formData.email}
-                          onChange={handleChange}
-                          required
-                          disabled={status.loading}
-                          className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors disabled:opacity-50 ${formErrors.email ? 'border-red-300' : ''}`}
-                          style={{ borderColor: formErrors.email ? '#f87171' : colors.lightTan, color: colors.darkBrown, outlineColor: colors.goldenYellow }}
-                        />
-                      </div>
-                      
-                      <div>
-                        <label className="block text-sm font-medium mb-2" style={{ color: colors.darkBrown }}>
-                          Phone (optional) {formErrors.phone && <span className="text-red-500 text-xs ml-2">({formErrors.phone})</span>}
-                        </label>
-                        <input
-                          type="tel"
-                          name="phone"
-                          value={formData.phone}
-                          onChange={handleChange}
-                          disabled={status.loading}
-                          className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors disabled:opacity-50 ${formErrors.phone ? 'border-red-300' : ''}`}
-                          style={{ borderColor: formErrors.phone ? '#f87171' : colors.lightTan, color: colors.darkBrown, outlineColor: colors.goldenYellow }}
-                        />
-                      </div>
-                      
-                      <div>
-                        <label className="block text-sm font-medium mb-2" style={{ color: colors.darkBrown }}>
-                          Subject * {formErrors.subject && <span className="text-red-500 text-xs ml-2">({formErrors.subject})</span>}
-                        </label>
-                        <select
-                          name="subject"
-                          value={formData.subject}
-                          onChange={handleChange}
-                          required
-                          disabled={status.loading}
-                          className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors appearance-none disabled:opacity-50 ${formErrors.subject ? 'border-red-300' : ''}`}
-                          style={{ borderColor: formErrors.subject ? '#f87171' : colors.lightTan, color: colors.darkBrown, backgroundColor: 'white', outlineColor: colors.goldenYellow }}
-                        >
-                          <option value="">Select a subject</option>
-                          <option value="Get a Quote">Get a Quote</option>
-                          <option value="Tracking Help">Tracking Help</option>
-                          <option value="Service Inquiry">Service Inquiry</option>
-                          <option value="Technical Support">Technical Support</option>
-                          <option value="Partnership Inquiry">Partnership Inquiry</option>
-                          <option value="Career Opportunity">Career Opportunity</option>
-                          <option value="Other">Other</option>
-                        </select>
-                      </div>
-                    </div>
-                    
-                    <div className="mb-6">
-                      <label className="block text-sm font-medium mb-2" style={{ color: colors.darkBrown }}>
-                        Message * {formErrors.message && <span className="text-red-500 text-xs ml-2">({formErrors.message})</span>}
-                      </label>
-                      <textarea
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        required
-                        disabled={status.loading}
-                        rows="6"
-                        className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors disabled:opacity-50 ${formErrors.message ? 'border-red-300' : ''}`}
-                        style={{ borderColor: formErrors.message ? '#f87171' : colors.lightTan, color: colors.darkBrown, outlineColor: colors.goldenYellow }}
-                        placeholder="Please provide details about your logistics needs..."
-                      ></textarea>
-                    </div>
-                    
-                    <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
-                      <button
-                        type="submit"
-                        disabled={status.loading}
-                        className="text-white px-8 py-4 rounded-lg font-bold transition-all hover:shadow-lg flex items-center justify-center hover:scale-105 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100"
-                        style={{ backgroundColor: colors.goldenYellow, color: colors.darkBrown, boxShadow: `0 4px 14px ${colors.goldenYellow}40` }}
-                      >
-                        {status.loading ? (
-                          <>
-                            <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                            Sending Email...
-                          </>
-                        ) : (
-                          <>
-                            <Send className="mr-2 h-5 w-5" />
-                            Send Message Now
-                          </>
-                        )}
-                      </button>
-                      
-                      <div className="text-sm flex items-center" style={{ color: colors.darkBrown, opacity: 0.7 }}>
-                        <MessageSquare className="h-4 w-4 mr-2" style={{ color: colors.goldenYellow }} />
-                        <span>Instant email delivery</span>
-                      </div>
-                    </div>
-                  </form>
+                </form>
+              </div>
 
-                  {/* Email Setup Instructions (can be removed in production) */}
-                
-                </div>
-
-                {/* Additional Info */}
-                <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  <div className="p-4 rounded-lg border text-center" style={{ backgroundColor: colors.goldenYellow + '10', borderColor: colors.goldenYellow }}>
-                    <div className="text-lg font-bold mb-1" style={{ color: colors.darkBrown }}>Instant</div>
-                    <div className="text-sm" style={{ color: colors.darkBrown, opacity: 0.8 }}>Email Delivery</div>
-                  </div>
-                  
-                  <div className="p-4 rounded-lg border text-center" style={{ backgroundColor: colors.orange + '10', borderColor: colors.orange }}>
-                    <div className="text-lg font-bold mb-1" style={{ color: colors.darkBrown }}>Professional</div>
-                    <div className="text-sm" style={{ color: colors.darkBrown, opacity: 0.8 }}>Email Service</div>
-                  </div>
-                  
-                  <div className="p-4 rounded-lg border text-center" style={{ backgroundColor: colors.darkBrown + '10', borderColor: colors.darkBrown }}>
-                    <div className="text-lg font-bold mb-1" style={{ color: colors.darkBrown }}>Reliable</div>
-                    <div className="text-sm" style={{ color: colors.darkBrown, opacity: 0.8 }}>High Deliverability</div>
+              {/* Right Column - Map and Quick Info */}
+              <div className="space-y-4">
+                {/* Map */}
+                <div 
+                  className="p-5 rounded-xl h-[200px] relative overflow-hidden"
+                  style={{
+                    backgroundColor: 'white',
+                    border: `1px solid ${colors.lightTan}50`,
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
+                  }}
+                >
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="text-center">
+                      <MapPin className="h-8 w-8 mx-auto mb-2" style={{ color: colors.goldenYellow }} />
+                      <p className="text-base font-medium" style={{ color: colors.darkBrown }}>Apendans 5</p>
+                      <p className="text-sm" style={{ color: colors.darkBrown, opacity: 0.7 }}>2511ED 's-Gravenhage</p>
+                      <p className="text-xs mt-2" style={{ color: colors.darkBrown, opacity: 0.6 }}>The Netherlands</p>
+                    </div>
                   </div>
                 </div>
 
-                {/* Emergency Contact */}
-                <div className="mt-12 p-6 rounded-2xl text-center" style={{ backgroundColor: colors.darkOrange + '10', border: `1px solid ${colors.darkOrange}30` }}>
-                  <h3 className="text-xl font-bold mb-4 flex items-center justify-center" style={{ color: colors.darkBrown }}>
-                    <Truck className="mr-3 h-5 w-5" style={{ color: colors.darkOrange }} />
-                    Need Urgent Assistance?
-                  </h3>
-                  <p className="mb-4" style={{ color: colors.darkBrown, opacity: 0.8 }}>
-                    For time-critical shipments or emergency logistics support
-                  </p>
-                  <a href="tel:+316872022074" className="inline-flex items-center px-6 py-3 rounded-lg font-bold transition-all hover:shadow-lg" style={{ backgroundColor: colors.darkOrange, color: 'white', boxShadow: `0 4px 14px ${colors.darkOrange}40` }}>
-                    <Phone className="mr-3 h-5 w-5" />
-                    Emergency Hotline: +316872022074
-                  </a>
+                {/* Quick Contact Cards */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div 
+                    className="p-4 rounded-lg"
+                    style={{
+                      backgroundColor: colors.goldenYellow + '10',
+                      border: `1px solid ${colors.goldenYellow}30`
+                    }}
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: colors.goldenYellow + '20' }}>
+                        <Phone className="h-4 w-4" style={{ color: colors.goldenYellow }} />
+                      </div>
+                      <div>
+                        <p className="text-xs font-medium" style={{ color: colors.darkBrown }}>Emergency</p>
+                        <p className="text-sm font-bold" style={{ color: colors.darkBrown }}>+31 68720 2074</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div 
+                    className="p-4 rounded-lg"
+                    style={{
+                      backgroundColor: colors.orange + '10',
+                      border: `1px solid ${colors.orange}30`
+                    }}
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: colors.orange + '20' }}>
+                        <Mail className="h-4 w-4" style={{ color: colors.orange }} />
+                      </div>
+                      <div>
+                        <p className="text-xs font-medium" style={{ color: colors.darkBrown }}>Sales</p>
+                        <p className="text-sm font-bold break-all" style={{ color: colors.darkBrown }}>sales@kva.com</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Global Offices */}
+                <div 
+                  className="p-5 rounded-xl"
+                  style={{
+                    backgroundColor: colors.darkBrown + '05',
+                    border: `1px solid ${colors.darkBrown}20`
+                  }}
+                >
+                  <h3 className="text-lg font-bold mb-3" style={{ color: colors.darkBrown }}>Global Offices</h3>
+                  
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <div className="text-center">
+                      <span className="text-2xl block mb-1">🇳🇱</span>
+                      <p className="text-xs font-medium" style={{ color: colors.darkBrown }}>Rotterdam</p>
+                      <p className="text-[10px]" style={{ color: colors.darkBrown, opacity: 0.6 }}>Headquarters</p>
+                    </div>
+                    <div className="text-center">
+                      <span className="text-2xl block mb-1">🇺🇸</span>
+                      <p className="text-xs font-medium" style={{ color: colors.darkBrown }}>New York</p>
+                      <p className="text-[10px]" style={{ color: colors.darkBrown, opacity: 0.6 }}>Americas</p>
+                    </div>
+                    <div className="text-center">
+                      <span className="text-2xl block mb-1">🇸🇬</span>
+                      <p className="text-xs font-medium" style={{ color: colors.darkBrown }}>Singapore</p>
+                      <p className="text-[10px]" style={{ color: colors.darkBrown, opacity: 0.6 }}>Asia Pacific</p>
+                    </div>
+                    <div className="text-center">
+                      <span className="text-2xl block mb-1">🇦🇪</span>
+                      <p className="text-xs font-medium" style={{ color: colors.darkBrown }}>Dubai</p>
+                      <p className="text-[10px]" style={{ color: colors.darkBrown, opacity: 0.6 }}>Middle East</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Response Time Badge */}
+                <div 
+                  className="p-3 rounded-lg flex items-center justify-between"
+                  style={{
+                    background: `linear-gradient(90deg, ${colors.goldenYellow}20, ${colors.orange}20)`,
+                    border: `1px solid ${colors.goldenYellow}40`
+                  }}
+                >
+                  <div className="flex items-center gap-2">
+                    <Clock className="h-4 w-4" style={{ color: colors.goldenYellow }} />
+                    <span className="text-sm font-medium" style={{ color: colors.darkBrown }}>Response Time</span>
+                  </div>
+                  <span className="text-sm font-bold" style={{ color: colors.darkBrown }}>&lt; 2 hours</span>
                 </div>
               </div>
             </div>

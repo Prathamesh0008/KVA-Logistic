@@ -103,12 +103,12 @@ export default function Footer() {
               {[
                 {
                   icon: <MapPin className="h-4 w-4" />,
-                  content: "123 Logistics Plaza, Suite 500\nNew York, NY 10001\nUnited States",
+                  content: "Apendans 5, 2511ED 's-Gravenhage",
                   color: colors.darkBrown
                 },
                 {
                   icon: <Phone className="h-4 w-4" />,
-                  content: "+316872022074",
+                  content: "+31 6 84987360", 
                   subtitle: "24/7 Customer Support",
                   color: colors.orange
                 },

@@ -11,9 +11,9 @@ export default function AboutPage() {
   }
 
   return (
-    <div className="">
-      {/* Hero Section */}
-      <section className="relative py-20 md:py-24 bg-gray-50 overflow-hidden">
+    <div className="min-h-screen flex flex-col">
+      {/* Hero Section - compact */}
+      <section className="relative py-10 md:py-12 bg-gray-50 overflow-hidden flex-shrink-0">
         {/* Subtle background pattern */}
         <div className="absolute inset-0 opacity-5">
           <div 
@@ -28,7 +28,7 @@ export default function AboutPage() {
           <div className="max-w-3xl mx-auto text-center">
             {/* Badge */}
             <div 
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full mb-8"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-3"
               style={{
                 backgroundColor: colors.goldenYellow,
                 color: colors.darkBrown,
@@ -36,24 +36,24 @@ export default function AboutPage() {
               }}
             >
               <Award className="w-4 h-4" />
-              <span className="text-sm font-semibold">TRUSTED SINCE 1998</span>
+              <span className="text-xs font-semibold">TRUSTED SINCE 1998</span>
             </div>
             
             <h1 
-              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
+              className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2"
               style={{ color: colors.darkBrown }}
             >
-<span
-  className="block"
-  style={{
-    background: `linear-gradient(90deg, ${colors.darkBrown}, ${colors.goldenYellow})`,
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-    backgroundClip: 'text',
-  }}
->
-  About
-</span>
+              <span
+                className="block"
+                style={{
+                  background: `linear-gradient(90deg, ${colors.darkBrown}, ${colors.goldenYellow})`,
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                }}
+              >
+                About
+              </span>
               <span 
                 className="block"
                 style={{
@@ -67,130 +67,126 @@ export default function AboutPage() {
               </span>
             </h1>
             
-           <p
-  className="text-lg md:text-xl max-w-2xl mx-auto mb-8 text-center"
-  style={{
-    background: `linear-gradient(90deg, ${colors.darkBrown}, ${colors.goldenYellow})`,
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-    backgroundClip: 'text',
-    opacity: 0.9, // slightly transparent if you want
-  }}
->
-  Leading the logistics industry with innovation, reliability, and customer-first approach for over two decades
-</p>
-
+            <p
+              className="text-sm md:text-base max-w-2xl mx-auto"
+              style={{
+                color: colors.darkBrown,
+                opacity: 0.9
+              }}
+            >
+              Leading the logistics industry with innovation, reliability, and customer-first approach for over two decades
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-12 bg-white">
+      {/* Stats Section - compact */}
+      <section className="py-6 bg-white">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             <div 
-              className="p-6 rounded-xl text-center"
+              className="p-4 rounded-lg text-center"
               style={{
                 backgroundColor: colors.goldenYellow + '10',
                 border: `1px solid ${colors.goldenYellow}30`,
                 color: colors.darkBrown
               }}
             >
-              <div className="text-2xl md:text-3xl font-bold mb-1">25+</div>
-              <div className="text-sm">Years Experience</div>
+              <div className="text-xl md:text-2xl font-bold">25+</div>
+              <div className="text-xs">Years Exp</div>
             </div>
             <div 
-              className="p-6 rounded-xl text-center"
+              className="p-4 rounded-lg text-center"
               style={{
                 backgroundColor: colors.orange + '10',
                 border: `1px solid ${colors.orange}30`,
                 color: colors.darkBrown
               }}
             >
-              <div className="text-2xl md:text-3xl font-bold mb-1">150+</div>
-              <div className="text-sm">Countries Served</div>
+              <div className="text-xl md:text-2xl font-bold">150+</div>
+              <div className="text-xs">Countries</div>
             </div>
             <div 
-              className="p-6 rounded-xl text-center"
+              className="p-4 rounded-lg text-center"
               style={{
                 backgroundColor: colors.goldenYellow + '10',
                 border: `1px solid ${colors.goldenYellow}30`,
                 color: colors.darkBrown
               }}
             >
-              <div className="text-2xl md:text-3xl font-bold mb-1">99.8%</div>
-              <div className="text-sm">On-Time Delivery</div>
+              <div className="text-xl md:text-2xl font-bold">99.8%</div>
+              <div className="text-xs">On-Time</div>
             </div>
             <div 
-              className="p-6 rounded-xl text-center"
+              className="p-4 rounded-lg text-center"
               style={{
                 backgroundColor: colors.orange + '10',
                 border: `1px solid ${colors.orange}30`,
                 color: colors.darkBrown
               }}
             >
-              <div className="text-2xl md:text-3xl font-bold mb-1">500M+</div>
-              <div className="text-sm">Shipments Delivered</div>
+              <div className="text-xl md:text-2xl font-bold">500M+</div>
+              <div className="text-xs">Shipments</div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Mission & Vision */}
-      <section className="py-20 bg-gray-50">
+      {/* Mission & Vision - compact */}
+      <section className="py-8 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               {/* Mission */}
               <div 
-                className="p-8 rounded-2xl"
+                className="p-5 rounded-xl"
                 style={{
                   backgroundColor: 'white',
                   border: `1px solid ${colors.lightTan}50`,
-                  boxShadow: '0 4px 20px rgba(0,0,0,0.05)'
+                  boxShadow: '0 4px 15px rgba(0,0,0,0.05)'
                 }}
               >
-                <div className="flex items-center mb-6">
+                <div className="flex items-center mb-4">
                   <div 
-                    className="w-12 h-12 rounded-xl flex items-center justify-center mr-4"
+                    className="w-10 h-10 rounded-lg flex items-center justify-center mr-3"
                     style={{
                       background: `linear-gradient(135deg, ${colors.goldenYellow}, ${colors.orange})`
                     }}
                   >
-                    <Target className="h-6 w-6 text-white" />
+                    <Target className="h-5 w-5 text-white" />
                   </div>
-                  <h2 className="text-2xl md:text-3xl font-bold" style={{ color: colors.darkBrown }}>Our Mission</h2>
+                  <h2 className="text-lg md:text-xl font-bold" style={{ color: colors.darkBrown }}>Our Mission</h2>
                 </div>
-                <p className="mb-8 text-lg" style={{ color: colors.darkBrown, opacity: 0.8 }}>
+                <p className="mb-4 text-sm" style={{ color: colors.darkBrown, opacity: 0.8 }}>
                   To revolutionize global logistics through innovative technology and sustainable practices, 
                   making world-class shipping accessible to businesses of all sizes.
                 </p>
-                <div className="space-y-6">
+                <div className="space-y-3">
                   <div className="flex items-start">
-                    <div className="p-2 rounded-lg mr-4" style={{ backgroundColor: colors.goldenYellow + '20' }}>
-                      <Target className="h-5 w-5" style={{ color: colors.goldenYellow }} />
+                    <div className="p-1.5 rounded-lg mr-3" style={{ backgroundColor: colors.goldenYellow + '20' }}>
+                      <Target className="h-4 w-4" style={{ color: colors.goldenYellow }} />
                     </div>
                     <div>
-                      <h3 className="font-semibold mb-1" style={{ color: colors.darkBrown }}>Precision & Accuracy</h3>
-                      <p style={{ color: colors.darkBrown, opacity: 0.7 }}>99.8% on-time delivery rate across all services</p>
+                      <h3 className="font-semibold text-xs" style={{ color: colors.darkBrown }}>Precision & Accuracy</h3>
+                      <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.7 }}>99.8% on-time delivery</p>
                     </div>
                   </div>
                   <div className="flex items-start">
-                    <div className="p-2 rounded-lg mr-4" style={{ backgroundColor: colors.orange + '20' }}>
-                      <Shield className="h-5 w-5" style={{ color: colors.orange }} />
+                    <div className="p-1.5 rounded-lg mr-3" style={{ backgroundColor: colors.orange + '20' }}>
+                      <Shield className="h-4 w-4" style={{ color: colors.orange }} />
                     </div>
                     <div>
-                      <h3 className="font-semibold mb-1" style={{ color: colors.darkBrown }}>Security & Trust</h3>
-                      <p style={{ color: colors.darkBrown, opacity: 0.7 }}>$500M cargo insurance coverage for all shipments</p>
+                      <h3 className="font-semibold text-xs" style={{ color: colors.darkBrown }}>Security & Trust</h3>
+                      <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.7 }}>$500M cargo insurance</p>
                     </div>
                   </div>
                   <div className="flex items-start">
-                    <div className="p-2 rounded-lg mr-4" style={{ backgroundColor: colors.darkBrown + '20' }}>
-                      <Clock className="h-5 w-5" style={{ color: colors.darkBrown }} />
+                    <div className="p-1.5 rounded-lg mr-3" style={{ backgroundColor: colors.darkBrown + '20' }}>
+                      <Clock className="h-4 w-4" style={{ color: colors.darkBrown }} />
                     </div>
                     <div>
-                      <h3 className="font-semibold mb-1" style={{ color: colors.darkBrown }}>24/7 Reliability</h3>
-                      <p style={{ color: colors.darkBrown, opacity: 0.7 }}>Round-the-clock operations and customer support</p>
+                      <h3 className="font-semibold text-xs" style={{ color: colors.darkBrown }}>24/7 Reliability</h3>
+                      <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.7 }}>Round-the-clock support</p>
                     </div>
                   </div>
                 </div>
@@ -198,54 +194,54 @@ export default function AboutPage() {
               
               {/* Vision */}
               <div 
-                className="p-8 rounded-2xl"
+                className="p-5 rounded-xl"
                 style={{
                   backgroundColor: 'white',
                   border: `1px solid ${colors.lightTan}50`,
-                  boxShadow: '0 4px 20px rgba(0,0,0,0.05)'
+                  boxShadow: '0 4px 15px rgba(0,0,0,0.05)'
                 }}
               >
-                <div className="flex items-center mb-6">
+                <div className="flex items-center mb-4">
                   <div 
-                    className="w-12 h-12 rounded-xl flex items-center justify-center mr-4"
+                    className="w-10 h-10 rounded-lg flex items-center justify-center mr-3"
                     style={{
                       background: `linear-gradient(135deg, ${colors.orange}, ${colors.darkOrange})`
                     }}
                   >
-                    <Globe className="h-6 w-6 text-white" />
+                    <Globe className="h-5 w-5 text-white" />
                   </div>
-                  <h2 className="text-2xl md:text-3xl font-bold" style={{ color: colors.darkBrown }}>Our Vision</h2>
+                  <h2 className="text-lg md:text-xl font-bold" style={{ color: colors.darkBrown }}>Our Vision</h2>
                 </div>
-                <p className="mb-8 text-lg" style={{ color: colors.darkBrown, opacity: 0.8 }}>
+                <p className="mb-4 text-sm" style={{ color: colors.darkBrown, opacity: 0.8 }}>
                   To create a seamlessly connected global supply chain network that drives economic growth 
                   while minimizing environmental impact.
                 </p>
-                <div className="space-y-6">
+                <div className="space-y-3">
                   <div className="flex items-start">
-                    <div className="p-2 rounded-lg mr-4" style={{ backgroundColor: colors.orange + '20' }}>
-                      <TrendingUp className="h-5 w-5" style={{ color: colors.orange }} />
+                    <div className="p-1.5 rounded-lg mr-3" style={{ backgroundColor: colors.orange + '20' }}>
+                      <TrendingUp className="h-4 w-4" style={{ color: colors.orange }} />
                     </div>
                     <div>
-                      <h3 className="font-semibold mb-1" style={{ color: colors.darkBrown }}>Sustainable Growth</h3>
-                      <p style={{ color: colors.darkBrown, opacity: 0.7 }}>Carbon-neutral shipping options available</p>
+                      <h3 className="font-semibold text-xs" style={{ color: colors.darkBrown }}>Sustainable Growth</h3>
+                      <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.7 }}>Carbon-neutral options</p>
                     </div>
                   </div>
                   <div className="flex items-start">
-                    <div className="p-2 rounded-lg mr-4" style={{ backgroundColor: colors.goldenYellow + '20' }}>
-                      <Users className="h-5 w-5" style={{ color: colors.goldenYellow }} />
+                    <div className="p-1.5 rounded-lg mr-3" style={{ backgroundColor: colors.goldenYellow + '20' }}>
+                      <Users className="h-4 w-4" style={{ color: colors.goldenYellow }} />
                     </div>
                     <div>
-                      <h3 className="font-semibold mb-1" style={{ color: colors.darkBrown }}>Global Community</h3>
-                      <p style={{ color: colors.darkBrown, opacity: 0.7 }}>Serving businesses in 150+ countries worldwide</p>
+                      <h3 className="font-semibold text-xs" style={{ color: colors.darkBrown }}>Global Community</h3>
+                      <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.7 }}>150+ countries served</p>
                     </div>
                   </div>
                   <div className="flex items-start">
-                    <div className="p-2 rounded-lg mr-4" style={{ backgroundColor: colors.darkOrange + '20' }}>
-                      <Truck className="h-5 w-5" style={{ color: colors.darkOrange }} />
+                    <div className="p-1.5 rounded-lg mr-3" style={{ backgroundColor: colors.darkOrange + '20' }}>
+                      <Truck className="h-4 w-4" style={{ color: colors.darkOrange }} />
                     </div>
                     <div>
-                      <h3 className="font-semibold mb-1" style={{ color: colors.darkBrown }}>Innovation Driven</h3>
-                      <p style={{ color: colors.darkBrown, opacity: 0.7 }}>Continuously advancing logistics technology</p>
+                      <h3 className="font-semibold text-xs" style={{ color: colors.darkBrown }}>Innovation Driven</h3>
+                      <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.7 }}>Advancing technology</p>
                     </div>
                   </div>
                 </div>
@@ -255,82 +251,78 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Values Section */}
-      <section className="py-20 bg-white">
+      {/* Values Section - compact */}
+      <section className="py-6 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2
-  className="text-3xl md:text-4xl font-bold mb-4 text-center"
-  style={{
-    background: `linear-gradient(90deg, ${colors.darkBrown}, ${colors.goldenYellow})`,
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-    backgroundClip: 'text',
-  }}
->
-  Our Core Values
-</h2>
+              className="text-lg md:text-xl font-bold mb-2"
+              style={{
+                background: `linear-gradient(90deg, ${colors.darkBrown}, ${colors.goldenYellow})`,
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+            >
+              Our Core Values
+            </h2>
 
-           <p
-  className="text-lg mb-12 max-w-2xl mx-auto text-center"
-  style={{
-    background: `linear-gradient(90deg, ${colors.darkBrown}, ${colors.goldenYellow})`,
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-    backgroundClip: 'text',
-    opacity: 0.9, // adjust if you want softer look
-  }}
->
-  The principles that guide our decisions and define our culture
-</p>
-
+            <p
+              className="text-xs mb-4 max-w-2xl mx-auto"
+              style={{
+                color: colors.darkBrown,
+                opacity: 0.8
+              }}
+            >
+              The principles that guide our decisions and define our culture
+            </p>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
               <div 
-                className="p-8 rounded-2xl text-center"
+                className="p-4 rounded-xl text-center"
                 style={{
                   backgroundColor: colors.goldenYellow + '10',
                   border: `1px solid ${colors.goldenYellow}30`
                 }}
               >
-                <div className="w-16 h-16 rounded-full mx-auto mb-6 flex items-center justify-center" style={{ backgroundColor: colors.goldenYellow }}>
-                  <Shield className="h-8 w-8 text-white" />
+                <div className="w-10 h-10 rounded-full mx-auto mb-2 flex items-center justify-center" style={{ backgroundColor: colors.goldenYellow }}>
+                  <Shield className="h-5 w-5 text-white" />
                 </div>
-                <h3 className="text-xl font-bold mb-3" style={{ color: colors.darkBrown }}>Integrity</h3>
-                <p style={{ color: colors.darkBrown, opacity: 0.8 }}>
-                  Honest and transparent in every interaction
+                <h3 className="text-sm font-bold mb-1" style={{ color: colors.darkBrown }}>Integrity</h3>
+                <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.8 }}>
+                  Honest and transparent
                 </p>
               </div>
               
               <div 
-                className="p-8 rounded-2xl text-center"
+                className="p-4 rounded-xl text-center"
                 style={{
                   backgroundColor: colors.orange + '10',
                   border: `1px solid ${colors.orange}30`
                 }}
               >
-                <div className="w-16 h-16 rounded-full mx-auto mb-6 flex items-center justify-center" style={{ backgroundColor: colors.orange }}>
-                  <Target className="h-8 w-8 text-white" />
+                <div className="w-10 h-10 rounded-full mx-auto mb-2 flex items-center justify-center" style={{ backgroundColor: colors.orange }}>
+                  <Target className="h-5 w-5 text-white" />
                 </div>
-                <h3 className="text-xl font-bold mb-3" style={{ color: colors.darkBrown }}>Excellence</h3>
-                <p style={{ color: colors.darkBrown, opacity: 0.8 }}>
-                  Striving for perfection in every delivery
+                <h3 className="text-sm font-bold mb-1" style={{ color: colors.darkBrown }}>Excellence</h3>
+                <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.8 }}>
+                  Perfection in every delivery
                 </p>
               </div>
               
               <div 
-                className="p-8 rounded-2xl text-center"
+                className="p-4 rounded-xl text-center"
                 style={{
                   backgroundColor: colors.darkBrown + '10',
                   border: `1px solid ${colors.darkBrown}30`
                 }}
               >
-                <div className="w-16 h-16 rounded-full mx-auto mb-6 flex items-center justify-center" style={{ backgroundColor: colors.darkBrown }}>
-                  <Users className="h-8 w-8 text-white" />
+                <div className="w-10 h-10 rounded-full mx-auto mb-2 flex items-center justify-center" style={{ backgroundColor: colors.darkBrown }}>
+                  <Users className="h-5 w-5 text-white" />
                 </div>
-                <h3 className="text-xl font-bold mb-3" style={{ color: colors.darkBrown }}>Customer Focus</h3>
-                <p style={{ color: colors.darkBrown, opacity: 0.8 }}>
-                  Putting our clients' needs first, always
+                <h3 className="text-sm font-bold mb-1" style={{ color: colors.darkBrown }}>Customer Focus</h3>
+                <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.8 }}>
+                  Clients' needs first
                 </p>
               </div>
             </div>
