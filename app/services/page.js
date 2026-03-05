@@ -11,7 +11,7 @@ export default function ServicesPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 flex flex-col">
       {/* Hero Section - Minimal */}
-      <section className="relative py-3 sm:py-4 md:py-5 overflow-hidden flex-shrink-0">
+      <section className="relative py-12 md:py-16 lg:py-20 overflow-hidden">
         <div className="container mx-auto px-3 sm:px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-1">
@@ -52,12 +52,11 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Main Content - Fills space with no gaps */}
-      <section className="flex-1 flex flex-col">
-        <div className="container mx-auto px-3 sm:px-4 py-2 sm:py-3 flex-1 flex flex-col">
-          <div className="max-w-6xl mx-auto w-full flex-1 flex flex-col">
-            {/* Stats Banner - Compact */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-1.5 sm:gap-2 mb-3 sm:mb-4">
+      {/* Main Content - No extra footer, no gaps */}
+   <section className="flex-1 py-10 lg:py-16">
+    <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-6xl mx-auto">
+         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-10">
               {[
                 { value: "99.8%", label: "On-Time Delivery", color: colors.goldenYellow },
                 { value: "150+", label: "Countries", color: colors.orange },
@@ -82,11 +81,11 @@ export default function ServicesPage() {
               ))}
             </div>
 
-            {/* Services Grid - 3 columns on large screens */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-3 sm:mb-4">
+            {/* Services Grid - 3 columns */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-8">
               {/* Road Freight */}
               <div
-                className="p-4 sm:p-5 rounded-xl border transition-all hover:shadow-md"
+                className="p-8 md:p-10 rounded-xl border transition-all hover:shadow-md"
                 style={{
                   backgroundColor: "white",
                   borderColor: colors.lightTan + "50",
@@ -158,7 +157,7 @@ export default function ServicesPage() {
 
               {/* Air Freight */}
               <div
-                className="p-4 sm:p-5 rounded-xl border transition-all hover:shadow-md md:col-span-2 lg:col-span-1"
+                className="p-4 sm:p-5 rounded-xl border transition-all hover:shadow-md"
                 style={{
                   backgroundColor: "white",
                   borderColor: colors.lightTan + "50",
@@ -193,9 +192,9 @@ export default function ServicesPage() {
               </div>
             </div>
 
-            {/* CTA Section */}
+            {/* CTA Section - Only this, no footer */}
             <div
-              className="p-4 sm:p-5 rounded-xl text-center mb-3 sm:mb-4"
+              className="p-4 sm:p-5 rounded-xl text-center"
               style={{
                 background: `linear-gradient(135deg, ${colors.goldenYellow}10, ${colors.orange}10)`,
                 border: `1px solid ${colors.goldenYellow}30`,
@@ -229,8 +228,6 @@ export default function ServicesPage() {
                 </button>
               </div>
             </div>
-
-         
           </div>
         </div>
       </section>
