@@ -1,5 +1,3 @@
-
-
 'use client'
 
 import { useState, useEffect } from 'react'
@@ -284,29 +282,19 @@ export default function Services() {
           {/* Header - reduced spacing */}
           <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8">
             {/* Badge */}
-            <div
-              className="inline-flex items-center justify-center gap-2 rounded-full mb-4 mx-auto px-3 py-1.5 shadow-sm"
-              style={{
-                backgroundColor: colors.goldenYellow,
-                color: colors.darkBrown,
-                border: `1px solid ${colors.darkBrown}20`,
-              }}
-            >
-              <Globe className="h-3 w-3" />
-              <span className="text-xs font-semibold">GLOBAL SERVICES</span>
-            </div>
+           
 
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-2">  
-              <span className="block" style={{ color: colors.darkBrown }}>
+              <span className="block cursor-pointer" style={{ color: colors.darkBrown }}>
                 Comprehensive
               </span>
-              <span className="block" style={highlightText}>
+              <span className="block cursor-pointer" style={highlightText}>
                 Logistics Solutions
               </span>
             </h2>
 
             <p
-              className="text-sm sm:text-base max-w-2xl mx-auto px-4"
+              className="text-sm sm:text-base max-w-2xl mx-auto px-4 cursor-pointer"
               style={{ color: colors.darkBrown, opacity: 0.7 }}
             >
               End-to-end logistics services designed to optimize your supply chain
@@ -317,65 +305,65 @@ export default function Services() {
           {/* Stats Banner - reduced spacing */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 mb-6 max-w-4xl mx-auto">
             <div
-              className="rounded-lg p-3 sm:p-4 text-center shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-0.5"
+              className="rounded-lg p-3 sm:p-4 text-center shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 cursor-pointer"
               style={{
                 backgroundColor: 'white',
                 border: `1px solid ${colors.lightTan}30`,
                 color: colors.darkBrown,
               }}
             >
-              <div className="text-xl sm:text-2xl font-bold mb-0.5" style={highlightText}>
+              <div className="text-xl sm:text-2xl font-bold mb-0.5 cursor-pointer" style={highlightText}>
                 150+
               </div>
-              <div className="text-xs" style={{ color: colors.darkBrown, opacity: 0.7 }}>
+              <div className="text-xs cursor-pointer" style={{ color: colors.darkBrown, opacity: 0.7 }}>
                 Countries Served
               </div>
             </div>
 
             <div
-              className="rounded-lg p-3 sm:p-4 text-center shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-0.5"
+              className="rounded-lg p-3 sm:p-4 text-center shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 cursor-pointer"
               style={{
                 backgroundColor: 'white',
                 border: `1px solid ${colors.goldenYellow}30`,
                 color: colors.darkBrown,
               }}
             >
-              <div className="text-xl sm:text-2xl font-bold mb-0.5" style={highlightText}>
+              <div className="text-xl sm:text-2xl font-bold mb-0.5 cursor-pointer" style={highlightText}>
                 99.8%
               </div>
-              <div className="text-xs" style={{ color: colors.darkBrown, opacity: 0.7 }}>
+              <div className="text-xs cursor-pointer" style={{ color: colors.darkBrown, opacity: 0.7 }}>
                 On-Time Delivery
               </div>
             </div>
 
             <div
-              className="rounded-lg p-3 sm:p-4 text-center shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-0.5"
+              className="rounded-lg p-3 sm:p-4 text-center shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 cursor-pointer"
               style={{
                 backgroundColor: 'white',
                 border: `1px solid ${colors.orange}30`,
                 color: colors.darkBrown,
               }}
             >
-              <div className="text-xl sm:text-2xl font-bold mb-0.5" style={highlightText}>
+              <div className="text-xl sm:text-2xl font-bold mb-0.5 cursor-pointer" style={highlightText}>
                 24/7
               </div>
-              <div className="text-xs" style={{ color: colors.darkBrown, opacity: 0.7 }}>
+              <div className="text-xs cursor-pointer" style={{ color: colors.darkBrown, opacity: 0.7 }}>
                 Customer Support
               </div>
             </div>
 
             <div
-              className="rounded-lg p-3 sm:p-4 text-center shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-0.5"
+              className="rounded-lg p-3 sm:p-4 text-center shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 cursor-pointer"
               style={{
                 backgroundColor: 'white',
                 border: `1px solid ${colors.darkBrown}20`,
                 color: colors.darkBrown,
               }}
             >
-              <div className="text-xl sm:text-2xl font-bold mb-0.5" style={highlightText}>
+              <div className="text-xl sm:text-2xl font-bold mb-0.5 cursor-pointer" style={highlightText}>
                 ISO
               </div>
-              <div className="text-xs" style={{ color: colors.darkBrown, opacity: 0.7 }}>
+              <div className="text-xs cursor-pointer" style={{ color: colors.darkBrown, opacity: 0.7 }}>
                 9001 Certified
               </div>
             </div>
@@ -386,7 +374,7 @@ export default function Services() {
             {services.map((service, index) => (
               <div
                 key={index}
-                className="group relative"
+                className="group relative cursor-pointer"
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
@@ -394,7 +382,7 @@ export default function Services() {
                 {service.popular && (
                   <div className="absolute -top-1 -right-1 z-20">
                     <div
-                      className="text-white px-2 py-0.5 rounded-full text-xs font-semibold shadow-lg"
+                      className="text-white px-2 py-0.5 rounded-full text-xs font-semibold shadow-lg cursor-default"
                       style={{
                         background: `linear-gradient(90deg, ${colors.orange}, ${colors.darkOrange})`,
                         color: 'white',
@@ -427,7 +415,7 @@ export default function Services() {
                   <div className="flex justify-between items-start mb-2">
                     {/* Icon Container */}
                     <div
-                      className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center shadow-sm group-hover:shadow-md group-hover:scale-105 transition-all duration-300"
+                      className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center shadow-sm group-hover:shadow-md group-hover:scale-105 transition-all duration-300 cursor-pointer"
                       style={{ background: service.gradient }}
                     >
                       <service.icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
@@ -435,18 +423,18 @@ export default function Services() {
                     </div>
 
                     <div className="text-right">
-                      <div className="text-xs sm:text-sm font-bold" style={highlightText}>
+                      <div className="text-xs sm:text-sm font-bold cursor-pointer" style={highlightText}>
                         {service.stats}
                       </div>
                     </div>
                   </div>
 
-                  <h3 className="text-base sm:text-lg font-bold mb-1" style={highlightText}>
+                  <h3 className="text-base sm:text-lg font-bold mb-1 cursor-pointer" style={highlightText}>
                     {service.title}
                   </h3>
 
                   <p
-                    className="text-xs sm:text-sm mb-2 leading-relaxed"
+                    className="text-xs sm:text-sm mb-2 leading-relaxed cursor-pointer"
                     style={{ color: colors.darkBrown, opacity: 0.8 }}
                   >
                     {service.description}
@@ -458,13 +446,13 @@ export default function Services() {
                       <li key={idx} className="flex items-start group/item">
                         <div className="flex-shrink-0 mr-2 mt-0.5">
                           <CheckCircle
-                            className="h-3 w-3 group-hover/item:scale-110 transition-transform"
+                            className="h-3 w-3 group-hover/item:scale-110 transition-transform cursor-pointer"
                             style={{
                               color: idx % 2 === 0 ? colors.goldenYellow : colors.orange,
                             }}
                           />
                         </div>
-                        <span className="text-xs" style={{ color: colors.darkBrown, opacity: 0.9 }}>
+                        <span className="text-xs cursor-pointer" style={{ color: colors.darkBrown, opacity: 0.9 }}>
                           {feature}
                         </span>
                       </li>
@@ -475,12 +463,12 @@ export default function Services() {
                   <div className="mt-auto pt-2 border-t" style={{ borderColor: colors.lightTan + '30' }}>
                     <button
                       onClick={() => handleLearnMore(service)}
-                      className="group/btn flex items-center justify-between w-full font-semibold text-xs sm:text-sm hover:opacity-80 transition-all duration-300"
+                      className="group/btn flex items-center justify-between w-full font-semibold text-xs sm:text-sm hover:opacity-80 transition-all duration-300 cursor-pointer"
                       style={{ color: colors.darkBrown }}
                     >
                       <span style={highlightText}>Learn More</span>
                       <ArrowRight
-                        className="h-3 w-3 sm:h-4 sm:w-4 group-hover/btn:translate-x-1 transition-transform"
+                        className="h-3 w-3 sm:h-4 sm:w-4 group-hover/btn:translate-x-1 transition-transform cursor-pointer"
                         style={{ color: colors.darkBrown }}
                       />
                     </button>
@@ -488,93 +476,6 @@ export default function Services() {
                 </div>
               </div>
             ))}
-          </div>
-
-          {/* CTA Section - reduced spacing and size */}
-          <div className="mt-6 sm:mt-8 text-center">
-            <div
-              className="rounded-xl p-4 sm:p-5 max-w-4xl mx-auto shadow-sm"
-              style={{
-                backgroundColor: 'white',
-                border: `1px solid ${colors.lightTan}50`,
-                background: `linear-gradient(135deg, white, ${backgroundColors.lighter})`,
-              }}
-            >
-              <div className="inline-flex items-center justify-center gap-2 mb-2">
-                <Shield className="h-6 w-6 sm:h-8 sm:w-8" style={{ color: colors.goldenYellow }} />
-                <Clock className="h-5 w-5 sm:h-6 sm:w-6" style={{ color: colors.orange }} />
-                <MapPin className="h-6 w-6 sm:h-8 sm:w-8" style={{ color: colors.darkBrown }} />
-              </div>
-
-              <h3 className="text-base sm:text-lg lg:text-xl font-bold mb-1" style={highlightText}>
-                Need Custom Logistics Solutions?
-              </h3>
-
-              <p className="mb-3 max-w-2xl mx-auto text-xs sm:text-sm" style={{ color: colors.darkBrown, opacity: 0.8 }}>
-                Our experts will design a logistics strategy tailored to your specific business needs
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-2 justify-center items-center">
-                <Link
-                  href="/contact"
-                  className="group px-4 sm:px-5 py-2 rounded-lg font-bold transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-1.5 text-xs sm:text-sm w-full sm:w-auto min-w-[160px] hover:scale-105"
-                  style={{
-                    background: `linear-gradient(90deg, ${colors.goldenYellow}, ${colors.orange})`,
-                    color: colors.darkBrown,
-                  }}
-                >
-                  <Users className="h-3 w-3 sm:h-4 sm:w-4" />
-                  Consult Our Experts
-                  <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-
-                <Link
-                  href="/services"
-                  className="group px-4 sm:px-5 py-2 rounded-lg font-bold transition-all duration-300 shadow-sm hover:shadow-md flex items-center justify-center gap-1.5 text-xs sm:text-sm w-full sm:w-auto min-w-[150px] hover:scale-105"
-                  style={{
-                    backgroundColor: 'white',
-                    color: colors.darkBrown,
-                    border: `1px solid ${colors.goldenYellow}`,
-                  }}
-                >
-                  <span style={highlightText}>View All</span>
-                  <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4 group-hover:translate-x-1 transition-transform opacity-70" />
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          {/* Trust Indicators - reduced spacing */}
-          <div className="mt-4 sm:mt-5">
-            <div className="text-center mb-2">
-              <h4 className="text-xs font-semibold mb-1 tracking-wider" style={highlightText}>
-                TRUSTED BY INDUSTRY LEADERS
-              </h4>
-              <div
-                className="h-0.5 w-12 mx-auto rounded-full"
-                style={{
-                  background: `linear-gradient(90deg, ${colors.goldenYellow}, ${colors.orange})`,
-                }}
-              />
-            </div>
-
-            <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4" style={{ color: colors.darkBrown, opacity: 0.8 }}>
-              <div className="text-xs sm:text-sm font-bold tracking-wide opacity-70 hover:opacity-100 transition-opacity" style={highlightText}>
-                MAERSK
-              </div>
-              <div className="text-xs sm:text-sm font-bold tracking-wide opacity-70 hover:opacity-100 transition-opacity" style={highlightText}>
-                DHL
-              </div>
-              <div className="text-xs sm:text-sm font-bold tracking-wide opacity-70 hover:opacity-100 transition-opacity" style={highlightText}>
-                FEDEX
-              </div>
-              <div className="text-xs sm:text-sm font-bold tracking-wide opacity-70 hover:opacity-100 transition-opacity" style={highlightText}>
-                UPS
-              </div>
-              <div className="text-xs sm:text-sm font-bold tracking-wide opacity-70 hover:opacity-100 transition-opacity" style={highlightText}>
-                COSCO
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -590,7 +491,7 @@ export default function Services() {
         >
           {/* Backdrop */}
           <div
-            className="absolute inset-0 bg-black transition-opacity duration-300"
+            className="absolute inset-0 bg-black transition-opacity duration-300 cursor-pointer"
             style={{ opacity: isModalOpen ? 0.7 : 0 }}
             onClick={closeModal}
           />
@@ -617,17 +518,17 @@ export default function Services() {
               }}
             >
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-white bg-opacity-20">
+                <div className="p-2 rounded-lg bg-white bg-opacity-20 cursor-pointer">
                   <selectedService.icon className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-white">
+                  <h3 className="text-xl font-bold text-white cursor-pointer">
                     {selectedService.title}
                   </h3>
                   <div className="flex items-center gap-2 mt-0.5">
-                    <div className="text-white text-xs font-medium">{selectedService.stats}</div>
+                    <div className="text-white text-xs font-medium cursor-pointer">{selectedService.stats}</div>
                     {selectedService.popular && (
-                      <span className="px-1.5 py-0.5 text-xs font-bold rounded-full bg-white" style={{ color: colors.darkOrange }}>
+                      <span className="px-1.5 py-0.5 text-xs font-bold rounded-full bg-white cursor-default" style={{ color: colors.darkOrange }}>
                         POPULAR
                       </span>
                     )}
@@ -637,7 +538,7 @@ export default function Services() {
 
               <button
                 onClick={closeModal}
-                className="p-1.5 rounded-full hover:bg-white hover:bg-opacity-20 transition-colors"
+                className="p-1.5 rounded-full hover:bg-white hover:bg-opacity-20 transition-colors cursor-pointer"
                 style={{ color: 'white' }}
               >
                 <X className="h-5 w-5" />
@@ -648,18 +549,18 @@ export default function Services() {
             <div className="p-4 sm:p-6">
               {/* Overview */}
               <div className="mb-4">
-                <h4 className="text-base font-bold mb-2 flex items-center gap-2" style={darkText}>
+                <h4 className="text-base font-bold mb-2 flex items-center gap-2 cursor-pointer" style={darkText}>
                   <CheckCircle className="h-4 w-4" style={{ color: colors.goldenYellow }} />
                   Service Overview
                 </h4>
-                <p className="text-sm" style={regularText}>
+                <p className="text-sm cursor-pointer" style={regularText}>
                   {selectedService.details.overview}
                 </p>
               </div>
 
               {/* Key Benefits */}
               <div className="mb-4">
-                <h4 className="text-base font-bold mb-2" style={darkText}>
+                <h4 className="text-base font-bold mb-2 cursor-pointer" style={darkText}>
                   Key Benefits
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -668,16 +569,16 @@ export default function Services() {
                     return (
                       <div
                         key={idx}
-                        className="flex items-start gap-2 p-3 rounded-lg"
+                        className="flex items-start gap-2 p-3 rounded-lg cursor-pointer hover:shadow-md transition-all duration-300"
                         style={{
                           backgroundColor: backgroundColors.lightGray,
                           border: `1px solid ${colors.lightTan}30`,
                         }}
                       >
-                        <div className="p-1.5 rounded-lg flex-shrink-0" style={{ backgroundColor: colors.goldenYellow + '20' }}>
+                        <div className="p-1.5 rounded-lg flex-shrink-0 cursor-pointer" style={{ backgroundColor: colors.goldenYellow + '20' }}>
                           {Icon && <Icon className="h-4 w-4" style={{ color: colors.goldenYellow }} />}
                         </div>
-                        <span className="text-xs" style={darkText}>
+                        <span className="text-xs cursor-pointer" style={darkText}>
                           {benefit.text}
                         </span>
                       </div>
@@ -689,52 +590,52 @@ export default function Services() {
               {/* Details Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
                 {selectedService.details.coverage && (
-                  <div className="p-3 rounded-lg border" style={{ borderColor: colors.lightTan + '50' }}>
+                  <div className="p-3 rounded-lg border cursor-pointer hover:shadow-md transition-all duration-300" style={{ borderColor: colors.lightTan + '50' }}>
                     <div className="flex items-center gap-1.5 mb-1">
                       <Globe className="h-4 w-4" style={{ color: colors.orange }} />
-                      <h5 className="font-bold text-xs" style={darkText}>
+                      <h5 className="font-bold text-xs cursor-pointer" style={darkText}>
                         Coverage
                       </h5>
                     </div>
-                    <p className="text-xs" style={lightText}>
+                    <p className="text-xs cursor-pointer" style={lightText}>
                       {selectedService.details.coverage}
                     </p>
                   </div>
                 )}
 
                 {selectedService.details.transitTime && (
-                  <div className="p-3 rounded-lg border" style={{ borderColor: colors.lightTan + '50' }}>
+                  <div className="p-3 rounded-lg border cursor-pointer hover:shadow-md transition-all duration-300" style={{ borderColor: colors.lightTan + '50' }}>
                     <div className="flex items-center gap-1.5 mb-1">
                       <Clock className="h-4 w-4" style={{ color: colors.goldenYellow }} />
-                      <h5 className="font-bold text-xs" style={darkText}>
+                      <h5 className="font-bold text-xs cursor-pointer" style={darkText}>
                         Transit Time
                       </h5>
                     </div>
-                    <p className="text-xs" style={lightText}>
+                    <p className="text-xs cursor-pointer" style={lightText}>
                       {selectedService.details.transitTime}
                     </p>
                   </div>
                 )}
 
                 {selectedService.details.pricing && (
-                  <div className="p-3 rounded-lg border" style={{ borderColor: colors.lightTan + '50' }}>
+                  <div className="p-3 rounded-lg border cursor-pointer hover:shadow-md transition-all duration-300" style={{ borderColor: colors.lightTan + '50' }}>
                     <div className="flex items-center gap-1.5 mb-1">
                       <DollarSign className="h-4 w-4" style={{ color: colors.darkOrange }} />
-                      <h5 className="font-bold text-xs" style={darkText}>
+                      <h5 className="font-bold text-xs cursor-pointer" style={darkText}>
                         Pricing
                       </h5>
                     </div>
-                    <p className="text-xs" style={lightText}>
+                    <p className="text-xs cursor-pointer" style={lightText}>
                       {selectedService.details.pricing}
                     </p>
                   </div>
                 )}
 
                 {selectedService.details.industries && (
-                  <div className="p-3 rounded-lg border" style={{ borderColor: colors.lightTan + '50' }}>
+                  <div className="p-3 rounded-lg border cursor-pointer hover:shadow-md transition-all duration-300" style={{ borderColor: colors.lightTan + '50' }}>
                     <div className="flex items-center gap-1.5 mb-1">
                       <UsersIcon className="h-4 w-4" style={{ color: colors.darkBrown }} />
-                      <h5 className="font-bold text-xs" style={darkText}>
+                      <h5 className="font-bold text-xs cursor-pointer" style={darkText}>
                         Industries
                       </h5>
                     </div>
@@ -742,7 +643,7 @@ export default function Services() {
                       {selectedService.details.industries.map((industry, idx) => (
                         <span
                           key={idx}
-                          className="px-2 py-0.5 text-xs rounded-full"
+                          className="px-2 py-0.5 text-xs rounded-full cursor-pointer hover:scale-105 transition-transform duration-300"
                           style={{
                             backgroundColor: colors.lightTan + '30',
                             color: colors.darkBrown,
@@ -759,17 +660,17 @@ export default function Services() {
 
               {/* Features */}
               <div className="mb-4">
-                <h4 className="text-base font-bold mb-2" style={darkText}>
+                <h4 className="text-base font-bold mb-2 cursor-pointer" style={darkText}>
                   Key Features
                 </h4>
                 <ul className="space-y-1">
                   {selectedService.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-center gap-2">
+                    <li key={idx} className="flex items-center gap-2 cursor-pointer hover:translate-x-1 transition-transform duration-300">
                       <CheckCircle
-                        className="h-4 w-4 flex-shrink-0"
+                        className="h-4 w-4 flex-shrink-0 cursor-pointer"
                         style={{ color: idx % 2 === 0 ? colors.goldenYellow : colors.orange }}
                       />
-                      <span className="text-xs" style={regularText}>{feature}</span>
+                      <span className="text-xs cursor-pointer" style={regularText}>{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -779,7 +680,7 @@ export default function Services() {
               <div className="flex flex-col sm:flex-row gap-2 pt-3 border-t" style={{ borderColor: colors.lightTan + '30' }}>
                 <Link
                   href="/contact"
-                  className="group flex-1 px-4 py-2 rounded-lg font-bold text-center transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-1.5 text-sm"
+                  className="group flex-1 px-4 py-2 rounded-lg font-bold text-center transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-1.5 text-sm cursor-pointer hover:scale-105"
                   style={{
                     background: `linear-gradient(90deg, ${colors.goldenYellow}, ${colors.orange})`,
                     color: colors.darkBrown,
@@ -787,12 +688,12 @@ export default function Services() {
                 >
                   <Users className="h-4 w-4" />
                   Get Quote
-                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform cursor-pointer" />
                 </Link>
 
                 <button
                   onClick={closeModal}
-                  className="px-4 py-2 rounded-lg font-bold transition-all duration-300 shadow-sm hover:shadow-md border"
+                  className="px-4 py-2 rounded-lg font-bold transition-all duration-300 shadow-sm hover:shadow-md border cursor-pointer hover:scale-105"
                   style={{
                     backgroundColor: 'white',
                     color: colors.darkBrown,
@@ -808,239 +709,4 @@ export default function Services() {
       )}
     </>
   )
-}// export default function ServicesPage() {
-//   // Color palette matching your home page
-//   const colors = {
-//     darkBrown: "#521903", // Primary dark
-//     goldenYellow: "#f8b936", // Primary accent
-//     orange: "#dc8c18", // Secondary accent
-//     darkOrange: "#9f4409", // Dark accent
-//     lightTan: "#c29f85", // Light accent
-//   };
-
-//   return (
-//     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 flex flex-col">
-//       {/* Hero Section - Minimal */}
-//       <section className="relative py-12 md:py-16 lg:py-20 overflow-hidden">
-//         <div className="container mx-auto px-3 sm:px-4 relative z-10">
-//           <div className="max-w-3xl mx-auto text-center">
-//             <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-1">
-//               <span
-//                 className="block"
-//                 style={{
-//                   background: `linear-gradient(90deg, ${colors.darkBrown}, ${colors.goldenYellow})`,
-//                   WebkitBackgroundClip: "text",
-//                   WebkitTextFillColor: "transparent",
-//                   backgroundClip: "text",
-//                 }}
-//               >
-//                 Comprehensive
-//               </span>
-//               <span
-//                 className="block"
-//                 style={{
-//                   background: `linear-gradient(90deg, ${colors.goldenYellow}, ${colors.orange})`,
-//                   WebkitBackgroundClip: "text",
-//                   WebkitTextFillColor: "transparent",
-//                   backgroundClip: "text",
-//                 }}
-//               >
-//                 Logistics Solutions
-//               </span>
-//             </h1>
-//             <p
-//               className="text-xs sm:text-sm md:text-base max-w-2xl mx-auto"
-//               style={{
-//                 color: colors.darkBrown,
-//                 opacity: 0.8,
-//               }}
-//             >
-//               End-to-end supply chain management designed to optimize
-//               efficiency, reduce costs, and deliver exceptional reliability
-//             </p>
-//           </div>
-//         </div>
-//       </section>
-
-//       {/* Main Content - No extra footer, no gaps */}
-//    <section className="flex-1 py-10 lg:py-16">
-//     <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-//           <div className="max-w-6xl mx-auto">
-//          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-10">
-//               {[
-//                 { value: "99.8%", label: "On-Time Delivery", color: colors.goldenYellow },
-//                 { value: "150+", label: "Countries", color: colors.orange },
-//                 { value: "24/7", label: "Support", color: colors.goldenYellow },
-//                 { value: "25+", label: "Years Experience", color: colors.orange }
-//               ].map((stat, index) => (
-//                 <div
-//                   key={index}
-//                   className="p-2 sm:p-2.5 rounded-lg text-center"
-//                   style={{
-//                     backgroundColor: stat.color + "10",
-//                     border: `1px solid ${stat.color}30`,
-//                   }}
-//                 >
-//                   <div className="text-base sm:text-lg md:text-xl font-bold" style={{ color: colors.darkBrown }}>
-//                     {stat.value}
-//                   </div>
-//                   <div className="text-[10px] sm:text-xs" style={{ color: colors.darkBrown, opacity: 0.7 }}>
-//                     {stat.label}
-//                   </div>
-//                 </div>
-//               ))}
-//             </div>
-
-//             {/* Services Grid - 3 columns */}
-//           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-8">
-//               {/* Road Freight */}
-//               <div
-//                 className="p-8 md:p-10 rounded-xl border transition-all hover:shadow-md"
-//                 style={{
-//                   backgroundColor: "white",
-//                   borderColor: colors.lightTan + "50",
-//                 }}
-//               >
-//                 <div className="flex items-center gap-2 mb-3">
-//                   <div
-//                     className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-lg"
-//                     style={{
-//                       background: `linear-gradient(135deg, ${colors.goldenYellow}, ${colors.orange})`,
-//                     }}
-//                   >
-//                     🚚
-//                   </div>
-//                   <h3 className="text-base sm:text-lg font-bold" style={{ color: colors.darkBrown }}>
-//                     Road Freight
-//                   </h3>
-//                 </div>
-                
-//                 <p className="text-xs sm:text-sm mb-3" style={{ color: colors.darkBrown, opacity: 0.7 }}>
-//                   Comprehensive overland transportation solutions across North America with real-time GPS tracking.
-//                 </p>
-
-//                 <div className="grid grid-cols-2 gap-2">
-//                   {["LTL & FTL", "Express"].map((item, idx) => (
-//                     <div key={idx} className="flex items-center gap-1.5">
-//                       <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: colors.goldenYellow }} />
-//                       <span className="text-xs" style={{ color: colors.darkBrown }}>{item}</span>
-//                     </div>
-//                   ))}
-//                 </div>
-//               </div>
-
-//               {/* Ocean Shipping */}
-//               <div
-//                 className="p-4 sm:p-5 rounded-xl border transition-all hover:shadow-md"
-//                 style={{
-//                   backgroundColor: "white",
-//                   borderColor: colors.lightTan + "50",
-//                 }}
-//               >
-//                 <div className="flex items-center gap-2 mb-3">
-//                   <div
-//                     className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-lg"
-//                     style={{
-//                       background: `linear-gradient(135deg, ${colors.orange}, ${colors.darkOrange})`,
-//                     }}
-//                   >
-//                     🚢
-//                   </div>
-//                   <h3 className="text-base sm:text-lg font-bold" style={{ color: colors.darkBrown }}>
-//                     Ocean Shipping
-//                   </h3>
-//                 </div>
-                
-//                 <p className="text-xs sm:text-sm mb-3" style={{ color: colors.darkBrown, opacity: 0.7 }}>
-//                   Global sea freight with container optimization and full customs clearance services.
-//                 </p>
-
-//                 <div className="grid grid-cols-2 gap-2">
-//                   {["FCL & LCL", "Port-to-Port", "Customs"].map((item, idx) => (
-//                     <div key={idx} className="flex items-center gap-1.5">
-//                       <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: colors.orange }} />
-//                       <span className="text-xs" style={{ color: colors.darkBrown }}>{item}</span>
-//                     </div>
-//                   ))}
-//                 </div>
-//               </div>
-
-//               {/* Air Freight */}
-//               <div
-//                 className="p-4 sm:p-5 rounded-xl border transition-all hover:shadow-md"
-//                 style={{
-//                   backgroundColor: "white",
-//                   borderColor: colors.lightTan + "50",
-//                 }}
-//               >
-//                 <div className="flex items-center gap-2 mb-3">
-//                   <div
-//                     className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-lg"
-//                     style={{
-//                       background: `linear-gradient(135deg, ${colors.darkBrown}, ${colors.lightTan})`,
-//                     }}
-//                   >
-//                     ✈️
-//                   </div>
-//                   <h3 className="text-base sm:text-lg font-bold" style={{ color: colors.darkBrown }}>
-//                     Air Freight
-//                   </h3>
-//                 </div>
-                
-//                 <p className="text-xs sm:text-sm mb-3" style={{ color: colors.darkBrown, opacity: 0.7 }}>
-//                   Express air cargo with priority handling for time-critical shipments and global coverage.
-//                 </p>
-
-//                 <div className="grid grid-cols-2 gap-2">
-//                   {["Same Day", "Next Flight", "Door-to-Door", "Charter"].map((item, idx) => (
-//                     <div key={idx} className="flex items-center gap-1.5">
-//                       <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: colors.darkBrown }} />
-//                       <span className="text-xs" style={{ color: colors.darkBrown }}>{item}</span>
-//                     </div>
-//                   ))}
-//                 </div>
-//               </div>
-//             </div>
-
-//             {/* CTA Section - Only this, no footer */}
-//             <div
-//               className="p-4 sm:p-5 rounded-xl text-center"
-//               style={{
-//                 background: `linear-gradient(135deg, ${colors.goldenYellow}10, ${colors.orange}10)`,
-//                 border: `1px solid ${colors.goldenYellow}30`,
-//               }}
-//             >
-//               <h3 className="text-base sm:text-lg font-bold mb-1" style={{ color: colors.darkBrown }}>
-//                 Need Custom Logistics Solutions?
-//               </h3>
-//               <p className="text-xs sm:text-sm mb-3 max-w-lg mx-auto" style={{ color: colors.darkBrown, opacity: 0.7 }}>
-//                 Our logistics experts will design a tailored solution for your business.
-//               </p>
-//               <div className="flex flex-row gap-2 justify-center">
-//                 <button
-//                   className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold text-xs sm:text-sm transition-all hover:shadow-md"
-//                   style={{
-//                     backgroundColor: colors.goldenYellow,
-//                     color: colors.darkBrown,
-//                   }}
-//                 >
-//                   Custom Quote
-//                 </button>
-//                 <button
-//                   className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold text-xs sm:text-sm transition-all hover:shadow-md border"
-//                   style={{
-//                     borderColor: colors.goldenYellow,
-//                     color: colors.darkBrown,
-//                     backgroundColor: "white",
-//                   }}
-//                 >
-//                   Consultation
-//                 </button>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </section>
-//     </div>
-//   );
-// }
+}

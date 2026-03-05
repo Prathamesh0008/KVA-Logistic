@@ -11,9 +11,9 @@ export default function AboutPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex flex-col bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50">
       {/* Hero Section - compact */}
-      <section className="relative py-10 md:py-12 bg-gray-50 overflow-hidden flex-shrink-0">
+      <section className="relative py-8 md:py-10 bg-transparent overflow-hidden flex-shrink-0">
         {/* Subtle background pattern */}
         <div className="absolute inset-0 opacity-5">
           <div 
@@ -26,8 +26,6 @@ export default function AboutPage() {
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
-            {/* Badge */}
-            
             <h1 
               className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2"
               style={{ color: colors.darkBrown }}
@@ -60,7 +58,7 @@ export default function AboutPage() {
               className="text-sm md:text-base max-w-2xl mx-auto"
               style={{
                 color: colors.darkBrown,
-                opacity: 0.9
+                opacity: 0.8
               }}
             >
               Leading the logistics industry with innovation, reliability, and customer-first approach for over two decades
@@ -70,69 +68,63 @@ export default function AboutPage() {
       </section>
 
       {/* Stats Section - compact */}
-      <section className="py-6 bg-white">
+      <section className="py-4 bg-transparent">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl mx-auto">
             <div 
-              className="p-4 rounded-lg text-center"
+              className="p-4 rounded-lg text-center bg-white shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 cursor-pointer"
               style={{
-                backgroundColor: colors.goldenYellow + '10',
                 border: `1px solid ${colors.goldenYellow}30`,
                 color: colors.darkBrown
               }}
             >
-              <div className="text-xl md:text-2xl font-bold">25+</div>
-              <div className="text-xs">Years Exp</div>
+              <div className="text-xl md:text-2xl font-bold" style={{ background: `linear-gradient(90deg, ${colors.goldenYellow}, ${colors.orange})`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>25+</div>
+              <div className="text-xs" style={{ color: colors.darkBrown, opacity: 0.7 }}>Years Exp</div>
             </div>
             <div 
-              className="p-4 rounded-lg text-center"
+              className="p-4 rounded-lg text-center bg-white shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 cursor-pointer"
               style={{
-                backgroundColor: colors.orange + '10',
                 border: `1px solid ${colors.orange}30`,
                 color: colors.darkBrown
               }}
             >
-              <div className="text-xl md:text-2xl font-bold">150+</div>
-              <div className="text-xs">Countries</div>
+              <div className="text-xl md:text-2xl font-bold" style={{ background: `linear-gradient(90deg, ${colors.orange}, ${colors.darkOrange})`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>150+</div>
+              <div className="text-xs" style={{ color: colors.darkBrown, opacity: 0.7 }}>Countries</div>
             </div>
             <div 
-              className="p-4 rounded-lg text-center"
+              className="p-4 rounded-lg text-center bg-white shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 cursor-pointer"
               style={{
-                backgroundColor: colors.goldenYellow + '10',
                 border: `1px solid ${colors.goldenYellow}30`,
                 color: colors.darkBrown
               }}
             >
-              <div className="text-xl md:text-2xl font-bold">99.8%</div>
-              <div className="text-xs">On-Time</div>
+              <div className="text-xl md:text-2xl font-bold" style={{ background: `linear-gradient(90deg, ${colors.goldenYellow}, ${colors.orange})`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>99.8%</div>
+              <div className="text-xs" style={{ color: colors.darkBrown, opacity: 0.7 }}>On-Time</div>
             </div>
             <div 
-              className="p-4 rounded-lg text-center"
+              className="p-4 rounded-lg text-center bg-white shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 cursor-pointer"
               style={{
-                backgroundColor: colors.orange + '10',
                 border: `1px solid ${colors.orange}30`,
                 color: colors.darkBrown
               }}
             >
-              <div className="text-xl md:text-2xl font-bold">500M+</div>
-              <div className="text-xs">Shipments</div>
+              <div className="text-xl md:text-2xl font-bold" style={{ background: `linear-gradient(90deg, ${colors.orange}, ${colors.darkOrange})`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>500M+</div>
+              <div className="text-xs" style={{ color: colors.darkBrown, opacity: 0.7 }}>Shipments</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Mission & Vision - compact */}
-      <section className="py-8 bg-gray-50">
+      <section className="py-6 bg-transparent flex-1">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               {/* Mission */}
               <div 
-                className="p-5 rounded-xl"
+                className="p-6 rounded-xl bg-white shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 cursor-pointer"
                 style={{
-                  backgroundColor: 'white',
-                  border: `1px solid ${colors.lightTan}50`,
-                  boxShadow: '0 4px 15px rgba(0,0,0,0.05)'
+                  border: `1px solid ${colors.lightTan}30`,
                 }}
               >
                 <div className="flex items-center mb-4">
@@ -152,30 +144,30 @@ export default function AboutPage() {
                 </p>
                 <div className="space-y-3">
                   <div className="flex items-start">
-                    <div className="p-1.5 rounded-lg mr-3" style={{ backgroundColor: colors.goldenYellow + '20' }}>
+                    <div className="p-1.5 rounded-lg mr-3" style={{ backgroundColor: colors.goldenYellow + '15' }}>
                       <Target className="h-4 w-4" style={{ color: colors.goldenYellow }} />
                     </div>
                     <div>
                       <h3 className="font-semibold text-xs" style={{ color: colors.darkBrown }}>Precision & Accuracy</h3>
-                      <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.7 }}>99.8% on-time delivery</p>
+                      <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.6 }}>99.8% on-time delivery</p>
                     </div>
                   </div>
                   <div className="flex items-start">
-                    <div className="p-1.5 rounded-lg mr-3" style={{ backgroundColor: colors.orange + '20' }}>
+                    <div className="p-1.5 rounded-lg mr-3" style={{ backgroundColor: colors.orange + '15' }}>
                       <Shield className="h-4 w-4" style={{ color: colors.orange }} />
                     </div>
                     <div>
                       <h3 className="font-semibold text-xs" style={{ color: colors.darkBrown }}>Security & Trust</h3>
-                      <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.7 }}>$500M cargo insurance</p>
+                      <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.6 }}>$500M cargo insurance</p>
                     </div>
                   </div>
                   <div className="flex items-start">
-                    <div className="p-1.5 rounded-lg mr-3" style={{ backgroundColor: colors.darkBrown + '20' }}>
+                    <div className="p-1.5 rounded-lg mr-3" style={{ backgroundColor: colors.darkBrown + '15' }}>
                       <Clock className="h-4 w-4" style={{ color: colors.darkBrown }} />
                     </div>
                     <div>
                       <h3 className="font-semibold text-xs" style={{ color: colors.darkBrown }}>24/7 Reliability</h3>
-                      <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.7 }}>Round-the-clock support</p>
+                      <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.6 }}>Round-the-clock support</p>
                     </div>
                   </div>
                 </div>
@@ -183,11 +175,9 @@ export default function AboutPage() {
               
               {/* Vision */}
               <div 
-                className="p-5 rounded-xl"
+                className="p-6 rounded-xl bg-white shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 cursor-pointer"
                 style={{
-                  backgroundColor: 'white',
-                  border: `1px solid ${colors.lightTan}50`,
-                  boxShadow: '0 4px 15px rgba(0,0,0,0.05)'
+                  border: `1px solid ${colors.lightTan}30`,
                 }}
               >
                 <div className="flex items-center mb-4">
@@ -207,112 +197,33 @@ export default function AboutPage() {
                 </p>
                 <div className="space-y-3">
                   <div className="flex items-start">
-                    <div className="p-1.5 rounded-lg mr-3" style={{ backgroundColor: colors.orange + '20' }}>
+                    <div className="p-1.5 rounded-lg mr-3" style={{ backgroundColor: colors.orange + '15' }}>
                       <TrendingUp className="h-4 w-4" style={{ color: colors.orange }} />
                     </div>
                     <div>
                       <h3 className="font-semibold text-xs" style={{ color: colors.darkBrown }}>Sustainable Growth</h3>
-                      <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.7 }}>Carbon-neutral options</p>
+                      <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.6 }}>Carbon-neutral options</p>
                     </div>
                   </div>
                   <div className="flex items-start">
-                    <div className="p-1.5 rounded-lg mr-3" style={{ backgroundColor: colors.goldenYellow + '20' }}>
+                    <div className="p-1.5 rounded-lg mr-3" style={{ backgroundColor: colors.goldenYellow + '15' }}>
                       <Users className="h-4 w-4" style={{ color: colors.goldenYellow }} />
                     </div>
                     <div>
                       <h3 className="font-semibold text-xs" style={{ color: colors.darkBrown }}>Global Community</h3>
-                      <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.7 }}>150+ countries served</p>
+                      <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.6 }}>150+ countries served</p>
                     </div>
                   </div>
                   <div className="flex items-start">
-                    <div className="p-1.5 rounded-lg mr-3" style={{ backgroundColor: colors.darkOrange + '20' }}>
+                    <div className="p-1.5 rounded-lg mr-3" style={{ backgroundColor: colors.darkOrange + '15' }}>
                       <Truck className="h-4 w-4" style={{ color: colors.darkOrange }} />
                     </div>
                     <div>
                       <h3 className="font-semibold text-xs" style={{ color: colors.darkBrown }}>Innovation Driven</h3>
-                      <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.7 }}>Advancing technology</p>
+                      <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.6 }}>Advancing technology</p>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Values Section - compact */}
-      <section className="py-6 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2
-              className="text-lg md:text-xl font-bold mb-2"
-              style={{
-                background: `linear-gradient(90deg, ${colors.darkBrown}, ${colors.goldenYellow})`,
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}
-            >
-              Our Core Values
-            </h2>
-
-            <p
-              className="text-xs mb-4 max-w-2xl mx-auto"
-              style={{
-                color: colors.darkBrown,
-                opacity: 0.8
-              }}
-            >
-              The principles that guide our decisions and define our culture
-            </p>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-              <div 
-                className="p-4 rounded-xl text-center"
-                style={{
-                  backgroundColor: colors.goldenYellow + '10',
-                  border: `1px solid ${colors.goldenYellow}30`
-                }}
-              >
-                <div className="w-10 h-10 rounded-full mx-auto mb-2 flex items-center justify-center" style={{ backgroundColor: colors.goldenYellow }}>
-                  <Shield className="h-5 w-5 text-white" />
-                </div>
-                <h3 className="text-sm font-bold mb-1" style={{ color: colors.darkBrown }}>Integrity</h3>
-                <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.8 }}>
-                  Honest and transparent
-                </p>
-              </div>
-              
-              <div 
-                className="p-4 rounded-xl text-center"
-                style={{
-                  backgroundColor: colors.orange + '10',
-                  border: `1px solid ${colors.orange}30`
-                }}
-              >
-                <div className="w-10 h-10 rounded-full mx-auto mb-2 flex items-center justify-center" style={{ backgroundColor: colors.orange }}>
-                  <Target className="h-5 w-5 text-white" />
-                </div>
-                <h3 className="text-sm font-bold mb-1" style={{ color: colors.darkBrown }}>Excellence</h3>
-                <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.8 }}>
-                  Perfection in every delivery
-                </p>
-              </div>
-              
-              <div 
-                className="p-4 rounded-xl text-center"
-                style={{
-                  backgroundColor: colors.darkBrown + '10',
-                  border: `1px solid ${colors.darkBrown}30`
-                }}
-              >
-                <div className="w-10 h-10 rounded-full mx-auto mb-2 flex items-center justify-center" style={{ backgroundColor: colors.darkBrown }}>
-                  <Users className="h-5 w-5 text-white" />
-                </div>
-                <h3 className="text-sm font-bold mb-1" style={{ color: colors.darkBrown }}>Customer Focus</h3>
-                <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.8 }}>
-                  Clients' needs first
-                </p>
               </div>
             </div>
           </div>

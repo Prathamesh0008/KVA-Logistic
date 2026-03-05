@@ -412,20 +412,7 @@ export default function Tracking() {
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
-            {/* Badge */}
-            <div
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full mb-4"
-              style={{
-                backgroundColor: colors.goldenYellow,
-                color: colors.darkBrown,
-                border: `1px solid ${colors.darkBrown}20`,
-              }}
-            >
-              <Radio className="h-4 w-4" />
-              <span className="text-sm font-semibold">
-                LIVE TRACKING
-              </span>
-            </div>
+          
 
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3">
               <span

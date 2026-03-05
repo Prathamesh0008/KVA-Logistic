@@ -163,9 +163,9 @@ export default function Hero() {
               </Link>
             </div>
 
-            {/* Contact Card */}
+            {/* Contact Card - Full Width */}
             <div
-              className="w-full max-w-full sm:max-w-md md:max-w-lg lg:max-w-xl p-3 sm:p-4 md:p-5 lg:p-6 rounded-lg md:rounded-xl transition-transform duration-300 hover:scale-[1.01] mb-5 sm:mb-6 md:mb-7 lg:mb-8"
+              className="w-full p-3 sm:p-4 md:p-5 lg:p-6 rounded-lg md:rounded-xl transition-transform duration-300 hover:scale-[1.01] mb-5 sm:mb-6 md:mb-7 lg:mb-8"
               style={{
                 backgroundColor: cardBg,
                 border: "1px solid #EB9003",
@@ -189,7 +189,7 @@ export default function Hero() {
                     className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold truncate"
                     style={{ color: "#9F4100" }}
                   >
-              +31 6 84987360
+                    +31 6 84987360
                   </div>
                   <div
                     className="text-[10px] sm:text-xs md:text-sm truncate"
@@ -197,12 +197,12 @@ export default function Hero() {
                   >
                     Free consultation • No hidden fees
                   </div>
-              </div>
+                </div>
               </div>
             </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-1 xs:grid-cols-3 gap-3 sm:gap-4 md:gap-5 lg:gap-6 max-w-full sm:max-w-2xl md:max-w-3xl lg:max-w-4xl">
+            {/* Stats - Two equal boxes below */}
+            <div className="grid grid-cols-1 xs:grid-cols-2 gap-3 sm:gap-4 md:gap-5 lg:gap-6">
               {statsData.map((s, i) => {
                 const Icon = s.icon;
                 return (
@@ -275,8 +275,8 @@ export default function Hero() {
           .xs\\:w-auto {
             width: auto;
           }
-          .xs\\:grid-cols-3 {
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+          .xs\\:grid-cols-2 {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
           }
         }
       `}</style>
