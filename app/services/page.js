@@ -230,44 +230,7 @@ export default function ServicesPage() {
               </div>
             </div>
 
-            {/* Footer Links - Compact */}
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 py-3 sm:py-4 border-t" style={{ borderColor: colors.goldenYellow + "30" }}>
-              {/* Quick Links */}
-              <div>
-                <h4 className="text-xs sm:text-sm font-bold mb-2" style={{ color: colors.darkBrown }}>Quick Links</h4>
-                <ul className="space-y-1">
-                  {["Home", "Services", "Tracking", "About", "Contact"].map((link, idx) => (
-                    <li key={idx}>
-                      <a href="#" className="text-xs hover:underline" style={{ color: colors.darkBrown, opacity: 0.7 }}>
-                        {link}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Contact Info */}
-              <div className="col-span-2 md:col-span-1">
-                <h4 className="text-xs sm:text-sm font-bold mb-2" style={{ color: colors.darkBrown }}>Contact Us</h4>
-                <ul className="space-y-1">
-                  <li className="text-xs" style={{ color: colors.darkBrown, opacity: 0.7 }}>
-                    Apartment 5, 2511ED - Greenwich
-                  </li>
-                  <li>
-                    <a href="tel:+31884987360" className="text-xs hover:underline" style={{ color: colors.goldenYellow }}>
-                      +31 8 84987360
-                    </a>
-                  </li>
-                </ul>
-              </div>
-
-              {/* Social/Additional Links */}
-              <div className="col-span-2 md:col-span-1 flex items-end justify-end">
-                <p className="text-[10px]" style={{ color: colors.darkBrown, opacity: 0.5 }}>
-                  © 2024 LogiTrack. All rights reserved.
-                </p>
-              </div>
-            </div>
+         
           </div>
         </div>
       </section>
