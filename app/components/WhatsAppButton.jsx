@@ -13,7 +13,7 @@ export default function WhatsAppButton() {
       <div
         className="flex items-center justify-center w-14 h-14 rounded-full shadow-lg transition-all duration-300 hover:scale-110"
         style={{
-          background: "linear-gradient(135deg,#f8b936,#dc8c18)",
+         background: "#25D366",
         }}
       >
         <svg

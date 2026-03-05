@@ -941,7 +941,7 @@ export default function Tracking() {
             </div>
 
             {/* Quick Help Section - matching services CTA spacing */}
-            <div
+            {/* <div
               className="rounded-xl p-5 text-center"
               style={{
                 background: `linear-gradient(135deg, ${colors.goldenYellow}15, ${colors.orange}15)`,
@@ -985,7 +985,7 @@ export default function Tracking() {
                   Email Support
                 </button>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
