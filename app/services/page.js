@@ -9,9 +9,9 @@ export default function ServicesPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      {/* Hero Section - smaller */}
-      <section className="relative py-8 md:py-10 bg-gray-50 overflow-hidden flex-shrink-0">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50">
+      {/* Hero Section - compact */}
+      <section className="relative py-6 md:py-8 overflow-hidden">
         {/* Subtle background pattern */}
         <div className="absolute inset-0 opacity-5">
           <div
@@ -24,9 +24,6 @@ export default function ServicesPage() {
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
-            {/* Badge */}
-            
-
             <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2">
               <span
                 className="block"
@@ -71,11 +68,11 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Services Content - smaller */}
-      <section className="py-6 md:py-8 bg-white flex-grow">
+      {/* Services Content - fills remaining space naturally */}
+      <section className="py-4 md:py-6 flex-1">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            {/* Stats Banner - smaller */}
+            {/* Stats Banner - compact */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4">
               <div
                 className="p-3 rounded-xl text-center"
@@ -123,7 +120,7 @@ export default function ServicesPage() {
               </div>
             </div>
 
-            {/* Services Grid - smaller */}
+            {/* Services Grid - compact */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
               {/* Road Freight */}
               <div
@@ -345,7 +342,7 @@ export default function ServicesPage() {
               </div>
             </div>
 
-            {/* CTA Section - smaller */}
+            {/* CTA Section - compact */}
             <div
               className="mt-4 p-4 rounded-xl text-center"
               style={{
