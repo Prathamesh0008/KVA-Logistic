@@ -255,7 +255,7 @@ export default function Services() {
   return (
     <>
       <section
-        className="relative py-8 sm:py-10 lg:py-12 overflow-hidden min-h-screen flex items-center"
+        className="relative py-8 sm:py-10 lg:py-12 overflow-hidden flex items-center"
         style={{ backgroundColor: backgroundColors.warmWhite }}
       >
         {/* Background Pattern - Light and subtle */}
@@ -515,7 +515,7 @@ export default function Services() {
               <div className="flex flex-col sm:flex-row gap-2 justify-center items-center">
                 <Link
                   href="/contact"
-                  className="group px-4 sm:px-5 py-2 rounded-lg font-bold transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-1.5 text-xs sm:text-sm w-full sm:w-auto min-w-[180px] hover:scale-105"
+                  className="group px-4 sm:px-5 py-2 rounded-lg font-bold transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-1.5 text-xs sm:text-sm w-full sm:w-auto min-w-[160px] hover:scale-105"
                   style={{
                     background: `linear-gradient(90deg, ${colors.goldenYellow}, ${colors.orange})`,
                     color: colors.darkBrown,
