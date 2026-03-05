@@ -59,10 +59,7 @@ export default function ServicesPage() {
           <div className="max-w-6xl mx-auto">
          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-10">
               {[
-                { value: "99.8%", label: "On-Time Delivery", color: colors.goldenYellow },
-                { value: "150+", label: "Countries", color: colors.orange },
-                { value: "24/7", label: "Support", color: colors.goldenYellow },
-                { value: "25+", label: "Years Experience", color: colors.orange }
+               
               ].map((stat, index) => (
                 <div
                   key={index}

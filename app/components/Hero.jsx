@@ -28,7 +28,6 @@ const uiGradient = `linear-gradient(
 
 const statsData = [
   { value: "99.8%", label: "Safe Delivery Rate", icon: Shield },
-  { value: "24/7", label: "Customer Support", icon: Clock },
   { value: "150+", label: "Countries Covered", icon: Globe },
 ];
 
@@ -190,7 +189,7 @@ export default function Hero() {
                     className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold truncate"
                     style={{ color: "#9F4100" }}
                   >
-                    +1 (555) 123-4567
+              +31 6 84987360
                   </div>
                   <div
                     className="text-[10px] sm:text-xs md:text-sm truncate"
