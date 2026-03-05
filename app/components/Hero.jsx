@@ -34,7 +34,7 @@ const statsData = [
 export default function Hero() {
   return (
     <section
-      className="relative min-h-screen lg:h-screen flex items-center py-8 lg:py-0"
+      className="relative  lg:h-screen flex items-center py-8 lg:py-0"
       style={{ backgroundColor: background }}
     >
       {/* Background image */}
