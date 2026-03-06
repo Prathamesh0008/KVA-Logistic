@@ -258,7 +258,8 @@ export default function TrackingPage() {
                   className="w-full pl-10 pr-4 py-3 rounded-lg focus:outline-none focus:ring-2 transition bg-white/50"
                   style={{ 
                     border: `1px solid ${colors.lightTan}`,
-                    focusRing: colors.goldenYellow
+                    focusRing: colors.goldenYellow,
+                    color: colors.darkBrown   // ← added to make typed text dark
                   }}
                 />
               </div>
@@ -504,7 +505,3 @@ export default function TrackingPage() {
     </div>
   )
 }
-
-
-
-
