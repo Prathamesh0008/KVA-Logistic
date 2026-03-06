@@ -96,8 +96,8 @@ export default function TrackingPage() {
             time: '11:45', 
             completed: true,
             description: 'Package picked up by carrier',
-            icon: Package
-          },
+            icon: Package 
+          }, 
           { 
             id: 3, 
             status: 'Arrived at Facility', 
@@ -224,26 +224,31 @@ export default function TrackingPage() {
     }
   }
 
-  return (
-    <div className=" bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50">
-      {/* Single Navigation Bar - Professional */}
-      
+ return (
+  <div className="bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50">
+    
+    {/* Main Content */}
+    <div className="container mx-auto px-4 pt-0 mt-0 pb-6">
+      <div className="max-w-4xl mx-auto text-center">
+        
+        <h1 className="text-4xl md:text-5xl font-bold mb-4 mt-0">
+          <span style={{ color: colors.darkBrown }}>Track Your </span>
+          <span
+            className="bg-clip-text text-transparent"
+            style={{
+              backgroundImage: `linear-gradient(135deg, ${colors.darkBrown}, ${colors.goldenYellow})`,
+            }}
+          >
+            Shipment
+          </span>
+        </h1>
 
-      {/* Main Content */}
-<div className="container mx-auto px-4 pt-2 pb-6">
-        <div className="max-w-4xl mx-auto text-center">
-          
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            <span style={{ color: colors.darkBrown }}>Track Your </span>
-            <span className="bg-clip-text text-transparent" style={{ 
-              backgroundImage: `linear-gradient(135deg, ${colors.darkBrown}, ${colors.goldenYellow})` 
-            }}>
-              Shipment
-            </span>
-          </h1>
-          <p className="text-base mb-8" style={{ color: colors.darkBrown, opacity: 0.7 }}>
-            Enter your tracking number to get real-time updates
-          </p>
+        <p
+          className="text-base mb-8"
+          style={{ color: colors.darkBrown, opacity: 0.7 }}
+        >
+          Enter your tracking number to get real-time updates
+        </p>
 
           {/* Search Form */}
           <form onSubmit={handleSubmit} className="bg-white/70 backdrop-blur-md rounded-xl shadow-lg p-4 border" style={{ borderColor: colors.goldenYellow + '30' }}>
