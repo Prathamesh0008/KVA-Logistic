@@ -230,7 +230,7 @@ export default function TrackingPage() {
       
 
       {/* Main Content */}
-<div className="container mx-auto px-4 pt-4 pb-8 md:pt-6 lg:pt-8">
+<div className="container mx-auto px-4 pt-2 pb-6">
         <div className="max-w-4xl mx-auto text-center">
           
           <h1 className="text-4xl md:text-5xl font-bold mb-4">

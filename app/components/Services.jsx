@@ -53,7 +53,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Main Content - No extra footer, no gaps */}
-    <section className="flex-1 pb-2 lg:pb-8">
+<section className="flex-1 py-4">
         <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
             {/* Services Grid - 3 columns */}
