@@ -49,11 +49,7 @@ export default function ContactPage() {
         <div className="py-6 md:py-8">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto text-center">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg mb-3" 
-                style={{ background: `linear-gradient(90deg, ${colors.goldenYellow}, ${colors.orange})` }}>
-                <MessageSquare className="w-4 h-4" style={{ color: colors.darkBrown }} />
-                <span className="text-xs font-bold" style={{ color: colors.darkBrown }}>GET IN TOUCH</span>
-              </div>
+              
               
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-black mb-3">
                 <span className="block bg-gradient-to-r from-yellow-100 via-[#EB9003] to-[#9F4100] bg-clip-text text-transparent">
