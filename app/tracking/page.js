@@ -416,7 +416,7 @@ export default function Tracking() {
   return (
     <>
       {/* Inject font-face and global font override */}
-      <style dangerouslySetInnerHTML={{ __html: fontStyle }} />
+      {/* <style dangerouslySetInnerHTML={{ __html: fontStyle }} /> */}
       
       <div className="min-h-screen flex flex-col" style={{ backgroundColor: backgroundColors.warmWhite }}>
         {/* Hero Section */}

@@ -1,23 +1,27 @@
-import { Inter } from 'next/font/google'
-import './globals.css'
-import Header from './components/Header'
-import Footer from './components/Footer'
-import WhatsAppButton from './components/WhatsAppButton'
-import Script from 'next/script'
 import localFont from "next/font/local";
+import "./globals.css";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import WhatsAppButton from "./components/WhatsAppButton";
+import Script from "next/script";
 
-const inter = Inter({ subsets: ['latin'] })
+/* Load Snasm Font */
+const snasm = localFont({
+  src: "./fonts/Snasm-W05-Regular.ttf",
+  variable: "--font-snasm",
+  weight: "400",
+  display: "swap",
+});
 
 export const metadata = {
-  title: 'KVA - Logistics & Shipping Solutions',
-  description: 'Global logistics and shipping services',
-}
+  title: "KVA - Logistics & Shipping Solutions",
+  description: "Global logistics and shipping services",
+};
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-
         <meta
           name="google-site-verification"
           content="yiIgLlx_6xhyvhxuCCM9JDU4bFW4alPievLOI1Y8lmU"
@@ -25,6 +29,7 @@ export default function RootLayout({ children }) {
 
         <meta name="robots" content="index, follow" />
 
+        {/* Google Tag Manager */}
         <Script id="gtm-script" strategy="afterInteractive">
           {`
           (function(w,d,s,l,i){w[l]=w[l]||[];
@@ -36,10 +41,9 @@ export default function RootLayout({ children }) {
           })(window,document,'script','dataLayer','GTM-MBHVSW73');
           `}
         </Script>
-
       </head>
 
-      <body className={inter.className}>
+      <body className={`${snasm.variable} antialiased font-snasm`}>
         <div className="min-h-screen flex flex-col">
           <Header />
           <main className="flex-1">{children}</main>
@@ -48,8 +52,5 @@ export default function RootLayout({ children }) {
         </div>
       </body>
     </html>
-  )
+  );
 }
-
-
-
