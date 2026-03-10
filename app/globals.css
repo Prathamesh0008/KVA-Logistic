@@ -24,3 +24,69 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+body {
+  font-family: "Snasm";
+}
+@font-face {
+  font-family: "Snasm Regular";
+  src: url("/fonts/Snasm-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.snasm-font {
+  font-family: "Snasm Regular", sans-serif;
+}
+
+@font-face {
+  font-family: "Snasm";
+  src: url("/fonts/Snasm-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.snasm-font {
+  font-family: "Snasm", sans-serif !important;
+}
+@font-face {
+  font-family: "Snasm";
+  src: url("/fonts/Snasm-Thin.ttf") format("truetype");
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: "Snasm";
+  src: url("/fonts/Snasm-Light.ttf") format("truetype");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Snasm";
+  src: url("/fonts/Snasm-Regular.ttf") format("truetype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Snasm";
+  src: url("/fonts/Snasm-Medium.ttf") format("truetype");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Snasm";
+  src: url("/fonts/Snasm-Bold.ttf") format("truetype");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Snasm";
+  src: url("/fonts/Snasm-Black.ttf") format("truetype");
+  font-weight: 900;
+}
+
+.snasm-font {
+  font-family: "Snasm", sans-serif;
+}
