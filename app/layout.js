@@ -14,10 +14,13 @@ const snasm = localFont({
 });
 
 export const metadata = {
+  metadataBase: new URL("https://www.kvalogistics.nl"),
   title: "KVA - Logistics & Shipping Solutions",
   description: "Global logistics and shipping services",
+  alternates: {
+    canonical: "/",
+  },
 };
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
