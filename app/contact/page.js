@@ -1,26 +1,78 @@
 'use client'
 
 import { useState } from 'react'
-import { Phone, Mail, MapPin, Clock, Send, MessageSquare, User, FileText, CheckCircle, ChevronRight } from 'lucide-react'
+import emailjs from '@emailjs/browser'
+import { Phone, Mail, MapPin, Clock, Send, User, FileText, CheckCircle } from 'lucide-react'
+
+// ------------------------------------------------------------------
+// 🔐 YOUR EMAILJS CREDENTIALS (hardcoded as requested)
+// ------------------------------------------------------------------
+const EMAILJS_PUBLIC_KEY  = 'ctHzsKvXJvpGEjIvF'
+const EMAILJS_SERVICE_ID  = 'service_m43r6fq'
+const ADMIN_TEMPLATE_ID   = 'template_ysi9wih'    // sends inquiry to you
+const USER_TEMPLATE_ID    = 'template_o2mw75i'    // auto-reply to user
+// ------------------------------------------------------------------
+
+// Initialize EmailJS once
+emailjs.init(EMAILJS_PUBLIC_KEY)
 
 export default function ContactPage() {
   const [formStatus, setFormStatus] = useState(null)
 
   // Color palette matching your home page
   const colors = {
-    darkBrown: '#310F0B',     // Primary dark (darker for better contrast)
-    goldenYellow: '#EB9003',  // Primary accent
-    orange: '#C55500',       // Secondary accent
-    darkOrange: '#9F4100',   // Dark accent
-    lightTan: '#F5F3EF'      // Light accent
+    darkBrown: '#310F0B',
+    goldenYellow: '#EB9003',
+    orange: '#C55500',
+    darkOrange: '#9F4100',
+    lightTan: '#F5F3EF'
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    setFormStatus('success')
-    setTimeout(() => setFormStatus(null), 3000)
+const handleSubmit = (e) => {
+  e.preventDefault()
+
+  const form = e.target
+  const formData = {
+    name: form.name.value,
+    email: form.email.value,
+    subject: form.subject.value,
+    message: form.message.value,
   }
 
+  // 1️⃣ Send message to ADMIN
+  emailjs.send(
+    EMAILJS_SERVICE_ID,
+    ADMIN_TEMPLATE_ID,
+    formData,
+    EMAILJS_PUBLIC_KEY
+  )
+  .then(() => {
+    console.log("✅ Admin email sent")
+  })
+  .catch((err) => {
+    console.error("❌ Admin email error:", err)
+  })
+
+
+  // 2️⃣ Send auto reply to USER
+  emailjs.send(
+    EMAILJS_SERVICE_ID,
+    USER_TEMPLATE_ID,
+    formData,
+    EMAILJS_PUBLIC_KEY
+  )
+  .then(() => {
+    console.log("✅ User auto reply sent")
+  })
+  .catch((err) => {
+    console.error("❌ User email error:", err)
+  })
+
+  setFormStatus("success")
+  form.reset()
+
+  setTimeout(() => setFormStatus(null), 3000)
+}
   return (
     <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#000000' }}>
       {/* Background Image Section - Matching Home Page */}
@@ -49,14 +101,11 @@ export default function ContactPage() {
         <div className="py-6 md:py-8">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto text-center">
-              
-              
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-black mb-3">
                 <span className="block bg-gradient-to-r from-yellow-100 via-[#EB9003] to-[#9F4100] bg-clip-text text-transparent">
                   Contact KVA Logistics
                 </span>
               </h1>
-              
               <p className="text-sm sm:text-base max-w-2xl mx-auto" style={{ color: colors.goldenYellow }}>
                 Reach out for inquiries, support, or logistics solutions
               </p>
@@ -176,6 +225,7 @@ export default function ContactPage() {
                         <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4" style={{ color: colors.darkOrange }} />
                         <input
                           type="text"
+                          name="name"
                           required
                           className="w-full pl-9 pr-3 py-2.5 border rounded-lg focus:outline-none focus:ring-1 text-sm"
                           style={{ 
@@ -195,6 +245,7 @@ export default function ContactPage() {
                         <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4" style={{ color: colors.darkOrange }} />
                         <input
                           type="email"
+                          name="email"
                           required
                           className="w-full pl-9 pr-3 py-2.5 border rounded-lg focus:outline-none focus:ring-1 text-sm"
                           style={{ 
@@ -214,6 +265,7 @@ export default function ContactPage() {
                         <FileText className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4" style={{ color: colors.darkOrange }} />
                         <input
                           type="text"
+                          name="subject"
                           required
                           className="w-full pl-9 pr-3 py-2.5 border rounded-lg focus:outline-none focus:ring-1 text-sm"
                           style={{ 
@@ -230,6 +282,7 @@ export default function ContactPage() {
                     <div>
                       <label className="block text-xs font-medium mb-1" style={{ color: colors.darkBrown }}>Message</label>
                       <textarea
+                        name="message"
                         rows={3}
                         required
                         className="w-full px-3 py-2.5 border rounded-lg focus:outline-none focus:ring-1 text-sm"
@@ -339,6 +392,7 @@ export default function ContactPage() {
                     }}
                   >
                     <h3 className="text-base font-bold mb-3" style={{ color: colors.darkOrange }}>Global Offices</h3>
+                    
                     
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                       {[
