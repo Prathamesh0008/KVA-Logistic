@@ -22,16 +22,19 @@ import {
   TrendingUp,
   Users as UsersIcon,
   BarChart,
+  Star,
+  ThumbsUp,
+  Zap,
 } from 'lucide-react'
 import Link from 'next/link'
 
 // Color palette matching your logo
 const colors = {
-  darkBrown: '#521903', // Primary dark
-  goldenYellow: '#f8b936', // Primary accent
-  orange: '#dc8c18', // Secondary accent
-  darkOrange: '#9f4409', // Dark accent
-  lightTan: '#c29f85', // Light accent
+  darkBrown: '#521903',
+  goldenYellow: '#f8b936',
+  orange: '#dc8c18',
+  darkOrange: '#9f4409',
+  lightTan: '#c29f85',
 }
 
 // Light background colors
@@ -50,18 +53,18 @@ const highlightText = {
   backgroundClip: 'text',
 }
 
-// ✅ Added: Regular dark text style for better readability
+// Regular dark text style
 const darkText = {
   color: colors.darkBrown,
 }
 
-// ✅ Added: Regular text with opacity for better readability
+// Regular text with opacity
 const regularText = {
   color: colors.darkBrown,
   opacity: 0.9,
 }
 
-// ✅ Added: Light text with more opacity
+// Light text with more opacity
 const lightText = {
   color: colors.darkBrown,
   opacity: 0.8,
@@ -225,6 +228,28 @@ const services = [
   },
 ]
 
+// Testimonials data
+const testimonials = [
+  {
+    name: 'Sarah Johnson',
+    role: 'Supply Chain Manager, TechCorp',
+    content: 'The road freight service has been a game-changer for our distribution. Real-time tracking and 99.5% on-time delivery have significantly improved our operations.',
+    rating: 5,
+  },
+  {
+    name: 'Michael Chen',
+    role: 'CEO, Global Imports Ltd.',
+    content: 'Their ocean shipping expertise helped us reduce costs by 25% while expanding our reach to new markets. The customs clearance support is exceptional.',
+    rating: 5,
+  },
+  {
+    name: 'Emily Rodriguez',
+    role: 'Operations Director, FreshFoods',
+    content: 'The smart warehousing solution with climate control has preserved our perishable goods perfectly. Inventory accuracy is now at 99.9%.',
+    rating: 5,
+  },
+]
+
 export default function Services() {
   const [hoveredIndex, setHoveredIndex] = useState(null)
   const [selectedService, setSelectedService] = useState(null)
@@ -249,7 +274,7 @@ export default function Services() {
 
   const closeModal = () => {
     setIsModalOpen(false)
-    setTimeout(() => setSelectedService(null), 300) // Wait for animation
+    setTimeout(() => setSelectedService(null), 300)
   }
 
   return (
@@ -258,7 +283,7 @@ export default function Services() {
         className="relative py-8 sm:py-10 lg:py-12 overflow-hidden flex items-center"
         style={{ backgroundColor: backgroundColors.warmWhite }}
       >
-        {/* Background Pattern - Light and subtle */}
+        {/* Background Pattern */}
         <div className="absolute inset-0 opacity-5">
           <div
             className="absolute inset-0"
@@ -268,7 +293,7 @@ export default function Services() {
           />
         </div>
 
-        {/* Subtle decorative elements - reduced opacity */}
+        {/* Decorative blurs */}
         <div
           className="absolute top-10 left-10 w-48 h-48 rounded-full blur-3xl opacity-5"
           style={{ backgroundColor: colors.goldenYellow }}
@@ -279,12 +304,9 @@ export default function Services() {
         />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          {/* Header - reduced spacing */}
+          {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8">
-            {/* Badge */}
-           
-
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-2">  
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light tracking-wide mb-2">
               <span className="block cursor-pointer" style={{ color: colors.darkBrown }}>
                 Comprehensive
               </span>
@@ -292,7 +314,6 @@ export default function Services() {
                 Logistics Solutions
               </span>
             </h2>
-
             <p
               className="text-sm sm:text-base max-w-2xl mx-auto px-4 cursor-pointer"
               style={{ color: colors.darkBrown, opacity: 0.7 }}
@@ -302,7 +323,79 @@ export default function Services() {
             </p>
           </div>
 
-          {/* Stats Banner - reduced spacing */}
+          {/* Why Choose Us Section (NEW) */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-5xl mx-auto mb-8">
+            <div
+              className="p-4 rounded-xl text-center transition-all duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer"
+              style={{
+                backgroundColor: 'white',
+                border: `1px solid ${colors.goldenYellow}30`,
+              }}
+            >
+              <div className="flex justify-center mb-2">
+                <div
+                  className="p-2 rounded-full"
+                  style={{ backgroundColor: colors.goldenYellow + '20' }}
+                >
+                  <Zap className="h-5 w-5" style={{ color: colors.goldenYellow }} />
+                </div>
+              </div>
+              <h4 className="text-sm font-bold mb-1" style={darkText}>
+                Speed & Reliability
+              </h4>
+              <p className="text-xs" style={lightText}>
+                99.8% on-time delivery across all services, with real-time tracking and proactive alerts.
+              </p>
+            </div>
+
+            <div
+              className="p-4 rounded-xl text-center transition-all duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer"
+              style={{
+                backgroundColor: 'white',
+                border: `1px solid ${colors.orange}30`,
+              }}
+            >
+              <div className="flex justify-center mb-2">
+                <div
+                  className="p-2 rounded-full"
+                  style={{ backgroundColor: colors.orange + '20' }}
+                >
+                  <Shield className="h-5 w-5" style={{ color: colors.orange }} />
+                </div>
+              </div>
+              <h4 className="text-sm font-bold mb-1" style={darkText}>
+                Security & Compliance
+              </h4>
+              <p className="text-xs" style={lightText}>
+                ISO 9001 certified with full cargo insurance and compliance with all international regulations.
+              </p>
+            </div>
+
+            <div
+              className="p-4 rounded-xl text-center transition-all duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer"
+              style={{
+                backgroundColor: 'white',
+                border: `1px solid ${colors.darkBrown}20`,
+              }}
+            >
+              <div className="flex justify-center mb-2">
+                <div
+                  className="p-2 rounded-full"
+                  style={{ backgroundColor: colors.darkBrown + '20' }}
+                >
+                  <Users className="h-5 w-5" style={{ color: colors.darkBrown }} />
+                </div>
+              </div>
+              <h4 className="text-sm font-bold mb-1" style={darkText}>
+                24/7 Dedicated Support
+              </h4>
+              <p className="text-xs" style={lightText}>
+                Personal account managers and round-the-clock customer service in 12 languages.
+              </p>
+            </div>
+          </div>
+
+          {/* Stats Banner */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 mb-6 max-w-4xl mx-auto">
             <div
               className="rounded-lg p-3 sm:p-4 text-center shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 cursor-pointer"
@@ -369,7 +462,7 @@ export default function Services() {
             </div>
           </div>
 
-          {/* Services Grid - reduced card sizes */}
+          {/* Services Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4 max-w-6xl mx-auto">
             {services.map((service, index) => (
               <div
@@ -401,7 +494,7 @@ export default function Services() {
                     h-full flex flex-col
                     ${
                       hoveredIndex === index
-                        ? 'shadow-lg scale-[1.01] -translate-y-0.5'
+                        ? 'shadow-lg scale-[1.02] -translate-y-1'
                         : 'shadow-sm hover:shadow-md'
                     }
                   `}
@@ -411,14 +504,13 @@ export default function Services() {
                     color: colors.darkBrown,
                   }}
                 >
-                  {/* Icon and Stats Container */}
+                  {/* Icon and Stats */}
                   <div className="flex justify-between items-start mb-2">
-                    {/* Icon Container */}
                     <div
                       className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center shadow-sm group-hover:shadow-md group-hover:scale-105 transition-all duration-300 cursor-pointer"
                       style={{ background: service.gradient }}
                     >
-                      <service.icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
+                      <service.icon className="h-5 w-5 sm:h-6 sm:w-6 text-white animate-pulse group-hover:animate-none" />
                       <div className="absolute inset-0 rounded-xl bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
                     </div>
 
@@ -429,7 +521,7 @@ export default function Services() {
                     </div>
                   </div>
 
-                  <h3 className="text-base sm:text-lg font-bold mb-1 cursor-pointer" style={highlightText}>
+                  <h3 className="text-base sm:text-lg font-normal tracking-wide mb-1 cursor-pointer" style={highlightText}>
                     {service.title}
                   </h3>
 
@@ -459,11 +551,28 @@ export default function Services() {
                     ))}
                   </ul>
 
+                  {/* Hover Tooltip with Key Metrics (NEW) */}
+                  {hoveredIndex === index && (
+                    <div
+                      className="absolute -top-12 left-1/2 transform -translate-x-1/2 z-30 px-3 py-1.5 rounded-lg text-xs whitespace-nowrap shadow-lg"
+                      style={{
+                        backgroundColor: colors.darkBrown,
+                        color: 'white',
+                      }}
+                    >
+                      <div className="flex items-center gap-2">
+                        <span>🚚 {service.details.transitTime || 'Fast delivery'}</span>
+                        <span>🌍 {service.details.coverage?.split(' ')[0] || 'Global'}</span>
+                      </div>
+                      <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 rotate-45" style={{ backgroundColor: colors.darkBrown }} />
+                    </div>
+                  )}
+
                   {/* Action Button */}
                   <div className="mt-auto pt-2 border-t" style={{ borderColor: colors.lightTan + '30' }}>
                     <button
                       onClick={() => handleLearnMore(service)}
-                      className="group/btn flex items-center justify-between w-full font-semibold text-xs sm:text-sm hover:opacity-80 transition-all duration-300 cursor-pointer"
+                      className="group/btn flex items-center justify-between w-full font-normal tracking-wide text-xs sm:text-sm hover:opacity-80 transition-all duration-300 cursor-pointer"
                       style={{ color: colors.darkBrown }}
                     >
                       <span style={highlightText}>Learn More</span>
@@ -477,10 +586,87 @@ export default function Services() {
               </div>
             ))}
           </div>
+
+          {/* Testimonials Section (NEW) */}
+          <div className="mt-10 max-w-5xl mx-auto">
+            <h3 className="text-xl sm:text-2xl font-light tracking-wide text-center mb-4">
+              <span className="block cursor-pointer" style={highlightText}>
+                What Our Clients Say
+              </span>
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {testimonials.map((testimonial, idx) => (
+                <div
+                  key={idx}
+                  className="p-4 rounded-xl transition-all duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer"
+                  style={{
+                    backgroundColor: 'white',
+                    border: `1px solid ${colors.lightTan}30`,
+                  }}
+                >
+                  <div className="flex items-center gap-1 mb-2">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className="h-3 w-3 fill-current"
+                        style={{ color: colors.goldenYellow }}
+                      />
+                    ))}
+                  </div>
+                  <p className="text-xs mb-3 italic" style={regularText}>
+                    "{testimonial.content}"
+                  </p>
+                  <div className="flex items-center gap-2">
+                    <div
+                      className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white"
+                      style={{ background: `linear-gradient(135deg, ${colors.goldenYellow}, ${colors.orange})` }}
+                    >
+                      {testimonial.name.charAt(0)}
+                    </div>
+                    <div>
+                      <p className="text-xs font-bold" style={darkText}>
+                        {testimonial.name}
+                      </p>
+                      <p className="text-xs" style={lightText}>
+                        {testimonial.role}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Call-to-Action Banner (NEW) */}
+          <div
+            className="mt-8 p-6 rounded-xl text-center transition-all duration-300 hover:shadow-xl"
+            style={{
+              background: `linear-gradient(90deg, ${colors.darkBrown}, ${colors.darkOrange})`,
+            }}
+          >
+            <h4 className="text-lg sm:text-xl font-light tracking-wide text-white mb-2">
+              Ready to Optimize Your Supply Chain?
+            </h4>
+            <p className="text-sm text-white opacity-90 mb-4">
+              Get a free consultation and personalized quote today.
+            </p>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 px-6 py-2 rounded-lg font-normal tracking-wide transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105 text-sm"
+              style={{
+                backgroundColor: 'white',
+                color: colors.darkBrown,
+              }}
+            >
+              <Users className="h-4 w-4" />
+              Request Quote
+              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* Service Details Modal - keeping the modal unchanged as it's a popup */}
+      {/* Service Details Modal (unchanged) */}
       {selectedService && (
         <div
           className={`
@@ -522,7 +708,7 @@ export default function Services() {
                   <selectedService.icon className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-white cursor-pointer">
+                  <h3 className="text-xl font-normal tracking-wide text-white cursor-pointer">
                     {selectedService.title}
                   </h3>
                   <div className="flex items-center gap-2 mt-0.5">
@@ -549,7 +735,7 @@ export default function Services() {
             <div className="p-4 sm:p-6">
               {/* Overview */}
               <div className="mb-4">
-                <h4 className="text-base font-bold mb-2 flex items-center gap-2 cursor-pointer" style={darkText}>
+                <h4 className="text-base font-normal tracking-wide mb-2 flex items-center gap-2 cursor-pointer" style={darkText}>
                   <CheckCircle className="h-4 w-4" style={{ color: colors.goldenYellow }} />
                   Service Overview
                 </h4>
@@ -680,7 +866,7 @@ export default function Services() {
               <div className="flex flex-col sm:flex-row gap-2 pt-3 border-t" style={{ borderColor: colors.lightTan + '30' }}>
                 <Link
                   href="/contact"
-                  className="group flex-1 px-4 py-2 rounded-lg font-bold text-center transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-1.5 text-sm cursor-pointer hover:scale-105"
+                  className="group flex-1 px-4 py-2 rounded-lg font-normal tracking-wide text-center transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-1.5 text-sm cursor-pointer hover:scale-105"
                   style={{
                     background: `linear-gradient(90deg, ${colors.goldenYellow}, ${colors.orange})`,
                     color: colors.darkBrown,

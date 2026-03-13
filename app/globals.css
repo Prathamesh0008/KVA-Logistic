@@ -34,3 +34,7 @@ body {
 .snasm-font {
   font-family: var(--font-snasm), sans-serif;
 }
+body {
+  font-weight: 300;
+  letter-spacing: 0.02em;
+}

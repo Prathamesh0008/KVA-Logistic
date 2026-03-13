@@ -74,7 +74,7 @@ const handleSubmit = (e) => {
   setTimeout(() => setFormStatus(null), 3000)
 }
   return (
-    <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#000000' }}>
+<div className="min-h-screen flex flex-col font-light">
       {/* Background Image Section - Matching Home Page */}
       <div className="relative">
         <div
@@ -101,12 +101,10 @@ const handleSubmit = (e) => {
         <div className="py-6 md:py-8">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-black mb-3">
-                <span className="block bg-gradient-to-r from-yellow-100 via-[#EB9003] to-[#9F4100] bg-clip-text text-transparent">
-                  Contact KVA Logistics
-                </span>
-              </h1>
-              <p className="text-sm sm:text-base max-w-2xl mx-auto" style={{ color: colors.goldenYellow }}>
+<h1 className="text-3xl sm:text-4xl md:text-5xl font-normal tracking-wide mb-3">  <span style={{ color: colors.darkBrown }}>
+    Contact KVA Logistics
+  </span>
+</h1>       <p className="text-sm sm:text-base max-w-2xl mx-auto" style={{ color: colors.goldenYellow }}>
                 Reach out for inquiries, support, or logistics solutions
               </p>
             </div>
@@ -132,9 +130,9 @@ const handleSubmit = (e) => {
                       style={{ background: `linear-gradient(90deg, ${colors.goldenYellow}, ${colors.orange})` }}>
                       <Phone className="h-5 w-5" style={{ color: colors.darkBrown }} />
                     </div>
-                    <h3 className="text-xs font-semibold mb-1" style={{ color: colors.darkBrown }}>Phone</h3>
-                    <p className="text-sm font-bold" style={{ color: colors.darkOrange }}>+31 6 84987360</p>
-                    <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.8 }}>24/7 Support</p>
+<h3 className="text-xs font-medium mb-1" style={{ color: colors.darkBrown }}>
+  Phone
+</h3>                    <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.8 }}>24/7 Support</p>
                   </div>
                 </div>
 
@@ -152,7 +150,7 @@ const handleSubmit = (e) => {
                       style={{ background: `linear-gradient(90deg, ${colors.orange}, ${colors.darkOrange})` }}>
                       <Mail className="h-5 w-5" style={{ color: colors.darkBrown }} />
                     </div>
-                    <h3 className="text-xs font-semibold mb-1" style={{ color: colors.darkBrown }}>Email</h3>
+                    <h3 className="text-xs font-medium mb-1" style={{ color: colors.darkBrown }}>Email</h3>
                     <p className="text-sm font-bold break-all" style={{ color: colors.darkOrange }}>info@kvalogistics.nl</p>
                     <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.8 }}>Response within 2h</p>
                   </div>
@@ -171,8 +169,9 @@ const handleSubmit = (e) => {
                     <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-2" 
                       style={{ background: `linear-gradient(90deg, ${colors.darkBrown}, ${colors.lightTan})` }}>
                       <MapPin className="h-5 w-5" style={{ color: colors.lightTan }} />
-                    </div>
-                    <h3 className="text-xs font-semibold mb-1" style={{ color: colors.darkBrown }}>Main Office</h3>
+                    </div><h3 className="text-xs font-medium mb-1" style={{ color: colors.darkBrown }}>
+  Main Office
+</h3>                    <h3 className="... font-medium mb-1" style={{ color: colors.darkBrown }}>Main Office</h3>
                     <p className="text-sm font-bold break-all" style={{ color: colors.darkOrange }}>Apendans 5, 2511ED</p>
                     <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.8 }}>The Netherlands</p>
                   </div>
@@ -216,7 +215,7 @@ const handleSubmit = (e) => {
                     boxShadow: "0 4px 20px rgba(235, 144, 3, 0.15)",
                   }}
                 >
-                  <h2 className="text-lg font-bold mb-3" style={{ color: colors.darkOrange }}>Send us a Message</h2>
+                  <h2 className="text-lg font-medium mb-3" style={{ color: colors.darkOrange }}>Send us a Message</h2>
                   
                   <form onSubmit={handleSubmit} className="space-y-3">
                     <div>
@@ -388,7 +387,7 @@ const handleSubmit = (e) => {
                     style={{
                       backgroundColor: colors.lightTan,
                       borderColor: colors.darkBrown,
-                      boxShadow: "0 4px 20px rgba(49, 15, 11, 0.15)",
+                      boxShadow: "0 4px 20px rgba(250, 247, 247, 0.15)",
                     }}
                   >
                     <h3 className="text-base font-bold mb-3" style={{ color: colors.darkOrange }}>Global Offices</h3>

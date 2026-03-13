@@ -37,8 +37,8 @@ export default function Hero() {
   if (!mounted) return null;
 
   return (
-    <section
-      className="relative w-full min-h-[90vh] md:min-h-screen flex items-center overflow-hidden"
+<section
+  className="relative w-full min-h-[90vh] md:min-h-screen flex items-center overflow-hidden font-light tracking-wide"
       style={{ fontFamily: "var(--font-snasm)" }}
     >
       {/* Background */}
@@ -91,16 +91,14 @@ export default function Hero() {
             </div>
 
             {/* Heading */}
-            <h1
-              className="
-                leading-[1.05] mb-6
-                text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl
-              "
-              style={{
-                fontFamily: "var(--font-snasm)",
-                fontWeight: 400,
-              }}
-            >
+         <h1
+  className="
+    leading-[1.05] mb-6
+    text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl
+    font-light tracking-wide
+  "
+  style={{ fontFamily: "var(--font-snasm)" }}
+>
               <span className="block bg-gradient-to-r from-yellow-100 via-[#EB9003] to-[#9F4100] bg-clip-text text-transparent">
                 Global Logistics
               </span>
@@ -111,13 +109,13 @@ export default function Hero() {
             </h1>
 
             {/* Description */}
-            <p
-              className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed mb-8 max-w-xl"
-              style={{
-                color: "#EB9003",
-                fontFamily: "var(--font-snasm)",
-                fontWeight: 400,
-              }}
+         <p
+  className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed mb-8 max-w-xl font-light"
+  style={{
+    color: "#EB9003",
+    fontFamily: "var(--font-snasm)",
+  }}
+
             >
               Professional warehousing, distribution, and transportation services —
               <span style={{ color: "#9F4100" }}>secure</span>,{" "}
@@ -193,18 +191,18 @@ export default function Hero() {
 
                       <div>
                         <div
-                          className="text-lg sm:text-xl"
+                   className="text-lg sm:text-xl font-light tracking-wide"
                           style={{
                             color: "#9F4100",
                             fontFamily: "var(--font-snasm)",
-                            fontWeight: 400,
+                          
                           }}
                         >
                           {s.value}
                         </div>
 
                         <div
-                          className="text-xs sm:text-sm uppercase"
+                       className="text-xs sm:text-sm uppercase tracking-wider font-light"
                           style={{
                             color: "#310F0B",
                             fontFamily: "var(--font-snasm)",
@@ -250,7 +248,7 @@ export default function Hero() {
                   </div>
 
                   <div
-                    className="text-lg sm:text-xl"
+                  className="text-lg sm:text-xl font-light tracking-wide"
                     style={{
                       color: "#9F4100",
                       fontFamily: "var(--font-snasm)",

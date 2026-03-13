@@ -10,7 +10,9 @@ import {
   Plane, Train, Bike, Navigation, Copy, CheckCheck,
   Sparkles, Zap, Target, Compass, Gift, CreditCard,
   ShieldCheck, Wind, Sun, Cloud, Droplets, Thermometer,
-  Menu, X
+  Menu, X, Leaf, Map, ThumbsUp, MessageCircle, HelpCircle as Help,
+  ChevronDown, ChevronUp, TruckIcon, Plane as PlaneIcon, Train as TrainIcon, Ship as ShipIcon,
+  LocateFixed, Route, Waypoints, Gauge, Fuel, Milestone
 } from 'lucide-react'
 
 export default function TrackingPage() {
@@ -20,6 +22,11 @@ export default function TrackingPage() {
   const [emailNotification, setEmailNotification] = useState('')
   const [activeTab, setActiveTab] = useState('tracking')
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [expandedFaq, setExpandedFaq] = useState(null)
+  // NEW: State for Learn More expansion
+  const [learnMoreExpanded, setLearnMoreExpanded] = useState(false)
+  // NEW: Simulated live update trigger
+  const [lastUpdate, setLastUpdate] = useState(new Date().toLocaleTimeString())
 
   // Professional color palette
   const colors = {
@@ -35,6 +42,12 @@ export default function TrackingPage() {
     sage: '#9CAF88',
     forest: '#228B22',
     burgundy: '#800020'
+  }
+
+  // NEW: Simulate live refresh
+  const refreshTracking = () => {
+    setLastUpdate(new Date().toLocaleTimeString())
+    // In a real app, you'd fetch new data here
   }
 
   const handleSubmit = (e) => {
@@ -62,7 +75,9 @@ export default function TrackingPage() {
         currentLocation: {
           city: 'Chicago',
           state: 'IL',
-          facility: 'Midwest Sorting Center'
+          facility: 'Midwest Sorting Center',
+          lat: 41.8781,
+          lng: -87.6298
         },
         estimatedDelivery: 'Jan 20, 2024',
         estimatedTime: '2:30 PM - 5:30 PM',
@@ -199,7 +214,19 @@ export default function TrackingPage() {
         carbonFootprint: '2.5 kg CO₂',
         routeOptimized: 'Yes - 15% shorter',
         estimatedSavings: '$45.00',
-        sustainabilityScore: 'A'
+        sustainabilityScore: 'A',
+        
+        // NEW: Route details for live map
+        routeStops: [
+          { location: 'Los Angeles, CA', status: 'completed', time: '09:30 Jan 15' },
+          { location: 'Phoenix, AZ', status: 'completed', time: '18:20 Jan 15' },
+          { location: 'Albuquerque, NM', status: 'completed', time: '09:15 Jan 16' },
+          { location: 'Oklahoma City, OK', status: 'completed', time: '22:40 Jan 16' },
+          { location: 'St. Louis, MO', status: 'completed', time: '14:30 Jan 17' },
+          { location: 'Chicago, IL', status: 'current', time: '15:30 Jan 17' },
+          { location: 'Cleveland, OH', status: 'upcoming', time: 'Est. 08:00 Jan 18' },
+          { location: 'New York, NY', status: 'upcoming', time: 'Est. Jan 20' }
+        ]
       })
     }
   }
@@ -224,31 +251,32 @@ export default function TrackingPage() {
     }
   }
 
- return (
-  <div className="bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50">
-    
-    {/* Main Content */}
-    <div className="container mx-auto px-4 pt-0 mt-0 pb-6">
-      <div className="max-w-4xl mx-auto text-center">
-        
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 mt-0">
-          <span style={{ color: colors.darkBrown }}>Track Your </span>
-          <span
-            className="bg-clip-text text-transparent"
-            style={{
-              backgroundImage: `linear-gradient(135deg, ${colors.darkBrown}, ${colors.goldenYellow})`,
-            }}
-          >
-            Shipment
-          </span>
-        </h1>
+  const toggleFaq = (index) => {
+    setExpandedFaq(expandedFaq === index ? null : index)
+  }
 
-        <p
-          className="text-base mb-8"
-          style={{ color: colors.darkBrown, opacity: 0.7 }}
-        >
-          Enter your tracking number to get real-time updates
-        </p>
+  return (
+    <div className="font-light tracking-wide bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50">
+      {/* Main Content */}
+      <div className="container mx-auto px-4 pt-0 mt-0 pb-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-4xl md:text-5xl font-light tracking-wide mb-4 mt-0">
+            <span style={{ color: colors.darkBrown }}>Track Your </span>
+            <span
+              className="bg-clip-text text-transparent"
+              style={{
+                backgroundImage: `linear-gradient(135deg, ${colors.darkBrown}, ${colors.goldenYellow})`,
+              }}
+            >
+              Shipment
+            </span>
+          </h1>
+          <p
+            className="text-base mb-8"
+            style={{ color: colors.darkBrown, opacity: 0.7 }}
+          >
+            Enter your tracking number to get real-time updates
+          </p>
 
           {/* Search Form */}
           <form onSubmit={handleSubmit} className="bg-white/70 backdrop-blur-md rounded-xl shadow-lg p-4 border" style={{ borderColor: colors.goldenYellow + '30' }}>
@@ -264,7 +292,7 @@ export default function TrackingPage() {
                   style={{ 
                     border: `1px solid ${colors.lightTan}`,
                     focusRing: colors.goldenYellow,
-                    color: colors.darkBrown   // ← added to make typed text dark
+                    color: colors.darkBrown
                   }}
                 />
               </div>
@@ -301,7 +329,7 @@ export default function TrackingPage() {
         {/* Tracking Results */}
         {trackingData && (
           <div className="max-w-7xl mx-auto mt-12">
-            {/* Status Header */}
+            {/* Status Header with Refresh */}
             <div className="bg-white/70 backdrop-blur-md rounded-xl p-6 mb-6 border" style={{ borderColor: colors.goldenYellow + '30' }}>
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <div className="flex items-center gap-4">
@@ -321,6 +349,9 @@ export default function TrackingPage() {
                   </div>
                 </div>
                 <div className="flex gap-2">
+                  <button className="p-2 rounded-lg hover:bg-white/50 transition" onClick={refreshTracking}>
+                    <RefreshCw className="h-5 w-5" style={{ color: colors.goldenYellow }} />
+                  </button>
                   <button className="p-2 rounded-lg hover:bg-white/50 transition" onClick={() => copyToClipboard(trackingData.id)}>
                     {copied ? <CheckCheck className="h-5 w-5" style={{ color: colors.forest }} /> : <Copy className="h-5 w-5" style={{ color: colors.goldenYellow }} />}
                   </button>
@@ -331,6 +362,9 @@ export default function TrackingPage() {
                     <Share2 className="h-5 w-5" style={{ color: colors.goldenYellow }} />
                   </button>
                 </div>
+              </div>
+              <div className="text-right text-xs mt-2" style={{ color: colors.darkBrown, opacity: 0.5 }}>
+                Last updated: {lastUpdate}
               </div>
             </div>
 
@@ -351,6 +385,26 @@ export default function TrackingPage() {
                   }}
                 />
               </div>
+            </div>
+
+            {/* Shipment Highlights */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+              {[
+                { icon: Leaf, label: 'Carbon Footprint', value: trackingData.carbonFootprint, color: colors.sage },
+                { icon: Zap, label: 'Route Optimized', value: trackingData.routeOptimized, color: colors.goldenYellow },
+                { icon: TrendingUp, label: 'Est. Savings', value: trackingData.estimatedSavings, color: colors.forest },
+                { icon: Award, label: 'Sustainability', value: `Score ${trackingData.sustainabilityScore}`, color: colors.orange }
+              ].map((item, idx) => (
+                <div key={idx} className="bg-white/70 backdrop-blur-md rounded-xl p-4 border flex items-center gap-3" style={{ borderColor: colors.lightTan }}>
+                  <div className="p-2 rounded-lg" style={{ backgroundColor: item.color + '20' }}>
+                    <item.icon className="h-5 w-5" style={{ color: item.color }} />
+                  </div>
+                  <div>
+                    <div className="text-xs" style={{ color: colors.darkBrown, opacity: 0.6 }}>{item.label}</div>
+                    <div className="text-sm font-medium" style={{ color: colors.darkBrown }}>{item.value}</div>
+                  </div>
+                </div>
+              ))}
             </div>
 
             {/* Main Grid */}
@@ -380,7 +434,7 @@ export default function TrackingPage() {
 
                 {/* Timeline */}
                 <div className="bg-white/70 backdrop-blur-md rounded-xl p-6 border" style={{ borderColor: colors.lightTan }}>
-                  <h3 className="text-lg font-bold mb-4" style={{ color: colors.darkBrown }}>Tracking Timeline</h3>
+                  <h3 className="text-lg font-normal tracking-wide mb-4" style={{ color: colors.darkBrown }}>Tracking Timeline</h3>
                   <div className="space-y-4">
                     {trackingData.timeline.map((event) => {
                       const IconComponent = event.icon || getStatusIcon(event.status)
@@ -418,7 +472,7 @@ export default function TrackingPage() {
                     <Calendar className="h-5 w-5" style={{ color: colors.goldenYellow }} />
                     <h3 className="font-bold" style={{ color: colors.darkBrown }}>Estimated Delivery</h3>
                   </div>
-                  <div className="text-2xl font-bold mb-1" style={{ color: colors.goldenYellow }}>{trackingData.estimatedDelivery}</div>
+                  <div className="text-2xl font-normal tracking-wide mb-1" style={{ color: colors.goldenYellow }}>{trackingData.estimatedDelivery}</div>
                   <p className="text-sm mb-3" style={{ color: colors.darkBrown, opacity: 0.6 }}>{trackingData.estimatedTime}</p>
                   
                   {/* Quick Countdown */}
@@ -440,7 +494,7 @@ export default function TrackingPage() {
 
                 {/* Package Details */}
                 <div className="bg-white/70 backdrop-blur-md rounded-xl p-6 border" style={{ borderColor: colors.lightTan }}>
-                  <h3 className="font-bold mb-3" style={{ color: colors.darkBrown }}>Package Details</h3>
+                  <h3 className="font-normal tracking-wide mb-3" style={{ color: colors.darkBrown }}>Package Details</h3>
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
                       <span style={{ color: colors.darkBrown, opacity: 0.6 }}>Weight:</span>
@@ -479,17 +533,168 @@ export default function TrackingPage() {
                 </div>
               </div>
             </div>
+
+            {/* ENHANCED: Live Shipment Route with stops */}
+            <div className="mt-6 bg-white/70 backdrop-blur-md rounded-xl p-6 border" style={{ borderColor: colors.lightTan }}>
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-2">
+                  <Map className="h-5 w-5" style={{ color: colors.goldenYellow }} />
+                  <h3 className="font-normal tracking-wide" style={{ color: colors.darkBrown }}>Live Shipment Route</h3>
+                </div>
+                <span className="text-xs px-2 py-1 rounded-full" style={{ backgroundColor: colors.goldenYellow + '20', color: colors.goldenYellow }}>
+                  <LocateFixed className="h-3 w-3 inline mr-1" />
+                  Live
+                </span>
+              </div>
+              
+              {/* Route visualization */}
+              <div className="relative mb-6">
+                <div className="h-24 bg-gradient-to-r from-amber-100 to-orange-100 rounded-lg flex items-center justify-between px-4 border-2" style={{ borderColor: colors.goldenYellow + '40' }}>
+                  {trackingData.routeStops.map((stop, idx) => (
+                    <div key={idx} className="relative flex flex-col items-center">
+                      <div 
+                        className={`w-4 h-4 rounded-full ${
+                          stop.status === 'completed' ? 'bg-green-500' : 
+                          stop.status === 'current' ? 'bg-yellow-500 animate-pulse' : 
+                          'bg-gray-300'
+                        }`}
+                        style={{ 
+                          boxShadow: stop.status === 'current' ? `0 0 0 4px ${colors.goldenYellow}40` : 'none'
+                        }}
+                      />
+                      {idx < trackingData.routeStops.length - 1 && (
+                        <div className="absolute top-2 left-6 w-full h-0.5 bg-gray-300" style={{ width: 'calc(100% - 1rem)' }} />
+                      )}
+                      <span className="text-xs mt-2 whitespace-nowrap" style={{ color: colors.darkBrown, opacity: 0.7 }}>{stop.location.split(',')[0]}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex justify-between text-xs mb-4">
+                <span style={{ color: colors.darkBrown, opacity: 0.6 }}>{trackingData.origin.city}</span>
+                <ArrowRight className="h-3 w-3" style={{ color: colors.goldenYellow }} />
+                <span style={{ color: colors.darkBrown, opacity: 0.6 }}>{trackingData.currentLocation.city}</span>
+                <ArrowRight className="h-3 w-3" style={{ color: colors.goldenYellow }} />
+                <span style={{ color: colors.darkBrown, opacity: 0.6 }}>{trackingData.destination.city}</span>
+              </div>
+
+              {/* Route details */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div className="p-2 rounded-lg" style={{ backgroundColor: colors.cream }}>
+                  <span className="block font-medium" style={{ color: colors.darkBrown }}>Distance Covered</span>
+                  <span style={{ color: colors.goldenYellow }}>2,450 mi</span>
+                </div>
+                <div className="p-2 rounded-lg" style={{ backgroundColor: colors.cream }}>
+                  <span className="block font-medium" style={{ color: colors.darkBrown }}>Est. Remaining</span>
+                  <span style={{ color: colors.orange }}>790 mi</span>
+                </div>
+                <div className="p-2 rounded-lg" style={{ backgroundColor: colors.cream }}>
+                  <span className="block font-medium" style={{ color: colors.darkBrown }}>Current Speed</span>
+                  <span style={{ color: colors.forest }}>550 mph</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Value-Added Services */}
+            <div className="mt-6">
+              <h3 className="text-lg font-normal tracking-wide mb-4" style={{ color: colors.darkBrown }}>Enhance Your Shipment</h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {[
+                  { icon: ShieldCheck, label: 'Extra Insurance', desc: 'Protect high-value items' },
+                  { icon: Clock3, label: 'Time-Definite', desc: 'Guaranteed delivery window' },
+                  { icon: Droplets, label: 'Cold Chain', desc: 'Temperature controlled' },
+                  { icon: Gift, label: 'White Glove', desc: 'Inside delivery & setup' }
+                ].map((service, idx) => (
+                  <div key={idx} className="bg-white/70 backdrop-blur-md rounded-xl p-4 border text-center hover:shadow-md transition" style={{ borderColor: colors.lightTan }}>
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-2" style={{ backgroundColor: colors.goldenYellow + '20' }}>
+                      <service.icon className="h-5 w-5" style={{ color: colors.goldenYellow }} />
+                    </div>
+                    <h4 className="text-sm font-medium" style={{ color: colors.darkBrown }}>{service.label}</h4>
+                    <p className="text-xs mt-1" style={{ color: colors.darkBrown, opacity: 0.6 }}>{service.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Frequently Asked Questions */}
+            <div className="mt-6 bg-white/70 backdrop-blur-md rounded-xl p-6 border" style={{ borderColor: colors.lightTan }}>
+              <h3 className="text-lg font-normal tracking-wide mb-4" style={{ color: colors.darkBrown }}>Frequently Asked Questions</h3>
+              <div className="space-y-3">
+                {[
+                  { q: 'How can I change my delivery address?', a: 'You can request an address change by contacting our support team at least 24 hours before the scheduled delivery. Additional fees may apply.' },
+                  { q: 'What if I miss my delivery?', a: 'If you\'re not available, the carrier will leave a notice with instructions to reschedule or pick up from a nearby facility.' },
+                  { q: 'Is my package insured?', a: 'Basic coverage is included. For high-value items, we recommend purchasing additional insurance.' },
+                  { q: 'Can I track multiple shipments at once?', a: 'Yes, our bulk tracking tool allows you to monitor up to 50 shipments simultaneously.' }
+                ].map((faq, idx) => (
+                  <div key={idx} className="border rounded-lg" style={{ borderColor: colors.lightTan }}>
+                    <button
+                      onClick={() => toggleFaq(idx)}
+                      className="w-full flex items-center justify-between p-4 text-left"
+                    >
+                      <span className="text-sm font-medium" style={{ color: colors.darkBrown }}>{faq.q}</span>
+                      {expandedFaq === idx ? 
+                        <ChevronUp className="h-4 w-4" style={{ color: colors.goldenYellow }} /> : 
+                        <ChevronDown className="h-4 w-4" style={{ color: colors.goldenYellow }} />
+                      }
+                    </button>
+                    {expandedFaq === idx && (
+                      <div className="px-4 pb-4 text-sm" style={{ color: colors.darkBrown, opacity: 0.7 }}>
+                        {faq.a}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Need Assistance? */}
+            <div className="mt-6 bg-white/70 backdrop-blur-md rounded-xl p-6 border" style={{ borderColor: colors.goldenYellow + '30' }}>
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div className="flex items-center gap-3">
+                  <div className="p-3 rounded-full" style={{ backgroundColor: colors.goldenYellow + '20' }}>
+                    <HeadphonesIcon className="h-6 w-6" style={{ color: colors.goldenYellow }} />
+                  </div>
+                  <div>
+                    <h3 className="font-normal tracking-wide" style={{ color: colors.darkBrown }}>Need Assistance?</h3>
+                    <p className="text-sm" style={{ color: colors.darkBrown, opacity: 0.6 }}>Our support team is available 24/7</p>
+                  </div>
+                </div>
+                <div className="flex gap-3">
+                  <button className="px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 transition hover:scale-105" style={{ backgroundColor: colors.goldenYellow, color: colors.darkBrown }}>
+                    <Phone className="h-4 w-4" />
+                    Call Now
+                  </button>
+                  <button className="px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 border transition hover:bg-white/50" style={{ borderColor: colors.goldenYellow, color: colors.darkBrown }}>
+                    <Mail className="h-4 w-4" />
+                    Email
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Feedback */}
+            <div className="mt-6 text-center">
+              <p className="text-sm mb-2" style={{ color: colors.darkBrown, opacity: 0.6 }}>Was this tracking information helpful?</p>
+              <div className="flex justify-center gap-2">
+                {[1,2,3,4,5].map((star) => (
+                  <button key={star} className="p-1 hover:scale-110 transition">
+                    <Star className="h-5 w-5" style={{ color: colors.goldenYellow }} fill={colors.goldenYellow} />
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
         )}
 
-        {/* No Tracking Data - Services */}
+        {/* No Tracking Data - Enhanced Services with Learn More */}
         {!trackingData && (
           <div className="max-w-7xl mx-auto mt-16">
             <h2 className="text-2xl font-bold text-center mb-8" style={{ color: colors.darkBrown }}>
               Why Choose LogiTrack?
             </h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
               {[
                 { icon: Zap, title: 'Real-time Tracking', desc: 'Live updates every 30 seconds' },
                 { icon: Shield, title: 'Secure Shipping', desc: 'End-to-end package protection' },
@@ -499,10 +704,81 @@ export default function TrackingPage() {
                   <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3" style={{ backgroundColor: colors.goldenYellow + '20' }}>
                     <feature.icon className="h-5 w-5" style={{ color: colors.goldenYellow }} />
                   </div>
-                  <h3 className="font-bold mb-1" style={{ color: colors.darkBrown }}>{feature.title}</h3>
+                  <h3 className="font-normal tracking-wide mb-1" style={{ color: colors.darkBrown }}>{feature.title}</h3>
                   <p className="text-sm" style={{ color: colors.darkBrown, opacity: 0.6 }}>{feature.desc}</p>
                 </div>
               ))}
+            </div>
+
+            {/* Additional info for non-trackers */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="bg-white/50 backdrop-blur-sm rounded-xl p-6 border" style={{ borderColor: colors.lightTan }}>
+                <h3 className="font-normal tracking-wide mb-3 flex items-center gap-2" style={{ color: colors.darkBrown }}>
+                  <MessageCircle className="h-4 w-4" style={{ color: colors.goldenYellow }} />
+                  Need Help Finding Your Tracking Number?
+                </h3>
+                <p className="text-sm mb-4" style={{ color: colors.darkBrown, opacity: 0.7 }}>
+                  Check your order confirmation email or shipping notification. The tracking number is usually a 12-15 digit code starting with "LGSW".
+                </p>
+                <button 
+                  className="text-sm font-medium flex items-center gap-1 transition hover:gap-2" 
+                  style={{ color: colors.goldenYellow }}
+                  onClick={() => setLearnMoreExpanded(!learnMoreExpanded)}
+                >
+                  {learnMoreExpanded ? 'Show Less' : 'Learn More'} {learnMoreExpanded ? <ChevronUp className="h-3 w-3" /> : <ChevronRight className="h-3 w-3" />}
+                </button>
+
+                {/* Expanded Learn More content */}
+                {learnMoreExpanded && (
+                  <div className="mt-4 p-4 rounded-lg" style={{ backgroundColor: colors.cream }}>
+                    <h4 className="font-medium mb-2" style={{ color: colors.darkBrown }}>Where to find your tracking number:</h4>
+                    <ul className="space-y-2 text-sm" style={{ color: colors.darkBrown, opacity: 0.8 }}>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 mt-0.5" style={{ color: colors.forest }} />
+                        <span>Order confirmation email from the sender</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 mt-0.5" style={{ color: colors.forest }} />
+                        <span>Shipping notification email with subject "Your order has shipped"</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 mt-0.5" style={{ color: colors.forest }} />
+                        <span>On the shipping label or receipt if you dropped off the package</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 mt-0.5" style={{ color: colors.forest }} />
+                        <span>In your account order history on the retailer's website</span>
+                      </li>
+                    </ul>
+                    <p className="text-sm mt-3 p-2 rounded" style={{ backgroundColor: colors.goldenYellow + '20', color: colors.darkBrown }}>
+                      <strong>Tip:</strong> If you still can't find it, contact the sender directly.
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              <div className="bg-white/50 backdrop-blur-sm rounded-xl p-6 border" style={{ borderColor: colors.lightTan }}>
+                <h3 className="font-normal tracking-wide mb-3 flex items-center gap-2" style={{ color: colors.darkBrown }}>
+                  <Bell className="h-4 w-4" style={{ color: colors.goldenYellow }} />
+                  Never Miss an Update
+                </h3>
+                <p className="text-sm mb-4" style={{ color: colors.darkBrown, opacity: 0.7 }}>
+                  Sign up for SMS or email alerts to receive real-time notifications about your shipment's status.
+                </p>
+                <div className="flex gap-2">
+                  <input
+                    type="email"
+                    placeholder="Your email"
+                    value={emailNotification}
+                    onChange={(e) => setEmailNotification(e.target.value)}
+                    className="flex-1 px-3 py-2 rounded-lg text-sm bg-white/50 border focus:outline-none focus:ring-2"
+                    style={{ borderColor: colors.lightTan, color: colors.darkBrown }}
+                  />
+                  <button className="px-4 py-2 rounded-lg text-sm font-medium" style={{ backgroundColor: colors.goldenYellow, color: colors.darkBrown }}>
+                    Subscribe
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         )}

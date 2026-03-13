@@ -49,9 +49,10 @@ export default function Header() {
     isScrolled ? "bg-white/95 backdrop-blur shadow-lg" : "bg-white shadow-md"
   }`}
   style={{
-    fontFamily: "var(--font-snasm)",
-    fontWeight: 400
-  }}
+  fontFamily: "var(--font-snasm)",
+  fontWeight: 300,
+  letterSpacing: "0.02em"
+}}
 >
 
       <div className="max-w-7xl mx-auto px-3 sm:px-4">
@@ -81,13 +82,14 @@ export default function Header() {
                       ? 'text-white'
                       : 'text-gray-700 hover:text-gray-900'
                   }`}
-                  style={{
-                    fontFamily: "var(--font-snasm)",
-                    fontWeight: 400,
-                    ...(pathname === item.href && {
-                      backgroundColor: colors.darkBrown
-                    })
-                  }}
+                style={{
+  fontFamily: "var(--font-snasm)",
+  fontWeight: 300,
+  letterSpacing: "0.02em",
+  ...(pathname === item.href && {
+    backgroundColor: colors.darkBrown
+  })
+}}
                 >
                   {item.name}
                 </Link>
@@ -102,12 +104,11 @@ export default function Header() {
             <Link
               href="/contact"
               className="px-6 py-3 rounded-xl shadow-lg transition hover:opacity-90"
-              style={{
-                backgroundColor: colors.goldenYellow,
-                color: colors.darkBrown,
-                fontFamily: "var(--font-snasm)",
-                fontWeight: 400
-              }}
+        style={{
+  fontFamily: "var(--font-snasm)",
+  fontWeight: 300,
+  letterSpacing: "0.02em"
+}}
             >
               Get Quote
             </Link>

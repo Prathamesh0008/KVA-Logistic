@@ -418,8 +418,7 @@ export default function Tracking() {
       {/* Inject font-face and global font override */}
       {/* <style dangerouslySetInnerHTML={{ __html: fontStyle }} /> */}
       
-      <div className="min-h-screen flex flex-col" style={{ backgroundColor: backgroundColors.warmWhite }}>
-        {/* Hero Section */}
+<div className="min-h-screen flex flex-col font-light tracking-wide">        {/* Hero Section */}
         <section className="relative py-10 md:py-12 bg-gray-50 overflow-hidden flex-shrink-0">
           {/* Subtle background pattern (unchanged) */}
           <div className="absolute inset-0 opacity-5">
@@ -433,7 +432,7 @@ export default function Tracking() {
 
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-light tracking-wide mb-3">
                 <span
                   className="block"
                   style={{
@@ -488,7 +487,7 @@ export default function Tracking() {
                     color: colors.darkBrown,
                   }}
                 >
-                  <div className="text-xl md:text-2xl font-bold">24/7</div>
+                <div className="text-xl md:text-2xl font-normal tracking-wide">24/7</div>
                   <div className="text-xs md:text-sm">Live Tracking</div>
                 </div>
                 <div
@@ -499,7 +498,7 @@ export default function Tracking() {
                     color: colors.darkBrown,
                   }}
                 >
-                  <div className="text-xl md:text-2xl font-bold">150+</div>
+                <div className="text-xl md:text-2xl font-normal tracking-wide">150+</div>
                   <div className="text-xs md:text-sm">Countries</div>
                 </div>
                 <div
@@ -541,7 +540,7 @@ export default function Tracking() {
                     {/* Tracking Form */}
                     <div className="mb-4">
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
-                        <h3 className="text-lg font-bold" style={{ color: colors.darkBrown }}>
+                      <h3 className="text-lg font-normal tracking-wide" style={{ color: colors.darkBrown }}>
                           Enter Tracking Number
                         </h3>
 
@@ -593,14 +592,9 @@ export default function Tracking() {
                             />
                           </div>
 
-                          <button
-                            type="submit"
-                            className="group px-5 py-2.5 rounded-lg font-bold transition-all duration-300 hover:shadow-md flex items-center justify-center gap-2 whitespace-nowrap hover:scale-105 text-sm"
-                            style={{
-                              background: `linear-gradient(90deg, ${colors.goldenYellow}, ${colors.orange})`,
-                              color: colors.darkBrown,
-                            }}
-                          >
+                     <button
+  className="group px-5 py-2.5 rounded-lg font-normal tracking-wide transition-all"
+>
                             <Search className="h-4 w-4" />
                             <span>Track</span>
                           </button>
@@ -698,7 +692,7 @@ export default function Tracking() {
                               Tracking ID
                             </div>
                             <div className="flex items-center gap-2">
-                              <h3 className="text-lg font-bold font-mono" style={highlightText}>
+                            <h3 className="text-lg font-normal tracking-wide font-mono" style={highlightText}>
                                 {trackingId || 'LGSW123456789'}
                               </h3>
                               <button
@@ -780,7 +774,7 @@ export default function Tracking() {
                                 <div className="text-xs uppercase tracking-wider" style={{ color: colors.darkBrown, opacity: 0.5 }}>
                                   {key}
                                 </div>
-                                <div className="text-xs font-bold" style={highlightText}>
+                        <div className="text-xs font-normal tracking-wide" style={highlightText}>
                                   {value}
                                 </div>
                               </div>
@@ -857,9 +851,9 @@ export default function Tracking() {
                     }}
                   >
                     <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-lg font-bold" style={{ color: colors.darkBrown }}>
-                        Timeline
-                      </h3>
+                     <h3 className="text-lg font-normal tracking-wide">
+  Timeline
+</h3>
                       <button
                         onClick={() => alert('Package is insured and protected by our security system.')}
                         className="p-1.5 hover:bg-gray-100 rounded-lg transition-colors"
