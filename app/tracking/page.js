@@ -317,6 +317,7 @@ export default function Tracking() {
 
   const timelineSteps = [
     {
+
       id: 1,
       status: 'Order Confirmed',
       location: 'Los Angeles, CA',
@@ -418,7 +419,7 @@ export default function Tracking() {
       {/* Inject font-face and global font override */}
       {/* <style dangerouslySetInnerHTML={{ __html: fontStyle }} /> */}
       
-<div className="min-h-screen flex flex-col font-light tracking-wide">        {/* Hero Section */}
+<div className="flex flex-col font-light tracking-wide">   {/* Hero Section */}
         <section className="relative py-10 md:py-12 bg-gray-50 overflow-hidden flex-shrink-0">
           {/* Subtle background pattern (unchanged) */}
           <div className="absolute inset-0 opacity-5">
@@ -474,7 +475,7 @@ export default function Tracking() {
         </section>
 
         {/* Main Tracking Section */}
-        <section className="py-8 md:py-10 bg-white flex-grow">
+      <section className="py-8 md:py-10 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               {/* Stats Banner */}

@@ -74,7 +74,7 @@ const handleSubmit = (e) => {
   setTimeout(() => setFormStatus(null), 3000)
 }
   return (
-<div className="min-h-screen flex flex-col font-light">
+<div className="flex flex-col font-light">
       {/* Background Image Section - Matching Home Page */}
       <div className="relative">
         <div
@@ -169,9 +169,9 @@ const handleSubmit = (e) => {
                     <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-2" 
                       style={{ background: `linear-gradient(90deg, ${colors.darkBrown}, ${colors.lightTan})` }}>
                       <MapPin className="h-5 w-5" style={{ color: colors.lightTan }} />
-                    </div><h3 className="text-xs font-medium mb-1" style={{ color: colors.darkBrown }}>
-  Main Office
-</h3>                    <h3 className="... font-medium mb-1" style={{ color: colors.darkBrown }}>Main Office</h3>
+                    </div> 
+            <h3 className="... font-medium mb-1" style={{ color: colors.darkBrown }}>Main Office</h3>   
+              <h3 className="... font-medium mb-1" style={{ color: colors.darkBrown }}>Main Office</h3>
                     <p className="text-sm font-bold break-all" style={{ color: colors.darkOrange }}>Apendans 5, 2511ED</p>
                     <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.8 }}>The Netherlands</p>
                   </div>
