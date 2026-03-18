@@ -450,7 +450,7 @@ export default function AboutPage() {
       </section>
 
       {/* Global Network (Map placeholder) */}
-      <section className="py-10">
+      {/* <section className="py-10">
         <div className="container mx-auto px-4">
           <h2
             className="text-3xl md:text-4xl font-light text-center mb-4"
@@ -481,7 +481,7 @@ export default function AboutPage() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }
