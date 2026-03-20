@@ -75,9 +75,9 @@ const handleSubmit = (e) => {
   setTimeout(() => setFormStatus(null), 3000)
 }
   return (
-<div className="flex flex-col font-light">
+<div className="flex flex-col font-light bg-white">
       {/* Background Image Section - Matching Home Page */}
-    <div className="relative">
+  <div className="relative h-[250px] md:h-[300px] lg:h-[350px]">
   <div
     className="absolute inset-0 bg-cover bg-center bg-no-repeat"
     style={{
@@ -90,7 +90,7 @@ const handleSubmit = (e) => {
             background: `linear-gradient(90deg, #310F0B 0%, rgba(49, 15, 11, 0.95) 30%, rgba(49, 15, 11, 0.7) 50%, transparent 100%)`,
           }}
         /> */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#310F0B]/60 via-[#310F0B]/30 to-transparent" />
+        <div className="absolute inset-0  via-[#310F0B]/30 to-transparent" />
 </div>
 
       {/* Content - No Gaps */}
