@@ -47,6 +47,7 @@ export default function RootLayout({ children }) {
       </head>
 
       <body className={`${snasm.variable} antialiased font-snasm`}>
+        
         <div className="min-h-screen flex flex-col">
           <Header />
           <main className="flex-1">{children}</main>

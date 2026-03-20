@@ -13,8 +13,8 @@ const team = [
 
 export default function TeamsPage() {
   return (
-    <main className="min-h-screen bg-white">
-      <section className="mx-auto max-w-6xl px-4 py-10 sm:py-12">
+<main className="bg-white min-h-screen flex flex-col">
+    <section className="mx-auto max-w-6xl px-4 py-10 sm:py-12 flex-1 w-full">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
             <p className="inline-flex items-center rounded-full bg-[#EB9003] px-3 py-1 text-xs font-medium text-white">

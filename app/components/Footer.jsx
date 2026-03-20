@@ -169,13 +169,13 @@ export default function Footer() {
             >
               Terms of Service
             </Link>
-            <Link
+            {/* <Link
               href="/sitemap"
               className="text-sm transition-colors hover:text-gray-900 hover:underline font-medium"
               style={{ color: colors.darkBrown }}
             >
               Sitemap
-            </Link>
+            </Link> */}
           </div>
 
           {/* Certifications */}

@@ -101,17 +101,18 @@ export default function Header() {
 
           {/* DESKTOP CTA */}
           <div className="hidden lg:block">
-            <Link
-              href="/contact"
-              className="px-6 py-3 rounded-xl shadow-lg transition hover:opacity-90"
-        style={{
-  fontFamily: "var(--font-snasm)",
-  fontWeight: 300,
-  letterSpacing: "0.02em"
-}}
-            >
-              Get Quote
-            </Link>
+         <Link
+  href="/contact"
+ className="px-6 py-3 rounded-xl shadow-lg transition hover:opacity-90 hover:scale-105 text-white"
+  style={{
+    backgroundColor: colors.darkBrown,
+    fontFamily: "var(--font-snasm)",
+    fontWeight: 400,
+    letterSpacing: "0.02em"
+  }}
+>
+  Get Quote
+</Link>
           </div>
 
           {/* MOBILE BUTTONS */}

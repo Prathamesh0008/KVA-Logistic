@@ -1,3 +1,4 @@
+
 'use client'
 
 import { useState } from 'react'
@@ -8,7 +9,7 @@ import { Phone, Mail, MapPin, Clock, Send, User, FileText, CheckCircle } from 'l
 // 🔐 YOUR EMAILJS CREDENTIALS (hardcoded as requested)
 // ------------------------------------------------------------------
 const EMAILJS_PUBLIC_KEY  = 'ctHzsKvXJvpGEjIvF'
-const EMAILJS_SERVICE_ID  = 'service_m43r6fq'
+const EMAILJS_SERVICE_ID  = 'service_a93w12k'
 const ADMIN_TEMPLATE_ID   = 'template_ysi9wih'    // sends inquiry to you
 const USER_TEMPLATE_ID    = 'template_o2mw75i'    // auto-reply to user
 // ------------------------------------------------------------------
@@ -76,24 +77,21 @@ const handleSubmit = (e) => {
   return (
 <div className="flex flex-col font-light">
       {/* Background Image Section - Matching Home Page */}
-      <div className="relative">
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: "url('/Banner 2.jpg')",
-            backgroundPosition: "center center",
-            backgroundSize: "cover",
-            height: "100%",
-          }}
-        />
-        <div
+    <div className="relative">
+  <div
+    className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+    style={{
+      backgroundImage: "url('/Banner 2.jpg')",
+    }}
+  />
+        {/* <div
           className="absolute inset-0 hidden md:block"
           style={{
             background: `linear-gradient(90deg, #310F0B 0%, rgba(49, 15, 11, 0.95) 30%, rgba(49, 15, 11, 0.7) 50%, transparent 100%)`,
           }}
-        />
-        <div className="absolute inset-0 block md:hidden bg-gradient-to-t from-[#310F0B] via-[#310F0B]/90 to-transparent" />
-      </div>
+        /> */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#310F0B]/60 via-[#310F0B]/30 to-transparent" />
+</div>
 
       {/* Content - No Gaps */}
       <div className="relative z-10">
