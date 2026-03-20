@@ -77,21 +77,7 @@ const handleSubmit = (e) => {
   return (
 <div className="flex flex-col font-light bg-white">
       {/* Background Image Section - Matching Home Page */}
-  <div className="relative h-[250px] md:h-[300px] lg:h-[350px]">
-  <div
-    className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-    style={{
-      backgroundImage: "url('/Banner 2.jpg')",
-    }}
-  />
-        {/* <div
-          className="absolute inset-0 hidden md:block"
-          style={{
-            background: `linear-gradient(90deg, #310F0B 0%, rgba(49, 15, 11, 0.95) 30%, rgba(49, 15, 11, 0.7) 50%, transparent 100%)`,
-          }}
-        /> */}
-        <div className="absolute inset-0  via-[#310F0B]/30 to-transparent" />
-</div>
+  
 
       {/* Content - No Gaps */}
       <div className="relative z-10">
