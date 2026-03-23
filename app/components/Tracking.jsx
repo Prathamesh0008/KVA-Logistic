@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { 
   Search, MapPin, Package, Clock, Truck, Calendar, CheckCircle, 
   MessageSquare, Phone, Mail, Globe, Shield, ArrowRight, 
@@ -12,7 +12,7 @@ import {
   ShieldCheck, Wind, Sun, Cloud, Droplets, Thermometer,
   Menu, X, Leaf, Map, ThumbsUp, MessageCircle, HelpCircle as Help,
   ChevronDown, ChevronUp, TruckIcon, Plane as PlaneIcon, Train as TrainIcon, Ship as ShipIcon,
-  LocateFixed, Route, Waypoints, Gauge, Fuel, Milestone
+  LocateFixed, Route, Waypoints, Gauge, Fuel, Milestone, Loader2
 } from 'lucide-react'
 
 export default function TrackingPage() {
@@ -23,12 +23,12 @@ export default function TrackingPage() {
   const [activeTab, setActiveTab] = useState('tracking')
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [expandedFaq, setExpandedFaq] = useState(null)
-  // NEW: State for Learn More expansion
   const [learnMoreExpanded, setLearnMoreExpanded] = useState(false)
-  // NEW: Simulated live update trigger
   const [lastUpdate, setLastUpdate] = useState(new Date().toLocaleTimeString())
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
-  // Professional color palette
+  // Professional color palette (unchanged)
   const colors = {
     darkBrown: '#2C1810',
     mediumBrown: '#8B4513',
@@ -44,190 +44,137 @@ export default function TrackingPage() {
     burgundy: '#800020'
   }
 
-  // NEW: Simulate live refresh
-  const refreshTracking = () => {
-    setLastUpdate(new Date().toLocaleTimeString())
-    // In a real app, you'd fetch new data here
+  // ------------------------------------------------------------------
+  // 1. API CALL FUNCTION (REPLACE WITH YOUR REAL ENDPOINT)
+  // ------------------------------------------------------------------
+  const fetchTrackingData = async (id) => {
+    setLoading(true)
+    setError('')
+    try {
+      // Replace with your actual API endpoint
+      const response = await fetch(`https://api.yourlogistics.com/tracking/${id}`, {
+        headers: { 'Content-Type': 'application/json' }
+      })
+      
+      if (!response.ok) {
+        throw new Error('Tracking number not found or API error')
+      }
+      
+      const data = await response.json()
+      
+      // Map the API response to your existing trackingData structure
+      // Adjust this mapping to match your actual API fields.
+      const mappedData = {
+        id: data.trackingNumber,
+        status: data.statusCode,
+        statusText: data.statusDescription,
+        statusColor: data.statusColor || colors.forest,
+        origin: {
+          city: data.origin?.city || 'Unknown',
+          state: data.origin?.state || '',
+          country: data.origin?.country || '',
+          facility: data.origin?.facility || '',
+          code: data.origin?.code || ''
+        },
+        destination: {
+          city: data.destination?.city || 'Unknown',
+          state: data.destination?.state || '',
+          country: data.destination?.country || '',
+          facility: data.destination?.facility || '',
+          code: data.destination?.code || ''
+        },
+        currentLocation: {
+          city: data.currentLocation?.city || 'In transit',
+          state: data.currentLocation?.state || '',
+          facility: data.currentLocation?.facility || '',
+          lat: data.currentLocation?.lat || 0,
+          lng: data.currentLocation?.lng || 0
+        },
+        estimatedDelivery: data.estimatedDelivery || 'TBD',
+        estimatedTime: data.estimatedTime || '',
+        weight: data.weight || 'N/A',
+        dimensions: data.dimensions || 'N/A',
+        shippingMethod: data.shippingMethod || 'Standard',
+        service: data.service || 'Standard',
+        trackingNumber: data.trackingNumber,
+        customerReference: data.customerReference || 'N/A',
+        pieces: data.pieces || 1,
+        totalValue: data.totalValue || '$0.00',
+        insurance: data.insurance || 'Not included',
+        specialInstructions: data.specialInstructions || '',
+        timeline: (data.timeline || []).map(event => ({
+          ...event,
+          icon: getIconComponent(event.status)
+        })),
+        trackingHistory: data.trackingHistory || [],
+        milestones: data.milestones || { total: 0, completed: 0, progress: 0 },
+        weather: data.weather || { atOrigin: {}, atDestination: {}, atCurrent: {} },
+        deliveryOptions: data.deliveryOptions || {},
+        contactInfo: data.contactInfo || {},
+        carbonFootprint: data.carbonFootprint || 'N/A',
+        routeOptimized: data.routeOptimized || 'No',
+        estimatedSavings: data.estimatedSavings || '$0.00',
+        sustainabilityScore: data.sustainabilityScore || 'N/A',
+        routeStops: data.routeStops || []
+      }
+      
+      setTrackingData(mappedData)
+      setLastUpdate(new Date().toLocaleTimeString())
+    } catch (err) {
+      setError(err.message || 'Failed to fetch tracking information')
+      setTrackingData(null)
+    } finally {
+      setLoading(false)
+    }
   }
 
+  // Helper to map status text to icon component
+  const getIconComponent = (status) => {
+    switch(status) {
+      case 'Order Placed': return FileText
+      case 'Picked Up': return Package
+      case 'Arrived at Facility': return Boxes
+      case 'Departed Facility': return Plane
+      case 'In Transit': return Train
+      case 'Arrived at Hub': return Truck
+      case 'Out for Delivery': return Bike
+      case 'Delivered': return CheckCircle
+      default: return Package
+    }
+  }
+
+  // ------------------------------------------------------------------
+  // 2. HANDLE FORM SUBMIT
+  // ------------------------------------------------------------------
   const handleSubmit = (e) => {
     e.preventDefault()
     if (trackingId.trim()) {
-      setTrackingData({
-        id: trackingId.toUpperCase(),
-        status: 'IN_TRANSIT',
-        statusText: 'In Transit - On Time',
-        statusColor: colors.forest,
-        origin: {
-          city: 'Los Angeles',
-          state: 'CA',
-          country: 'USA',
-          facility: 'LAX Logistics Hub',
-          code: 'LAX'
-        },
-        destination: {
-          city: 'New York',
-          state: 'NY',
-          country: 'USA',
-          facility: 'JFK Distribution Center',
-          code: 'JFK'
-        },
-        currentLocation: {
-          city: 'Chicago',
-          state: 'IL',
-          facility: 'Midwest Sorting Center',
-          lat: 41.8781,
-          lng: -87.6298
-        },
-        estimatedDelivery: 'Jan 20, 2024',
-        estimatedTime: '2:30 PM - 5:30 PM',
-        weight: '15.5 kg',
-        dimensions: '40 x 30 x 25 cm',
-        shippingMethod: 'Express Air',
-        service: 'Priority Overnight',
-        trackingNumber: trackingId.toUpperCase(),
-        customerReference: 'PO-2024-00123',
-        pieces: 2,
-        totalValue: '$1,250.00',
-        insurance: 'Included',
-        specialInstructions: 'Fragile - Handle with care',
-        
-        timeline: [
-          { 
-            id: 1, 
-            status: 'Order Placed', 
-            location: 'Los Angeles, CA', 
-            date: 'Jan 15', 
-            time: '09:30', 
-            completed: true,
-            description: 'Shipment information received',
-            icon: FileText
-          },
-          { 
-            id: 2, 
-            status: 'Picked Up', 
-            location: 'Los Angeles, CA', 
-            date: 'Jan 15', 
-            time: '11:45', 
-            completed: true,
-            description: 'Package picked up by carrier',
-            icon: Package 
-          }, 
-          { 
-            id: 3, 
-            status: 'Arrived at Facility', 
-            location: 'Los Angeles Hub', 
-            date: 'Jan 15', 
-            time: '14:15', 
-            completed: true,
-            description: 'Sorting in progress',
-            icon: Boxes
-          },
-          { 
-            id: 4, 
-            status: 'Departed Facility', 
-            location: 'Los Angeles Hub', 
-            date: 'Jan 16', 
-            time: '08:00', 
-            completed: true,
-            description: 'Departed for destination',
-            icon: Plane
-          },
-          { 
-            id: 5, 
-            status: 'In Transit', 
-            location: 'Chicago, IL', 
-            date: 'Jan 17', 
-            time: '15:30', 
-            completed: true,
-            description: 'Arrived at Chicago sorting facility',
-            icon: Train
-          },
-          { 
-            id: 6, 
-            status: 'Arrived at Hub', 
-            location: 'New York Hub', 
-            date: 'Jan 18', 
-            time: '10:20', 
-            completed: false,
-            description: 'Processing at regional facility',
-            icon: Truck
-          },
-          { 
-            id: 7, 
-            status: 'Out for Delivery', 
-            location: 'New York, NY', 
-            date: 'Jan 19', 
-            time: '08:00', 
-            completed: false,
-            description: 'Package on delivery vehicle',
-            icon: Bike
-          },
-          { 
-            id: 8, 
-            status: 'Delivered', 
-            location: 'New York, NY', 
-            date: 'Jan 20', 
-            time: 'Expected', 
-            completed: false,
-            description: 'Awaiting delivery confirmation',
-            icon: CheckCircle
-          }
-        ],
-        
-        trackingHistory: [
-          { action: 'Label created', date: 'Jan 15, 2024', time: '09:30', user: 'System' },
-          { action: 'Picked up', date: 'Jan 15, 2024', time: '11:45', user: 'Driver: John D.' },
-          { action: 'Sorted at LAX', date: 'Jan 15, 2024', time: '14:15', user: 'Facility A' },
-          { action: 'Departed LAX', date: 'Jan 16, 2024', time: '08:00', user: 'Flight AA1234' },
-          { action: 'Arrived at ORD', date: 'Jan 17, 2024', time: '15:30', user: 'Chicago Hub' },
-        ],
-        
-        milestones: {
-          total: 8,
-          completed: 5,
-          remaining: 3,
-          progress: 62.5
-        },
-        
-        weather: {
-          atOrigin: { condition: 'Sunny', temp: '72°F', icon: Sun },
-          atDestination: { condition: 'Cloudy', temp: '45°F', icon: Cloud },
-          atCurrent: { condition: 'Partly cloudy', temp: '38°F', icon: Wind }
-        },
-        
-        deliveryOptions: {
-          signature: 'Required',
-          leaveWithNeighbor: false,
-          alternateAddress: 'Available upon request'
-        },
-        
-        contactInfo: {
-          shipper: 'ABC Corp',
-          shipperPhone: '+1 (800) 555-0123',
-          shipperEmail: 'shipping@abccorp.com',
-          recipient: 'John Smith',
-          recipientPhone: '+1 (212) 555-4567',
-          recipientEmail: 'john.smith@email.com'
-        },
+      fetchTrackingData(trackingId.trim())
+    }
+  }
 
-        carbonFootprint: '2.5 kg CO₂',
-        routeOptimized: 'Yes - 15% shorter',
-        estimatedSavings: '$45.00',
-        sustainabilityScore: 'A',
-        
-        // NEW: Route details for live map
-        routeStops: [
-          { location: 'Los Angeles, CA', status: 'completed', time: '09:30 Jan 15' },
-          { location: 'Phoenix, AZ', status: 'completed', time: '18:20 Jan 15' },
-          { location: 'Albuquerque, NM', status: 'completed', time: '09:15 Jan 16' },
-          { location: 'Oklahoma City, OK', status: 'completed', time: '22:40 Jan 16' },
-          { location: 'St. Louis, MO', status: 'completed', time: '14:30 Jan 17' },
-          { location: 'Chicago, IL', status: 'current', time: '15:30 Jan 17' },
-          { location: 'Cleveland, OH', status: 'upcoming', time: 'Est. 08:00 Jan 18' },
-          { location: 'New York, NY', status: 'upcoming', time: 'Est. Jan 20' }
-        ]
-      })
+  // ------------------------------------------------------------------
+  // 3. POLLING FOR LIVE UPDATES (every 30 seconds)
+  // ------------------------------------------------------------------
+  useEffect(() => {
+    let intervalId
+    if (trackingData && trackingData.id) {
+      intervalId = setInterval(() => {
+        fetchTrackingData(trackingData.id)
+      }, 30000) // 30 seconds – adjust as needed
+    }
+    return () => {
+      if (intervalId) clearInterval(intervalId)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [trackingData?.id]) // Only re-run when the tracking ID changes
+
+  // ------------------------------------------------------------------
+  // 4. MANUAL REFRESH (refresh button)
+  // ------------------------------------------------------------------
+  const refreshTracking = () => {
+    if (trackingData && trackingData.id) {
+      fetchTrackingData(trackingData.id)
     }
   }
 
@@ -255,9 +202,11 @@ export default function TrackingPage() {
     setExpandedFaq(expandedFaq === index ? null : index)
   }
 
+  // ------------------------------------------------------------------
+  // 5. RENDER
+  // ------------------------------------------------------------------
   return (
     <div className="font-light tracking-wide bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50">
-      {/* Main Content */}
       <div className="container mx-auto px-4 pt-0 mt-0 pb-6">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-light tracking-wide mb-4 mt-0">
@@ -298,14 +247,15 @@ export default function TrackingPage() {
               </div>
               <button
                 type="submit"
-                className="px-6 py-3 rounded-lg font-medium flex items-center justify-center gap-2 transition hover:scale-105"
+                disabled={loading}
+                className="px-6 py-3 rounded-lg font-medium flex items-center justify-center gap-2 transition hover:scale-105 disabled:opacity-50"
                 style={{ 
                   backgroundColor: colors.goldenYellow,
                   color: colors.darkBrown
                 }}
               >
-                <Search className="h-5 w-5" />
-                Track
+                {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : <Search className="h-5 w-5" />}
+                {loading ? 'Tracking...' : 'Track'}
               </button>
             </div>
           </form>
@@ -325,6 +275,14 @@ export default function TrackingPage() {
             ))}
           </div>
         </div>
+
+        {/* Error Message */}
+        {error && (
+          <div className="max-w-4xl mx-auto mt-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center gap-2 text-red-700">
+            <AlertCircle className="h-5 w-5" />
+            <span>{error}</span>
+          </div>
+        )}
 
         {/* Tracking Results */}
         {trackingData && (
@@ -349,8 +307,13 @@ export default function TrackingPage() {
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <button className="p-2 rounded-lg hover:bg-white/50 transition" onClick={refreshTracking}>
-                    <RefreshCw className="h-5 w-5" style={{ color: colors.goldenYellow }} />
+                  <button 
+                    className="p-2 rounded-lg hover:bg-white/50 transition" 
+                    onClick={refreshTracking}
+                    disabled={loading}
+                  >
+                    {loading ? <Loader2 className="h-5 w-5 animate-spin" style={{ color: colors.goldenYellow }} /> : 
+                    <RefreshCw className="h-5 w-5" style={{ color: colors.goldenYellow }} />}
                   </button>
                   <button className="p-2 rounded-lg hover:bg-white/50 transition" onClick={() => copyToClipboard(trackingData.id)}>
                     {copied ? <CheckCheck className="h-5 w-5" style={{ color: colors.forest }} /> : <Copy className="h-5 w-5" style={{ color: colors.goldenYellow }} />}
@@ -475,7 +438,7 @@ export default function TrackingPage() {
                   <div className="text-2xl font-normal tracking-wide mb-1" style={{ color: colors.goldenYellow }}>{trackingData.estimatedDelivery}</div>
                   <p className="text-sm mb-3" style={{ color: colors.darkBrown, opacity: 0.6 }}>{trackingData.estimatedTime}</p>
                   
-                  {/* Quick Countdown */}
+                  {/* Quick Countdown (optional, can be computed from dates) */}
                   <div className="grid grid-cols-3 gap-2">
                     <div className="text-center p-2 rounded-lg" style={{ backgroundColor: colors.goldenYellow + '10' }}>
                       <div className="text-lg font-bold" style={{ color: colors.darkBrown }}>02</div>
@@ -520,12 +483,14 @@ export default function TrackingPage() {
                   <h3 className="font-bold mb-3" style={{ color: colors.darkBrown }}>Quick Actions</h3>
                   <div className="space-y-2">
                     <button className="w-full p-3 rounded-lg text-sm font-medium flex items-center justify-center gap-2 transition hover:scale-105"
-                      style={{ backgroundColor: colors.goldenYellow + '20', color: colors.darkBrown }}>
+                      style={{ backgroundColor: colors.goldenYellow + '20', color: colors.darkBrown }}
+                      onClick={() => alert('Notifications feature - implement as needed')}>
                       <Bell className="h-4 w-4" />
                       Get Notifications
                     </button>
                     <button className="w-full p-3 rounded-lg text-sm font-medium flex items-center justify-center gap-2 transition hover:scale-105"
-                      style={{ backgroundColor: colors.orange + '20', color: colors.darkBrown }}>
+                      style={{ backgroundColor: colors.orange + '20', color: colors.darkBrown }}
+                      onClick={() => alert('Support contact - implement as needed')}>
                       <HeadphonesIcon className="h-4 w-4" />
                       Contact Support
                     </button>
@@ -534,7 +499,7 @@ export default function TrackingPage() {
               </div>
             </div>
 
-            {/* ENHANCED: Live Shipment Route with stops */}
+            {/* Live Shipment Route with stops */}
             <div className="mt-6 bg-white/70 backdrop-blur-md rounded-xl p-6 border" style={{ borderColor: colors.lightTan }}>
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
@@ -548,52 +513,58 @@ export default function TrackingPage() {
               </div>
               
               {/* Route visualization */}
-              <div className="relative mb-6">
-                <div className="h-24 bg-gradient-to-r from-amber-100 to-orange-100 rounded-lg flex items-center justify-between px-4 border-2" style={{ borderColor: colors.goldenYellow + '40' }}>
-                  {trackingData.routeStops.map((stop, idx) => (
-                    <div key={idx} className="relative flex flex-col items-center">
-                      <div 
-                        className={`w-4 h-4 rounded-full ${
-                          stop.status === 'completed' ? 'bg-green-500' : 
-                          stop.status === 'current' ? 'bg-yellow-500 animate-pulse' : 
-                          'bg-gray-300'
-                        }`}
-                        style={{ 
-                          boxShadow: stop.status === 'current' ? `0 0 0 4px ${colors.goldenYellow}40` : 'none'
-                        }}
-                      />
-                      {idx < trackingData.routeStops.length - 1 && (
-                        <div className="absolute top-2 left-6 w-full h-0.5 bg-gray-300" style={{ width: 'calc(100% - 1rem)' }} />
-                      )}
-                      <span className="text-xs mt-2 whitespace-nowrap" style={{ color: colors.darkBrown, opacity: 0.7 }}>{stop.location.split(',')[0]}</span>
+              {trackingData.routeStops && trackingData.routeStops.length > 0 ? (
+                <>
+                  <div className="relative mb-6">
+                    <div className="h-24 bg-gradient-to-r from-amber-100 to-orange-100 rounded-lg flex items-center justify-between px-4 border-2" style={{ borderColor: colors.goldenYellow + '40' }}>
+                      {trackingData.routeStops.map((stop, idx) => (
+                        <div key={idx} className="relative flex flex-col items-center">
+                          <div 
+                            className={`w-4 h-4 rounded-full ${
+                              stop.status === 'completed' ? 'bg-green-500' : 
+                              stop.status === 'current' ? 'bg-yellow-500 animate-pulse' : 
+                              'bg-gray-300'
+                            }`}
+                            style={{ 
+                              boxShadow: stop.status === 'current' ? `0 0 0 4px ${colors.goldenYellow}40` : 'none'
+                            }}
+                          />
+                          {idx < trackingData.routeStops.length - 1 && (
+                            <div className="absolute top-2 left-6 w-full h-0.5 bg-gray-300" style={{ width: 'calc(100% - 1rem)' }} />
+                          )}
+                          <span className="text-xs mt-2 whitespace-nowrap" style={{ color: colors.darkBrown, opacity: 0.7 }}>{stop.location.split(',')[0]}</span>
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
-              </div>
+                  </div>
 
-              <div className="flex justify-between text-xs mb-4">
-                <span style={{ color: colors.darkBrown, opacity: 0.6 }}>{trackingData.origin.city}</span>
-                <ArrowRight className="h-3 w-3" style={{ color: colors.goldenYellow }} />
-                <span style={{ color: colors.darkBrown, opacity: 0.6 }}>{trackingData.currentLocation.city}</span>
-                <ArrowRight className="h-3 w-3" style={{ color: colors.goldenYellow }} />
-                <span style={{ color: colors.darkBrown, opacity: 0.6 }}>{trackingData.destination.city}</span>
-              </div>
+                  <div className="flex justify-between text-xs mb-4">
+                    <span style={{ color: colors.darkBrown, opacity: 0.6 }}>{trackingData.origin.city}</span>
+                    <ArrowRight className="h-3 w-3" style={{ color: colors.goldenYellow }} />
+                    <span style={{ color: colors.darkBrown, opacity: 0.6 }}>{trackingData.currentLocation.city}</span>
+                    <ArrowRight className="h-3 w-3" style={{ color: colors.goldenYellow }} />
+                    <span style={{ color: colors.darkBrown, opacity: 0.6 }}>{trackingData.destination.city}</span>
+                  </div>
 
-              {/* Route details */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
-                <div className="p-2 rounded-lg" style={{ backgroundColor: colors.cream }}>
-                  <span className="block font-medium" style={{ color: colors.darkBrown }}>Distance Covered</span>
-                  <span style={{ color: colors.goldenYellow }}>2,450 mi</span>
-                </div>
-                <div className="p-2 rounded-lg" style={{ backgroundColor: colors.cream }}>
-                  <span className="block font-medium" style={{ color: colors.darkBrown }}>Est. Remaining</span>
-                  <span style={{ color: colors.orange }}>790 mi</span>
-                </div>
-                <div className="p-2 rounded-lg" style={{ backgroundColor: colors.cream }}>
-                  <span className="block font-medium" style={{ color: colors.darkBrown }}>Current Speed</span>
-                  <span style={{ color: colors.forest }}>550 mph</span>
-                </div>
-              </div>
+                  {/* Route details */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                    <div className="p-2 rounded-lg" style={{ backgroundColor: colors.cream }}>
+                      <span className="block font-medium" style={{ color: colors.darkBrown }}>Distance Covered</span>
+                      <span style={{ color: colors.goldenYellow }}>2,450 mi</span>
+                    </div>
+                    <div className="p-2 rounded-lg" style={{ backgroundColor: colors.cream }}>
+                      <span className="block font-medium" style={{ color: colors.darkBrown }}>Est. Remaining</span>
+                      <span style={{ color: colors.orange }}>790 mi</span>
+                    </div>
+                    <div className="p-2 rounded-lg" style={{ backgroundColor: colors.cream }}>
+                      <span className="block font-medium" style={{ color: colors.darkBrown }}>Current Speed</span>
+                      <span style={{ color: colors.forest }}>550 mph</span>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <p className="text-sm text-center" style={{ color: colors.darkBrown, opacity: 0.6 }}>Route information not available yet.</p>
+              )}
             </div>
 
             {/* Value-Added Services */}
@@ -661,11 +632,11 @@ export default function TrackingPage() {
                   </div>
                 </div>
                 <div className="flex gap-3">
-                  <button className="px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 transition hover:scale-105" style={{ backgroundColor: colors.goldenYellow, color: colors.darkBrown }}>
+                  <button className="px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 transition hover:scale-105" style={{ backgroundColor: colors.goldenYellow, color: colors.darkBrown }} onClick={() => alert('Call support - implement as needed')}>
                     <Phone className="h-4 w-4" />
                     Call Now
                   </button>
-                  <button className="px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 border transition hover:bg-white/50" style={{ borderColor: colors.goldenYellow, color: colors.darkBrown }}>
+                  <button className="px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 border transition hover:bg-white/50" style={{ borderColor: colors.goldenYellow, color: colors.darkBrown }} onClick={() => alert('Email support - implement as needed')}>
                     <Mail className="h-4 w-4" />
                     Email
                   </button>
@@ -678,7 +649,7 @@ export default function TrackingPage() {
               <p className="text-sm mb-2" style={{ color: colors.darkBrown, opacity: 0.6 }}>Was this tracking information helpful?</p>
               <div className="flex justify-center gap-2">
                 {[1,2,3,4,5].map((star) => (
-                  <button key={star} className="p-1 hover:scale-110 transition">
+                  <button key={star} className="p-1 hover:scale-110 transition" onClick={() => alert(`Rated ${star} stars - implement as needed`)}>
                     <Star className="h-5 w-5" style={{ color: colors.goldenYellow }} fill={colors.goldenYellow} />
                   </button>
                 ))}
@@ -688,7 +659,7 @@ export default function TrackingPage() {
         )}
 
         {/* No Tracking Data - Enhanced Services with Learn More */}
-        {!trackingData && (
+        {!trackingData && !loading && !error && (
           <div className="max-w-7xl mx-auto mt-16">
             <h2 className="text-2xl font-bold text-center mb-8" style={{ color: colors.darkBrown }}>
               Why Choose LogiTrack?
@@ -710,7 +681,7 @@ export default function TrackingPage() {
               ))}
             </div>
 
-            {/* Additional info for non-trackers */}
+            {/* Additional info */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="bg-white/50 backdrop-blur-sm rounded-xl p-6 border" style={{ borderColor: colors.lightTan }}>
                 <h3 className="font-normal tracking-wide mb-3 flex items-center gap-2" style={{ color: colors.darkBrown }}>
@@ -727,8 +698,6 @@ export default function TrackingPage() {
                 >
                   {learnMoreExpanded ? 'Show Less' : 'Learn More'} {learnMoreExpanded ? <ChevronUp className="h-3 w-3" /> : <ChevronRight className="h-3 w-3" />}
                 </button>
-
-                {/* Expanded Learn More content */}
                 {learnMoreExpanded && (
                   <div className="mt-4 p-4 rounded-lg" style={{ backgroundColor: colors.cream }}>
                     <h4 className="font-medium mb-2" style={{ color: colors.darkBrown }}>Where to find your tracking number:</h4>
@@ -786,3 +755,792 @@ export default function TrackingPage() {
     </div>
   )
 }
+  
+  // 'use client'
+
+// import { useState } from 'react'
+// import { 
+//   Search, MapPin, Package, Clock, Truck, Calendar, CheckCircle, 
+//   MessageSquare, Phone, Mail, Globe, Shield, ArrowRight, 
+//   AlertCircle, HelpCircle, ChevronRight, Download, Share2,
+//   Bell, RefreshCw, FileText, HeadphonesIcon, Star, Award,
+//   Clock3, BarChart3, Users, TrendingUp, Boxes, Ship,
+//   Plane, Train, Bike, Navigation, Copy, CheckCheck,
+//   Sparkles, Zap, Target, Compass, Gift, CreditCard,
+//   ShieldCheck, Wind, Sun, Cloud, Droplets, Thermometer,
+//   Menu, X, Leaf, Map, ThumbsUp, MessageCircle, HelpCircle as Help,
+//   ChevronDown, ChevronUp, TruckIcon, Plane as PlaneIcon, Train as TrainIcon, Ship as ShipIcon,
+//   LocateFixed, Route, Waypoints, Gauge, Fuel, Milestone
+// } from 'lucide-react'
+
+// export default function TrackingPage() {
+//   const [trackingId, setTrackingId] = useState('')
+//   const [trackingData, setTrackingData] = useState(null)
+//   const [copied, setCopied] = useState(false)
+//   const [emailNotification, setEmailNotification] = useState('')
+//   const [activeTab, setActiveTab] = useState('tracking')
+//   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+//   const [expandedFaq, setExpandedFaq] = useState(null)
+//   // NEW: State for Learn More expansion
+//   const [learnMoreExpanded, setLearnMoreExpanded] = useState(false)
+//   // NEW: Simulated live update trigger
+//   const [lastUpdate, setLastUpdate] = useState(new Date().toLocaleTimeString())
+
+//   // Professional color palette
+//   const colors = {
+//     darkBrown: '#2C1810',
+//     mediumBrown: '#8B4513',
+//     lightBrown: '#D2691E',
+//     goldenYellow: '#FFB81C',
+//     lightGold: '#FFD700',
+//     orange: '#FF8C42',
+//     darkOrange: '#CC5500',
+//     cream: '#FFF8E7',
+//     lightTan: '#F5DEB3',
+//     sage: '#9CAF88',
+//     forest: '#228B22',
+//     burgundy: '#800020'
+//   }
+
+//   // NEW: Simulate live refresh
+//   const refreshTracking = () => {
+//     setLastUpdate(new Date().toLocaleTimeString())
+//     // In a real app, you'd fetch new data here
+//   }
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault()
+//     if (trackingId.trim()) {
+//       setTrackingData({
+//         id: trackingId.toUpperCase(),
+//         status: 'IN_TRANSIT',
+//         statusText: 'In Transit - On Time',
+//         statusColor: colors.forest,
+//         origin: {
+//           city: 'Los Angeles',
+//           state: 'CA',
+//           country: 'USA',
+//           facility: 'LAX Logistics Hub',
+//           code: 'LAX'
+//         },
+//         destination: {
+//           city: 'New York',
+//           state: 'NY',
+//           country: 'USA',
+//           facility: 'JFK Distribution Center',
+//           code: 'JFK'
+//         },
+//         currentLocation: {
+//           city: 'Chicago',
+//           state: 'IL',
+//           facility: 'Midwest Sorting Center',
+//           lat: 41.8781,
+//           lng: -87.6298
+//         },
+//         estimatedDelivery: 'Jan 20, 2024',
+//         estimatedTime: '2:30 PM - 5:30 PM',
+//         weight: '15.5 kg',
+//         dimensions: '40 x 30 x 25 cm',
+//         shippingMethod: 'Express Air',
+//         service: 'Priority Overnight',
+//         trackingNumber: trackingId.toUpperCase(),
+//         customerReference: 'PO-2024-00123',
+//         pieces: 2,
+//         totalValue: '$1,250.00',
+//         insurance: 'Included',
+//         specialInstructions: 'Fragile - Handle with care',
+        
+//         timeline: [
+//           { 
+//             id: 1, 
+//             status: 'Order Placed', 
+//             location: 'Los Angeles, CA', 
+//             date: 'Jan 15', 
+//             time: '09:30', 
+//             completed: true,
+//             description: 'Shipment information received',
+//             icon: FileText
+//           },
+//           { 
+//             id: 2, 
+//             status: 'Picked Up', 
+//             location: 'Los Angeles, CA', 
+//             date: 'Jan 15', 
+//             time: '11:45', 
+//             completed: true,
+//             description: 'Package picked up by carrier',
+//             icon: Package 
+//           }, 
+//           { 
+//             id: 3, 
+//             status: 'Arrived at Facility', 
+//             location: 'Los Angeles Hub', 
+//             date: 'Jan 15', 
+//             time: '14:15', 
+//             completed: true,
+//             description: 'Sorting in progress',
+//             icon: Boxes
+//           },
+//           { 
+//             id: 4, 
+//             status: 'Departed Facility', 
+//             location: 'Los Angeles Hub', 
+//             date: 'Jan 16', 
+//             time: '08:00', 
+//             completed: true,
+//             description: 'Departed for destination',
+//             icon: Plane
+//           },
+//           { 
+//             id: 5, 
+//             status: 'In Transit', 
+//             location: 'Chicago, IL', 
+//             date: 'Jan 17', 
+//             time: '15:30', 
+//             completed: true,
+//             description: 'Arrived at Chicago sorting facility',
+//             icon: Train
+//           },
+//           { 
+//             id: 6, 
+//             status: 'Arrived at Hub', 
+//             location: 'New York Hub', 
+//             date: 'Jan 18', 
+//             time: '10:20', 
+//             completed: false,
+//             description: 'Processing at regional facility',
+//             icon: Truck
+//           },
+//           { 
+//             id: 7, 
+//             status: 'Out for Delivery', 
+//             location: 'New York, NY', 
+//             date: 'Jan 19', 
+//             time: '08:00', 
+//             completed: false,
+//             description: 'Package on delivery vehicle',
+//             icon: Bike
+//           },
+//           { 
+//             id: 8, 
+//             status: 'Delivered', 
+//             location: 'New York, NY', 
+//             date: 'Jan 20', 
+//             time: 'Expected', 
+//             completed: false,
+//             description: 'Awaiting delivery confirmation',
+//             icon: CheckCircle
+//           }
+//         ],
+        
+//         trackingHistory: [
+//           { action: 'Label created', date: 'Jan 15, 2024', time: '09:30', user: 'System' },
+//           { action: 'Picked up', date: 'Jan 15, 2024', time: '11:45', user: 'Driver: John D.' },
+//           { action: 'Sorted at LAX', date: 'Jan 15, 2024', time: '14:15', user: 'Facility A' },
+//           { action: 'Departed LAX', date: 'Jan 16, 2024', time: '08:00', user: 'Flight AA1234' },
+//           { action: 'Arrived at ORD', date: 'Jan 17, 2024', time: '15:30', user: 'Chicago Hub' },
+//         ],
+        
+//         milestones: {
+//           total: 8,
+//           completed: 5,
+//           remaining: 3,
+//           progress: 62.5
+//         },
+        
+//         weather: {
+//           atOrigin: { condition: 'Sunny', temp: '72°F', icon: Sun },
+//           atDestination: { condition: 'Cloudy', temp: '45°F', icon: Cloud },
+//           atCurrent: { condition: 'Partly cloudy', temp: '38°F', icon: Wind }
+//         },
+        
+//         deliveryOptions: {
+//           signature: 'Required',
+//           leaveWithNeighbor: false,
+//           alternateAddress: 'Available upon request'
+//         },
+        
+//         contactInfo: {
+//           shipper: 'ABC Corp',
+//           shipperPhone: '+1 (800) 555-0123',
+//           shipperEmail: 'shipping@abccorp.com',
+//           recipient: 'John Smith',
+//           recipientPhone: '+1 (212) 555-4567',
+//           recipientEmail: 'john.smith@email.com'
+//         },
+
+//         carbonFootprint: '2.5 kg CO₂',
+//         routeOptimized: 'Yes - 15% shorter',
+//         estimatedSavings: '$45.00',
+//         sustainabilityScore: 'A',
+        
+//         // NEW: Route details for live map
+//         routeStops: [
+//           { location: 'Los Angeles, CA', status: 'completed', time: '09:30 Jan 15' },
+//           { location: 'Phoenix, AZ', status: 'completed', time: '18:20 Jan 15' },
+//           { location: 'Albuquerque, NM', status: 'completed', time: '09:15 Jan 16' },
+//           { location: 'Oklahoma City, OK', status: 'completed', time: '22:40 Jan 16' },
+//           { location: 'St. Louis, MO', status: 'completed', time: '14:30 Jan 17' },
+//           { location: 'Chicago, IL', status: 'current', time: '15:30 Jan 17' },
+//           { location: 'Cleveland, OH', status: 'upcoming', time: 'Est. 08:00 Jan 18' },
+//           { location: 'New York, NY', status: 'upcoming', time: 'Est. Jan 20' }
+//         ]
+//       })
+//     }
+//   }
+
+//   const copyToClipboard = (text) => {
+//     navigator.clipboard.writeText(text)
+//     setCopied(true)
+//     setTimeout(() => setCopied(false), 2000)
+//   }
+
+//   const getStatusIcon = (status) => {
+//     switch(status) {
+//       case 'Order Placed': return FileText
+//       case 'Picked Up': return Package
+//       case 'Arrived at Facility': return Boxes
+//       case 'Departed Facility': return Plane
+//       case 'In Transit': return Train
+//       case 'Arrived at Hub': return Truck
+//       case 'Out for Delivery': return Bike
+//       case 'Delivered': return CheckCircle
+//       default: return Package
+//     }
+//   }
+
+//   const toggleFaq = (index) => {
+//     setExpandedFaq(expandedFaq === index ? null : index)
+//   }
+
+//   return (
+//     <div className="font-light tracking-wide bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50">
+//       {/* Main Content */}
+//       <div className="container mx-auto px-4 pt-0 mt-0 pb-6">
+//         <div className="max-w-4xl mx-auto text-center">
+//           <h1 className="text-4xl md:text-5xl font-light tracking-wide mb-4 mt-0">
+//             <span style={{ color: colors.darkBrown }}>Track Your </span>
+//             <span
+//               className="bg-clip-text text-transparent"
+//               style={{
+//                 backgroundImage: `linear-gradient(135deg, ${colors.darkBrown}, ${colors.goldenYellow})`,
+//               }}
+//             >
+//               Shipment
+//             </span>
+//           </h1>
+//           <p
+//             className="text-base mb-8"
+//             style={{ color: colors.darkBrown, opacity: 0.7 }}
+//           >
+//             Enter your tracking number to get real-time updates
+//           </p>
+
+//           {/* Search Form */}
+//           <form onSubmit={handleSubmit} className="bg-white/70 backdrop-blur-md rounded-xl shadow-lg p-4 border" style={{ borderColor: colors.goldenYellow + '30' }}>
+//             <div className="flex flex-col md:flex-row gap-3">
+//               <div className="flex-1 relative">
+//                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5" style={{ color: colors.goldenYellow }} />
+//                 <input
+//                   type="text"
+//                   value={trackingId}
+//                   onChange={(e) => setTrackingId(e.target.value)}
+//                   placeholder="Enter tracking number (e.g., LGSW123456789)"
+//                   className="w-full pl-10 pr-4 py-3 rounded-lg focus:outline-none focus:ring-2 transition bg-white/50"
+//                   style={{ 
+//                     border: `1px solid ${colors.lightTan}`,
+//                     focusRing: colors.goldenYellow,
+//                     color: colors.darkBrown
+//                   }}
+//                 />
+//               </div>
+//               <button
+//                 type="submit"
+//                 className="px-6 py-3 rounded-lg font-medium flex items-center justify-center gap-2 transition hover:scale-105"
+//                 style={{ 
+//                   backgroundColor: colors.goldenYellow,
+//                   color: colors.darkBrown
+//                 }}
+//               >
+//                 <Search className="h-5 w-5" />
+//                 Track
+//               </button>
+//             </div>
+//           </form>
+
+//           {/* Quick Actions */}
+//           <div className="flex flex-wrap items-center justify-center gap-2 mt-4">
+//             <span className="text-xs" style={{ color: colors.darkBrown, opacity: 0.6 }}>Recent:</span>
+//             {['LGSW123456789', 'LGSW987654321', 'LGSW456123789'].map((num) => (
+//               <button
+//                 key={num}
+//                 onClick={() => setTrackingId(num)}
+//                 className="px-3 py-1 text-xs rounded-full hover:scale-105 transition bg-white/50 border"
+//                 style={{ borderColor: colors.goldenYellow + '30', color: colors.darkBrown }}
+//               >
+//                 {num}
+//               </button>
+//             ))}
+//           </div>
+//         </div>
+
+//         {/* Tracking Results */}
+//         {trackingData && (
+//           <div className="max-w-7xl mx-auto mt-12">
+//             {/* Status Header with Refresh */}
+//             <div className="bg-white/70 backdrop-blur-md rounded-xl p-6 mb-6 border" style={{ borderColor: colors.goldenYellow + '30' }}>
+//               <div className="flex flex-wrap items-center justify-between gap-4">
+//                 <div className="flex items-center gap-4">
+//                   <div className="p-3 rounded-lg" style={{ backgroundColor: colors.goldenYellow + '20' }}>
+//                     <Package className="h-6 w-6" style={{ color: colors.goldenYellow }} />
+//                   </div>
+//                   <div>
+//                     <div className="flex items-center gap-2">
+//                       <h2 className="text-xl font-bold" style={{ color: colors.darkBrown }}>Shipment #{trackingData.id}</h2>
+//                       <span className="px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1"
+//                         style={{ backgroundColor: trackingData.statusColor + '20', color: trackingData.statusColor }}>
+//                         <CheckCircle className="h-3 w-3" />
+//                         {trackingData.statusText}
+//                       </span>
+//                     </div>
+//                     <p className="text-sm" style={{ color: colors.darkBrown, opacity: 0.6 }}>Ref: {trackingData.customerReference}</p>
+//                   </div>
+//                 </div>
+//                 <div className="flex gap-2">
+//                   <button className="p-2 rounded-lg hover:bg-white/50 transition" onClick={refreshTracking}>
+//                     <RefreshCw className="h-5 w-5" style={{ color: colors.goldenYellow }} />
+//                   </button>
+//                   <button className="p-2 rounded-lg hover:bg-white/50 transition" onClick={() => copyToClipboard(trackingData.id)}>
+//                     {copied ? <CheckCheck className="h-5 w-5" style={{ color: colors.forest }} /> : <Copy className="h-5 w-5" style={{ color: colors.goldenYellow }} />}
+//                   </button>
+//                   <button className="p-2 rounded-lg hover:bg-white/50 transition">
+//                     <Download className="h-5 w-5" style={{ color: colors.goldenYellow }} />
+//                   </button>
+//                   <button className="p-2 rounded-lg hover:bg-white/50 transition">
+//                     <Share2 className="h-5 w-5" style={{ color: colors.goldenYellow }} />
+//                   </button>
+//                 </div>
+//               </div>
+//               <div className="text-right text-xs mt-2" style={{ color: colors.darkBrown, opacity: 0.5 }}>
+//                 Last updated: {lastUpdate}
+//               </div>
+//             </div>
+
+//             {/* Progress Bar */}
+//             <div className="bg-white/70 backdrop-blur-md rounded-xl p-4 mb-6 border" style={{ borderColor: colors.lightTan }}>
+//               <div className="flex items-center justify-between mb-2">
+//                 <span className="text-sm font-medium" style={{ color: colors.darkBrown }}>Shipment Progress</span>
+//                 <span className="text-sm px-2 py-0.5 rounded-full" style={{ backgroundColor: colors.goldenYellow + '20', color: colors.goldenYellow }}>
+//                   {trackingData.milestones.completed}/{trackingData.milestones.total} Steps
+//                 </span>
+//               </div>
+//               <div className="h-2 bg-gray-200/50 rounded-full overflow-hidden">
+//                 <div 
+//                   className="h-full rounded-full transition-all duration-500"
+//                   style={{ 
+//                     width: `${trackingData.milestones.progress}%`,
+//                     background: `linear-gradient(90deg, ${colors.goldenYellow}, ${colors.orange})`
+//                   }}
+//                 />
+//               </div>
+//             </div>
+
+//             {/* Shipment Highlights */}
+//             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+//               {[
+//                 { icon: Leaf, label: 'Carbon Footprint', value: trackingData.carbonFootprint, color: colors.sage },
+//                 { icon: Zap, label: 'Route Optimized', value: trackingData.routeOptimized, color: colors.goldenYellow },
+//                 { icon: TrendingUp, label: 'Est. Savings', value: trackingData.estimatedSavings, color: colors.forest },
+//                 { icon: Award, label: 'Sustainability', value: `Score ${trackingData.sustainabilityScore}`, color: colors.orange }
+//               ].map((item, idx) => (
+//                 <div key={idx} className="bg-white/70 backdrop-blur-md rounded-xl p-4 border flex items-center gap-3" style={{ borderColor: colors.lightTan }}>
+//                   <div className="p-2 rounded-lg" style={{ backgroundColor: item.color + '20' }}>
+//                     <item.icon className="h-5 w-5" style={{ color: item.color }} />
+//                   </div>
+//                   <div>
+//                     <div className="text-xs" style={{ color: colors.darkBrown, opacity: 0.6 }}>{item.label}</div>
+//                     <div className="text-sm font-medium" style={{ color: colors.darkBrown }}>{item.value}</div>
+//                   </div>
+//                 </div>
+//               ))}
+//             </div>
+
+//             {/* Main Grid */}
+//             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+//               {/* Left Column - Timeline & History */}
+//               <div className="lg:col-span-2 space-y-6">
+//                 {/* Location Cards */}
+//                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+//                   <div className="bg-white/70 backdrop-blur-md rounded-xl p-4 border" style={{ borderColor: colors.goldenYellow + '30' }}>
+//                     <div className="flex items-center gap-2 mb-2">
+//                       <MapPin className="h-4 w-4" style={{ color: colors.goldenYellow }} />
+//                       <h3 className="font-medium" style={{ color: colors.darkBrown }}>Origin</h3>
+//                     </div>
+//                     <p className="font-bold" style={{ color: colors.darkBrown }}>{trackingData.origin.city}, {trackingData.origin.state}</p>
+//                     <p className="text-sm" style={{ color: colors.darkBrown, opacity: 0.6 }}>{trackingData.origin.facility}</p>
+//                   </div>
+
+//                   <div className="bg-white/70 backdrop-blur-md rounded-xl p-4 border" style={{ borderColor: colors.orange + '30' }}>
+//                     <div className="flex items-center gap-2 mb-2">
+//                       <Navigation className="h-4 w-4" style={{ color: colors.orange }} />
+//                       <h3 className="font-medium" style={{ color: colors.darkBrown }}>Current Location</h3>
+//                     </div>
+//                     <p className="font-bold" style={{ color: colors.darkBrown }}>{trackingData.currentLocation.city}, {trackingData.currentLocation.state}</p>
+//                     <p className="text-sm" style={{ color: colors.darkBrown, opacity: 0.6 }}>{trackingData.currentLocation.facility}</p>
+//                   </div>
+//                 </div>
+
+//                 {/* Timeline */}
+//                 <div className="bg-white/70 backdrop-blur-md rounded-xl p-6 border" style={{ borderColor: colors.lightTan }}>
+//                   <h3 className="text-lg font-normal tracking-wide mb-4" style={{ color: colors.darkBrown }}>Tracking Timeline</h3>
+//                   <div className="space-y-4">
+//                     {trackingData.timeline.map((event) => {
+//                       const IconComponent = event.icon || getStatusIcon(event.status)
+//                       return (
+//                         <div key={event.id} className="flex gap-3">
+//                           <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0`}
+//                             style={{ backgroundColor: event.completed ? colors.forest + '20' : '#f3f4f6' }}>
+//                             <IconComponent className="h-4 w-4" style={{ color: event.completed ? colors.forest : '#9ca3af' }} />
+//                           </div>
+//                           <div className="flex-1">
+//                             <div className="flex flex-wrap justify-between items-start gap-2">
+//                               <div>
+//                                 <h4 className="font-medium" style={{ color: colors.darkBrown }}>{event.status}</h4>
+//                                 <p className="text-sm" style={{ color: colors.darkBrown, opacity: 0.6 }}>{event.description}</p>
+//                                 <p className="text-xs mt-1" style={{ color: colors.goldenYellow }}>{event.location}</p>
+//                               </div>
+//                               <div className="text-right">
+//                                 <div className="text-sm font-medium" style={{ color: colors.darkBrown }}>{event.date}</div>
+//                                 <div className="text-xs" style={{ color: colors.darkBrown, opacity: 0.5 }}>{event.time}</div>
+//                               </div>
+//                             </div>
+//                           </div>
+//                         </div>
+//                       )
+//                     })}
+//                   </div>
+//                 </div>
+//               </div>
+
+//               {/* Right Column - Package Info */}
+//               <div className="space-y-6">
+//                 {/* Delivery Estimate */}
+//                 <div className="bg-white/70 backdrop-blur-md rounded-xl p-6 border" style={{ borderColor: colors.goldenYellow + '30' }}>
+//                   <div className="flex items-center gap-2 mb-3">
+//                     <Calendar className="h-5 w-5" style={{ color: colors.goldenYellow }} />
+//                     <h3 className="font-bold" style={{ color: colors.darkBrown }}>Estimated Delivery</h3>
+//                   </div>
+//                   <div className="text-2xl font-normal tracking-wide mb-1" style={{ color: colors.goldenYellow }}>{trackingData.estimatedDelivery}</div>
+//                   <p className="text-sm mb-3" style={{ color: colors.darkBrown, opacity: 0.6 }}>{trackingData.estimatedTime}</p>
+                  
+//                   {/* Quick Countdown */}
+//                   <div className="grid grid-cols-3 gap-2">
+//                     <div className="text-center p-2 rounded-lg" style={{ backgroundColor: colors.goldenYellow + '10' }}>
+//                       <div className="text-lg font-bold" style={{ color: colors.darkBrown }}>02</div>
+//                       <div className="text-xs" style={{ color: colors.darkBrown, opacity: 0.6 }}>Days</div>
+//                     </div>
+//                     <div className="text-center p-2 rounded-lg" style={{ backgroundColor: colors.orange + '10' }}>
+//                       <div className="text-lg font-bold" style={{ color: colors.darkBrown }}>14</div>
+//                       <div className="text-xs" style={{ color: colors.darkBrown, opacity: 0.6 }}>Hours</div>
+//                     </div>
+//                     <div className="text-center p-2 rounded-lg" style={{ backgroundColor: colors.forest + '10' }}>
+//                       <div className="text-lg font-bold" style={{ color: colors.darkBrown }}>32</div>
+//                       <div className="text-xs" style={{ color: colors.darkBrown, opacity: 0.6 }}>Mins</div>
+//                     </div>
+//                   </div>
+//                 </div>
+
+//                 {/* Package Details */}
+//                 <div className="bg-white/70 backdrop-blur-md rounded-xl p-6 border" style={{ borderColor: colors.lightTan }}>
+//                   <h3 className="font-normal tracking-wide mb-3" style={{ color: colors.darkBrown }}>Package Details</h3>
+//                   <div className="space-y-2">
+//                     <div className="flex justify-between text-sm">
+//                       <span style={{ color: colors.darkBrown, opacity: 0.6 }}>Weight:</span>
+//                       <span className="font-medium" style={{ color: colors.darkBrown }}>{trackingData.weight}</span>
+//                     </div>
+//                     <div className="flex justify-between text-sm">
+//                       <span style={{ color: colors.darkBrown, opacity: 0.6 }}>Dimensions:</span>
+//                       <span className="font-medium" style={{ color: colors.darkBrown }}>{trackingData.dimensions}</span>
+//                     </div>
+//                     <div className="flex justify-between text-sm">
+//                       <span style={{ color: colors.darkBrown, opacity: 0.6 }}>Service:</span>
+//                       <span className="font-medium" style={{ color: colors.goldenYellow }}>{trackingData.service}</span>
+//                     </div>
+//                     <div className="flex justify-between text-sm">
+//                       <span style={{ color: colors.darkBrown, opacity: 0.6 }}>Value:</span>
+//                       <span className="font-medium" style={{ color: colors.forest }}>{trackingData.totalValue}</span>
+//                     </div>
+//                   </div>
+//                 </div>
+
+//                 {/* Quick Actions */}
+//                 <div className="bg-white/70 backdrop-blur-md rounded-xl p-6 border" style={{ borderColor: colors.lightTan }}>
+//                   <h3 className="font-bold mb-3" style={{ color: colors.darkBrown }}>Quick Actions</h3>
+//                   <div className="space-y-2">
+//                     <button className="w-full p-3 rounded-lg text-sm font-medium flex items-center justify-center gap-2 transition hover:scale-105"
+//                       style={{ backgroundColor: colors.goldenYellow + '20', color: colors.darkBrown }}>
+//                       <Bell className="h-4 w-4" />
+//                       Get Notifications
+//                     </button>
+//                     <button className="w-full p-3 rounded-lg text-sm font-medium flex items-center justify-center gap-2 transition hover:scale-105"
+//                       style={{ backgroundColor: colors.orange + '20', color: colors.darkBrown }}>
+//                       <HeadphonesIcon className="h-4 w-4" />
+//                       Contact Support
+//                     </button>
+//                   </div>
+//                 </div>
+//               </div>
+//             </div>
+
+//             {/* ENHANCED: Live Shipment Route with stops */}
+//             <div className="mt-6 bg-white/70 backdrop-blur-md rounded-xl p-6 border" style={{ borderColor: colors.lightTan }}>
+//               <div className="flex items-center justify-between mb-4">
+//                 <div className="flex items-center gap-2">
+//                   <Map className="h-5 w-5" style={{ color: colors.goldenYellow }} />
+//                   <h3 className="font-normal tracking-wide" style={{ color: colors.darkBrown }}>Live Shipment Route</h3>
+//                 </div>
+//                 <span className="text-xs px-2 py-1 rounded-full" style={{ backgroundColor: colors.goldenYellow + '20', color: colors.goldenYellow }}>
+//                   <LocateFixed className="h-3 w-3 inline mr-1" />
+//                   Live
+//                 </span>
+//               </div>
+              
+//               {/* Route visualization */}
+//               <div className="relative mb-6">
+//                 <div className="h-24 bg-gradient-to-r from-amber-100 to-orange-100 rounded-lg flex items-center justify-between px-4 border-2" style={{ borderColor: colors.goldenYellow + '40' }}>
+//                   {trackingData.routeStops.map((stop, idx) => (
+//                     <div key={idx} className="relative flex flex-col items-center">
+//                       <div 
+//                         className={`w-4 h-4 rounded-full ${
+//                           stop.status === 'completed' ? 'bg-green-500' : 
+//                           stop.status === 'current' ? 'bg-yellow-500 animate-pulse' : 
+//                           'bg-gray-300'
+//                         }`}
+//                         style={{ 
+//                           boxShadow: stop.status === 'current' ? `0 0 0 4px ${colors.goldenYellow}40` : 'none'
+//                         }}
+//                       />
+//                       {idx < trackingData.routeStops.length - 1 && (
+//                         <div className="absolute top-2 left-6 w-full h-0.5 bg-gray-300" style={{ width: 'calc(100% - 1rem)' }} />
+//                       )}
+//                       <span className="text-xs mt-2 whitespace-nowrap" style={{ color: colors.darkBrown, opacity: 0.7 }}>{stop.location.split(',')[0]}</span>
+//                     </div>
+//                   ))}
+//                 </div>
+//               </div>
+
+//               <div className="flex justify-between text-xs mb-4">
+//                 <span style={{ color: colors.darkBrown, opacity: 0.6 }}>{trackingData.origin.city}</span>
+//                 <ArrowRight className="h-3 w-3" style={{ color: colors.goldenYellow }} />
+//                 <span style={{ color: colors.darkBrown, opacity: 0.6 }}>{trackingData.currentLocation.city}</span>
+//                 <ArrowRight className="h-3 w-3" style={{ color: colors.goldenYellow }} />
+//                 <span style={{ color: colors.darkBrown, opacity: 0.6 }}>{trackingData.destination.city}</span>
+//               </div>
+
+//               {/* Route details */}
+//               <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+//                 <div className="p-2 rounded-lg" style={{ backgroundColor: colors.cream }}>
+//                   <span className="block font-medium" style={{ color: colors.darkBrown }}>Distance Covered</span>
+//                   <span style={{ color: colors.goldenYellow }}>2,450 mi</span>
+//                 </div>
+//                 <div className="p-2 rounded-lg" style={{ backgroundColor: colors.cream }}>
+//                   <span className="block font-medium" style={{ color: colors.darkBrown }}>Est. Remaining</span>
+//                   <span style={{ color: colors.orange }}>790 mi</span>
+//                 </div>
+//                 <div className="p-2 rounded-lg" style={{ backgroundColor: colors.cream }}>
+//                   <span className="block font-medium" style={{ color: colors.darkBrown }}>Current Speed</span>
+//                   <span style={{ color: colors.forest }}>550 mph</span>
+//                 </div>
+//               </div>
+//             </div>
+
+//             {/* Value-Added Services */}
+//             <div className="mt-6">
+//               <h3 className="text-lg font-normal tracking-wide mb-4" style={{ color: colors.darkBrown }}>Enhance Your Shipment</h3>
+//               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+//                 {[
+//                   { icon: ShieldCheck, label: 'Extra Insurance', desc: 'Protect high-value items' },
+//                   { icon: Clock3, label: 'Time-Definite', desc: 'Guaranteed delivery window' },
+//                   { icon: Droplets, label: 'Cold Chain', desc: 'Temperature controlled' },
+//                   { icon: Gift, label: 'White Glove', desc: 'Inside delivery & setup' }
+//                 ].map((service, idx) => (
+//                   <div key={idx} className="bg-white/70 backdrop-blur-md rounded-xl p-4 border text-center hover:shadow-md transition" style={{ borderColor: colors.lightTan }}>
+//                     <div className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-2" style={{ backgroundColor: colors.goldenYellow + '20' }}>
+//                       <service.icon className="h-5 w-5" style={{ color: colors.goldenYellow }} />
+//                     </div>
+//                     <h4 className="text-sm font-medium" style={{ color: colors.darkBrown }}>{service.label}</h4>
+//                     <p className="text-xs mt-1" style={{ color: colors.darkBrown, opacity: 0.6 }}>{service.desc}</p>
+//                   </div>
+//                 ))}
+//               </div>
+//             </div>
+
+//             {/* Frequently Asked Questions */}
+//             <div className="mt-6 bg-white/70 backdrop-blur-md rounded-xl p-6 border" style={{ borderColor: colors.lightTan }}>
+//               <h3 className="text-lg font-normal tracking-wide mb-4" style={{ color: colors.darkBrown }}>Frequently Asked Questions</h3>
+//               <div className="space-y-3">
+//                 {[
+//                   { q: 'How can I change my delivery address?', a: 'You can request an address change by contacting our support team at least 24 hours before the scheduled delivery. Additional fees may apply.' },
+//                   { q: 'What if I miss my delivery?', a: 'If you\'re not available, the carrier will leave a notice with instructions to reschedule or pick up from a nearby facility.' },
+//                   { q: 'Is my package insured?', a: 'Basic coverage is included. For high-value items, we recommend purchasing additional insurance.' },
+//                   { q: 'Can I track multiple shipments at once?', a: 'Yes, our bulk tracking tool allows you to monitor up to 50 shipments simultaneously.' }
+//                 ].map((faq, idx) => (
+//                   <div key={idx} className="border rounded-lg" style={{ borderColor: colors.lightTan }}>
+//                     <button
+//                       onClick={() => toggleFaq(idx)}
+//                       className="w-full flex items-center justify-between p-4 text-left"
+//                     >
+//                       <span className="text-sm font-medium" style={{ color: colors.darkBrown }}>{faq.q}</span>
+//                       {expandedFaq === idx ? 
+//                         <ChevronUp className="h-4 w-4" style={{ color: colors.goldenYellow }} /> : 
+//                         <ChevronDown className="h-4 w-4" style={{ color: colors.goldenYellow }} />
+//                       }
+//                     </button>
+//                     {expandedFaq === idx && (
+//                       <div className="px-4 pb-4 text-sm" style={{ color: colors.darkBrown, opacity: 0.7 }}>
+//                         {faq.a}
+//                       </div>
+//                     )}
+//                   </div>
+//                 ))}
+//               </div>
+//             </div>
+
+//             {/* Need Assistance? */}
+//             <div className="mt-6 bg-white/70 backdrop-blur-md rounded-xl p-6 border" style={{ borderColor: colors.goldenYellow + '30' }}>
+//               <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+//                 <div className="flex items-center gap-3">
+//                   <div className="p-3 rounded-full" style={{ backgroundColor: colors.goldenYellow + '20' }}>
+//                     <HeadphonesIcon className="h-6 w-6" style={{ color: colors.goldenYellow }} />
+//                   </div>
+//                   <div>
+//                     <h3 className="font-normal tracking-wide" style={{ color: colors.darkBrown }}>Need Assistance?</h3>
+//                     <p className="text-sm" style={{ color: colors.darkBrown, opacity: 0.6 }}>Our support team is available 24/7</p>
+//                   </div>
+//                 </div>
+//                 <div className="flex gap-3">
+//                   <button className="px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 transition hover:scale-105" style={{ backgroundColor: colors.goldenYellow, color: colors.darkBrown }}>
+//                     <Phone className="h-4 w-4" />
+//                     Call Now
+//                   </button>
+//                   <button className="px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 border transition hover:bg-white/50" style={{ borderColor: colors.goldenYellow, color: colors.darkBrown }}>
+//                     <Mail className="h-4 w-4" />
+//                     Email
+//                   </button>
+//                 </div>
+//               </div>
+//             </div>
+
+//             {/* Feedback */}
+//             <div className="mt-6 text-center">
+//               <p className="text-sm mb-2" style={{ color: colors.darkBrown, opacity: 0.6 }}>Was this tracking information helpful?</p>
+//               <div className="flex justify-center gap-2">
+//                 {[1,2,3,4,5].map((star) => (
+//                   <button key={star} className="p-1 hover:scale-110 transition">
+//                     <Star className="h-5 w-5" style={{ color: colors.goldenYellow }} fill={colors.goldenYellow} />
+//                   </button>
+//                 ))}
+//               </div>
+//             </div>
+//           </div>
+//         )}
+
+//         {/* No Tracking Data - Enhanced Services with Learn More */}
+//         {!trackingData && (
+//           <div className="max-w-7xl mx-auto mt-16">
+//             <h2 className="text-2xl font-bold text-center mb-8" style={{ color: colors.darkBrown }}>
+//               Why Choose LogiTrack?
+//             </h2>
+            
+//             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+//               {[
+//                 { icon: Zap, title: 'Real-time Tracking', desc: 'Live updates every 30 seconds' },
+//                 { icon: Shield, title: 'Secure Shipping', desc: 'End-to-end package protection' },
+//                 { icon: Globe, title: 'Global Network', desc: 'Coverage in 200+ countries' }
+//               ].map((feature, index) => (
+//                 <div key={index} className="bg-white/50 backdrop-blur-sm rounded-xl p-6 text-center border" style={{ borderColor: colors.goldenYellow + '30' }}>
+//                   <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3" style={{ backgroundColor: colors.goldenYellow + '20' }}>
+//                     <feature.icon className="h-5 w-5" style={{ color: colors.goldenYellow }} />
+//                   </div>
+//                   <h3 className="font-normal tracking-wide mb-1" style={{ color: colors.darkBrown }}>{feature.title}</h3>
+//                   <p className="text-sm" style={{ color: colors.darkBrown, opacity: 0.6 }}>{feature.desc}</p>
+//                 </div>
+//               ))}
+//             </div>
+
+//             {/* Additional info for non-trackers */}
+//             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+//               <div className="bg-white/50 backdrop-blur-sm rounded-xl p-6 border" style={{ borderColor: colors.lightTan }}>
+//                 <h3 className="font-normal tracking-wide mb-3 flex items-center gap-2" style={{ color: colors.darkBrown }}>
+//                   <MessageCircle className="h-4 w-4" style={{ color: colors.goldenYellow }} />
+//                   Need Help Finding Your Tracking Number?
+//                 </h3>
+//                 <p className="text-sm mb-4" style={{ color: colors.darkBrown, opacity: 0.7 }}>
+//                   Check your order confirmation email or shipping notification. The tracking number is usually a 12-15 digit code starting with "LGSW".
+//                 </p>
+//                 <button 
+//                   className="text-sm font-medium flex items-center gap-1 transition hover:gap-2" 
+//                   style={{ color: colors.goldenYellow }}
+//                   onClick={() => setLearnMoreExpanded(!learnMoreExpanded)}
+//                 >
+//                   {learnMoreExpanded ? 'Show Less' : 'Learn More'} {learnMoreExpanded ? <ChevronUp className="h-3 w-3" /> : <ChevronRight className="h-3 w-3" />}
+//                 </button>
+
+//                 {/* Expanded Learn More content */}
+//                 {learnMoreExpanded && (
+//                   <div className="mt-4 p-4 rounded-lg" style={{ backgroundColor: colors.cream }}>
+//                     <h4 className="font-medium mb-2" style={{ color: colors.darkBrown }}>Where to find your tracking number:</h4>
+//                     <ul className="space-y-2 text-sm" style={{ color: colors.darkBrown, opacity: 0.8 }}>
+//                       <li className="flex items-start gap-2">
+//                         <CheckCircle className="h-4 w-4 mt-0.5" style={{ color: colors.forest }} />
+//                         <span>Order confirmation email from the sender</span>
+//                       </li>
+//                       <li className="flex items-start gap-2">
+//                         <CheckCircle className="h-4 w-4 mt-0.5" style={{ color: colors.forest }} />
+//                         <span>Shipping notification email with subject "Your order has shipped"</span>
+//                       </li>
+//                       <li className="flex items-start gap-2">
+//                         <CheckCircle className="h-4 w-4 mt-0.5" style={{ color: colors.forest }} />
+//                         <span>On the shipping label or receipt if you dropped off the package</span>
+//                       </li>
+//                       <li className="flex items-start gap-2">
+//                         <CheckCircle className="h-4 w-4 mt-0.5" style={{ color: colors.forest }} />
+//                         <span>In your account order history on the retailer's website</span>
+//                       </li>
+//                     </ul>
+//                     <p className="text-sm mt-3 p-2 rounded" style={{ backgroundColor: colors.goldenYellow + '20', color: colors.darkBrown }}>
+//                       <strong>Tip:</strong> If you still can't find it, contact the sender directly.
+//                     </p>
+//                   </div>
+//                 )}
+//               </div>
+
+//               <div className="bg-white/50 backdrop-blur-sm rounded-xl p-6 border" style={{ borderColor: colors.lightTan }}>
+//                 <h3 className="font-normal tracking-wide mb-3 flex items-center gap-2" style={{ color: colors.darkBrown }}>
+//                   <Bell className="h-4 w-4" style={{ color: colors.goldenYellow }} />
+//                   Never Miss an Update
+//                 </h3>
+//                 <p className="text-sm mb-4" style={{ color: colors.darkBrown, opacity: 0.7 }}>
+//                   Sign up for SMS or email alerts to receive real-time notifications about your shipment's status.
+//                 </p>
+//                 <div className="flex gap-2">
+//                   <input
+//                     type="email"
+//                     placeholder="Your email"
+//                     value={emailNotification}
+//                     onChange={(e) => setEmailNotification(e.target.value)}
+//                     className="flex-1 px-3 py-2 rounded-lg text-sm bg-white/50 border focus:outline-none focus:ring-2"
+//                     style={{ borderColor: colors.lightTan, color: colors.darkBrown }}
+//                   />
+//                   <button className="px-4 py-2 rounded-lg text-sm font-medium" style={{ backgroundColor: colors.goldenYellow, color: colors.darkBrown }}>
+//                     Subscribe
+//                   </button>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//         )}
+//       </div>
+//     </div>
+//   )
+// }

@@ -75,16 +75,16 @@ export default function TeamsPage() {
             <p className="text-sm font-medium text-[#310F0B]">📞 Quick contact</p>
             <div className="mt-2 space-y-1">
               <a
-                href="mailto:support@kvalogistics.com"
+                href="mailto:support@kvalogistics.nl"
                 className="block text-sm text-[#310F0B]/70 hover:text-[#EB9003] transition"
               >
-                support@kvalogistics.com
+                support@kvalogistics.nl
               </a>
               <a
-                href="tel:+15551234567"
+                href="tel:+31 6 84987360"
                 className="block text-sm text-[#310F0B]/70 hover:text-[#EB9003] transition"
               >
-                +1 (555) 123‑4567
+                +31 6 84987360
               </a>
             </div>
             <div className="mt-3 h-0.5 w-full rounded-full bg-[#EB9003]" />
