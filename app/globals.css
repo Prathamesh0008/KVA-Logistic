@@ -38,3 +38,24 @@ body {
   font-weight: 300;
   letter-spacing: 0.02em;
 }
+body {
+  background-color: #0F0F0F; /* darker */
+  color: #EAEAEA;
+  font-family: var(--font-eurostile);
+}
+
+/* smooth text */
+* {
+  -webkit-font-smoothing: antialiased;
+}
+
+@font-face {
+  font-family: "Eurostile";
+  src: url("/fonts/Eurostile.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  font-family: "Eurostile", sans-serif;
+}

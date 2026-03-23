@@ -100,20 +100,21 @@ export default function Header() {
           </nav>
 
           {/* DESKTOP CTA */}
-          <div className="hidden lg:block">
-         <Link
-  href="/contact"
- className="px-6 py-3 rounded-xl shadow-lg transition hover:opacity-90 hover:scale-105 text-white"
-  style={{
-    backgroundColor: colors.darkBrown,
-    fontFamily: "var(--font-snasm)",
-    fontWeight: 400,
-    letterSpacing: "0.02em"
-  }}
->
-  Get Quote
-</Link>
-          </div>
+{/* DESKTOP CTA - enhanced version */}
+<div className="hidden lg:block">
+  <Link
+    href="/contact"
+    className="group relative inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-[#EB9003] to-[#C55500] px-6 py-3 text-white shadow-md transition-all duration-300 hover:scale-105 hover:shadow-xl hover:from-[#F5A623] hover:to-[#D45E00] focus:outline-none focus:ring-2 focus:ring-[#EB9003] focus:ring-offset-2"
+    style={{
+      fontFamily: "var(--font-snasm)",
+      fontWeight: 400,
+      letterSpacing: "0.02em"
+    }}
+  >
+    <span className="relative z-10">Get Quote</span>
+    <span className="absolute inset-0 rounded-xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-white/10" />
+  </Link>
+</div>
 
           {/* MOBILE BUTTONS */}
           <div className="flex lg:hidden items-center gap-2">

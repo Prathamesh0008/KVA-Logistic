@@ -99,7 +99,7 @@ export default function Hero() {
   "
   style={{ fontFamily: "var(--font-snasm)" }}
 >
-              <span className="block bg-gradient-to-r from-yellow-100 via-[#EB9003] to-[#9F4100] bg-clip-text text-transparent">
+              <span className="block bg-gradient-to-r from-yellow-100 via-[#EB9003] to-[#9F4100] bg-clip-text text-transparent ">
                 Global Logistics
               </span>
 
@@ -139,7 +139,7 @@ export default function Hero() {
                 }}
               >
                 <Truck className="w-5 h-5" />
-                Get Storage Quote
+                Get Storage Quote 
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
 

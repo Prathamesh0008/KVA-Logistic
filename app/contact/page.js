@@ -85,10 +85,17 @@ const handleSubmit = (e) => {
         <div className="py-6 md:py-8">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto text-center">
-<h1 className="text-3xl sm:text-4xl md:text-5xl font-normal tracking-wide mb-3">  <span style={{ color: colors.darkBrown }}>
+<h1 className="
+  text-3xl sm:text-4xl md:text-5xl 
+  font-light 
+  tracking-wide 
+  mb-3
+">
+  <span style={{ color: "#8B5E3C" }}>
     Contact KVA Logistics
   </span>
-</h1>       <p className="text-sm sm:text-base max-w-2xl mx-auto" style={{ color: colors.goldenYellow }}>
+</h1>
+    <p className="text-sm sm:text-base max-w-2xl mx-auto" style={{ color: colors.goldenYellow }}>
                 Reach out for inquiries, support, or logistics solutions
               </p>
             </div>
@@ -366,7 +373,7 @@ const handleSubmit = (e) => {
                   </div>
 
                   {/* Global Offices */}
-                  <div 
+                  {/* <div 
                     className="p-5 md:p-6 rounded-xl border"
                     style={{
                       backgroundColor: colors.lightTan,
@@ -385,13 +392,18 @@ const handleSubmit = (e) => {
                         { flag: "🇦🇪", city: "Dubai", desc: "Middle East" }
                       ].map((office, idx) => (
                         <div key={idx} className="text-center cursor-pointer hover:scale-105 transition-transform duration-300">
-                          <span className="text-3xl block mb-1 drop-shadow-md">{office.flag}</span>
+                      <span
+  className="
+    text-3xl block mb-1
+    contrast-150 brightness-90 saturate-125
+  "
+>{office.flag}</span>
                           <p className="text-xs font-bold" style={{ color: colors.darkOrange }}>{office.city}</p>
                           <p className="text-[10px]" style={{ color: colors.darkBrown }}>{office.desc}</p>
                         </div>
                       ))}
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
