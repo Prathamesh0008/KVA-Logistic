@@ -62,7 +62,7 @@ export default function Header() {
             <img
               src="/logo.png"
               alt="KVA Logistics"
-              className="h-25 sm:h-22 lg:h-27 object-cover"
+              className="h-22 sm:h-21 lg:h-25 object-cover"
             />
           </Link>
 
