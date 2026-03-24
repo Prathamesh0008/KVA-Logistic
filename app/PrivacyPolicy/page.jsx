@@ -145,8 +145,8 @@ export default function PrivacyPolicyPage() {
             <div className="grid md:grid-cols-2 gap-4 mb-6">
               <div className="bg-gray-50 p-4 rounded-lg border border-gray-100">
                 <div className="text-xs text-gray-500 mb-1">Email</div>
-                <a href="mailto:privacy@kvalogistics.com" className="text-base font-medium text-[#310F0B] hover:text-[#dc8c18] transition-colors break-all">
-                  privacy@kvalogistics.com
+                <a href="mailto:privacy@kvalogistics.nl" className="text-base font-medium text-[#310F0B] hover:text-[#dc8c18] transition-colors break-all">
+                  privacy@kvalogistics.nl
                 </a>
               </div>
               <div className="bg-gray-50 p-4 rounded-lg border border-gray-100">
@@ -166,12 +166,7 @@ export default function PrivacyPolicyPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
               </a>
-              <a
-                href="/data-request"
-                className="inline-flex items-center justify-center rounded-lg border border-[#310F0B]/20 bg-white px-6 py-3 text-sm font-medium text-[#310F0B] hover:border-[#dc8c18] hover:bg-[#dc8c18]/5 transition-all"
-              >
-                Submit Data Request
-              </a>
+             
             </div>
           </div>
         </div>
