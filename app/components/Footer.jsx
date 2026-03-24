@@ -43,7 +43,7 @@ export default function Footer() {
                 </div>
               </Link>
             </div>
-            <p className="text-sm leading-relaxed p-10" style={{ color: colors.darkBrown }}>
+           <p className="text-sm leading-relaxed p-10 font-medium" style={{ color: colors.darkBrown}}>
               Delivering excellence in logistics and supply chain solutions worldwide since 2005.
             </p>
             <div className="flex justify-center md:justify-start space-x-3 pt-2">
@@ -123,7 +123,7 @@ export default function Footer() {
                   <div 
                     className="p-2.5 rounded-lg mb-2 md:mb-0 md:mr-3 flex-shrink-0"
                     style={{ 
-                      backgroundColor: item.color + '20',
+                      backgroundColor: item.color + '40',
                       color: item.color
                     }}
                   >
@@ -134,7 +134,7 @@ export default function Footer() {
                       {item.content}
                     </span>
                     {item.subtitle && (
-                      <span className="text-xs" style={{ color: colors.darkBrown + '80' }}>
+                      <span className="text-xs" style={{ color: colors.darkBrown + '150' }}>
                         {item.subtitle}
                       </span>
                     )}
@@ -148,7 +148,7 @@ export default function Footer() {
         {/* Divider */}
         <div 
           className="my-8 h-px w-full"
-          style={{ backgroundColor: colors.darkBrown + '30' }}
+          style={{ backgroundColor: colors.darkBrown + '50' }}
         />
 
         {/* Footer Bottom */}

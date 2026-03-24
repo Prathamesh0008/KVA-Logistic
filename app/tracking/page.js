@@ -592,13 +592,9 @@ export default function Tracking() {
                               style={{ color: colors.darkBrown, opacity: 0.5 }}
                             />
                           </div>
-
-                     <button
-  className="group px-5 py-2.5 rounded-lg font-normal tracking-wide transition-all"
->
-                            <Search className="h-4 w-4" />
-                            <span>Track</span>
-                          </button>
+<h3 className="text-lg font-semibold tracking-wide" style={highlightText}>
+Track
+</h3>
                         </div>
                       </form>
 
@@ -852,8 +848,8 @@ export default function Tracking() {
                     }}
                   >
                     <div className="flex items-center justify-between mb-4">
-                     <h3 className="text-lg font-normal tracking-wide">
-  Timeline
+                  <h3 className="text-lg font-semibold tracking-wide" style={highlightText}>
+  Shipment Timeline
 </h3>
                       <button
                         onClick={() => alert('Package is insured and protected by our security system.')}

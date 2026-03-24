@@ -91,7 +91,7 @@ const handleSubmit = (e) => {
   tracking-wide 
   mb-3
 ">
-  <span style={{ color: "#8B5E3C" }}>
+  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8B5E3C] to-[#C55500]">
     Contact KVA Logistics
   </span>
 </h1>
@@ -146,27 +146,52 @@ const handleSubmit = (e) => {
                     <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.8 }}>Response within 2h</p>
                   </div>
                 </div>
+<div 
+  className="p-5 rounded-xl border transition-all duration-300 hover:scale-[1.02] cursor-pointer"
+  style={{
+    backgroundColor: colors.lightTan,
+    borderColor: colors.darkBrown,
+    boxShadow: "0 6px 18px rgba(49, 15, 11, 0.12)",
+  }}
+>
+  <div className="flex flex-col items-center text-center gap-2">
 
-                {/* Office */}
-                <div 
-                  className="p-4 rounded-lg border transition-all duration-300 hover:scale-[1.02] cursor-pointer"
-                  style={{
-                    backgroundColor: colors.lightTan,
-                    borderColor: colors.darkBrown,
-                    boxShadow: "0 4px 12px rgba(49, 15, 11, 0.1)",
-                  }}
-                >
-                  <div className="flex flex-col items-center text-center">
-                    <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-2" 
-                      style={{ background: `linear-gradient(90deg, ${colors.darkBrown}, ${colors.lightTan})` }}>
-                      <MapPin className="h-5 w-5" style={{ color: colors.lightTan }} />
-                    </div> 
-            <h3 className="... font-medium mb-1" style={{ color: colors.darkBrown }}>Main Office</h3>   
-              <h3 className="... font-medium mb-1" style={{ color: colors.darkBrown }}>Main Office</h3>
-                    <p className="text-sm font-bold break-all" style={{ color: colors.darkOrange }}>Apendans 5, 2511ED</p>
-                    <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.8 }}>The Netherlands</p>
-                  </div>
-                </div>
+    {/* ICON */}
+    <div 
+      className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
+      style={{
+        background: `linear-gradient(135deg, ${colors.darkBrown}, ${colors.darkOrange})`
+      }}
+    >
+      <MapPin className="h-5 w-5 text-white" />
+    </div> 
+
+    {/* TITLE */}
+    <h3 
+      className="text-base font-semibold leading-tight"
+      style={{ color: colors.darkBrown }}
+    >
+      Main Office
+    </h3>
+
+    {/* ADDRESS */}
+    <p 
+      className="text-sm font-medium leading-snug"
+      style={{ color: colors.darkOrange }}
+    >
+      Apendans 5, 2511ED
+    </p>
+
+    {/* COUNTRY */}
+    <p 
+      className="text-xs leading-tight"
+      style={{ color: colors.darkBrown, opacity: 0.7 }}
+    >
+      The Netherlands
+    </p>
+
+  </div>
+</div>
 
                 {/* Hours */}
                 <div 
@@ -249,25 +274,45 @@ const handleSubmit = (e) => {
                       </div>
                     </div>
 
-                    <div>
-                      <label className="block text-xs font-medium mb-1" style={{ color: colors.darkBrown }}>Subject</label>
-                      <div className="relative">
-                        <FileText className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4" style={{ color: colors.darkOrange }} />
-                        <input
-                          type="text"
-                          name="subject"
-                          required
-                          className="w-full pl-9 pr-3 py-2.5 border rounded-lg focus:outline-none focus:ring-1 text-sm"
-                          style={{ 
-                            borderColor: colors.orange,
-                            outlineColor: colors.goldenYellow,
-                            backgroundColor: 'white',
-                            color: colors.darkBrown,
-                          }}
-                          placeholder="Inquiry about shipping"
-                        />
-                      </div>
-                    </div>
+                <div>
+  <label 
+    className="block text-xs font-medium mb-1" 
+    style={{ color: colors.darkBrown }}
+  >
+    Subject
+  </label>
+
+  <div className="relative">
+
+    {/* ICON */}
+    <FileText 
+      className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 pointer-events-none" 
+      style={{ color: colors.darkOrange }} 
+    />
+
+    {/* DROPDOWN */}
+    <select
+      name="subject"
+      required
+      className="w-full pl-9 pr-3 py-2.5 border rounded-lg focus:outline-none focus:ring-1 text-sm appearance-none cursor-pointer"
+      style={{ 
+        borderColor: colors.orange,
+        outlineColor: colors.goldenYellow,
+        backgroundColor: 'white',
+        color: colors.darkBrown,
+      }}
+    >
+      <option value="">Select Subject</option>
+      <option value="shipping">Shipping Inquiry</option>
+      <option value="tracking">Tracking Issue</option>
+      <option value="pricing">Pricing / Quote</option>
+      <option value="support">Customer Support</option>
+      <option value="complaint">Complaint</option>
+      <option value="other">Other</option>
+    </select>
+
+  </div>
+</div>
 
                     <div>
                       <label className="block text-xs font-medium mb-1" style={{ color: colors.darkBrown }}>Message</label>

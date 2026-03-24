@@ -56,7 +56,7 @@ export default function Header() {
 >
 
       <div className="max-w-7xl mx-auto px-1 sm:px-4">
-<div className="flex items-center justify-between h-14 sm:h-16 lg:h-19">
+<div className="flex items-center justify-between h-15 sm:h-16 lg:h-18 pt-1 pb-1">
           {/* LOGO */}
           <Link href="/" className="flex shrink-0">
             <img
@@ -117,18 +117,17 @@ export default function Header() {
           {/* MOBILE BUTTONS */}
           <div className="flex lg:hidden items-center gap-2">
 
-            <Link
-              href="/contact"
-              className="px-3 py-2 rounded-lg text-xs sm:text-sm"
-              style={{
-                backgroundColor: colors.goldenYellow,
-                color: colors.darkBrown,
-                fontFamily: "var(--font-snasm)",
-                fontWeight: 400
-              }}
-            >
-              Quote
-            </Link>
+          <Link
+  href="/contact"
+  className="px-4 py-2 rounded-full text-xs font-medium shadow-sm whitespace-nowrap"
+  style={{
+    backgroundColor: colors.goldenYellow,
+    color: colors.darkBrown,
+    fontFamily: "var(--font-snasm)"
+  }}
+>
+  Get Quote
+</Link>
 
             <button
               onClick={() => setIsMenuOpen(true)}
