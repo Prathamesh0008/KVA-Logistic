@@ -11,7 +11,7 @@ const eurostile = localFont({
   src: [
     {
       path: "./fonts/Eurostile.ttf",  // ✅ correct
-      weight: "400",
+      weight: "800",
     },
     {
       path: "./fonts/Eurostile.ttf",

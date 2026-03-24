@@ -55,16 +55,14 @@ export default function Header() {
 }}
 >
 
-      <div className="max-w-7xl mx-auto px-3 sm:px-4">
-
-        <div className="flex items-center justify-between h-16 sm:h-20 lg:h-24">
-
+      <div className="max-w-7xl mx-auto px-1 sm:px-4">
+<div className="flex items-center justify-between h-14 sm:h-16 lg:h-19">
           {/* LOGO */}
           <Link href="/" className="flex shrink-0">
             <img
               src="/logo.png"
               alt="KVA Logistics"
-              className="h-20 sm:h-25 lg:h-30 object-cover"
+              className="h-25 sm:h-22 lg:h-27 object-cover"
             />
           </Link>
 
