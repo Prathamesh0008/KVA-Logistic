@@ -165,7 +165,7 @@ export default function Hero() {
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 w-full max-w-xl">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 w-full max-w-xl  ">
               {statsData.map((s, i) => {
                 const Icon = s.icon;
 
@@ -191,7 +191,7 @@ export default function Hero() {
 
                       <div>
                         <div
-                   className="text-lg sm:text-xl font-light tracking-wide"
+                   className="text-lg sm:text-xl font-light tracking-wide "
                           style={{
                             color: "#9F4100",
                             fontFamily: "var(--font-snasm)",
@@ -219,58 +219,59 @@ export default function Hero() {
             </div>
 
             {/* Contact Card */}
-            <div
-              className="p-4 sm:p-6 rounded-xl mt-6 w-full max-w-xl"
-              style={{
-                backgroundColor: cardBg,
-                border: "1px solid #EB9003",
-                boxShadow: "0 4px 20px rgba(235,144,3,0.15)",
-              }}
-            >
-              <div className="flex items-center gap-3 sm:gap-4">
-                <div
-                  className="p-2 sm:p-3 rounded-lg"
-                  style={{ background: uiGradient }}
-                >
-                  <Phone className="w-5 h-5 sm:w-6 sm:h-6" style={{ color: "#310F0B" }} />
-                </div>
+           {/* Contact Card */}
+<div
+  className="p-4 sm:p-6 rounded-xl mt-4 md:mt-6 w-full max-w-xl"
+  style={{
+    backgroundColor: cardBg,
+    border: "1px solid #EB9003",
+    boxShadow: "0 4px 20px rgba(235,144,3,0.15)",
+  }}
+>
+  <div className="flex items-center gap-2 sm:gap-4">
+    <div
+      className="p-2 sm:p-3 rounded-lg"
+      style={{ background: uiGradient }}
+    >
+      <Phone className="w-5 h-5 sm:w-6 sm:h-6" style={{ color: "#310F0B" }} />
+    </div>
 
-                <div>
-                  <div
-                    className="text-xs sm:text-sm uppercase"
-                    style={{
-                      color: "#310F0B",
-                      fontFamily: "var(--font-snasm)",
-                      fontWeight: 400,
-                    }}
-                  >
-                    24/7 CUSTOMER SUPPORT
-                  </div>
+    <div>
+      <div
+        className="text-xs sm:text-sm uppercase"
+        style={{
+          color: "#310F0B",
+          fontFamily: "var(--font-snasm)",
+          fontWeight: 400,
+        }}
+      >
+        24/7 CUSTOMER SUPPORT
+      </div>
 
-                  <div
-                  className="text-lg sm:text-xl font-light tracking-wide"
-                    style={{
-                      color: "#9F4100",
-                      fontFamily: "var(--font-snasm)",
-                      fontWeight: 400,
-                    }}
-                  >
-                    +31 6 84987360
-                  </div>
+      <div
+        className="text-lg sm:text-xl font-light tracking-wide"
+        style={{
+          color: "#9F4100",
+          fontFamily: "var(--font-snasm)",
+          fontWeight: 400,
+        }}
+      >
+        +31 6 84987360
+      </div>
 
-                  <div
-                    className="text-xs sm:text-sm"
-                    style={{
-                      color: "#310F0B",
-                      fontFamily: "var(--font-snasm)",
-                      fontWeight: 400,
-                    }}
-                  >
-                    Free consultation • No hidden fees
-                  </div>
-                </div>
-              </div>
-            </div>
+      <div
+        className="text-xs sm:text-sm"
+        style={{
+          color: "#310F0B",
+          fontFamily: "var(--font-snasm)",
+          fontWeight: 400,
+        }}
+      >
+        Free consultation • No hidden fees
+      </div>
+    </div>
+  </div>
+</div>
           </div>
         </div>
       </div>
