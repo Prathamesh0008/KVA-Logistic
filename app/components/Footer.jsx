@@ -106,12 +106,12 @@ export default function Footer() {
                   content: "Apendans 5, 2511ED 's-Gravenhage",
                   color: colors.darkBrown
                 },
-                {
-                  icon: <Phone className="h-4 w-4" />,
-                  content: "+31 6 84987360", 
-                  subtitle: "24/7 Customer Support",
-                  color: colors.orange
-                },
+                // {
+                //   icon: <Phone className="h-4 w-4" />,
+                //   content: "+31 6 84987360", 
+                //   subtitle: "24/7 Customer Support",
+                //   color: colors.orange
+                // },
                 {
                   icon: <Mail className="h-4 w-4" />,
                   content: "info@kvalogistics.nl",
