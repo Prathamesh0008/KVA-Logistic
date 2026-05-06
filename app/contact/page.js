@@ -389,10 +389,10 @@ const handleSubmit = (e) => {
                           style={{ background: `linear-gradient(90deg, ${colors.goldenYellow}, ${colors.orange})` }}>
                           <Phone className="h-4 w-4" style={{ color: colors.darkBrown }} />
                         </div>
-                        <div>
-                          <p className="text-xs font-medium" style={{ color: colors.darkBrown, opacity: 0.8 }}>Emergency</p>
-                          <p className="text-sm font-bold" style={{ color: colors.darkOrange }}>+31 6 84987360</p>
-                        </div>
+                        // <div>
+                        //   <p className="text-xs font-medium" style={{ color: colors.darkBrown, opacity: 0.8 }}>Emergency</p>
+                        //   <p className="text-sm font-bold" style={{ color: colors.darkOrange }}>+31 6 84987360</p>
+                        // </div>
                       </div>
                     </div>
 
