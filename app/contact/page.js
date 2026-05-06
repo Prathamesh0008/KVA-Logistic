@@ -376,7 +376,7 @@ const handleSubmit = (e) => {
 
                   {/* Quick Contact Cards */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div 
+                    {/* <div 
                       className="p-4 rounded-lg border transition-all duration-300 hover:scale-[1.02] cursor-pointer"
                       style={{
                         backgroundColor: colors.lightTan,
@@ -391,7 +391,7 @@ const handleSubmit = (e) => {
                         </div>
                        
                       </div>
-                    </div>
+                    </div> */}
 
                     <div 
                       className="p-4 rounded-lg border transition-all duration-300 hover:scale-[1.02] cursor-pointer"
