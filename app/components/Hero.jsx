@@ -248,7 +248,7 @@ export default function Hero() {
         24/7 CUSTOMER SUPPORT
       </div>
 
-      <div
+      {/* <div
         className="text-lg sm:text-xl font-light tracking-wide"
         style={{
           color: "#9F4100",
@@ -257,7 +257,7 @@ export default function Hero() {
         }}
       >
         +31 6 84987360
-      </div>
+      </div> */}
 
       <div
         className="text-xs sm:text-sm"
