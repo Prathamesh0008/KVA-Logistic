@@ -384,13 +384,13 @@ const handleSubmit = (e) => {
                         boxShadow: "0 4px 12px rgba(235, 144, 3, 0.1)",
                       }}
                     >
-                      // <div className="flex items-center gap-3">
-                      //   <div className="w-8 h-8 rounded-lg flex items-center justify-center" 
-                      //     style={{ background: `linear-gradient(90deg, ${colors.goldenYellow}, ${colors.orange})` }}>
-                      //     <Phone className="h-4 w-4" style={{ color: colors.darkBrown }} />
-                      //   </div>
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-lg flex items-center justify-center" 
+                          style={{ background: `linear-gradient(90deg, ${colors.goldenYellow}, ${colors.orange})` }}>
+                          <Phone className="h-4 w-4" style={{ color: colors.darkBrown }} />
+                        </div>
                        
-                      // </div>
+                      </div>
                     </div>
 
                     <div 
