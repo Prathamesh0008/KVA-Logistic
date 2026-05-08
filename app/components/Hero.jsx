@@ -42,13 +42,17 @@ export default function Hero() {
       style={{ fontFamily: "var(--font-snasm)" }}
     >
       {/* Background */}
-      <div
-        className="absolute inset-0 bg-cover md:bg-cover bg-center md:bg-left bg-no-repeat"
-        style={{ backgroundImage: "url('/Banner 2.jpg')" }}
-      />
+     <video
+  className="absolute inset-0 w-full h-full object-cover"
+  src="/videos/banner-video.mp4"
+  autoPlay
+  loop
+  muted
+  playsInline
+/>
 
       {/* Desktop Overlay */}
-      <div
+      {/* <div
         className="absolute inset-0 hidden md:block"
         style={{
           background: `linear-gradient(
@@ -59,7 +63,7 @@ export default function Hero() {
             transparent 100%
           )`,
         }}
-      />
+      /> */}
 
       {/* Mobile Overlay */}
       <div className="absolute inset-0 md:hidden bg-gradient-to-t from-[#310F0B] via-[#310F0B]/90 to-transparent" />
