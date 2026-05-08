@@ -96,7 +96,7 @@ export default function Header() {
           <div className="hidden lg:flex items-center gap-3">
             <Link
               href="/login"
-              className="inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm text-gray-700 border-2 border-[#EB9003] hover:bg-gray-50 transition-all duration-300"
+              className="inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm text-gray-700 border-2 border-oran hover:bg-gray-50 transition-all duration-300"
               style={{
                 fontFamily: "var(--font-snasm)",
                 fontWeight: 400,
