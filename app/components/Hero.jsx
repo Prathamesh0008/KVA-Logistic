@@ -44,7 +44,7 @@ export default function Hero() {
       {/* Background */}
      <video
   className="absolute inset-0 w-full h-full object-cover"
-  src="/videos/banner-video.mp4"
+  src="/videos/Container-Ship.mp4"
   autoPlay
   loop
   muted
@@ -122,9 +122,9 @@ export default function Hero() {
 
             >
               Professional warehousing, distribution, and transportation services —
-              <span style={{ color: "#9F4100" }}>secure</span>,{" "}
-              <span style={{ color: "#9F4100" }}>efficient</span> &{" "}
-              <span style={{ color: "#9F4100" }}>reliable</span>.
+              <span style={{ color: "#EB9003" }}>secure</span>,{" "}
+              <span style={{ color: "#EB9003" }}>efficient</span> &{" "}
+              <span style={{ color: "#EB9003" }}>reliable</span>.
             </p>
 
             {/* Buttons */}
