@@ -1,7 +1,6 @@
 ﻿'use client'
 
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { Kalam } from 'next/font/google'
 import {
   ClipboardPlus,
   ChevronDown,
@@ -32,11 +31,6 @@ const getReliableFlagUrl = (countryCode = '') => {
   if (!code) return ''
   return `https://flagcdn.com/w40/${code}.png`
 }
-
-const kalam = Kalam({
-  subsets: ['latin'],
-  weight: ['400', '700']
-})
 
 export default function LoginPage() {
   const [step, setStep] = useState(1)
@@ -81,7 +75,7 @@ export default function LoginPage() {
   const [activeSidebarTab, setActiveSidebarTab] = useState('new_order')
   const [supportForm, setSupportForm] = useState({ name: '', email: '', message: '' })
   const [supportMessage, setSupportMessage] = useState('')
-  const [accountForm, setAccountForm] = useState({ name: '', password: '', whatsapp: '', profilePhoto: '' })
+  const [accountForm, setAccountForm] = useState({ name: '', password: '', whatsapp: '' })
   const [accountMessage, setAccountMessage] = useState('')
   const [isDarkMode, setIsDarkMode] = useState(() => {
     if (typeof window === 'undefined') return false
@@ -149,8 +143,7 @@ export default function LoginPage() {
     setAccountForm({
       name: matched?.name || '',
       password: matched?.password || password,
-      whatsapp: matched?.whatsapp || '',
-      profilePhoto: matched?.profilePhoto || ''
+      whatsapp: matched?.whatsapp || ''
     })
 
     setSavedAddresses(context?.addresses || [])
@@ -525,7 +518,7 @@ export default function LoginPage() {
       persistSession(currentUserEmail, loginData.password, 4)
     }
     setTimeout(() => {
-      setActiveSidebarTab('your_order')
+      setActiveSidebarTab('history')
       setStep(2)
       if (currentUserEmail) {
         persistSession(currentUserEmail, loginData.password, 2)
@@ -541,13 +534,13 @@ export default function LoginPage() {
   }
 
   const inputClass =
-    'w-full border border-[#c29f85] bg-white px-4 py-3 text-[#521903] placeholder:text-[#8a6f60] outline-none transition focus:border-[#f8b936] focus:ring-2 focus:ring-[#f8b936]/30'
+    'w-full border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 outline-none transition focus:border-gray-500 focus:ring-2 focus:ring-gray-200'
   const selectClass =
-    'w-full border border-[#c29f85] bg-white px-4 py-3 text-[#521903] outline-none transition focus:border-[#f8b936] focus:ring-2 focus:ring-[#f8b936]/30'
+    'w-full border border-gray-300 bg-white px-4 py-3 text-gray-900 outline-none transition focus:border-gray-500 focus:ring-2 focus:ring-gray-200'
   const primaryBtnClass =
-    ' bg-[#f8b936] px-6 py-3 text-[#521903] transition hover:bg-[#dc8c18] hover:text-white active:scale-[0.99]'
+    ' bg-gray-900 px-6 py-3 text-white transition hover:bg-gray-800 active:scale-[0.99]'
   const secondaryBtnClass =
-    ' border border-[#c29f85] bg-white px-6 py-3 text-[#521903] transition hover:bg-[#fff4df] active:scale-[0.99]'
+    ' border border-gray-300 px-6 py-3 text-gray-700 transition hover:bg-gray-50 active:scale-[0.99]'
   const selectedCountry = countries.find((c) => c.name === contactData.country)
   const selectedPhoneCode = phoneCodes.find((c) => c.dialCode === contactData.phoneCode)
   const filteredCountries = useMemo(() => {
@@ -788,28 +781,6 @@ export default function LoginPage() {
     }
   }
 
-  const handleProfilePhotoUpload = (event) => {
-    const file = event.target.files?.[0]
-    if (!file) return
-    if (!file.type.startsWith('image/')) {
-      setAccountMessage('Please upload a valid image file.')
-      return
-    }
-    const maxSizeInBytes = 2 * 1024 * 1024
-    if (file.size > maxSizeInBytes) {
-      setAccountMessage('Image size must be 2MB or less.')
-      return
-    }
-    const reader = new FileReader()
-    reader.onload = () => {
-      const result = typeof reader.result === 'string' ? reader.result : ''
-      setAccountForm((prev) => ({ ...prev, profilePhoto: result }))
-      setAccountMessage('')
-    }
-    reader.onerror = () => setAccountMessage('Failed to read image file.')
-    reader.readAsDataURL(file)
-  }
-
   const handleAccountUpdate = async (e) => {
     e.preventDefault()
     if (!currentUserEmail) return
@@ -825,8 +796,7 @@ export default function LoginPage() {
           email: normalizedEmail,
           name: accountForm.name.trim(),
           password: accountForm.password,
-          whatsapp: accountForm.whatsapp.trim(),
-          profilePhoto: accountForm.profilePhoto || ''
+          whatsapp: accountForm.whatsapp.trim()
         })
       })
       setLoginData((p) => ({ ...p, password: accountForm.password }))
@@ -838,11 +808,11 @@ export default function LoginPage() {
   }
 
   return (
-    <section className={`theme-root ${isDarkMode ? 'theme-dark' : 'theme-light'} min-h-screen bg-gradient-to-b from-[#fff8ea] via-[#fff2db] to-[#f7e5cf] px-4 ${
+    <section className={`theme-root ${isDarkMode ? 'theme-dark' : 'theme-light'} min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 px-4 ${
       step === 1 ? 'flex items-center justify-center py-6 sm:py-8' : 'py-6 sm:py-8'
     }`}>
       <div className={`mx-auto w-full border border-gray-200 bg-white p-4 text-gray-900 shadow-lg sm:p-6 ${
-        step === 1 ? 'max-w-md' : 'max-w-[96vw]'
+        step === 1 ? 'max-w-md' : step === 2 ? 'max-w-[96vw]' : 'max-w-4xl'
       }`}>
         {step === 1 && (
           <>
@@ -952,12 +922,12 @@ export default function LoginPage() {
 
         {step !== 1 && (
           <div className="grid grid-cols-12 gap-3">
-            <aside className="col-span-12 flex min-h-[70vh] flex-col self-start border border-gray-200 bg-gray-50 p-3 lg:fixed lg:left-4 lg:top-0 lg:z-20 lg:h-screen lg:w-64 lg:overflow-y-auto">
+            <aside className="col-span-12 flex min-h-[70vh] flex-col self-start border border-gray-200 bg-gray-50 p-3 lg:sticky lg:top-4 lg:h-[calc(100vh-5rem)] lg:col-span-2">
               <div className="mb-3 flex items-center justify-center border border-gray-200 bg-white p-2">
                 <img
                   src="/logo.png"
                   alt="KVA Logistics"
-                  className="h-20 w-auto object-contain"
+                  className="h-14 w-auto object-contain"
                 />
               </div>
               <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-500">Menu</h3>
@@ -1044,23 +1014,6 @@ export default function LoginPage() {
               </div>
               {currentUserEmail ? (
                 <div className="mt-auto space-y-2 border border-gray-200 bg-white p-2">
-                  <div className="border border-gray-200 bg-gray-50 px-2 py-2 text-center">
-                    <p
-                      className="text-base text-gray-900"
-                      style={{ fontFamily: kalam.style.fontFamily }}
-                    >
-                      Tony Masala Production
-                    </p>
-                  </div>
-                  {accountForm.profilePhoto ? (
-                    <div className="flex justify-center">
-                      <img
-                        src={accountForm.profilePhoto}
-                        alt="User profile"
-                        className="h-14 w-14 rounded-full border border-gray-200 object-cover"
-                      />
-                    </div>
-                  ) : null}
                   <p className="text-xs text-gray-600">
                    <span className="font-medium text-gray-800">{currentUserEmail}</span>
                   </p>
@@ -1077,8 +1030,8 @@ export default function LoginPage() {
 
             </aside>
 
-            <div className="col-span-12 lg:ml-[17.5rem]">
-              <div className="sticky top-0 z-10 mb-3 border border-gray-200 bg-gray-50 px-3 py-2 xl:w-[58.0%]">
+            <div className="col-span-12 lg:col-span-10">
+              <div className="mb-3 border border-gray-200 bg-gray-50 px-3 py-2">
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   {step === 2 ? (
                     <h2 className="flex items-center gap-2 text-xl font-semibold tracking-tight text-gray-900">
@@ -1231,35 +1184,6 @@ export default function LoginPage() {
                 <h3 className="mb-3 text-base font-semibold text-gray-900">Your Account</h3>
                 <form className="space-y-3" onSubmit={handleAccountUpdate}>
                   <div>
-                    <label className="mb-1 block text-sm font-medium text-gray-700">Profile Photo</label>
-                    <div className="flex items-center gap-3">
-                      <div className="h-14 w-14 overflow-hidden rounded-full border border-gray-200 bg-gray-50">
-                        {accountForm.profilePhoto ? (
-                          <img src={accountForm.profilePhoto} alt="Profile preview" className="h-full w-full object-cover" />
-                        ) : (
-                          <div className="flex h-full w-full items-center justify-center text-xs text-gray-500">No photo</div>
-                        )}
-                      </div>
-                      <div className="flex-1">
-                        <input
-                          type="file"
-                          accept="image/*"
-                          onChange={handleProfilePhotoUpload}
-                          className="w-full border border-[#c29f85] bg-white px-3 py-2 text-sm text-[#521903]"
-                        />
-                        {accountForm.profilePhoto ? (
-                          <button
-                            type="button"
-                            onClick={() => setAccountForm((p) => ({ ...p, profilePhoto: '' }))}
-                            className="mt-2 border border-red-200 bg-red-50 px-2.5 py-1 text-xs font-medium text-red-600"
-                          >
-                            Remove photo
-                          </button>
-                        ) : null}
-                      </div>
-                    </div>
-                  </div>
-                  <div>
                     <label className="mb-1 block text-sm font-medium text-gray-700">Name</label>
                     <input
                       className={inputClass}
@@ -1336,6 +1260,41 @@ export default function LoginPage() {
               ) : null}
 
               <section className={`col-span-12 ${activeSidebarTab === 'new_order' ? 'xl:col-span-12' : isRecipientsMode ? 'xl:col-span-8' : 'xl:col-span-9'}`}>
+            {!isRecipientsMode && parcelDrafts.length > 0 && (
+              <div className="mb-3 border border-green-200 bg-green-50 p-3 text-sm text-green-700">
+                {parcelDrafts.length} parcel(s) saved in this order. Add next parcel and click <span className="font-semibold">Save & New Parcel</span>.
+              </div>
+            )}
+            {!isRecipientsMode && parcelDrafts.length > 0 && (
+              <div className="mb-3 border border-gray-200 bg-white p-3">
+                <p className="mb-2 text-sm font-semibold text-gray-900">Saved Parcels</p>
+                <div className="space-y-2">
+                  {parcelDrafts.map((parcel, idx) => (
+                    <div key={parcel.id} className="flex items-center justify-between border border-gray-200 bg-gray-50 px-3 py-2 text-sm">
+                      <span className="text-gray-800">
+                        Parcel {idx + 1}: {parcel.address?.name} - {parcel.address?.postalCode} {parcel.address?.houseNumber}, {parcel.address?.country}
+                      </span>
+                      <div className="flex items-center gap-2">
+                        <button
+                          type="button"
+                          onClick={() => editParcelDraft(idx)}
+                          className=" border border-blue-200 bg-blue-50 px-2.5 py-1 text-xs font-medium text-blue-700"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => removeParcelDraft(idx)}
+                          className=" border border-red-200 bg-red-50 px-2.5 py-1 text-xs font-medium text-red-600"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
             <form
               id="receiver-form"
               onSubmit={(e) => {
@@ -1352,7 +1311,7 @@ export default function LoginPage() {
                 {isRecipientsMode && !showRecipientDetails ? (
                 <div className="xl:col-span-12" />
                 ) : (
-                <div className={`border border-gray-200 bg-gray-50/60 p-3 shadow-sm sm:p-4 ${isRecipientsMode ? 'xl:col-span-12' : 'xl:col-span-7 xl:order-1'}`}>
+                <div className={`border border-gray-200 bg-gray-50/60 p-3 shadow-sm sm:p-4 ${isRecipientsMode ? 'xl:col-span-12' : 'xl:col-span-7'}`}>
                   <div className="mb-3 flex items-center justify-between border-b border-gray-200 pb-2">
                     <h3 className="flex items-center gap-2 text-sm font-semibold text-gray-900">
                       <MapPin className="h-4 w-4" />
@@ -1690,15 +1649,14 @@ export default function LoginPage() {
                       onChange={(e) => setContactData((p) => ({ ...p, reference: e.target.value }))}
                     />
                   </div>
-
                   </div>
                 </div>
                 )}
 
                 {!isRecipientsMode ? (
-                <div className="border border-gray-200 bg-gray-50/60 p-3 shadow-sm sm:p-4 xl:col-span-7 xl:order-3">
-                  <div className="mb-4 border border-gray-200 bg-gray-50 px-3 py-2">
-                    <h3 className="flex items-center gap-2 text-3xl font-semibold tracking-tight text-gray-900">
+                <div className="self-start border border-gray-200 bg-gray-50/60 p-3 sm:p-4 xl:col-span-5">
+                  <div className="mb-4">
+                    <h3 className="flex items-center gap-2 text-sm font-semibold text-gray-900">
                       <Package className="h-4 w-4" />
                       <span>Products</span>
                     </h3>
@@ -1802,46 +1760,6 @@ export default function LoginPage() {
                   </div>
                 </div>
                 ) : null}
-
-                {!isRecipientsMode && parcelDrafts.length > 0 ? (
-                <div className="self-start border border-gray-200 bg-gray-50/60 p-3 sm:p-4 xl:col-span-5 xl:order-2">
-                  <div className="mb-4">
-                    <h3 className="flex items-center gap-2 text-sm font-semibold text-gray-900">
-                      <Package className="h-4 w-4" />
-                      <span>Saved Parcels</span>
-                    </h3>
-                  </div>
-                  <div className="space-y-2">
-                    {parcelDrafts.map((parcel, idx) => (
-                      <div key={parcel.id} className="flex items-center justify-between border border-gray-200 bg-white px-3 py-2 text-sm shadow-sm">
-                        <span className="pr-3 text-gray-800">
-                          Parcel {idx + 1}: {parcel.address?.name} - {parcel.address?.postalCode} {parcel.address?.houseNumber}, {parcel.address?.country}
-                        </span>
-                        <div className="flex items-center gap-2">
-                          <button
-                            type="button"
-                            onClick={() => editParcelDraft(idx)}
-                            className="inline-flex items-center justify-center border border-blue-200 bg-blue-50 p-1.5 text-blue-700 transition hover:bg-blue-100"
-                            aria-label="Edit parcel"
-                            title="Edit"
-                          >
-                            <Pencil className="h-3.5 w-3.5" />
-                          </button>
-                          <button
-                            type="button"
-                            onClick={() => removeParcelDraft(idx)}
-                            className="inline-flex items-center justify-center border border-red-200 bg-red-50 p-1.5 text-red-600 transition hover:bg-red-100"
-                            aria-label="Delete parcel"
-                            title="Delete"
-                          >
-                            <Trash2 className="h-3.5 w-3.5" />
-                          </button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                ) : null}
               </div>
 
               {!isRecipientsMode ? (
@@ -1861,14 +1779,14 @@ export default function LoginPage() {
                     onClick={saveAndCreateNewParcel}
                     className=" border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50"
                   >
-                    {editingParcelIndex === null ? 'Save and Send New Parcel' : 'Update and Send New Parcel'}
+                    {editingParcelIndex === null ? 'Save & New Parcel' : 'Update & New Parcel'}
                   </button>
                   <button
                     type="submit"
                     form="receiver-form"
                     className=" bg-gray-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-gray-800"
                   >
-                    Confirm and Send
+                    Save and Review
                   </button>
                 </div>
               </div>
@@ -2090,63 +2008,6 @@ export default function LoginPage() {
         )}
       </div>
       <style jsx global>{`
-        .theme-root button,
-        .theme-root [role='button'],
-        .theme-root input[type='file'],
-        .theme-root select {
-          cursor: pointer;
-        }
-        .theme-root.theme-light {
-          color: #521903 !important;
-        }
-        .theme-root.theme-light .bg-white {
-          background-color: #fffdf9 !important;
-        }
-        .theme-root.theme-light .bg-gray-50,
-        .theme-root.theme-light .bg-gray-50\/60 {
-          background-color: #fff4df !important;
-        }
-        .theme-root.theme-light .bg-gray-100 {
-          background-color: #f8e9d1 !important;
-        }
-        .theme-root.theme-light .text-gray-900,
-        .theme-root.theme-light .text-gray-800 {
-          color: #521903 !important;
-        }
-        .theme-root.theme-light .text-gray-700,
-        .theme-root.theme-light .text-gray-600,
-        .theme-root.theme-light .text-gray-500 {
-          color: #7a4b32 !important;
-        }
-        .theme-root.theme-light .border-gray-200,
-        .theme-root.theme-light .border-gray-300,
-        .theme-root.theme-light .border-gray-100 {
-          border-color: #c29f85 !important;
-        }
-        .theme-root.theme-light .bg-green-600 {
-          background-color: #f8b936 !important;
-          border-color: #dc8c18 !important;
-          color: #521903 !important;
-        }
-        .theme-root.theme-light .hover\:bg-green-700:hover {
-          background-color: #dc8c18 !important;
-          color: #fff !important;
-        }
-        .theme-root.theme-light .bg-blue-50 {
-          background-color: #fff4df !important;
-        }
-        .theme-root.theme-light .text-blue-700 {
-          color: #7a4b32 !important;
-        }
-        .theme-root.theme-light .border-blue-200 {
-          border-color: #c29f85 !important;
-        }
-        .theme-root.theme-light .bg-red-50 {
-          background-color: #fff1ec !important;
-        }
-        .theme-root.theme-light .border-red-200 {
-          border-color: #d9a18f !important;
-        }
         .theme-root.theme-dark {
           background: #0f172a !important;
           color: #e5e7eb !important;

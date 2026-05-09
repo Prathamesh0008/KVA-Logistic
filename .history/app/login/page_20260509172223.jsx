@@ -1078,7 +1078,7 @@ export default function LoginPage() {
             </aside>
 
             <div className="col-span-12 lg:ml-[17.5rem]">
-              <div className="sticky top-0 z-10 mb-3 border border-gray-200 bg-gray-50 px-3 py-2 xl:w-[58.0%]">
+              <div className="sticky top-0 z-10 mb-3 border border-gray-200 bg-gray-50 px-3 py-2 xl:w-[58.222222%]">
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   {step === 2 ? (
                     <h2 className="flex items-center gap-2 text-xl font-semibold tracking-tight text-gray-900">
