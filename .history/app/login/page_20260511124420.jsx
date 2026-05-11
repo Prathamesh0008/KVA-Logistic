@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Kalam } from 'next/font/google'
-import { useRouter } from 'next/navigation'
 import {
   ClipboardPlus,
   ChevronDown,
@@ -40,7 +39,6 @@ const kalam = Kalam({
 })
 
 export default function LoginPage() {
-  const router = useRouter()
   const [step, setStep] = useState(1)
   const [loginData, setLoginData] = useState({
     email: 'demo@kva.com',
@@ -289,25 +287,6 @@ export default function LoginPage() {
     }
     try {
       const normalizedEmail = loginData.email.trim().toLowerCase()
-      try {
-        await apiRequest('/api/admin/orders-summary', {
-          method: 'POST',
-          body: JSON.stringify({ email: normalizedEmail, password: loginData.password })
-        })
-        localStorage.setItem(
-          'kva_admin_session',
-          JSON.stringify({ email: normalizedEmail, password: loginData.password })
-        )
-        setErrors({})
-        router.push('/admin')
-        return
-      } catch (adminError) {
-        if (normalizedEmail.includes('admin')) {
-          setErrors({ login: adminError.message || 'Invalid admin credentials.' })
-          return
-        }
-      }
-
       await apiRequest('/api/auth/login', {
         method: 'POST',
         body: JSON.stringify({ email: normalizedEmail, password: loginData.password })
@@ -650,6 +629,7 @@ export default function LoginPage() {
         .includes(q)
     })
   }, [recipientEntries, recipientsSearch])
+
   const progressPercent = (step / 5) * 100
   const isRecipientsMode = activeSidebarTab === 'recipients'
   const flowSteps = [
@@ -1185,13 +1165,13 @@ export default function LoginPage() {
 
             <div className="col-span-12 lg:ml-[17.5rem]">
               {step === 2 ? (
-              <div className="sticky top-0 z-10 mb-3 overflow-hidden border border-gray-200 bg-gray-50 px-3 py-3 xl:w-[57.7777%]">
+              <div className="sticky top-0 z-10 mb-3 overflow-hidden border border-gray-200 bg-gray-50 px-3 py-2 xl:w-[57.7777%]">
                 <div
                   aria-hidden="true"
                   className="pointer-events-none absolute inset-0 opacity-50"
                   style={{
                     backgroundImage: "url('/maps.png')",
-                    backgroundSize: 'contain',
+                    backgroundSize: 'cover',
                     backgroundPosition: 'center'
                   }}
                 />

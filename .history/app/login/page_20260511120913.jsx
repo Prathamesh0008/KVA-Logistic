@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Kalam } from 'next/font/google'
-import { useRouter } from 'next/navigation'
 import {
   ClipboardPlus,
   ChevronDown,
@@ -40,7 +39,6 @@ const kalam = Kalam({
 })
 
 export default function LoginPage() {
-  const router = useRouter()
   const [step, setStep] = useState(1)
   const [loginData, setLoginData] = useState({
     email: 'demo@kva.com',
@@ -289,25 +287,6 @@ export default function LoginPage() {
     }
     try {
       const normalizedEmail = loginData.email.trim().toLowerCase()
-      try {
-        await apiRequest('/api/admin/orders-summary', {
-          method: 'POST',
-          body: JSON.stringify({ email: normalizedEmail, password: loginData.password })
-        })
-        localStorage.setItem(
-          'kva_admin_session',
-          JSON.stringify({ email: normalizedEmail, password: loginData.password })
-        )
-        setErrors({})
-        router.push('/admin')
-        return
-      } catch (adminError) {
-        if (normalizedEmail.includes('admin')) {
-          setErrors({ login: adminError.message || 'Invalid admin credentials.' })
-          return
-        }
-      }
-
       await apiRequest('/api/auth/login', {
         method: 'POST',
         body: JSON.stringify({ email: normalizedEmail, password: loginData.password })
@@ -650,6 +629,7 @@ export default function LoginPage() {
         .includes(q)
     })
   }, [recipientEntries, recipientsSearch])
+
   const progressPercent = (step / 5) * 100
   const isRecipientsMode = activeSidebarTab === 'recipients'
   const flowSteps = [
@@ -1185,17 +1165,8 @@ export default function LoginPage() {
 
             <div className="col-span-12 lg:ml-[17.5rem]">
               {step === 2 ? (
-              <div className="sticky top-0 z-10 mb-3 overflow-hidden border border-gray-200 bg-gray-50 px-3 py-3 xl:w-[57.7777%]">
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 opacity-50"
-                  style={{
-                    backgroundImage: "url('/maps.png')",
-                    backgroundSize: 'contain',
-                    backgroundPosition: 'center'
-                  }}
-                />
-                <div className="relative z-[1] flex flex-wrap items-center justify-between gap-2">
+              <div className="sticky top-0 z-10 mb-3 border border-gray-200 bg-gray-50 px-3 py-2 xl:w-[57.7777%]">
+                <div className="flex flex-wrap items-center justify-between gap-2">
                   <h2 className="flex items-center gap-2 text-xl font-semibold tracking-tight text-gray-900">
                     <MapPin className="h-5 w-5 text-gray-700" />
                     <span>
@@ -1798,16 +1769,22 @@ export default function LoginPage() {
                   </div>
                 </div>
                 )}
+                
 
                 {!isRecipientsMode ? (
-                <>
-                <div className="border border-gray-200 bg-gray-50 px-3 py-2 xl:col-span-7 xl:order-3">
-                  <h3 className="flex items-center gap-2 text-3xl font-semibold tracking-tight text-gray-900">
-                    <Package className="h-4 w-4" />
-                    <span>Products</span>
-                  </h3>
-                </div>
-                <div className="border border-gray-200 bg-gray-50/60 p-3 shadow-sm sm:p-4 xl:col-span-7 xl:order-4">
+                  <>  <div className="mb-4 border border-gray-200 bg-gray-50 px-3 py-2">
+                    <h3 className="flex items-center gap-2 text-3xl font-semibold tracking-tight text-gray-900">
+                      <Package className="h-4 w-4" />
+                      <span>Products</span>
+                    </h3>
+                  </div></>
+                <div className="border border-gray-200 bg-gray-50/60 p-3 shadow-sm sm:p-4 xl:col-span-7 xl:order-3">
+                  <div className="mb-4 border border-gray-200 bg-gray-50 px-3 py-2">
+                    <h3 className="flex items-center gap-2 text-3xl font-semibold tracking-tight text-gray-900">
+                      <Package className="h-4 w-4" />
+                      <span>Products</span>
+                    </h3>
+                  </div>
                   <div className="space-y-3">
                     <div className={` border bg-white p-3 ${
                       editingIndex !== null ? 'border-blue-300 ring-2 ring-blue-100' : 'border-gray-200'
@@ -1906,7 +1883,6 @@ export default function LoginPage() {
                     {errors.product && <p className="text-sm text-red-600">{errors.product}</p>}
                   </div>
                 </div>
-                </>
                 ) : null}
 
                 {!isRecipientsMode && parcelDrafts.length > 0 ? (

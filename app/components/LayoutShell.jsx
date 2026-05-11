@@ -8,8 +8,9 @@ import WhatsAppButton from './WhatsAppButton'
 export default function LayoutShell({ children }) {
   const pathname = usePathname()
   const isAuthPage = pathname === '/login'
+  const isAdminPage = pathname === '/admin'
 
-  if (isAuthPage) {
+  if (isAuthPage || isAdminPage) {
     return <main className="min-h-screen">{children}</main>
   }
 

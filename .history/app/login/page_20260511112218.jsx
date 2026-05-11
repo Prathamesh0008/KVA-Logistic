@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Kalam } from 'next/font/google'
-import { useRouter } from 'next/navigation'
 import {
   ClipboardPlus,
   ChevronDown,
@@ -40,7 +39,6 @@ const kalam = Kalam({
 })
 
 export default function LoginPage() {
-  const router = useRouter()
   const [step, setStep] = useState(1)
   const [loginData, setLoginData] = useState({
     email: 'demo@kva.com',
@@ -98,8 +96,6 @@ export default function LoginPage() {
   const [recipientsSearch, setRecipientsSearch] = useState('')
   const [selectedRecipientKey, setSelectedRecipientKey] = useState('')
   const [editingSavedRecipientId, setEditingSavedRecipientId] = useState('')
-  const [selectedRecipientSource, setSelectedRecipientSource] = useState('')
-  const [selectedRecipientParcelIndex, setSelectedRecipientParcelIndex] = useState(null)
   const [showRecipientDetails, setShowRecipientDetails] = useState(false)
   const [activeCountryIndex, setActiveCountryIndex] = useState(0)
   const [activePhoneCodeIndex, setActivePhoneCodeIndex] = useState(0)
@@ -289,25 +285,6 @@ export default function LoginPage() {
     }
     try {
       const normalizedEmail = loginData.email.trim().toLowerCase()
-      try {
-        await apiRequest('/api/admin/orders-summary', {
-          method: 'POST',
-          body: JSON.stringify({ email: normalizedEmail, password: loginData.password })
-        })
-        localStorage.setItem(
-          'kva_admin_session',
-          JSON.stringify({ email: normalizedEmail, password: loginData.password })
-        )
-        setErrors({})
-        router.push('/admin')
-        return
-      } catch (adminError) {
-        if (normalizedEmail.includes('admin')) {
-          setErrors({ login: adminError.message || 'Invalid admin credentials.' })
-          return
-        }
-      }
-
       await apiRequest('/api/auth/login', {
         method: 'POST',
         body: JSON.stringify({ email: normalizedEmail, password: loginData.password })
@@ -348,32 +325,6 @@ export default function LoginPage() {
 
   const handleContactNext = (e) => {
     e.preventDefault()
-    const addressFieldsExcludingAutoEmail = {
-      country: contactData.country,
-      name: contactData.name,
-      company: contactData.company,
-      postalCode: contactData.postalCode,
-      houseNumber: contactData.houseNumber,
-      addition: contactData.addition,
-      extraAddressInfo: contactData.extraAddressInfo,
-      phoneCode: contactData.phoneCode,
-      mobile: contactData.mobile,
-      reference: contactData.reference
-    }
-    const hasAnyNonEmailAddressInput = Object.values(addressFieldsExcludingAutoEmail).some((value) =>
-      String(value || '').trim()
-    )
-    const hasCurrentParcelInput = hasAnyNonEmailAddressInput || products.length > 0
-
-    if (!hasCurrentParcelInput && parcelDrafts.length > 0 && editingParcelIndex === null) {
-      setErrors({})
-      setStep(3)
-      if (currentUserEmail) {
-        persistSession(currentUserEmail, loginData.password, 3)
-      }
-      return
-    }
-
     const parcel = buildParcelDraft()
     if (!parcel) return
     const allParcels =
@@ -650,6 +601,7 @@ export default function LoginPage() {
         .includes(q)
     })
   }, [recipientEntries, recipientsSearch])
+
   const progressPercent = (step / 5) * 100
   const isRecipientsMode = activeSidebarTab === 'recipients'
   const flowSteps = [
@@ -701,16 +653,13 @@ export default function LoginPage() {
     setSelectedRecipientKey(entry.key)
     applyAddressSuggestion(entry.address)
     setEditingSavedRecipientId(entry.source === 'saved' ? entry.address?.id || '' : '')
-    setSelectedRecipientSource(entry.source || '')
-    setSelectedRecipientParcelIndex(
-      entry.source === 'parcel' && Number.isInteger(entry.parcelIndex) ? entry.parcelIndex : null
-    )
     setShowRecipientDetails(true)
     setStep(2)
-    setActiveSidebarTab('recipients')
+    setActiveSidebarTab(entry.source === 'saved' ? 'recipients' : 'new_order')
   }
 
   const updateSavedRecipientFromForm = async () => {
+    if (!editingSavedRecipientId || !currentUserEmail) return
     const nextErrors = {}
     if (!contactData.country.trim()) nextErrors.country = 'Country is required'
     if (!contactData.name.trim()) nextErrors.name = 'Name is required'
@@ -723,25 +672,6 @@ export default function LoginPage() {
       return
     }
 
-    if (selectedRecipientSource === 'parcel' && selectedRecipientParcelIndex !== null) {
-      setParcelDrafts((prev) =>
-        prev.map((parcel, idx) =>
-          idx === selectedRecipientParcelIndex
-            ? {
-                ...parcel,
-                address: {
-                  ...parcel.address,
-                  ...contactData
-                }
-              }
-            : parcel
-        )
-      )
-      setErrors({})
-      return
-    }
-
-    if (!editingSavedRecipientId || !currentUserEmail) return
     const updatedAddresses = savedAddresses.map((addr) =>
       addr.id === editingSavedRecipientId ? { ...addr, ...contactData, id: editingSavedRecipientId } : addr
     )
@@ -762,29 +692,6 @@ export default function LoginPage() {
   }
 
   const deleteSavedRecipient = async () => {
-    if (selectedRecipientSource === 'parcel' && selectedRecipientParcelIndex !== null) {
-      setParcelDrafts((prev) => prev.filter((_, idx) => idx !== selectedRecipientParcelIndex))
-      setSelectedRecipientParcelIndex(null)
-      setSelectedRecipientSource('')
-      setEditingSavedRecipientId('')
-      setSelectedRecipientKey('')
-      setShowRecipientDetails(false)
-      setContactData({
-        country: '',
-        name: '',
-        company: '',
-        postalCode: '',
-        houseNumber: '',
-        addition: '',
-        extraAddressInfo: '',
-        email: currentUserEmail || '',
-        phoneCode: '',
-        mobile: '',
-        reference: ''
-      })
-      return
-    }
-
     if (!editingSavedRecipientId || !currentUserEmail) return
     try {
       await apiRequest(`/api/addresses?userEmail=${encodeURIComponent(currentUserEmail)}&addressId=${encodeURIComponent(editingSavedRecipientId)}`, {
@@ -793,10 +700,7 @@ export default function LoginPage() {
       const updatedAddresses = savedAddresses.filter((addr) => addr.id !== editingSavedRecipientId)
       setSavedAddresses(updatedAddresses)
       setEditingSavedRecipientId('')
-      setSelectedRecipientSource('')
-      setSelectedRecipientParcelIndex(null)
       setSelectedRecipientKey('')
-      setShowRecipientDetails(false)
       setContactData({
         country: '',
         name: '',
@@ -1162,16 +1066,6 @@ export default function LoginPage() {
                   </p>
                   <button
                     type="button"
-                    onClick={() => setIsDarkMode((prev) => !prev)}
-                    className="inline-flex w-full items-center justify-center gap-2 border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-100"
-                    aria-label={isDarkMode ? 'Switch to day mode' : 'Switch to night mode'}
-                    title={isDarkMode ? 'Day mode' : 'Night mode'}
-                  >
-                    {isDarkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-                    <span>{isDarkMode ? 'Day Mode' : 'Night Mode'}</span>
-                  </button>
-                  <button
-                    type="button"
                     onClick={handleLogout}
                     className="inline-flex w-full items-center justify-center gap-2 border border-red-300 bg-red-50 px-3 py-2 text-sm font-semibold text-red-700 transition hover:border-red-400 hover:bg-red-100"
                   >
@@ -1184,37 +1078,39 @@ export default function LoginPage() {
             </aside>
 
             <div className="col-span-12 lg:ml-[17.5rem]">
-              {step === 2 ? (
-              <div className="sticky top-0 z-10 mb-3 overflow-hidden border border-gray-200 bg-gray-50 px-3 py-3 xl:w-[57.7777%]">
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 opacity-50"
-                  style={{
-                    backgroundImage: "url('/maps.png')",
-                    backgroundSize: 'contain',
-                    backgroundPosition: 'center'
-                  }}
-                />
-                <div className="relative z-[1] flex flex-wrap items-center justify-between gap-2">
-                  <h2 className="flex items-center gap-2 text-xl font-semibold tracking-tight text-gray-900">
-                    <MapPin className="h-5 w-5 text-gray-700" />
-                    <span>
-                      {activeSidebarTab === 'your_order'
-                        ? 'Order History'
-                        : activeSidebarTab === 'recipients'
-                          ? 'Recipients'
-                          : activeSidebarTab === 'inbox'
-                            ? 'Inbox'
-                            : activeSidebarTab === 'contact'
-                              ? 'Support'
-                              : activeSidebarTab === 'account'
-                                ? 'Your Account'
-                          : 'Who is the receiver?'}
-                    </span>
-                  </h2>
+              <div className="sticky top-0 z-10 mb-3 border border-gray-200 bg-gray-50 px-3 py-2 xl:w-[5.0%]">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  {step === 2 ? (
+                    <h2 className="flex items-center gap-2 text-xl font-semibold tracking-tight text-gray-900">
+                      <MapPin className="h-5 w-5 text-gray-700" />
+                      <span>
+                        {activeSidebarTab === 'your_order'
+                          ? 'Order History'
+                          : activeSidebarTab === 'recipients'
+                            ? 'Recipients'
+                            : activeSidebarTab === 'inbox'
+                              ? 'Inbox'
+                              : activeSidebarTab === 'contact'
+                                ? 'Support'
+                                : activeSidebarTab === 'account'
+                                  ? 'Your Account'
+                            : 'Who is the receiver?'}
+                      </span>
+                    </h2>
+                  ) : (
+                    <div />
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => setIsDarkMode((prev) => !prev)}
+                    className="inline-flex h-9 w-9 items-center justify-center border border-gray-300 bg-white text-gray-700 hover:bg-gray-100"
+                    aria-label={isDarkMode ? 'Switch to day mode' : 'Switch to night mode'}
+                    title={isDarkMode ? 'Day mode' : 'Night mode'}
+                  >
+                    {isDarkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                  </button>
                 </div>
               </div>
-              ) : null}
         {step === 2 && (
           <>
             {activeSidebarTab === 'your_order' ? (
@@ -1468,7 +1364,7 @@ export default function LoginPage() {
                       </span>
                     ) : null}
                   </div>
-                  {activeSidebarTab === 'recipients' && showRecipientDetails && selectedRecipientKey ? (
+                  {activeSidebarTab === 'recipients' && editingSavedRecipientId ? (
                     <div className="mb-3 flex gap-2">
                       <button
                         type="button"
@@ -1800,14 +1696,13 @@ export default function LoginPage() {
                 )}
 
                 {!isRecipientsMode ? (
-                <>
-                <div className="border border-gray-200 bg-gray-50 px-3 py-2 xl:col-span-7 xl:order-3">
-                  <h3 className="flex items-center gap-2 text-3xl font-semibold tracking-tight text-gray-900">
-                    <Package className="h-4 w-4" />
-                    <span>Products</span>
-                  </h3>
-                </div>
-                <div className="border border-gray-200 bg-gray-50/60 p-3 shadow-sm sm:p-4 xl:col-span-7 xl:order-4">
+                <div className="border border-gray-200 bg-gray-50/60 p-3 shadow-sm sm:p-4 xl:col-span-7 xl:order-3">
+                  <div className="mb-4 border border-gray-200 bg-gray-50 px-3 py-2">
+                    <h3 className="flex items-center gap-2 text-3xl font-semibold tracking-tight text-gray-900">
+                      <Package className="h-4 w-4" />
+                      <span>Products</span>
+                    </h3>
+                  </div>
                   <div className="space-y-3">
                     <div className={` border bg-white p-3 ${
                       editingIndex !== null ? 'border-blue-300 ring-2 ring-blue-100' : 'border-gray-200'
@@ -1906,7 +1801,6 @@ export default function LoginPage() {
                     {errors.product && <p className="text-sm text-red-600">{errors.product}</p>}
                   </div>
                 </div>
-                </>
                 ) : null}
 
                 {!isRecipientsMode && parcelDrafts.length > 0 ? (
