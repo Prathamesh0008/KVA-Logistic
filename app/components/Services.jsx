@@ -30,17 +30,17 @@ export default function ServicesPage() {
               >
                 Comprehensive
               </span>
-              <span
-                className="block"
-                style={{
-                  background: `linear-gradient(90deg, ${colors.goldenYellow}, ${colors.orange})`,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                Logistics Solutions
-              </span>
+             <span
+  className="block overflow-visible leading-[1.2] pb-2"
+  style={{
+    background: `linear-gradient(90deg, ${colors.goldenYellow}, ${colors.orange})`,
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+    backgroundClip: "text",
+  }}
+>
+  Logistics Solutions
+</span>
             </h1>
             <p
               className="text-sm md:text-base max-w-2xl mx-auto"

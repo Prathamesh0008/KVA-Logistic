@@ -59,3 +59,15 @@ body {
 body {
   font-family: "Eurostile", sans-serif;
 }
+html {
+  scroll-behavior: auto !important;
+}
+
+html.page-loading-hide body {
+  opacity: 0;
+}
+
+body {
+  opacity: 1;
+  transition: opacity 0.12s ease;
+}
