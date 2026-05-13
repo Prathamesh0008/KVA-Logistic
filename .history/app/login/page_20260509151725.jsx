@@ -99,10 +99,7 @@ export default function LoginPage() {
   const countrySearchInputRef = useRef(null)
   const phoneCodeSearchInputRef = useRef(null)
 
-  const getAddressStorageKey = (email) => `kva_saved_addresses_${email.toLowerCase()}`
-  const getOrderStorageKey = (email) => `kva_order_history_${email.toLowerCase()}`
   const LOGIN_SESSION_KEY = 'kva_demo_login_session'
-  const USERS_STORAGE_KEY = 'kva_registered_users'
   const THEME_KEY = 'kva_theme_mode'
 
   const persistSession = (email, password, stepValue) => {
@@ -116,30 +113,42 @@ export default function LoginPage() {
     )
   }
 
-  const hydrateUserContext = (normalizedEmail, password = 'demo123', stepValue = 2) => {
+  const apiRequest = async (url, options = {}) => {
+    const response = await fetch(url, {
+      headers: { 'Content-Type': 'application/json', ...(options.headers || {}) },
+      ...options
+    })
+    const data = await response.json().catch(() => ({}))
+    if (!response.ok) {
+      throw new Error(data?.error || 'Request failed')
+    }
+    return data
+  }
+
+  const fetchUserContext = async (normalizedEmail) => {
+    return apiRequest(`/api/user-context?email=${encodeURIComponent(normalizedEmail)}`)
+  }
+
+  const hydrateUserContext = async (normalizedEmail, password = 'demo123', stepValue = 2) => {
     setCurrentUserEmail(normalizedEmail)
     setLoginData({
       email: normalizedEmail,
       password
     })
     setSupportForm((prev) => ({ ...prev, email: normalizedEmail }))
-    const rawUsers = localStorage.getItem(USERS_STORAGE_KEY)
-    const users = rawUsers ? JSON.parse(rawUsers) : []
-    const matched = users.find((u) => String(u.email || '').toLowerCase() === normalizedEmail)
+
+    const context = await fetchUserContext(normalizedEmail)
+    const matched = context?.user
+
     setAccountForm({
       name: matched?.name || '',
-      password,
+      password: matched?.password || password,
       whatsapp: matched?.whatsapp || ''
     })
 
-    const storedAddresses = localStorage.getItem(getAddressStorageKey(normalizedEmail))
-    const parsedAddresses = storedAddresses ? JSON.parse(storedAddresses) : []
-    setSavedAddresses(parsedAddresses)
+    setSavedAddresses(context?.addresses || [])
     setSelectedSavedAddressId('')
-
-    const storedOrders = localStorage.getItem(getOrderStorageKey(normalizedEmail))
-    const parsedOrders = storedOrders ? JSON.parse(storedOrders) : []
-    setOrderHistory(parsedOrders)
+    setOrderHistory(context?.orders || [])
 
     setContactData((prev) => ({ ...prev, email: normalizedEmail }))
     setStep(stepValue)
@@ -211,22 +220,25 @@ export default function LoginPage() {
   }, [isDarkMode])
 
   useEffect(() => {
-    const sessionRaw = localStorage.getItem(LOGIN_SESSION_KEY)
-    if (!sessionRaw) return
+    const restoreSession = async () => {
+      const sessionRaw = localStorage.getItem(LOGIN_SESSION_KEY)
+      if (!sessionRaw) return
 
-    try {
-      const session = JSON.parse(sessionRaw)
-      if (!session?.email) return
-      const normalizedEmail = String(session.email).toLowerCase()
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      hydrateUserContext(
-        normalizedEmail,
-        session.password || 'demo123',
-        session.step && session.step >= 2 ? session.step : 2
-      )
-    } catch {
-      localStorage.removeItem(LOGIN_SESSION_KEY)
+      try {
+        const session = JSON.parse(sessionRaw)
+        if (!session?.email) return
+        const normalizedEmail = String(session.email).toLowerCase()
+        await hydrateUserContext(
+          normalizedEmail,
+          session.password || 'demo123',
+          session.step && session.step >= 2 ? session.step : 2
+        )
+      } catch {
+        localStorage.removeItem(LOGIN_SESSION_KEY)
+      }
     }
+
+    restoreSession()
   }, [])
 
   useEffect(() => {
@@ -258,48 +270,50 @@ export default function LoginPage() {
     }
   }, [isPhoneCodeOpen])
 
-  const handleDemoLogin = (e) => {
+  const handleDemoLogin = async (e) => {
     e.preventDefault()
     if (!loginData.email || !loginData.password) {
       setErrors({ login: 'Email and password are required.' })
       return
     }
-    const normalizedEmail = loginData.email.trim().toLowerCase()
-    hydrateUserContext(normalizedEmail, loginData.password, 2)
-    setErrors({})
-    persistSession(normalizedEmail, loginData.password, 2)
+    try {
+      const normalizedEmail = loginData.email.trim().toLowerCase()
+      await apiRequest('/api/auth/login', {
+        method: 'POST',
+        body: JSON.stringify({ email: normalizedEmail, password: loginData.password })
+      })
+      await hydrateUserContext(normalizedEmail, loginData.password, 2)
+      setErrors({})
+      persistSession(normalizedEmail, loginData.password, 2)
+    } catch (error) {
+      setErrors({ login: error.message || 'Login failed.' })
+    }
   }
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault()
     if (!registerData.name.trim() || !registerData.email.trim() || !registerData.password.trim() || !registerData.whatsapp.trim()) {
       setErrors({ register: 'All fields are required.' })
       return
     }
-    const normalizedEmail = registerData.email.trim().toLowerCase()
-    const rawUsers = localStorage.getItem(USERS_STORAGE_KEY)
-    const users = rawUsers ? JSON.parse(rawUsers) : []
-    const exists = users.some((user) => String(user.email || '').toLowerCase() === normalizedEmail)
-    if (exists) {
-      setErrors({ register: 'Email already registered. Please login.' })
-      return
+    try {
+      const normalizedEmail = registerData.email.trim().toLowerCase()
+      await apiRequest('/api/auth/register', {
+        method: 'POST',
+        body: JSON.stringify({
+          name: registerData.name.trim(),
+          email: normalizedEmail,
+          password: registerData.password,
+          whatsapp: registerData.whatsapp.trim()
+        })
+      })
+      setLoginData({ email: normalizedEmail, password: registerData.password })
+      setRegisterData({ name: '', email: '', password: '', whatsapp: '' })
+      setAuthMode('login')
+      setErrors({ login: 'Registered successfully. Please click Login.' })
+    } catch (error) {
+      setErrors({ register: error.message || 'Registration failed.' })
     }
-    const nextUsers = [
-      ...users,
-      {
-        id: `usr_${Date.now()}`,
-        name: registerData.name.trim(),
-        email: normalizedEmail,
-        password: registerData.password,
-        whatsapp: registerData.whatsapp.trim(),
-        createdAt: new Date().toISOString()
-      }
-    ]
-    localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(nextUsers))
-    setLoginData({ email: normalizedEmail, password: registerData.password })
-    setRegisterData({ name: '', email: '', password: '', whatsapp: '' })
-    setAuthMode('login')
-    setErrors({ login: 'Registered successfully. Please click Login.' })
   }
 
   const handleContactNext = (e) => {
@@ -361,7 +375,10 @@ export default function LoginPage() {
         }
         const updatedAddresses = [addressRecord, ...savedAddresses]
         setSavedAddresses(updatedAddresses)
-        localStorage.setItem(getAddressStorageKey(currentUserEmail), JSON.stringify(updatedAddresses))
+        apiRequest('/api/addresses', {
+          method: 'POST',
+          body: JSON.stringify({ userEmail: currentUserEmail, address: addressRecord })
+        }).catch(() => {})
       }
     }
 
@@ -490,7 +507,10 @@ export default function LoginPage() {
       const updatedOrders = [order, ...orderHistory]
       setOrderHistory(updatedOrders)
       setLatestOrderId(order.id)
-      localStorage.setItem(getOrderStorageKey(currentUserEmail), JSON.stringify(updatedOrders))
+      apiRequest('/api/orders', {
+        method: 'POST',
+        body: JSON.stringify(order)
+      }).catch(() => {})
     }
 
     setStep(4)
@@ -631,7 +651,7 @@ export default function LoginPage() {
     setActiveSidebarTab(entry.source === 'saved' ? 'recipients' : 'new_order')
   }
 
-  const updateSavedRecipientFromForm = () => {
+  const updateSavedRecipientFromForm = async () => {
     if (!editingSavedRecipientId || !currentUserEmail) return
     const nextErrors = {}
     if (!contactData.country.trim()) nextErrors.country = 'Country is required'
@@ -648,31 +668,48 @@ export default function LoginPage() {
     const updatedAddresses = savedAddresses.map((addr) =>
       addr.id === editingSavedRecipientId ? { ...addr, ...contactData, id: editingSavedRecipientId } : addr
     )
-    setSavedAddresses(updatedAddresses)
-    localStorage.setItem(getAddressStorageKey(currentUserEmail), JSON.stringify(updatedAddresses))
-    setErrors({})
+    try {
+      await apiRequest('/api/addresses', {
+        method: 'PUT',
+        body: JSON.stringify({
+          userEmail: currentUserEmail,
+          addressId: editingSavedRecipientId,
+          address: { ...contactData }
+        })
+      })
+      setSavedAddresses(updatedAddresses)
+      setErrors({})
+    } catch (error) {
+      setErrors({ email: error.message || 'Failed to update recipient.' })
+    }
   }
 
-  const deleteSavedRecipient = () => {
+  const deleteSavedRecipient = async () => {
     if (!editingSavedRecipientId || !currentUserEmail) return
-    const updatedAddresses = savedAddresses.filter((addr) => addr.id !== editingSavedRecipientId)
-    setSavedAddresses(updatedAddresses)
-    localStorage.setItem(getAddressStorageKey(currentUserEmail), JSON.stringify(updatedAddresses))
-    setEditingSavedRecipientId('')
-    setSelectedRecipientKey('')
-    setContactData({
-      country: '',
-      name: '',
-      company: '',
-      postalCode: '',
-      houseNumber: '',
-      addition: '',
-      extraAddressInfo: '',
-      email: currentUserEmail || '',
-      phoneCode: '',
-      mobile: '',
-      reference: ''
-    })
+    try {
+      await apiRequest(`/api/addresses?userEmail=${encodeURIComponent(currentUserEmail)}&addressId=${encodeURIComponent(editingSavedRecipientId)}`, {
+        method: 'DELETE'
+      })
+      const updatedAddresses = savedAddresses.filter((addr) => addr.id !== editingSavedRecipientId)
+      setSavedAddresses(updatedAddresses)
+      setEditingSavedRecipientId('')
+      setSelectedRecipientKey('')
+      setContactData({
+        country: '',
+        name: '',
+        company: '',
+        postalCode: '',
+        houseNumber: '',
+        addition: '',
+        extraAddressInfo: '',
+        email: currentUserEmail || '',
+        phoneCode: '',
+        mobile: '',
+        reference: ''
+      })
+    } catch (error) {
+      setErrors({ email: error.message || 'Failed to delete recipient.' })
+    }
   }
 
   const selectCountry = (countryName) => {
@@ -723,48 +760,51 @@ export default function LoginPage() {
     }
   }
 
-  const handleSupportSubmit = (e) => {
+  const handleSupportSubmit = async (e) => {
     e.preventDefault()
     if (!supportForm.name.trim() || !supportForm.email.trim() || !supportForm.message.trim()) {
       setSupportMessage('Please fill name, email and message.')
       return
     }
-    setSupportMessage('Thanks. Your message has been submitted.')
-    setSupportForm({ name: '', email: currentUserEmail || '', message: '' })
+    try {
+      await apiRequest('/api/support', {
+        method: 'POST',
+        body: JSON.stringify({
+          ...supportForm,
+          userEmail: currentUserEmail || supportForm.email
+        })
+      })
+      setSupportMessage('Thanks. Your message has been submitted.')
+      setSupportForm({ name: '', email: currentUserEmail || '', message: '' })
+    } catch (error) {
+      setSupportMessage(error.message || 'Failed to submit message.')
+    }
   }
 
-  const handleAccountUpdate = (e) => {
+  const handleAccountUpdate = async (e) => {
     e.preventDefault()
     if (!currentUserEmail) return
     if (!accountForm.name.trim() || !accountForm.password.trim() || !accountForm.whatsapp.trim()) {
       setAccountMessage('Name, password and number are required.')
       return
     }
-    const normalizedEmail = currentUserEmail.toLowerCase()
-    const rawUsers = localStorage.getItem(USERS_STORAGE_KEY)
-    const users = rawUsers ? JSON.parse(rawUsers) : []
-    const idx = users.findIndex((u) => String(u.email || '').toLowerCase() === normalizedEmail)
-    if (idx >= 0) {
-      users[idx] = {
-        ...users[idx],
-        name: accountForm.name.trim(),
-        password: accountForm.password,
-        whatsapp: accountForm.whatsapp.trim()
-      }
-    } else {
-      users.push({
-        id: `usr_${Date.now()}`,
-        name: accountForm.name.trim(),
-        email: normalizedEmail,
-        password: accountForm.password,
-        whatsapp: accountForm.whatsapp.trim(),
-        createdAt: new Date().toISOString()
+    try {
+      const normalizedEmail = currentUserEmail.toLowerCase()
+      await apiRequest('/api/users', {
+        method: 'PUT',
+        body: JSON.stringify({
+          email: normalizedEmail,
+          name: accountForm.name.trim(),
+          password: accountForm.password,
+          whatsapp: accountForm.whatsapp.trim()
+        })
       })
+      setLoginData((p) => ({ ...p, password: accountForm.password }))
+      persistSession(normalizedEmail, accountForm.password, step)
+      setAccountMessage('Account updated successfully.')
+    } catch (error) {
+      setAccountMessage(error.message || 'Failed to update account.')
     }
-    localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(users))
-    setLoginData((p) => ({ ...p, password: accountForm.password }))
-    persistSession(normalizedEmail, accountForm.password, step)
-    setAccountMessage('Account updated successfully.')
   }
 
   return (
@@ -883,6 +923,13 @@ export default function LoginPage() {
         {step !== 1 && (
           <div className="grid grid-cols-12 gap-3">
             <aside className="col-span-12 flex min-h-[70vh] flex-col self-start border border-gray-200 bg-gray-50 p-3 lg:sticky lg:top-4 lg:h-[calc(100vh-5rem)] lg:col-span-2">
+              <div className="mb-3 flex items-center justify-center border border-gray-200 bg-white p-2">
+                <img
+                  src="/logo.png"
+                  alt="KVA Logistics"
+                  className="h-14 w-auto object-contain"
+                />
+              </div>
               <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-500">Menu</h3>
               <div className="space-y-1">
                 <button
@@ -967,6 +1014,9 @@ export default function LoginPage() {
               </div>
               {currentUserEmail ? (
                 <div className="mt-auto space-y-2 border border-gray-200 bg-white p-2">
+                  <p className="text-xs text-gray-600">
+                   <span className="font-medium text-gray-800">{currentUserEmail}</span>
+                  </p>
                   <button
                     type="button"
                     onClick={handleLogout}
@@ -1180,7 +1230,7 @@ export default function LoginPage() {
                     className="w-full border border-gray-300 bg-white px-3 py-2 text-sm outline-none focus:border-gray-500"
                   />
                 </div>
-                <div className="max-h-[64vh] overflow-y-auto bg-white p-2">
+                <div className="h-[calc(100vh-15rem)] min-h-[320px] overflow-y-auto bg-white p-2">
                   {filteredRecipientEntries.length === 0 ? (
                     <p className="p-3 text-sm text-gray-500">No recipients found.</p>
                   ) : (
@@ -1285,9 +1335,11 @@ export default function LoginPage() {
                       <button
                         type="button"
                         onClick={deleteSavedRecipient}
-                        className="border border-red-200 bg-red-50 px-3 py-1.5 text-xs font-medium text-red-600"
+                        className="inline-flex items-center justify-center border border-red-200 bg-red-50 p-1.5 text-red-600 hover:bg-red-100"
+                        aria-label="Delete recipient"
+                        title="Delete recipient"
                       >
-                        Delete Recipient
+                        <Trash2 className="h-4 w-4" />
                       </button>
                     </div>
                   ) : null}
