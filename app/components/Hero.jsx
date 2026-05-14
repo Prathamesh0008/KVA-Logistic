@@ -105,10 +105,25 @@ export default function Hero() {
           videoRef.current.play().catch(() => {});
         }
       }, 100);
-    }, 3000);
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, [videoError]);
+
+  useEffect(() => {
+    if (!showLoader) return;
+
+    const bodyOverflow = document.body.style.overflow;
+    const htmlOverflow = document.documentElement.style.overflow;
+
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = bodyOverflow;
+      document.documentElement.style.overflow = htmlOverflow;
+    };
+  }, [showLoader]);
 
   useEffect(() => {
     const playVideo = () => {
@@ -165,9 +180,9 @@ export default function Hero() {
       {/* Mobile overlay */}
       <div className="absolute inset-0 md:hidden bg-gradient-to-t from-[#310F0B] via-[#310F0B]/90 to-transparent" />
 
-      {/* 3 Second Loading Overlay */}
+      {/* 1 Second Full Page Loading Overlay */}
       {showLoader && (
-        <div className="absolute inset-0 z-[50] flex items-center justify-center bg-[#0B4B55]/90 backdrop-blur-md">
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#0B4B55]">
           <div className="flex flex-col items-center gap-4 rounded-2xl border border-[#EB9003]/60 bg-white/95 px-8 py-7 shadow-2xl">
             <div className="relative">
               <div className="absolute inset-0 rounded-full bg-[#EB9003]/25 blur-xl" />
