@@ -43,8 +43,8 @@ export default function LoginPage() {
   const router = useRouter()
   const [step, setStep] = useState(1)
   const [loginData, setLoginData] = useState({
-    email: 'demo@kva.com',
-    password: 'demo123'
+    email: '',
+    password: ''
   })
   const [authMode, setAuthMode] = useState('login')
   const [registerData, setRegisterData] = useState({
