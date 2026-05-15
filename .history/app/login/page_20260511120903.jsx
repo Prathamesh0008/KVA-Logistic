@@ -960,7 +960,7 @@ export default function LoginPage() {
                     type="email"
                     value={loginData.email}
                     onChange={(e) => setLoginData((p) => ({ ...p, email: e.target.value }))}
-                    placeholder="demo@company.com"
+                    placeholder="Email"
                     className={inputClass}
                   />
                 </div>
