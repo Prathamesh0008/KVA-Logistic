@@ -6,7 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
-const LOGO_SRC = "/Orange and Black Modern Construction Business Invoice (1).png";
+const LOGO_SRC = "/logo.png";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
