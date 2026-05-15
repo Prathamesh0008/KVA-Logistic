@@ -31,14 +31,13 @@ export default function Footer() {
           <div className="space-y-6 text-center md:text-left">
             <div className="flex justify-center md:justify-start">
               <Link href="/" className="inline-block">
-                <div className="relative w-full h-[100px]">
+                <div className="relative w-[180px] h-[72px] sm:w-[210px] sm:h-[84px]">
                   <Image
-                    src="/logo.png" 
+                    src="/logo.png"
                     alt="KVA Logistics"
-                    width={250}
-                    height={100}
+                    fill
+                    sizes="(max-width: 640px) 180px, 210px"
                     className="object-contain"
-                    priority
                   />
                 </div>
               </Link>
