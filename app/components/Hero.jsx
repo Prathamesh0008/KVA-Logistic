@@ -182,7 +182,7 @@ export default function Hero() {
 
       {/* 1 Second Full Page Loading Overlay */}
       {showLoader && (
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#0B4B55]">
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#0B4B55]/35 backdrop-blur-md">
           <div className="flex flex-col items-center gap-4 rounded-2xl border border-[#EB9003]/60 bg-white/95 px-8 py-7 shadow-2xl">
             <div className="relative">
               <div className="absolute inset-0 rounded-full bg-[#EB9003]/25 blur-xl" />
