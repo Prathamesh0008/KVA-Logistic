@@ -133,7 +133,7 @@ export default function Footer() {
                       {item.content}
                     </span>
                     {item.subtitle && (
-                      <span className="text-xs" style={{ color: colors.darkBrown + '150' }}>
+                      <span className="text-l" style={{ color: colors.darkBrown + '150' }}>
                         {item.subtitle}
                       </span>
                     )}
@@ -179,7 +179,7 @@ export default function Footer() {
 
           {/* Certifications */}
           <div className="text-center">
-            <p className="text-xs font-medium mb-2" style={{ color: colors.darkBrown + '70' }}>
+            <p className="text-l font-medium mb-2" style={{ color: colors.darkBrown + '70' }}>
               ISO 9001:2015 Certified • Registered Logistics Provider
             </p>
           </div>

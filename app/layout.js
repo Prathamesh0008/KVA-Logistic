@@ -22,7 +22,6 @@ export const metadata = {
   title: "KVA - Logistics & Shipping Solutions",
   description: "Global logistics and shipping services",
 };
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={eurostile.variable} suppressHydrationWarning>

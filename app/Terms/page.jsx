@@ -58,7 +58,7 @@ export default function TeamsPage() {
         {/* Top content with badge and contact card */}
         <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="inline-flex items-center rounded-full bg-[#EB9003] px-3 py-1 text-xs font-medium text-white">
+            <p className="inline-flex items-center rounded-full bg-[#EB9003] px-3 py-1 text-l font-medium text-white">
               KVA Logistics
             </p>
             <h2 className="mt-3 text-2xl font-medium tracking-tight sm:text-3xl text-[#310F0B]">
@@ -88,7 +88,7 @@ export default function TeamsPage() {
               </a>
             </div>
             <div className="mt-3 h-0.5 w-full rounded-full bg-[#EB9003]" />
-            <p className="mt-2 text-xs text-[#310F0B]/50">
+            <p className="mt-2 text-l text-[#310F0B]/50">
               Mon–Fri, 8am–6pm (EST)
             </p>
           </div>
@@ -108,13 +108,13 @@ export default function TeamsPage() {
                 </div>
                 <span className="h-3 w-3 rounded-full bg-[#EB9003] ring-2 ring-white mt-1" />
               </div>
-              <p className="mt-2 text-xs font-medium text-[#EB9003] uppercase tracking-wider">
+              <p className="mt-2 text-l font-medium text-[#EB9003] uppercase tracking-wider">
                 {t.role}
               </p>
               <p className="mt-2 text-sm leading-relaxed text-[#310F0B]/80 flex-grow">
                 {t.description}
               </p>
-              <div className="mt-4 flex items-center justify-between text-xs text-[#310F0B]/60">
+              <div className="mt-4 flex items-center justify-between text-l text-[#310F0B]/60">
                 <span>⚡ {t.stats}</span>
                 <div className="h-1.5 w-20 rounded-full bg-[#EB9003]/20 overflow-hidden">
                   <div className="h-full w-3/4 rounded-full bg-[#EB9003] transition-all group-hover:w-full" />
@@ -131,19 +131,19 @@ export default function TeamsPage() {
             <div className="mt-3 grid grid-cols-2 gap-4">
               <div>
                 <p className="text-2xl font-bold text-[#EB9003]">500+</p>
-                <p className="text-xs text-[#310F0B]/70">Shipments / day</p>
+                <p className="text-l text-[#310F0B]/70">Shipments / day</p>
               </div>
               <div>
                 <p className="text-2xl font-bold text-[#EB9003]">98%</p>
-                <p className="text-xs text-[#310F0B]/70">On‑time delivery</p>
+                <p className="text-l text-[#310F0B]/70">On‑time delivery</p>
               </div>
               <div>
                 <p className="text-2xl font-bold text-[#EB9003]">50+</p>
-                <p className="text-xs text-[#310F0B]/70">Team members</p>
+                <p className="text-l text-[#310F0B]/70">Team members</p>
               </div>
               <div>
                 <p className="text-2xl font-bold text-[#EB9003]">24/7</p>
-                <p className="text-xs text-[#310F0B]/70">Support coverage</p>
+                <p className="text-l text-[#310F0B]/70">Support coverage</p>
               </div>
             </div>
           </div>
@@ -207,7 +207,7 @@ export default function TeamsPage() {
 // <section className="mx-auto max-w-6xl px-4 py-10 sm:py-12 flex-1 w-full flex flex-col">
 //         <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
 //           <div className="max-w-2xl">
-//             <p className="inline-flex items-center rounded-full bg-[#EB9003] px-3 py-1 text-xs font-medium text-white">
+//             <p className="inline-flex items-center rounded-full bg-[#EB9003] px-3 py-1 text-l font-medium text-white">
 //               KVA Logistics
 //             </p>
 //             <h1 className="mt-3 text-2xl font-medium tracking-tight sm:text-3xl text-[#310F0B]">
@@ -238,7 +238,7 @@ export default function TeamsPage() {
 //                 <h2 className="text-lg font-semibold text-[#310F0B]">{t.name}</h2>
 //                 <span className="h-3 w-3 rounded-full bg-[#EB9003] ring-2 ring-white mt-1" />
 //               </div>
-//               <p className="mt-2 text-xs leading-relaxed text-[#310F0B]/80">{t.role}</p>
+//               <p className="mt-2 text-l leading-relaxed text-[#310F0B]/80">{t.role}</p>
 //               <div className="mt-4 h-1.5 w-full rounded-full bg-[#EB9003]/20">
 //                 <div className="h-1.5 w-3/4 rounded-full bg-[#EB9003] transition-all group-hover:w-full" />
 //               </div>

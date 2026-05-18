@@ -157,7 +157,7 @@ export default function Header() {
 
             <Link
               href="/contact"
-              className="group relative inline-flex items-center justify-center rounded-full px-4 py-2 text-xs font-medium text-white shadow-md whitespace-nowrap bg-gradient-to-r from-[#EB9003] to-[#C55500] hover:from-[#F5A623] hover:to-[#D45E00] transition-all duration-300"
+              className="group relative inline-flex items-center justify-center rounded-full px-4 py-2 text-l font-medium text-white shadow-md whitespace-nowrap bg-gradient-to-r from-[#EB9003] to-[#C55500] hover:from-[#F5A623] hover:to-[#D45E00] transition-all duration-300"
               style={{
                 fontFamily: "var(--font-snasm)",
                 letterSpacing: "0.02em",

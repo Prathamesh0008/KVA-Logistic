@@ -268,39 +268,39 @@ export default function Hero() {
               </span>
             </h1>
 
-            {/* Description */}
-            <p
-              className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed mb-8 max-w-xl font-light drop-shadow-[0_2px_8px_rgba(0,0,0,0.18)]"
-              style={{
-                color: "rgba(255, 232, 170, 0.88)",
-                fontFamily: "var(--font-snasm)",
-              }}
-            >
-              Professional warehousing, distribution, and transportation services
-              —
-              <span style={{ color: "rgba(255, 244, 199, 0.95)" }}>
-                {" "}
-                secure
-              </span>
-              ,{" "}
-              <span style={{ color: "rgba(255, 210, 122, 0.92)" }}>
-                efficient
-              </span>{" "}
-              &{" "}
-              <span style={{ color: "rgba(255, 210, 122, 0.92)" }}>
-                reliable
-              </span>
-              .
-            </p>
+{/* Paragraph */}
+<p
+  className="text-lg sm:text-xl md:text-2xl lg:text-[28px] leading-[1.6] mb-10 max-w-4xl font-light drop-shadow-[0_2px_8px_rgba(0,0,0,0.18)]"
+  style={{
+    color: "rgba(255, 232, 170, 0.88)",
+    fontFamily: "var(--font-snasm)",
+  }}
+>
+  Professional warehousing, distribution, and transportation services
+  
+  <span style={{ color: "rgba(255, 244, 199, 0.95)" }}>
+    {" "}
+    secure
+  </span>
+  ,{" "}
+  <span style={{ color: "rgba(255, 210, 122, 0.92)" }}>
+    efficient
+  </span>{" "}
+  &{" "}
+  <span style={{ color: "rgba(255, 210, 122, 0.92)" }}>
+    reliable
+  </span>
+  .
+</p>
 
             {/* Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
               <Link
                 href="/contact"
                 className="
-                  group flex items-center justify-center gap-2
-                  px-6 py-4 rounded-xl
-                  text-sm sm:text-base
+                  group flex items-center justify-center gap-3
+                 px-8 py-5 rounded-xl
+                 text-base sm:text-lg
                   transition hover:scale-[1.03] active:scale-95
                   bg-[#EB9003] text-white border-2 border-[#EB9003]
                 "
@@ -338,137 +338,114 @@ export default function Hero() {
               </Link>
             </div>
 
-            {/* Stats + Support */}
-            <div className="w-full max-w-xl space-y-4 sm:space-y-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-                {statsData.map((s, i) => {
-                  const Icon = s.icon;
+         {/* Stats + Support */}
+<div className="w-full max-w-[620px] space-y-3">
+  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+    {statsData.map((s, i) => {
+      const Icon = s.icon;
 
-                  return (
-                    <div
-                      key={i}
-                      className="
-                        group rounded-2xl px-5 py-5
-                        transition-all duration-300
-                        hover:-translate-y-1
-                      "
-                      style={{
-                        background:
-                          "linear-gradient(135deg, rgba(255,250,240,0.96), rgba(245,243,239,0.92))",
-                        border: "1px solid rgba(235,144,3,0.9)",
-                        boxShadow:
-                          "0 12px 30px rgba(49,15,11,0.14), inset 0 1px 0 rgba(255,255,255,0.75)",
-                      }}
-                    >
-                      <div className="flex items-center gap-4">
-                        <div
-                          className="
-                            w-12 h-12 rounded-xl
-                            flex items-center justify-center shrink-0
-                            transition-transform duration-300
-                            group-hover:scale-110
-                          "
-                          style={{
-                            background: uiGradient,
-                            boxShadow: "0 8px 18px rgba(235,144,3,0.35)",
-                          }}
-                        >
-                          <Icon
-                            className="w-6 h-6"
-                            style={{ color: "#310F0B" }}
-                          />
-                        </div>
+      return (
+        <div
+          key={i}
+          className="group rounded-2xl px-4 py-4 transition-all duration-300 hover:-translate-y-1"
+          style={{
+            background:
+              "linear-gradient(135deg, rgba(255,250,240,0.96), rgba(245,243,239,0.92))",
+            border: "1px solid rgba(235,144,3,0.9)",
+            boxShadow:
+              "0 10px 24px rgba(49,15,11,0.13), inset 0 1px 0 rgba(255,255,255,0.75)",
+          }}
+        >
+          <div className="flex items-center gap-4">
+            <div
+              className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
+              style={{
+                background: uiGradient,
+                boxShadow: "0 7px 16px rgba(235,144,3,0.3)",
+              }}
+            >
+              <Icon className="w-6 h-6" style={{ color: "#310F0B" }} />
+            </div>
 
-                        <div>
-                          <div
-                            className="text-2xl sm:text-3xl font-light leading-none tracking-wide"
-                            style={{
-                              color: "#B94A00",
-                              fontFamily: "var(--font-snasm)",
-                            }}
-                          >
-                            <CountUp
-                              end={s.end}
-                              suffix={s.suffix}
-                              decimals={s.decimals}
-                            />
-                          </div>
-
-                          <div
-                            className="mt-2 text-xs sm:text-sm uppercase tracking-[0.16em]"
-                            style={{
-                              color: "#310F0B",
-                              fontFamily: "var(--font-snasm)",
-                              fontWeight: 400,
-                            }}
-                          >
-                            {s.label}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* Support Card */}
+            <div>
               <div
-                className="
-                  rounded-2xl px-5 sm:px-6 py-5 sm:py-6
-                  transition-all duration-300
-                  hover:-translate-y-1
-                "
+                className="text-2xl sm:text-3xl font-light leading-none tracking-normal"
                 style={{
-                  background:
-                    "linear-gradient(135deg, rgba(255,250,240,0.97), rgba(245,243,239,0.93))",
-                  border: "1px solid rgba(235,144,3,0.9)",
-                  boxShadow:
-                    "0 12px 30px rgba(49,15,11,0.14), inset 0 1px 0 rgba(255,255,255,0.75)",
+                  color: "#B94A00",
+                  fontFamily: "var(--font-snasm)",
                 }}
               >
-                <div className="flex items-center gap-4">
-                  <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
-                    style={{
-                      background: uiGradient,
-                      boxShadow: "0 8px 18px rgba(235,144,3,0.35)",
-                    }}
-                  >
-                    <Phone
-                      className="w-6 h-6"
-                      style={{ color: "#310F0B" }}
-                    />
-                  </div>
+                <CountUp end={s.end} suffix={s.suffix} decimals={s.decimals} />
+              </div>
 
-                  <div>
-                    <div
-                      className="text-xs sm:text-sm uppercase tracking-[0.16em]"
-                      style={{
-                        color: "#310F0B",
-                        fontFamily: "var(--font-snasm)",
-                        fontWeight: 500,
-                      }}
-                    >
-                      24/7 Customer Support
-                    </div>
-
-                    <div
-                      className="mt-1 text-sm sm:text-base"
-                      style={{
-                        color: "#3A1811",
-                        fontFamily: "var(--font-snasm)",
-                        fontWeight: 400,
-                      }}
-                    >
-                      Free consultation{" "}
-                      <span style={{ color: "#EB9003" }}>•</span>{" "}
-                      No hidden fees
-                    </div>
-                  </div>
-                </div>
+              <div
+                className="mt-1 text-xs sm:text-sm uppercase tracking-[0.08em] leading-snug"
+                style={{
+                  color: "#310F0B",
+                  fontFamily: "var(--font-snasm)",
+                  fontWeight: 500,
+                }}
+              >
+                {s.label}
               </div>
             </div>
-            {/* End Stats + Support */}
+          </div>
+        </div>
+      );
+    })}
+  </div>
+
+  {/* Support Card */}
+  <div
+    className="rounded-2xl px-4 py-4 transition-all duration-300 hover:-translate-y-1"
+    style={{
+      background:
+        "linear-gradient(135deg, rgba(255,250,240,0.97), rgba(245,243,239,0.93))",
+      border: "1px solid rgba(235,144,3,0.9)",
+      boxShadow:
+        "0 10px 24px rgba(49,15,11,0.13), inset 0 1px 0 rgba(255,255,255,0.75)",
+    }}
+  >
+    <div className="flex items-center gap-4">
+      <div
+        className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
+        style={{
+          background: uiGradient,
+          boxShadow: "0 7px 16px rgba(235,144,3,0.3)",
+        }}
+      >
+        <Phone className="w-6 h-6" style={{ color: "#310F0B" }} />
+      </div>
+
+      <div>
+        <div
+          className="text-xs sm:text-sm uppercase tracking-[0.08em] leading-snug"
+          style={{
+            color: "#310F0B",
+            fontFamily: "var(--font-snasm)",
+            fontWeight: 500,
+          }}
+        >
+          24/7 Customer Support
+        </div>
+
+        <div
+          className="mt-1 text-sm sm:text-base leading-snug"
+          style={{
+            color: "#3A1811",
+            fontFamily: "var(--font-snasm)",
+            fontWeight: 400,
+          }}
+        >
+          Free consultation{" "}
+          <span style={{ color: "#EB9003" }}>•</span>{" "}
+          No hidden fees
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{/* End Stats + Support */}
           </div>
         </div>
       </div>

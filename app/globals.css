@@ -2,7 +2,7 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #21110a;
 }
 
 /* Tailwind theme variables */
@@ -16,32 +16,14 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #ffffff;
+    --foreground: #21110a;
   }
-}
-
-/* Default body styling */
-body {
-  background: var(--background);
-  color: var(--foreground);
-
-  /* use Snasm from next/font */
-  font-family: var(--font-snasm), Arial, Helvetica, sans-serif;
 }
 
 /* optional utility class */
 .snasm-font {
   font-family: var(--font-snasm), sans-serif;
-}
-body {
-  font-weight: 300;
-  letter-spacing: 0.02em;
-}
-body {
-  background-color: #0F0F0F; /* darker */
-  color: #EAEAEA;
-  font-family: var(--font-eurostile);
 }
 
 /* smooth text */
@@ -57,7 +39,46 @@ body {
 }
 
 body {
-  font-family: "Eurostile", sans-serif;
+  font-family: var(--font-eurostile), "Eurostile", sans-serif;
+  background: var(--background);
+  color: var(--foreground);
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  opacity: 1;
+  transition: opacity 0.12s ease;
+}
+
+.font-light {
+  font-weight: 400 !important;
+}
+
+.font-normal {
+  font-weight: 500 !important;
+}
+
+.text-xs {
+  font-size: 0.8125rem !important;
+}
+
+.text-sm {
+  font-size: 0.9375rem !important;
+}
+
+.text-base {
+  font-size: 1.0625rem !important;
+}
+
+.text-gray-500,
+.text-gray-600,
+.text-gray-700,
+.text-gray-800 {
+  color: #2f1a10 !important;
+}
+
+.text-gray-400,
+.text-gray-900 {
+  color: #21110a !important;
 }
 html {
   scroll-behavior: auto !important;
@@ -65,9 +86,4 @@ html {
 
 html.page-loading-hide body {
   opacity: 0;
-}
-
-body {
-  opacity: 1;
-  transition: opacity 0.12s ease;
 }

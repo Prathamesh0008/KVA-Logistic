@@ -343,7 +343,7 @@ export default function Services() {
               <h4 className="text-sm font-bold mb-1" style={darkText}>
                 Speed & Reliability
               </h4>
-              <p className="text-xs" style={lightText}>
+              <p className="text-l" style={lightText}>
                 99.8% on-time delivery across all services, with real-time tracking and proactive alerts.
               </p>
             </div>
@@ -366,7 +366,7 @@ export default function Services() {
               <h4 className="text-sm font-bold mb-1" style={darkText}>
                 Security & Compliance
               </h4>
-              <p className="text-xs" style={lightText}>
+              <p className="text-l" style={lightText}>
                 ISO 9001 certified with full cargo insurance and compliance with all international regulations.
               </p>
             </div>
@@ -389,7 +389,7 @@ export default function Services() {
               <h4 className="text-sm font-bold mb-1" style={darkText}>
                 24/7 Dedicated Support
               </h4>
-              <p className="text-xs" style={lightText}>
+              <p className="text-l" style={lightText}>
                 Personal account managers and round-the-clock customer service in 12 languages.
               </p>
             </div>
@@ -408,7 +408,7 @@ export default function Services() {
               <div className="text-xl sm:text-2xl font-bold mb-0.5 cursor-pointer" style={highlightText}>
                 150+
               </div>
-              <div className="text-xs cursor-pointer" style={{ color: colors.darkBrown, opacity: 0.7 }}>
+              <div className="text-l cursor-pointer" style={{ color: colors.darkBrown, opacity: 0.7 }}>
                 Countries Served
               </div>
             </div>
@@ -424,7 +424,7 @@ export default function Services() {
               <div className="text-xl sm:text-2xl font-bold mb-0.5 cursor-pointer" style={highlightText}>
                 99.8%
               </div>
-              <div className="text-xs cursor-pointer" style={{ color: colors.darkBrown, opacity: 0.7 }}>
+              <div className="text-l cursor-pointer" style={{ color: colors.darkBrown, opacity: 0.7 }}>
                 On-Time Delivery
               </div>
             </div>
@@ -440,7 +440,7 @@ export default function Services() {
               <div className="text-xl sm:text-2xl font-bold mb-0.5 cursor-pointer" style={highlightText}>
                 24/7
               </div>
-              <div className="text-xs cursor-pointer" style={{ color: colors.darkBrown, opacity: 0.7 }}>
+              <div className="text-l cursor-pointer" style={{ color: colors.darkBrown, opacity: 0.7 }}>
                 Customer Support
               </div>
             </div>
@@ -456,7 +456,7 @@ export default function Services() {
               <div className="text-xl sm:text-2xl font-bold mb-0.5 cursor-pointer" style={highlightText}>
                 ISO
               </div>
-              <div className="text-xs cursor-pointer" style={{ color: colors.darkBrown, opacity: 0.7 }}>
+              <div className="text-l cursor-pointer" style={{ color: colors.darkBrown, opacity: 0.7 }}>
                 9001 Certified
               </div>
             </div>
@@ -475,7 +475,7 @@ export default function Services() {
                 {service.popular && (
                   <div className="absolute -top-1 -right-1 z-20">
                     <div
-                      className="text-white px-2 py-0.5 rounded-full text-xs font-semibold shadow-lg cursor-default"
+                      className="text-white px-2 py-0.5 rounded-full text-l font-semibold shadow-lg cursor-default"
                       style={{
                         background: `linear-gradient(90deg, ${colors.orange}, ${colors.darkOrange})`,
                         color: 'white',
@@ -515,7 +515,7 @@ export default function Services() {
                     </div>
 
                     <div className="text-right">
-                      <div className="text-xs sm:text-sm font-bold cursor-pointer" style={highlightText}>
+                      <div className="text-l sm:text-sm font-bold cursor-pointer" style={highlightText}>
                         {service.stats}
                       </div>
                     </div>
@@ -526,7 +526,7 @@ export default function Services() {
                   </h3>
 
                   <p
-                    className="text-xs sm:text-sm mb-2 leading-relaxed cursor-pointer"
+                    className="text-l sm:text-sm mb-2 leading-relaxed cursor-pointer"
                     style={{ color: colors.darkBrown, opacity: 0.8 }}
                   >
                     {service.description}
@@ -544,7 +544,7 @@ export default function Services() {
                             }}
                           />
                         </div>
-                        <span className="text-xs cursor-pointer" style={{ color: colors.darkBrown, opacity: 0.9 }}>
+                        <span className="text-l cursor-pointer" style={{ color: colors.darkBrown, opacity: 0.9 }}>
                           {feature}
                         </span>
                       </li>
@@ -554,7 +554,7 @@ export default function Services() {
                   {/* Hover Tooltip with Key Metrics (NEW) */}
                   {hoveredIndex === index && (
                     <div
-                      className="absolute -top-12 left-1/2 transform -translate-x-1/2 z-30 px-3 py-1.5 rounded-lg text-xs whitespace-nowrap shadow-lg"
+                      className="absolute -top-12 left-1/2 transform -translate-x-1/2 z-30 px-3 py-1.5 rounded-lg text-l whitespace-nowrap shadow-lg"
                       style={{
                         backgroundColor: colors.darkBrown,
                         color: 'white',
@@ -572,7 +572,7 @@ export default function Services() {
                   <div className="mt-auto pt-2 border-t" style={{ borderColor: colors.lightTan + '30' }}>
                     <button
                       onClick={() => handleLearnMore(service)}
-                      className="group/btn flex items-center justify-between w-full font-normal tracking-wide text-xs sm:text-sm hover:opacity-80 transition-all duration-300 cursor-pointer"
+                      className="group/btn flex items-center justify-between w-full font-normal tracking-wide text-l sm:text-sm hover:opacity-80 transition-all duration-300 cursor-pointer"
                       style={{ color: colors.darkBrown }}
                     >
                       <span style={highlightText}>Learn More</span>
@@ -613,21 +613,21 @@ export default function Services() {
                       />
                     ))}
                   </div>
-                  <p className="text-xs mb-3 italic" style={regularText}>
+                  <p className="text-l mb-3 italic" style={regularText}>
                     "{testimonial.content}"
                   </p>
                   <div className="flex items-center gap-2">
                     <div
-                      className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white"
+                      className="w-6 h-6 rounded-full flex items-center justify-center text-l font-bold text-white"
                       style={{ background: `linear-gradient(135deg, ${colors.goldenYellow}, ${colors.orange})` }}
                     >
                       {testimonial.name.charAt(0)}
                     </div>
                     <div>
-                      <p className="text-xs font-bold" style={darkText}>
+                      <p className="text-l font-bold" style={darkText}>
                         {testimonial.name}
                       </p>
-                      <p className="text-xs" style={lightText}>
+                      <p className="text-l" style={lightText}>
                         {testimonial.role}
                       </p>
                     </div>
@@ -712,9 +712,9 @@ export default function Services() {
                     {selectedService.title}
                   </h3>
                   <div className="flex items-center gap-2 mt-0.5">
-                    <div className="text-white text-xs font-medium cursor-pointer">{selectedService.stats}</div>
+                    <div className="text-white text-l font-medium cursor-pointer">{selectedService.stats}</div>
                     {selectedService.popular && (
-                      <span className="px-1.5 py-0.5 text-xs font-bold rounded-full bg-white cursor-default" style={{ color: colors.darkOrange }}>
+                      <span className="px-1.5 py-0.5 text-l font-bold rounded-full bg-white cursor-default" style={{ color: colors.darkOrange }}>
                         POPULAR
                       </span>
                     )}
@@ -764,7 +764,7 @@ export default function Services() {
                         <div className="p-1.5 rounded-lg flex-shrink-0 cursor-pointer" style={{ backgroundColor: colors.goldenYellow + '20' }}>
                           {Icon && <Icon className="h-4 w-4" style={{ color: colors.goldenYellow }} />}
                         </div>
-                        <span className="text-xs cursor-pointer" style={darkText}>
+                        <span className="text-l cursor-pointer" style={darkText}>
                           {benefit.text}
                         </span>
                       </div>
@@ -779,11 +779,11 @@ export default function Services() {
                   <div className="p-3 rounded-lg border cursor-pointer hover:shadow-md transition-all duration-300" style={{ borderColor: colors.lightTan + '50' }}>
                     <div className="flex items-center gap-1.5 mb-1">
                       <Globe className="h-4 w-4" style={{ color: colors.orange }} />
-                      <h5 className="font-bold text-xs cursor-pointer" style={darkText}>
+                      <h5 className="font-bold text-l cursor-pointer" style={darkText}>
                         Coverage
                       </h5>
                     </div>
-                    <p className="text-xs cursor-pointer" style={lightText}>
+                    <p className="text-l cursor-pointer" style={lightText}>
                       {selectedService.details.coverage}
                     </p>
                   </div>
@@ -793,11 +793,11 @@ export default function Services() {
                   <div className="p-3 rounded-lg border cursor-pointer hover:shadow-md transition-all duration-300" style={{ borderColor: colors.lightTan + '50' }}>
                     <div className="flex items-center gap-1.5 mb-1">
                       <Clock className="h-4 w-4" style={{ color: colors.goldenYellow }} />
-                      <h5 className="font-bold text-xs cursor-pointer" style={darkText}>
+                      <h5 className="font-bold text-l cursor-pointer" style={darkText}>
                         Transit Time
                       </h5>
                     </div>
-                    <p className="text-xs cursor-pointer" style={lightText}>
+                    <p className="text-l cursor-pointer" style={lightText}>
                       {selectedService.details.transitTime}
                     </p>
                   </div>
@@ -807,11 +807,11 @@ export default function Services() {
                   <div className="p-3 rounded-lg border cursor-pointer hover:shadow-md transition-all duration-300" style={{ borderColor: colors.lightTan + '50' }}>
                     <div className="flex items-center gap-1.5 mb-1">
                       <DollarSign className="h-4 w-4" style={{ color: colors.darkOrange }} />
-                      <h5 className="font-bold text-xs cursor-pointer" style={darkText}>
+                      <h5 className="font-bold text-l cursor-pointer" style={darkText}>
                         Pricing
                       </h5>
                     </div>
-                    <p className="text-xs cursor-pointer" style={lightText}>
+                    <p className="text-l cursor-pointer" style={lightText}>
                       {selectedService.details.pricing}
                     </p>
                   </div>
@@ -821,7 +821,7 @@ export default function Services() {
                   <div className="p-3 rounded-lg border cursor-pointer hover:shadow-md transition-all duration-300" style={{ borderColor: colors.lightTan + '50' }}>
                     <div className="flex items-center gap-1.5 mb-1">
                       <UsersIcon className="h-4 w-4" style={{ color: colors.darkBrown }} />
-                      <h5 className="font-bold text-xs cursor-pointer" style={darkText}>
+                      <h5 className="font-bold text-l cursor-pointer" style={darkText}>
                         Industries
                       </h5>
                     </div>
@@ -829,7 +829,7 @@ export default function Services() {
                       {selectedService.details.industries.map((industry, idx) => (
                         <span
                           key={idx}
-                          className="px-2 py-0.5 text-xs rounded-full cursor-pointer hover:scale-105 transition-transform duration-300"
+                          className="px-2 py-0.5 text-l rounded-full cursor-pointer hover:scale-105 transition-transform duration-300"
                           style={{
                             backgroundColor: colors.lightTan + '30',
                             color: colors.darkBrown,
@@ -856,7 +856,7 @@ export default function Services() {
                         className="h-4 w-4 flex-shrink-0 cursor-pointer"
                         style={{ color: idx % 2 === 0 ? colors.goldenYellow : colors.orange }}
                       />
-                      <span className="text-xs cursor-pointer" style={regularText}>{feature}</span>
+                      <span className="text-l cursor-pointer" style={regularText}>{feature}</span>
                     </li>
                   ))}
                 </ul>

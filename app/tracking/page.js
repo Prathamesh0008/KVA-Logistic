@@ -489,7 +489,7 @@ export default function Tracking() {
                   }}
                 >
                 <div className="text-xl md:text-2xl font-normal tracking-wide">24/7</div>
-                  <div className="text-xs md:text-sm">Live Tracking</div>
+                  <div className="text-l md:text-sm">Live Tracking</div>
                 </div>
                 <div
                   className="p-4 rounded-xl text-center"
@@ -500,7 +500,7 @@ export default function Tracking() {
                   }}
                 >
                 <div className="text-xl md:text-2xl font-normal tracking-wide">150+</div>
-                  <div className="text-xs md:text-sm">Countries</div>
+                  <div className="text-l md:text-sm">Countries</div>
                 </div>
                 <div
                   className="p-4 rounded-xl text-center"
@@ -511,7 +511,7 @@ export default function Tracking() {
                   }}
                 >
                   <div className="text-xl md:text-2xl font-bold">99.8%</div>
-                  <div className="text-xs md:text-sm">Accuracy</div>
+                  <div className="text-l md:text-sm">Accuracy</div>
                 </div>
                 <div
                   className="p-4 rounded-xl text-center"
@@ -522,7 +522,7 @@ export default function Tracking() {
                   }}
                 >
                   <div className="text-xl md:text-2xl font-bold">1M+</div>
-                  <div className="text-xs md:text-sm">Packages Tracked</div>
+                  <div className="text-l md:text-sm">Packages Tracked</div>
                 </div>
               </div>
 
@@ -535,7 +535,7 @@ export default function Tracking() {
                     style={{
                       backgroundColor: 'white',
                       border: `1px solid ${colors.lightTan}50`,
-                      boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
+                      bolhadow: "0 4px 12px rgba(0,0,0,0.05)",
                     }}
                   >
                     {/* Tracking Form */}
@@ -548,7 +548,7 @@ export default function Tracking() {
                         <div className="flex gap-2">
                           <button
                             onClick={generateMockTracking}
-                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all hover:scale-105 text-xs font-bold"
+                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all hover:scale-105 text-l font-bold"
                             style={{
                               backgroundColor: colors.darkBrown,
                               color: 'white',
@@ -560,7 +560,7 @@ export default function Tracking() {
 
                           <button
                             onClick={simulateQRScan}
-                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all hover:scale-105 text-xs font-bold"
+                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all hover:scale-105 text-l font-bold"
                             style={{
                               background: `linear-gradient(90deg, ${colors.goldenYellow}, ${colors.orange})`,
                               color: colors.darkBrown,
@@ -600,7 +600,7 @@ Track
 
                       {/* Sample Tracking IDs */}
                       <div className="mt-3">
-                        <h4 className="text-xs font-semibold mb-1.5" style={highlightText}>
+                        <h4 className="text-l font-semibold mb-1.5" style={highlightText}>
                           Try Sample Tracking IDs
                         </h4>
                         <div className="flex flex-wrap gap-1.5">
@@ -608,7 +608,7 @@ Track
                             <button
                               key={sampleId}
                               onClick={() => loadSampleTracking(sampleId)}
-                              className="text-xs px-2 py-1 rounded-lg transition-colors flex items-center gap-1 hover:opacity-80"
+                              className="text-l px-2 py-1 rounded-lg transition-colors flex items-center gap-1 hover:opacity-80"
                               style={{
                                 backgroundColor: colors.darkBrown,
                                 color: 'white',
@@ -624,7 +624,7 @@ Track
                       {/* Recent Searches */}
                       {searchHistory.length > 0 && (
                         <div className="mt-3">
-                          <h4 className="text-xs font-semibold mb-1.5" style={highlightText}>
+                          <h4 className="text-l font-semibold mb-1.5" style={highlightText}>
                             Recent Searches
                           </h4>
                           <div className="flex flex-wrap gap-1.5">
@@ -632,7 +632,7 @@ Track
                               <button
                                 key={idx}
                                 onClick={() => loadSampleTracking(id)}
-                                className="text-xs px-2 py-1 rounded-lg transition-colors flex items-center gap-1 hover:opacity-80"
+                                className="text-l px-2 py-1 rounded-lg transition-colors flex items-center gap-1 hover:opacity-80"
                                 style={{
                                   backgroundColor: `${colors.lightTan}20`,
                                   color: colors.darkBrown,
@@ -648,7 +648,7 @@ Track
 
                       {/* Status Toggle */}
                       <div className="mt-4">
-                        <h4 className="text-xs font-semibold mb-2" style={highlightText}>
+                        <h4 className="text-l font-semibold mb-2" style={highlightText}>
                           Quick Status
                         </h4>
                         <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
@@ -656,7 +656,7 @@ Track
                             <button
                               key={status.id}
                               onClick={() => handleStatusToggle(status.id)}
-                              className={`flex items-center gap-1.5 px-2 py-1.5 rounded-lg transition-all text-xs ${
+                              className={`flex items-center gap-1.5 px-2 py-1.5 rounded-lg transition-all text-l ${
                                 activeStatus === status.id ? 'border shadow-sm' : 'border hover:opacity-90'
                               }`}
                               style={{
@@ -685,7 +685,7 @@ Track
                       >
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
                           <div>
-                            <div className="text-xs mb-0.5" style={{ color: colors.darkBrown, opacity: 0.7 }}>
+                            <div className="text-l mb-0.5" style={{ color: colors.darkBrown, opacity: 0.7 }}>
                               Tracking ID
                             </div>
                             <div className="flex items-center gap-2">
@@ -711,11 +711,11 @@ Track
                               }}
                             >
                               <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: colors.goldenYellow }} />
-                              <span className="text-xs font-semibold" style={highlightText}>
+                              <span className="text-l font-semibold" style={highlightText}>
                                 {activeStatus.toUpperCase()}
                               </span>
                             </div>
-                            <div className="text-xs" style={{ color: colors.darkBrown, opacity: 0.7 }}>
+                            <div className="text-l" style={{ color: colors.darkBrown, opacity: 0.7 }}>
                               Last updated: Just now
                             </div>
                           </div>
@@ -724,7 +724,7 @@ Track
                         {/* Status Badges */}
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4">
                           <div className="rounded-lg p-2.5" style={{ backgroundColor: 'white' }}>
-                            <div className="text-xs mb-0.5" style={{ color: colors.darkBrown, opacity: 0.7 }}>
+                            <div className="text-l mb-0.5" style={{ color: colors.darkBrown, opacity: 0.7 }}>
                               Est. Delivery
                             </div>
                             <div className="text-sm font-bold" style={highlightText}>
@@ -733,7 +733,7 @@ Track
                           </div>
 
                           <div className="rounded-lg p-2.5" style={{ backgroundColor: 'white' }}>
-                            <div className="text-xs mb-0.5" style={{ color: colors.darkBrown, opacity: 0.7 }}>
+                            <div className="text-l mb-0.5" style={{ color: colors.darkBrown, opacity: 0.7 }}>
                               Location
                             </div>
                             <div className="text-sm font-bold" style={highlightText}>
@@ -742,7 +742,7 @@ Track
                           </div>
 
                           <div className="rounded-lg p-2.5" style={{ backgroundColor: 'white' }}>
-                            <div className="text-xs mb-0.5" style={{ color: colors.darkBrown, opacity: 0.7 }}>
+                            <div className="text-l mb-0.5" style={{ color: colors.darkBrown, opacity: 0.7 }}>
                               Method
                             </div>
                             <div className="text-sm font-bold" style={highlightText}>
@@ -751,7 +751,7 @@ Track
                           </div>
 
                           <div className="rounded-lg p-2.5" style={{ backgroundColor: 'white' }}>
-                            <div className="text-xs mb-0.5" style={{ color: colors.darkBrown, opacity: 0.7 }}>
+                            <div className="text-l mb-0.5" style={{ color: colors.darkBrown, opacity: 0.7 }}>
                               Status
                             </div>
                             <div className="text-sm font-bold" style={highlightText}>
@@ -768,10 +768,10 @@ Track
                           <div className="grid grid-cols-2 md:grid-cols-5 gap-1.5">
                             {Object.entries(packageDetails).map(([key, value]) => (
                               <div key={key} className="rounded-lg p-2" style={{ backgroundColor: 'white' }}>
-                                <div className="text-xs uppercase tracking-wider" style={{ color: colors.darkBrown, opacity: 0.5 }}>
+                                <div className="text-l uppercase tracking-wider" style={{ color: colors.darkBrown, opacity: 0.5 }}>
                                   {key}
                                 </div>
-                        <div className="text-xs font-normal tracking-wide" style={highlightText}>
+                        <div className="text-l font-normal tracking-wide" style={highlightText}>
                                   {value}
                                 </div>
                               </div>
@@ -783,7 +783,7 @@ Track
                         <div className="flex flex-wrap gap-2">
                           <button
                             onClick={toggleNotifications}
-                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors hover:opacity-90 text-xs font-bold"
+                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors hover:opacity-90 text-l font-bold"
                             style={{
                               backgroundColor: notificationsEnabled ? colors.goldenYellow : colors.lightTan,
                               color: colors.darkBrown,
@@ -795,7 +795,7 @@ Track
 
                           <button
                             onClick={shareTrackingStatus}
-                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors hover:opacity-90 text-xs font-bold"
+                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors hover:opacity-90 text-l font-bold"
                             style={{
                               backgroundColor: colors.goldenYellow,
                               color: colors.darkBrown,
@@ -808,7 +808,7 @@ Track
 
                           <button
                             onClick={exportTrackingData}
-                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors hover:opacity-90 text-xs font-bold"
+                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors hover:opacity-90 text-l font-bold"
                             style={{
                               backgroundColor: colors.goldenYellow,
                               color: colors.darkBrown,
@@ -821,7 +821,7 @@ Track
 
                           <button
                             onClick={() => setAutoRefresh(!autoRefresh)}
-                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors hover:opacity-90 text-xs font-bold"
+                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors hover:opacity-90 text-l font-bold"
                             style={{
                               backgroundColor: autoRefresh ? colors.goldenYellow : colors.lightTan,
                               color: colors.darkBrown,
@@ -844,7 +844,7 @@ Track
                     style={{
                       backgroundColor: 'white',
                       border: `1px solid ${colors.lightTan}50`,
-                      boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
+                      bolhadow: "0 4px 12px rgba(0,0,0,0.05)",
                     }}
                   >
                     <div className="flex items-center justify-between mb-4">
@@ -881,7 +881,7 @@ Track
                             <div className="flex-grow">
                               <div className="flex justify-between items-start">
                                 <h4
-                                  className="text-xs font-bold"
+                                  className="text-l font-bold"
                                   style={step.completed ? highlightText : { color: `${colors.darkBrown}80` }}
                                 >
                                   {step.status}
@@ -917,7 +917,7 @@ Track
                         color: colors.darkBrown,
                       }}
                     >
-                      <div className="text-xs mb-0.5" style={{ color: colors.darkBrown, opacity: 0.7 }}>
+                      <div className="text-l mb-0.5" style={{ color: colors.darkBrown, opacity: 0.7 }}>
                         Estimated Delivery
                       </div>
                       <div className="text-base font-bold" style={highlightText}>
@@ -954,7 +954,7 @@ Track
                   <div className="w-48 h-48 border-4 border-dashed rounded-lg flex items-center justify-center" style={{ borderColor: colors.goldenYellow }}>
                     <div className="animate-pulse flex flex-col items-center">
                       <QrCode className="h-12 w-12 mb-2" style={{ color: colors.goldenYellow }} />
-                      <p className="text-xs" style={{ color: colors.darkBrown }}>Scanning...</p>
+                      <p className="text-l" style={{ color: colors.darkBrown }}>Scanning...</p>
                     </div>
                   </div>
                 </div>

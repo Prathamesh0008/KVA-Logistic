@@ -101,7 +101,7 @@ export default function ServicesPage() {
                       style={{ backgroundColor: colors.goldenYellow }}
                     />
                     <span
-                      className="text-xs font-light tracking-wide"
+                      className="text-l font-light tracking-wide"
                       style={{ color: colors.darkBrown }}
                     >
                       {item}
@@ -152,7 +152,7 @@ export default function ServicesPage() {
                       className="w-1.5 h-1.5 rounded-full"
                       style={{ backgroundColor: colors.orange }}
                     />
-                    <span className="text-xs" style={{ color: colors.darkBrown }}>
+                    <span className="text-l" style={{ color: colors.darkBrown }}>
                       {item}
                     </span>
                   </div>
@@ -201,7 +201,7 @@ export default function ServicesPage() {
                       className="w-1.5 h-1.5 rounded-full"
                       style={{ backgroundColor: colors.darkBrown }}
                     />
-                    <span className="text-xs" style={{ color: colors.darkBrown }}>
+                    <span className="text-l" style={{ color: colors.darkBrown }}>
                       {item}
                     </span>
                   </div>
@@ -306,7 +306,7 @@ export default function ServicesPage() {
                 <p className="text-sm italic mb-3 relative z-10" style={{ color: colors.darkBrown, opacity: 0.8 }}>
                   {testimonial.quote}
                 </p>
-                <p className="text-xs font-medium" style={{ color: colors.darkBrown }}>
+                <p className="text-l font-medium" style={{ color: colors.darkBrown }}>
                   {testimonial.author}
                 </p>
               </div>
@@ -331,7 +331,7 @@ export default function ServicesPage() {
             className="px-8 py-3 rounded-full text-white font-medium text-sm transition-transform hover:scale-105"
             style={{
               background: `linear-gradient(135deg, ${colors.goldenYellow}, ${colors.darkOrange})`,
-              boxShadow: `0 10px 20px -8px ${colors.darkOrange}`,
+              bolhadow: `0 10px 20px -8px ${colors.darkOrange}`,
             }}
           >
             Request a Quote
@@ -442,7 +442,7 @@ export default function ServicesPage() {
 //                       style={{ backgroundColor: colors.goldenYellow }}
 //                     />
 //                     <span
-//                       className="text-xs font-light tracking-wide"
+//                       className="text-l font-light tracking-wide"
 //                       style={{ color: colors.darkBrown }}
 //                     >
 //                       {item}
@@ -493,7 +493,7 @@ export default function ServicesPage() {
 //                       className="w-1.5 h-1.5 rounded-full"
 //                       style={{ backgroundColor: colors.orange }}
 //                     />
-//                     <span className="text-xs" style={{ color: colors.darkBrown }}>
+//                     <span className="text-l" style={{ color: colors.darkBrown }}>
 //                       {item}
 //                     </span>
 //                   </div>
@@ -542,7 +542,7 @@ export default function ServicesPage() {
 //                       className="w-1.5 h-1.5 rounded-full"
 //                       style={{ backgroundColor: colors.darkBrown }}
 //                     />
-//                     <span className="text-xs" style={{ color: colors.darkBrown }}>
+//                     <span className="text-l" style={{ color: colors.darkBrown }}>
 //                       {item}
 //                     </span>
 //                   </div>
@@ -678,7 +678,7 @@ export default function ServicesPage() {
 //                 <p className="text-sm italic mb-3 relative z-10" style={{ color: colors.darkBrown, opacity: 0.8 }}>
 //                   {testimonial.quote}
 //                 </p>
-//                 <p className="text-xs font-medium" style={{ color: colors.darkBrown }}>
+//                 <p className="text-l font-medium" style={{ color: colors.darkBrown }}>
 //                   {testimonial.author}
 //                 </p>
 //               </div>
@@ -703,7 +703,7 @@ export default function ServicesPage() {
 //             className="px-8 py-3 rounded-full text-white font-medium text-sm transition-transform hover:scale-105"
 //             style={{
 //               background: `linear-gradient(135deg, ${colors.goldenYellow}, ${colors.darkOrange})`,
-//               boxShadow: `0 10px 20px -8px ${colors.darkOrange}`,
+//               bolhadow: `0 10px 20px -8px ${colors.darkOrange}`,
 //             }}
 //           >
 //             Request a Quote

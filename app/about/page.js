@@ -38,7 +38,7 @@ export default function AboutPage() {
           <h4 className="font-normal text-sm" style={{ color: colors.darkBrown }}>
             {title}
           </h4>
-          <p className="text-xs" style={{ color: colors.darkBrown, opacity: 0.6 }}>
+          <p className="text-l" style={{ color: colors.darkBrown, opacity: 0.6 }}>
             {subtitle}
           </p>
         </div>
@@ -187,7 +187,7 @@ export default function AboutPage() {
                 >
                   {stat.value}
                 </div>
-                <div className="text-xs font-light uppercase tracking-wider mt-1" style={{ color: colors.darkBrown, opacity: 0.7 }}>
+                <div className="text-l font-light uppercase tracking-wider mt-1" style={{ color: colors.darkBrown, opacity: 0.7 }}>
                   {stat.label}
                 </div>
               </div>
@@ -440,7 +440,7 @@ export default function AboutPage() {
                 <div className="font-light" style={{ color: colors.darkBrown }}>
                   {t.author}
                 </div>
-                <div className="text-xs font-light" style={{ color: colors.darkBrown, opacity: 0.6 }}>
+                <div className="text-l font-light" style={{ color: colors.darkBrown, opacity: 0.6 }}>
                   {t.company}
                 </div>
               </div>
