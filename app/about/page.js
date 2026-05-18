@@ -149,13 +149,13 @@ export default function AboutPage() {
                 KVA Logistics
               </span>
             </h1>
-            <p
-              className="text-base md:text-lg font-light max-w-2xl mx-auto leading-relaxed"
-              style={{ color: colors.darkBrown, opacity: 0.8 }}
-            >
-              Leading the logistics industry with innovation, reliability, and
-              a customer-first approach for over two decades.
-            </p>
+        <p
+  className="text-lg md:text-xl font-medium max-w-3xl mx-auto leading-relaxed"
+  style={{ color: colors.darkBrown, opacity: 0.9 }}
+>
+  Leading the logistics industry with innovation, reliability, and
+  a customer-first approach for over two decades.
+</p>
           </div>
         </div>
       </section>

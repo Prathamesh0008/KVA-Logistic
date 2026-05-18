@@ -42,16 +42,16 @@ export default function ServicesPage() {
   Logistics Solutions
 </span>
             </h1>
-            <p
-              className="text-sm md:text-base max-w-2xl mx-auto"
-              style={{
-                color: colors.darkBrown,
-                opacity: 0.8,
-              }}
-            >
-              End-to-end supply chain management designed to optimize
-              efficiency, reduce costs, and deliver exceptional reliability.
-            </p>
+      <p
+  className="text-xl sm:text-1xl md:text-1xl max-w-4xl mx-auto leading-relaxed"
+  style={{
+    color: colors.darkBrown,
+    opacity: 0.8,
+  }}
+>
+  End-to-end supply chain management designed to optimize
+  efficiency, reduce costs, and deliver exceptional reliability.
+</p>
           </div>
         </div>
       </section>

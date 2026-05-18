@@ -199,7 +199,7 @@ export default function Hero() {
 
               <p
                 className="mt-1 text-xs text-[#6A2A12]"
-                style={{ fontFamily: "var(--font-snasm)", fontWeight: 400 }}
+                style={{ fontFamily: "var(--font-snasm)", fontWeight: 600}}
               >
                 Preparing logistics experience...
               </p>
@@ -221,12 +221,12 @@ export default function Hero() {
                   border: "1px solid #9F4100",
                 }}
               >
-                <Award className="w-5 h-5" style={{ color: "#310F0B" }} />
+                <Award className="w-5 h-5" style={{ color: "white" }} />
 
                 <span
                   className="text-sm tracking-wide"
                   style={{
-                    color: "#310F0B",
+                    color: "white",
                     fontFamily: "var(--font-snasm)",
                   }}
                 >
@@ -270,29 +270,14 @@ export default function Hero() {
 
 {/* Paragraph */}
 <p
-  className="text-lg sm:text-xl md:text-2xl lg:text-[28px] leading-[1.6] mb-10 max-w-4xl font-light drop-shadow-[0_2px_8px_rgba(0,0,0,0.18)]"
+  className="text-lg sm:text-xl md:text-2xl lg:text-[28px] leading-[1.6] mb-10 max-w-4xl font-light drop-shadow-[0_2px_8px_rgba(0,0,0,0.18)] bg-gradient-to-r from-yellow-100 via-[#EB9003] to-[#9F4100] bg-clip-text text-transparent"
   style={{
-    color: "rgba(255, 232, 170, 0.88)",
     fontFamily: "var(--font-snasm)",
   }}
 >
-  Professional warehousing, distribution, and transportation services
-  
-  <span style={{ color: "rgba(255, 244, 199, 0.95)" }}>
-    {" "}
-    secure
-  </span>
-  ,{" "}
-  <span style={{ color: "rgba(255, 210, 122, 0.92)" }}>
-    efficient
-  </span>{" "}
-  &{" "}
-  <span style={{ color: "rgba(255, 210, 122, 0.92)" }}>
-    reliable
-  </span>
-  .
+  Professional warehousing, distribution, and transportation services secure,
+  efficient & reliable.
 </p>
-
             {/* Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
               <Link
@@ -338,7 +323,7 @@ export default function Hero() {
               </Link>
             </div>
 
-         {/* Stats + Support */}
+{/* Stats + Support */}
 <div className="w-full max-w-[620px] space-y-3">
   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
     {statsData.map((s, i) => {
@@ -349,42 +334,33 @@ export default function Hero() {
           key={i}
           className="group rounded-2xl px-4 py-4 transition-all duration-300 hover:-translate-y-1"
           style={{
-            background:
-              "linear-gradient(135deg, rgba(255,250,240,0.96), rgba(245,243,239,0.92))",
-            border: "1px solid rgba(235,144,3,0.9)",
-            boxShadow:
-              "0 10px 24px rgba(49,15,11,0.13), inset 0 1px 0 rgba(255,255,255,0.75)",
+            background: "linear-gradient(135deg, #F8F3EA, #EFE8DD)",
+            border: "1px solid rgba(159,65,0,0.9)",
+            boxShadow: "0 10px 24px rgba(49,15,11,0.22)",
           }}
         >
           <div className="flex items-center gap-4">
             <div
               className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
               style={{
-                background: uiGradient,
-                boxShadow: "0 7px 16px rgba(235,144,3,0.3)",
+                background: "linear-gradient(135deg, #7A2604, #310F0B)",
+                boxShadow: "0 7px 16px rgba(49,15,11,0.35)",
               }}
             >
-              <Icon className="w-6 h-6" style={{ color: "#310F0B" }} />
+              <Icon className="w-6 h-6" style={{ color: "#FFFFFF" }} />
             </div>
 
             <div>
               <div
-                className="text-2xl sm:text-3xl font-light leading-none tracking-normal"
-                style={{
-                  color: "#B94A00",
-                  fontFamily: "var(--font-snasm)",
-                }}
+             className="text-2xl sm:text-3xl font-normal leading-none tracking-normal"
+                style={{ color: "#7A2604", fontFamily: "var(--font-snasm)" }}
               >
                 <CountUp end={s.end} suffix={s.suffix} decimals={s.decimals} />
               </div>
 
               <div
-                className="mt-1 text-xs sm:text-sm uppercase tracking-[0.08em] leading-snug"
-                style={{
-                  color: "#310F0B",
-                  fontFamily: "var(--font-snasm)",
-                  fontWeight: 500,
-                }}
+                className="mt-1 text-sm sm:text-base normal-case tracking-normal leading-snug"
+                style={{ color: "#310F0B", fontFamily: "var(--font-snasm)", fontWeight: 600 }}
               >
                 {s.label}
               </div>
@@ -399,46 +375,36 @@ export default function Hero() {
   <div
     className="rounded-2xl px-4 py-4 transition-all duration-300 hover:-translate-y-1"
     style={{
-      background:
-        "linear-gradient(135deg, rgba(255,250,240,0.97), rgba(245,243,239,0.93))",
-      border: "1px solid rgba(235,144,3,0.9)",
-      boxShadow:
-        "0 10px 24px rgba(49,15,11,0.13), inset 0 1px 0 rgba(255,255,255,0.75)",
+      background: "linear-gradient(135deg, #F8F3EA, #EFE8DD)",
+      border: "1px solid rgba(159,65,0,0.9)",
+      boxShadow: "0 10px 24px rgba(49,15,11,0.22)",
     }}
   >
     <div className="flex items-center gap-4">
       <div
         className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
         style={{
-          background: uiGradient,
-          boxShadow: "0 7px 16px rgba(235,144,3,0.3)",
+          background: "linear-gradient(135deg, #7A2604, #310F0B)",
+          boxShadow: "0 7px 16px rgba(49,15,11,0.35)",
         }}
       >
-        <Phone className="w-6 h-6" style={{ color: "#310F0B" }} />
+        <Phone className="w-6 h-6" style={{ color: "#FFFFFF" }} />
       </div>
 
       <div>
         <div
-          className="text-xs sm:text-sm uppercase tracking-[0.08em] leading-snug"
-          style={{
-            color: "#310F0B",
-            fontFamily: "var(--font-snasm)",
-            fontWeight: 500,
-          }}
+          className="text-sm sm:text-base normal-case tracking-normal leading-snug"
+          style={{ color: "#310F0B", fontFamily: "var(--font-snasm)", fontWeight: 600 }}
         >
           24/7 Customer Support
         </div>
 
         <div
           className="mt-1 text-sm sm:text-base leading-snug"
-          style={{
-            color: "#3A1811",
-            fontFamily: "var(--font-snasm)",
-            fontWeight: 400,
-          }}
+          style={{ color: "#3A1811", fontFamily: "var(--font-snasm)", fontWeight: 500 }}
         >
           Free consultation{" "}
-          <span style={{ color: "#EB9003" }}>•</span>{" "}
+          <span style={{ color: "#7A2604" }}>•</span>{" "}
           No hidden fees
         </div>
       </div>

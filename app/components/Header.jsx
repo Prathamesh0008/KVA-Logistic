@@ -93,14 +93,14 @@ export default function Header() {
                   <Link
                     key={item.name}
                     href={item.href}
-                    className={`px-4 xl:px-5 py-2.5 rounded-lg text-sm xl:text-[15px] transition-all duration-300 ${
-                      isActive
-                        ? "text-white"
-                        : "text-gray-700 hover:text-gray-900 hover:bg-orange-50"
-                    }`}
+                className={`px-5 xl:px-6 py-3 rounded-xl text-base xl:text-lg font-semibold transition-all duration-300 ${
+  isActive
+    ? "text-white"
+    : "text-gray-700 hover:text-gray-900 hover:bg-orange-50"
+}`}
                     style={{
                       fontFamily: "var(--font-snasm)",
-                      fontWeight: 300,
+                      fontWeight: 600,
                       letterSpacing: "0.02em",
                       ...(isActive && {
                         backgroundColor: colors.darkBrown,

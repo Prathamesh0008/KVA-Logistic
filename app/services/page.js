@@ -314,13 +314,13 @@ export default function Services() {
                 Logistics Solutions
               </span>
             </h2>
-            <p
-              className="text-sm sm:text-base max-w-2xl mx-auto px-4 cursor-pointer"
-              style={{ color: colors.darkBrown, opacity: 0.7 }}
-            >
-              End-to-end logistics services designed to optimize your supply chain
-              and deliver exceptional value
-            </p>
+        <p
+  className="text-lg sm:text-xl md:text-1xl max-w-3xl mx-auto px-4 cursor-pointer leading-relaxed"
+  style={{ color: colors.darkBrown, opacity: 0.8 }}
+>
+  End-to-end logistics services designed to optimize your supply chain
+  and deliver exceptional value
+</p>
           </div>
 
           {/* Why Choose Us Section (NEW) */}
@@ -340,9 +340,9 @@ export default function Services() {
                   <Zap className="h-5 w-5" style={{ color: colors.goldenYellow }} />
                 </div>
               </div>
-              <h4 className="text-sm font-bold mb-1" style={darkText}>
-                Speed & Reliability
-              </h4>
+           <h4 className="text-lg sm:text-xl font-bold mb-2" style={darkText}>
+  Speed & Reliability
+</h4>
               <p className="text-l" style={lightText}>
                 99.8% on-time delivery across all services, with real-time tracking and proactive alerts.
               </p>
@@ -363,9 +363,9 @@ export default function Services() {
                   <Shield className="h-5 w-5" style={{ color: colors.orange }} />
                 </div>
               </div>
-              <h4 className="text-sm font-bold mb-1" style={darkText}>
-                Security & Compliance
-              </h4>
+             <h4 className="text-lg sm:text-xl font-bold mb-2" style={darkText}>
+  Security & Compliance
+</h4>
               <p className="text-l" style={lightText}>
                 ISO 9001 certified with full cargo insurance and compliance with all international regulations.
               </p>
@@ -386,9 +386,9 @@ export default function Services() {
                   <Users className="h-5 w-5" style={{ color: colors.darkBrown }} />
                 </div>
               </div>
-              <h4 className="text-sm font-bold mb-1" style={darkText}>
-                24/7 Dedicated Support
-              </h4>
+            <h4 className="text-lg sm:text-xl font-bold mb-2" style={darkText}>
+  24/7 Dedicated Support
+</h4>
               <p className="text-l" style={lightText}>
                 Personal account managers and round-the-clock customer service in 12 languages.
               </p>
@@ -515,7 +515,7 @@ export default function Services() {
                     </div>
 
                     <div className="text-right">
-                      <div className="text-l sm:text-sm font-bold cursor-pointer" style={highlightText}>
+                      <div className="text-lg sm:text-xl font-bold  mb-2 cursor-pointer" style={highlightText}>
                         {service.stats}
                       </div>
                     </div>
