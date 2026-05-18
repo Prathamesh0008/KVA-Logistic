@@ -85,7 +85,7 @@ export default function ServicesPage() {
                 className="text-sm mb-4 font-light leading-relaxed"
                 style={{ color: colors.darkBrown, opacity: 0.7 }}
               >
-                Comprehensive overland transportation solutions with real-time
+                Comprehensive overland transportation solutions with real time
                 GPS tracking and optimized delivery routes.
               </p>
               <div className="grid grid-cols-2 gap-2">
@@ -102,7 +102,7 @@ export default function ServicesPage() {
                     />
                     <span
                       className="text-l font-light tracking-wide"
-                      style={{ color: colors.darkBrown }}
+                      style={{ color: colors.darkBrown}}
                     >
                       {item}
                     </span>
