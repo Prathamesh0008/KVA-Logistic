@@ -211,7 +211,7 @@ export default function Hero() {
       {/* Content */}
       <div className="relative z-10 w-full">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-16 md:py-20">
-          <div className="max-w-3xl">
+        <div className="max-w-[900px]">
             {/* Badge */}
             <div className="mb-6">
               <div
@@ -269,14 +269,23 @@ export default function Hero() {
             </h1>
 
 {/* Paragraph */}
+{/* Paragraph */}
+{/* Paragraph */}
 <p
-  className="text-lg sm:text-xl md:text-2xl lg:text-[28px] leading-[1.6] mb-10 max-w-4xl font-light drop-shadow-[0_2px_8px_rgba(0,0,0,0.18)] bg-gradient-to-r from-yellow-100 via-[#EB9003] to-[#9F4100] bg-clip-text text-transparent"
-  style={{
-    fontFamily: "var(--font-snasm)",
-  }}
+  className="
+    text-lg sm:text-xl md:text-2xl lg:text-[28px]
+    leading-[1.55] mb-10
+    max-w-[880px]
+    font-light
+    drop-shadow-[0_2px_8px_rgba(0,0,0,0.18)]
+    bg-gradient-to-r from-yellow-100 via-[#EB9003] to-[#9F4100]
+    bg-clip-text text-transparent
+  "
+  style={{ fontFamily: "var(--font-snasm)" }}
 >
-  Professional warehousing, distribution, and transportation services secure,
-  efficient & reliable.
+  Professional warehousing, distribution, and transportation services
+  <br />
+  secure, efficient &amp; reliable.
 </p>
             {/* Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
@@ -324,7 +333,7 @@ export default function Hero() {
             </div>
 
 {/* Stats + Support */}
-<div className="w-full max-w-[620px] space-y-3">
+<div className="w-full max-w-[775px] space-y-3">
   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
     {statsData.map((s, i) => {
       const Icon = s.icon;

@@ -42,12 +42,8 @@ export default function ServicesPage() {
   Logistics Solutions
 </span>
             </h1>
-      <p
-  className="text-xl sm:text-1xl md:text-1xl max-w-4xl mx-auto leading-relaxed"
-  style={{
-    color: colors.darkBrown,
-    opacity: 0.8,
-  }}
+<p
+   className="text-lg sm:text-xl md:text-1xl max-w-3xl mx-auto px-4 cursor-pointer leading-relaxed"
 >
   End-to-end supply chain management designed to optimize
   efficiency, reduce costs, and deliver exceptional reliability.
@@ -77,12 +73,15 @@ export default function ServicesPage() {
                 >
                   <Truck size={20} strokeWidth={1.5} />
                 </div>
-                <h3 className="text-lg font-normal tracking-wide" style={{ color: colors.darkBrown }}>
-                  Road Freight
-                </h3>
+               <h3
+  className="text-1xl sm:text-3xl md:text-[22px] font-semibold tracking-wide leading-tight"
+  style={{ color: colors.darkBrown }}
+>
+  Road Freight
+</h3>
               </div>
               <p
-                className="text-sm mb-4 font-light leading-relaxed"
+                className="text-base mb-4 font-light leading-relaxed"
                 style={{ color: colors.darkBrown, opacity: 0.7 }}
               >
                 Comprehensive overland transportation solutions with real time
@@ -128,12 +127,15 @@ export default function ServicesPage() {
                 >
                   <Ship size={20} strokeWidth={1.5} />
                 </div>
-                <h3 className="text-lg font-bold" style={{ color: colors.darkBrown }}>
-                  Ocean Shipping
-                </h3>
+              <h3
+  className="text-1xl sm:text-3xl md:text-[22px] font-semibold tracking-wide leading-tight"
+  style={{ color: colors.darkBrown }}
+>
+  Ocean Shipping
+</h3>
               </div>
               <p
-                className="text-sm mb-4"
+                className="text-base mb-4"
                 style={{ color: colors.darkBrown, opacity: 0.7 }}
               >
                 Global sea freight with container optimization and customs
@@ -177,12 +179,15 @@ export default function ServicesPage() {
                 >
                   <Plane size={20} strokeWidth={1.5} />
                 </div>
-                <h3 className="text-lg font-bold" style={{ color: colors.darkBrown }}>
-                  Air Freight
-                </h3>
+              <h3
+  className="text-1xl sm:text-3xl md:text-[22px] font-semibold tracking-wide leading-tight"
+  style={{ color: colors.darkBrown }}
+>
+  Air Freight
+</h3>
               </div>
               <p
-                className="text-sm mb-4"
+                className="text-base mb-4"
                 style={{ color: colors.darkBrown, opacity: 0.7 }}
               >
                 Express air cargo services for time-critical shipments with
@@ -216,12 +221,12 @@ export default function ServicesPage() {
       <section className="py-12">
         <div className="max-w-6xl mx-auto px-4">
           <h2
-            className="text-2xl md:text-3xl font-light text-center mb-10"
+            className="text-3xl md:text-3xl font-dark text-center mb-10"
             style={{ color: colors.darkBrown }}
           >
             Why Choose Us
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className= "text:base grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
                 icon: Globe,
