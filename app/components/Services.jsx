@@ -216,109 +216,168 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
+{/* Why Choose Us */}
+<section className="py-12">
+  <div className="max-w-6xl mx-auto px-4">
+    <h2
+      className="text-4xl md:text-4xl font-semibold text-center mb-12"
+      style={{ color: colors.darkBrown }}
+    >
+      Why Choose Us
+    </h2>
 
-      {/* Why Choose Us */}
-      <section className="py-12">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2
-            className="text-3xl md:text-3xl font-dark text-center mb-10"
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {[
+        {
+          icon: Globe,
+          title: "Global Network",
+          desc: "Strategic partnerships worldwide ensure seamless cross-border logistics.",
+        },
+        {
+          icon: Gauge,
+          title: "Real-Time Tracking",
+          desc: "Advanced GPS and IoT visibility from pickup to delivery.",
+        },
+        {
+          icon: Shield,
+          title: "Secure Handling",
+          desc: "Certified security protocols for high-value and sensitive cargo.",
+        },
+      ].map((item, idx) => (
+        <div
+          key={idx}
+          className="p-8 rounded-xl text-center border transition-all hover:shadow-lg"
+          style={{
+            backgroundColor: "white",
+            borderColor: colors.lightTan + "60",
+          }}
+        >
+          <div className="flex justify-center mb-4">
+            <item.icon
+              size={46}
+              strokeWidth={1.8}
+              style={{ color: colors.orange }}
+            />
+          </div>
+
+          <h3
+            className="text-2xl font-semibold mb-3"
             style={{ color: colors.darkBrown }}
           >
-            Why Choose Us
-          </h2>
-          <div className= "text:base grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: Globe,
-                title: "Global Network",
-                desc: "Strategic partnerships worldwide ensure seamless cross-border logistics.",
-              },
-              {
-                icon: Gauge,
-                title: "Real-Time Tracking",
-                desc: "Advanced GPS and IoT visibility from pickup to delivery.",
-              },
-              {
-                icon: Shield,
-                title: "Secure Handling",
-                desc: "Certified security protocols for high-value and sensitive cargo.",
-              },
-            ].map((item, idx) => (
-              <div
-                key={idx}
-                className="p-6 rounded-xl text-center border transition-all hover:shadow-md"
-                style={{
-                  backgroundColor: "white",
-                  borderColor: colors.lightTan + "50",
-                }}
-              >
-                <div
-                  className="flex justify-center mb-3"
-                  style={{
-                    filter: `drop-shadow(0 4px 6px ${colors.orange}30)`,
-                  }}
-                >
-                  <item.icon size={36} strokeWidth={1.5} style={{ color: colors.orange }} />
-                </div>
-                <h3 className="text-lg font-medium mb-2" style={{ color: colors.darkBrown }}>
-                  {item.title}
-                </h3>
-                <p className="text-sm" style={{ color: colors.darkBrown, opacity: 0.7 }}>
-                  {item.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+            {item.title}
+          </h3>
 
-      {/* Testimonials */}
-      <section className="py-12">
-        <div className="max-w-4xl mx-auto px-4">
-          <h2
-            className="text-2xl md:text-3xl font-light text-center mb-10"
-            style={{ color: colors.darkBrown }}
+          <p
+            className="text-base md:text-lg leading-relaxed font-medium"
+            style={{ color: colors.darkBrown, opacity: 0.82 }}
           >
-            What Our Clients Say
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {[
-              {
-                quote:
-                  "Their road freight service reduced our transit times by 30%. The real-time tracking is a game-changer.",
-                author: "— Maria G., Logistics Manager",
-              },
-              {
-                quote:
-                  "Outstanding ocean freight support – customs clearance was handled flawlessly. Highly professional team.",
-                author: "— James T., Supply Chain Director",
-              },
-            ].map((testimonial, idx) => (
-              <div
-                key={idx}
-                className="p-6 rounded-xl border relative"
-                style={{
-                  backgroundColor: "white",
-                  borderColor: colors.lightTan + "50",
-                }}
-              >
-                <div
-                  className="absolute top-0 left-4 transform -translate-y-1/2 text-4xl"
-                  style={{ color: colors.goldenYellow, opacity: 0.3 }}
-                >
-                  "
-                </div>
-                <p className="text-sm italic mb-3 relative z-10" style={{ color: colors.darkBrown, opacity: 0.8 }}>
-                  {testimonial.quote}
-                </p>
-                <p className="text-l font-medium" style={{ color: colors.darkBrown }}>
-                  {testimonial.author}
-                </p>
-              </div>
-            ))}
-          </div>
+            {item.desc}
+          </p>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
+
+{/* Testimonials */}
+<section className="py-12 overflow-hidden">
+  <div className="max-w-6xl mx-auto px-4">
+    <h2
+      className="text-3xl md:text-4xl font-semibold text-center mb-12"
+      style={{ color: colors.darkBrown }}
+    >
+      What Our Clients Say
+    </h2>
+
+    <div className="relative w-full overflow-hidden">
+      <div className="flex w-max gap-6 animate-[slideRightToLeft_28s_linear_infinite] hover:[animation-play-state:paused]">
+        {[
+          {
+            quote:
+              "Their road freight service reduced our transit times by 30%. The real-time tracking is a game-changer.",
+            author: "— Maria G., Logistics Manager",
+          },
+          {
+            quote:
+              "Outstanding ocean freight support – customs clearance was handled flawlessly. Highly professional team.",
+            author: "— James T., Supply Chain Director",
+          },
+          {
+            quote:
+              "Reliable, professional and fast support for our international shipments.",
+            author: "— David R., Operations Head",
+          },
+          {
+            quote:
+              "Excellent logistics partner with smooth communication and secure handling.",
+            author: "— Sarah K., Import Manager",
+          },
+          {
+            quote:
+              "Their road freight service reduced our transit times by 30%. The real-time tracking is a game-changer.",
+            author: "— Maria G., Logistics Manager",
+          },
+          {
+            quote:
+              "Outstanding ocean freight support – customs clearance was handled flawlessly. Highly professional team.",
+            author: "— James T., Supply Chain Director",
+          },
+          {
+            quote:
+              "Reliable, professional and fast support for our international shipments.",
+            author: "— David R., Operations Head",
+          },
+          {
+            quote:
+              "Excellent logistics partner with smooth communication and secure handling.",
+            author: "— Sarah K., Import Manager",
+          },
+        ].map((testimonial, idx) => (
+          <div
+            key={idx}
+            className="w-[520px] shrink-0 p-8 rounded-xl border relative"
+            style={{
+              backgroundColor: "white",
+              borderColor: colors.lightTan + "60",
+            }}
+          >
+            <div
+              className="absolute top-0 left-5 -translate-y-1/2 text-5xl"
+              style={{ color: colors.goldenYellow, opacity: 0.45 }}
+            >
+              "
+            </div>
+
+            <p
+              className="text-base md:text-lg italic mb-5 leading-relaxed"
+              style={{ color: colors.darkBrown, opacity: 0.88 }}
+            >
+              {testimonial.quote}
+            </p>
+
+            <p
+              className="text-lg md:text-xl font-semibold"
+              style={{ color: colors.darkBrown }}
+            >
+              {testimonial.author}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <style jsx>{`
+    @keyframes slideRightToLeft {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-50%);
+      }
+    }
+  `}</style>
+</section>
 
       {/* Call-to-Action */}
       <section className="py-16">

@@ -196,100 +196,82 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Mission & Vision */}
-      <section className="py-10">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* Mission */}
-            <div
-              className="p-8 rounded-2xl bg-white/70 backdrop-blur-sm shadow-sm hover:shadow-md transition-all duration-300"
-              style={{ border: `1px solid ${colors.lightTan}20` }}
-            >
-              <div className="flex items-center gap-3 mb-6">
-                <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center"
-                  style={{
-                    background: `linear-gradient(135deg, ${colors.goldenYellow}, ${colors.orange})`,
-                  }}
-                >
-                  <Target className="h-6 w-6 text-white" />
-                </div>
-                <h2 className="text-2xl font-light" style={{ color: colors.darkBrown }}>
-                  Our Mission
-                </h2>
-              </div>
-              <p className="mb-6 text-sm font-light leading-relaxed" style={{ color: colors.darkBrown, opacity: 0.8 }}>
-                To revolutionize global logistics through innovative technology and sustainable
-                practices, making world-class shipping accessible to businesses of all sizes.
-              </p>
-              <div className="space-y-4">
-                <MissionDetail
-                  icon={<Target />}
-                  color={colors.goldenYellow}
-                  title="Precision & Accuracy"
-                  subtitle="99.8% on-time delivery"
-                />
-                <MissionDetail
-                  icon={<Shield />}
-                  color={colors.orange}
-                  title="Security & Trust"
-                  subtitle="$500M cargo insurance"
-                />
-                <MissionDetail
-                  icon={<Clock />}
-                  color={colors.darkBrown}
-                  title="24/7 Reliability"
-                  subtitle="Round-the-clock support"
-                />
-              </div>
-            </div>
-
-            {/* Vision */}
-            <div
-              className="p-8 rounded-2xl bg-white/70 backdrop-blur-sm shadow-sm hover:shadow-md transition-all duration-300"
-              style={{ border: `1px solid ${colors.lightTan}20` }}
-            >
-              <div className="flex items-center gap-3 mb-6">
-                <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center"
-                  style={{
-                    background: `linear-gradient(135deg, ${colors.orange}, ${colors.darkOrange})`,
-                  }}
-                >
-                  <Globe className="h-6 w-6 text-white" />
-                </div>
-                <h2 className="text-2xl font-light" style={{ color: colors.darkBrown }}>
-                  Our Vision
-                </h2>
-              </div>
-              <p className="mb-6 text-sm font-light leading-relaxed" style={{ color: colors.darkBrown, opacity: 0.8 }}>
-                To create a seamlessly connected global supply chain network that drives economic
-                growth while minimizing environmental impact.
-              </p>
-              <div className="space-y-4">
-                <MissionDetail
-                  icon={<TrendingUp />}
-                  color={colors.orange}
-                  title="Sustainable Growth"
-                  subtitle="Carbon-neutral options"
-                />
-                <MissionDetail
-                  icon={<Users />}
-                  color={colors.goldenYellow}
-                  title="Global Community"
-                  subtitle="150+ countries served"
-                />
-                <MissionDetail
-                  icon={<Truck />}
-                  color={colors.darkOrange}
-                  title="Innovation Driven"
-                  subtitle="Advancing technology"
-                />
-              </div>
-            </div>
+    {/* Mission & Vision */}
+<section className="py-10">
+  <div className="container mx-auto px-4">
+    <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6">
+      {/* Mission */}
+      <div
+        className="p-8 rounded-2xl bg-white shadow-md hover:shadow-lg transition-all duration-300"
+        style={{ border: `1px solid ${colors.lightTan}40` }}
+      >
+        <div className="flex items-center gap-3 mb-6">
+          <div
+            className="w-12 h-12 rounded-xl flex items-center justify-center"
+            style={{
+              background: `linear-gradient(135deg, ${colors.goldenYellow}, ${colors.orange})`,
+            }}
+          >
+            <Target className="h-6 w-6 text-white" />
           </div>
+
+          <h2 className="text-3xl font-semibold" style={{ color: colors.darkBrown }}>
+            Our Mission
+          </h2>
         </div>
-      </section>
+
+        <p
+          className="mb-7 text-base md:text-lg font-medium leading-relaxed"
+          style={{ color: colors.darkBrown, opacity: 0.9 }}
+        >
+          To revolutionize global logistics through innovative technology and sustainable
+          practices, making world-class shipping accessible to businesses of all sizes.
+        </p>
+
+        <div className="space-y-5">
+          <MissionDetail icon={<Target />} color={colors.goldenYellow} title="Precision & Accuracy" subtitle="99.8% on-time delivery" />
+          <MissionDetail icon={<Shield />} color={colors.orange} title="Security & Trust" subtitle="$500M cargo insurance" />
+          <MissionDetail icon={<Clock />} color={colors.darkBrown} title="24/7 Reliability" subtitle="Round-the-clock support" />
+        </div>
+      </div>
+
+      {/* Vision */}
+      <div
+        className="p-8 rounded-2xl bg-white shadow-md hover:shadow-lg transition-all duration-300"
+        style={{ border: `1px solid ${colors.lightTan}40` }}
+      >
+        <div className="flex items-center gap-3 mb-6">
+          <div
+            className="w-12 h-12 rounded-xl flex items-center justify-center"
+            style={{
+              background: `linear-gradient(135deg, ${colors.orange}, ${colors.darkOrange})`,
+            }}
+          >
+            <Globe className="h-6 w-6 text-white" />
+          </div>
+
+          <h2 className="text-3xl font-semibold" style={{ color: colors.darkBrown }}>
+            Our Vision
+          </h2>
+        </div>
+
+        <p
+          className="mb-7 text-base md:text-lg font-medium leading-relaxed"
+          style={{ color: colors.darkBrown, opacity: 0.9 }}
+        >
+          To create a seamlessly connected global supply chain network that drives economic
+          growth while minimizing environmental impact.
+        </p>
+
+        <div className="space-y-5">
+          <MissionDetail icon={<TrendingUp />} color={colors.orange} title="Sustainable Growth" subtitle="Carbon-neutral options" />
+          <MissionDetail icon={<Users />} color={colors.goldenYellow} title="Global Community" subtitle="150+ countries served" />
+          <MissionDetail icon={<Truck />} color={colors.darkOrange} title="Innovation Driven" subtitle="Advancing technology" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* Our History (Timeline) */}
       <section className="py-10">

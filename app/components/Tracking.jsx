@@ -313,7 +313,7 @@ export default function TrackingPage() {
 
         {!trackingData && !loading && !error && (
           <div className="max-w-7xl mx-auto mt-16">
-            <h2 className="text-2xl font-bold text-center mb-8 text-[#2C1810]">
+            <h2 className="text-3xl font-bold text-center mb-8 text-[#2C1810]">
               Why Choose LogiTrack?
             </h2>
 
