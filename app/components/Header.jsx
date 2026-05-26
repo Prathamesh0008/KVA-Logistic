@@ -14,33 +14,11 @@ export default function Header() {
   const pathname = usePathname();
 
   const colors = {
-    darkBrown: "#521903",
-    goldenYellow: "#f8b936",
-    orange: "#dc8c18",
-    darkOrange: "#9f4409",
-    lightTan: "#c29f85",
+    darkBrown: "#3d1202",
+    orange: "#EB9003",
+    darkOrange: "#c25500",
+    lightBrown: "#F5E6D3",
   };
-
-  useEffect(() => {
-    const onScroll = () => setIsScrolled(window.scrollY > 10);
-
-    window.addEventListener("scroll", onScroll);
-    onScroll();
-
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  useEffect(() => {
-    setIsMenuOpen(false);
-  }, [pathname]);
-
-  useEffect(() => {
-    document.body.style.overflow = isMenuOpen ? "hidden" : "";
-
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isMenuOpen]);
 
   const navItems = [
     { name: "Home", href: "/" },
@@ -50,42 +28,125 @@ export default function Header() {
     { name: "Contact", href: "/contact" },
   ];
 
+  useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", onScroll);
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [pathname]);
+
   return (
     <header
-      className={`sticky top-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-white/95 backdrop-blur shadow-lg"
-          : "bg-white shadow-md"
+      className={`sticky top-0 z-50 border-b bg-white transition-all duration-300 ${
+        isScrolled ? "shadow-md" : ""
       }`}
-      style={{
-        fontFamily: "var(--font-snasm)",
-        fontWeight: 300,
-        letterSpacing: "0.02em",
-      }}
+      style={{ fontFamily: "var(--font-snasm)" }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-between h-[82px]">
-          {/* LOGO */}
-          <Link
-            href="/"
-            className="flex items-center shrink-0"
-            aria-label="KVA Logistics Home"
-          >
-            <div className="relative w-[96px] h-[68px] sm:w-[108px] sm:h-[72px] lg:w-[118px] lg:h-[76px]">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex h-[72px] items-center justify-between">
+          <Link href="/" className="flex shrink-0 items-center">
+            <div className="relative h-[58px] w-[95px] md:h-[66px] md:w-[115px]">
               <Image
                 src={LOGO_SRC}
                 alt="KVA Logistics"
                 fill
                 priority
-                sizes="(max-width: 640px) 96px, (max-width: 1024px) 108px, 118px"
-                className="object-contain"
+                className="object-contain object-left"
               />
             </div>
           </Link>
 
-          {/* DESKTOP NAV */}
-          <nav className="hidden lg:flex flex-1 justify-center">
-            <div className="flex items-center space-x-1 xl:space-x-2">
+          <nav className="hidden items-center gap-8 lg:flex">
+            {navItems.map((item) => {
+              const isActive = pathname === item.href;
+
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                 className="relative text-lg font-semibold tracking-wide transition hover:opacity-70"
+style={{
+  color: "#3A1811",
+  fontFamily: "Arial, Helvetica, sans-serif",
+}}
+                >
+                  {item.name}
+
+                  {isActive && (
+                    <span
+                      className="absolute -bottom-2 left-0 h-[3px] w-full rounded-full"
+              style={{ backgroundColor: "#3A1811" }}
+                    />
+                  )}
+                </Link>
+              );
+            })}
+          </nav>
+
+          <div className="hidden items-center gap-3 lg:flex">
+            <Link
+              href="/login"
+              className="rounded-full border px-5 py-2.5 text-sm font-bold transition hover:bg-[#F5E6D3]"
+              style={{
+                color: colors.darkBrown,
+                borderColor: colors.darkBrown + "30",
+              }}
+            >
+              Login
+            </Link>
+
+            <Link
+              href="/contact"
+              className="rounded-full px-6 py-3 text-sm font-bold text-white shadow-md transition hover:scale-105"
+              style={{
+                background: `linear-gradient(135deg, ${colors.orange}, ${colors.darkOrange})`,
+              }}
+            >
+              Get Quote
+            </Link>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setIsMenuOpen(true)}
+            className="rounded-full p-2 lg:hidden"
+            aria-label="Open menu"
+          >
+            <Menu className="h-7 w-7" style={{ color: colors.darkBrown }} />
+          </button>
+        </div>
+      </div>
+
+      {isMenuOpen && (
+        <div className="fixed inset-0 z-[999] lg:hidden">
+          <div
+            className="absolute inset-0 bg-black/45"
+            onClick={() => setIsMenuOpen(false)}
+          />
+
+          <div
+            className="absolute right-0 top-0 flex h-screen w-[85%] max-w-sm flex-col bg-white shadow-2xl"
+          >
+            <div className="flex items-center justify-between border-b px-5 py-4">
+              <div className="relative h-[60px] w-[110px]">
+                <Image
+                  src={LOGO_SRC}
+                  alt="KVA Logistics"
+                  fill
+                  className="object-contain object-left"
+                />
+              </div>
+
+              <button onClick={() => setIsMenuOpen(false)}>
+                <X className="h-7 w-7" style={{ color: colors.darkBrown }} />
+              </button>
+            </div>
+
+            <div className="flex flex-col gap-1 px-5 py-5">
               {navItems.map((item) => {
                 const isActive = pathname === item.href;
 
@@ -93,166 +154,28 @@ export default function Header() {
                   <Link
                     key={item.name}
                     href={item.href}
-                className={`px-5 xl:px-6 py-3 rounded-xl text-base xl:text-lg font-semibold transition-all duration-300 ${
-  isActive
-    ? "text-white"
-    : "text-gray-700 hover:text-gray-900 hover:bg-orange-50"
-}`}
+                    onClick={() => setIsMenuOpen(false)}
+                    className="rounded-xl px-4 py-4 text-lg font-bold"
                     style={{
-                      fontFamily: "var(--font-snasm)",
-                      fontWeight: 600,
-                      letterSpacing: "0.02em",
-                      ...(isActive && {
-                        backgroundColor: colors.darkBrown,
-                      }),
+                      color: isActive ? "#fff" : colors.darkBrown,
+                      backgroundColor: isActive ? colors.darkBrown : "transparent",
                     }}
                   >
                     {item.name}
                   </Link>
                 );
               })}
-            </div>
-          </nav>
 
-          {/* DESKTOP CTA */}
-          <div className="hidden lg:flex items-center gap-3">
-            <Link
-              href="/login"
-              className="inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm text-gray-700 border-2 border-[#EB9003] hover:bg-orange-50 transition-all duration-300"
-              style={{
-                fontFamily: "var(--font-snasm)",
-                fontWeight: 400,
-                letterSpacing: "0.02em",
-              }}
-            >
-              Login
-            </Link>
-
-            <Link
-              href="/contact"
-              className="group relative inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-[#EB9003] to-[#C55500] px-6 py-3 text-white shadow-md transition-all duration-300 hover:scale-105 hover:shadow-xl hover:from-[#F5A623] hover:to-[#D45E00] focus:outline-none focus:ring-2 focus:ring-[#EB9003] focus:ring-offset-2"
-              style={{
-                fontFamily: "var(--font-snasm)",
-                fontWeight: 400,
-                letterSpacing: "0.02em",
-              }}
-            >
-              <span className="relative z-10">Get Quote</span>
-              <span className="absolute inset-0 rounded-xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-white/10" />
-            </Link>
-          </div>
-
-          {/* MOBILE BUTTONS */}
-          <div className="flex lg:hidden items-center gap-2">
-            <Link
-              href="/login"
-              className="inline-flex items-center justify-center rounded-full px-4 py-2 text-xs font-medium border border-gray-300 text-gray-700 bg-white transition-all duration-300"
-              style={{
-                fontFamily: "var(--font-snasm)",
-                letterSpacing: "0.02em",
-              }}
-            >
-              Login
-            </Link>
-
-            <Link
-              href="/contact"
-              className="group relative inline-flex items-center justify-center rounded-full px-4 py-2 text-l font-medium text-white shadow-md whitespace-nowrap bg-gradient-to-r from-[#EB9003] to-[#C55500] hover:from-[#F5A623] hover:to-[#D45E00] transition-all duration-300"
-              style={{
-                fontFamily: "var(--font-snasm)",
-                letterSpacing: "0.02em",
-              }}
-            >
-              Get Quote
-            </Link>
-
-            <button
-              type="button"
-              onClick={() => setIsMenuOpen(true)}
-              className="p-2 rounded-lg hover:bg-orange-50 transition"
-              aria-label="Open menu"
-            >
-              <Menu className="h-6 w-6" style={{ color: colors.darkBrown }} />
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* MOBILE MENU */}
-      {isMenuOpen && (
-        <div className="fixed inset-0 z-[999] lg:hidden">
-          <div
-            className="absolute inset-0 bg-black/50"
-            onClick={() => setIsMenuOpen(false)}
-          />
-
-          <div
-            className="absolute right-0 top-0 h-[100vh] w-[85%] max-w-md shadow-2xl flex flex-col"
-            style={{ backgroundColor: colors.darkBrown }}
-          >
-            <div className="p-5 flex items-center justify-between border-b border-white/20">
               <Link
-                href="/"
+                href="/contact"
                 onClick={() => setIsMenuOpen(false)}
-                className="flex items-center gap-3"
-              >
-                <div className="relative w-[72px] h-[58px] shrink-0">
-                  <Image
-                    src={LOGO_SRC}
-                    alt="KVA Logistics"
-                    fill
-                    sizes="72px"
-                    className="object-contain"
-                  />
-                </div>
-
-                <span
-                  className="text-white text-base"
-                  style={{
-                    fontFamily: "var(--font-snasm)",
-                    fontWeight: 400,
-                  }}
-                >
-                  KVA LOGISTICS
-                </span>
-              </Link>
-
-              <button
-                type="button"
-                onClick={() => setIsMenuOpen(false)}
-                aria-label="Close menu"
-              >
-                <X className="h-6 w-6 text-white" />
-              </button>
-            </div>
-
-            <div className="flex-1 overflow-y-auto py-3">
-              <Link
-                href="/login"
-                onClick={() => setIsMenuOpen(false)}
-                className="block px-6 py-4 text-white hover:bg-white/10 transition"
+                className="mt-4 rounded-xl px-4 py-4 text-center text-lg font-bold text-white"
                 style={{
-                  fontFamily: "var(--font-snasm)",
-                  fontWeight: 400,
+                  background: `linear-gradient(135deg, ${colors.orange}, ${colors.darkOrange})`,
                 }}
               >
-                Login
+                Get Quote
               </Link>
-
-              {navItems.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  onClick={() => setIsMenuOpen(false)}
-                  className="block px-6 py-4 text-white hover:bg-white/10 transition"
-                  style={{
-                    fontFamily: "var(--font-snasm)",
-                    fontWeight: 400,
-                  }}
-                >
-                  {item.name}
-                </Link>
-              ))}
             </div>
           </div>
         </div>

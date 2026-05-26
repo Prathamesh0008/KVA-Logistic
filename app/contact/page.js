@@ -23,12 +23,28 @@ emailjs.init(EMAILJS_PUBLIC_KEY)
 export default function ContactPage() {
   const [formStatus, setFormStatus] = useState(null)
 
+  // Updated color palette – orange is #EB9003, brown becomes transparent + shiny
   const colors = {
-    darkBrown: '#310F0B',
-    goldenYellow: '#EB9003',
-    orange: '#C55500',
-    darkOrange: '#9F4100',
+    darkBrown: '#3d1202',           // Base for transparent brown
+    goldenYellow: '#f8b936',
+    orange: '#EB9003',              // New orange as requested
+    darkOrange: '#c25500',
     lightTan: '#F5F3EF',
+  }
+
+  // Transparent brown with shiny shadow effect
+  const brownTransparent = 'rgba(61, 18, 2, 0.92)'
+  const brownShinyShadow = '0 4px 20px rgba(197,85,0,0.3)'
+
+  // Shiny orange gradient (glossy metallic look)
+  const shinyOrangeGradient = `radial-gradient(circle at 30% 20%, rgba(255,255,240,0.35), rgba(255,200,100,0.1) 80%), linear-gradient(135deg, ${colors.orange}, ${colors.darkOrange})`
+
+  // Highlight text style (gold to orange gradient)
+  const highlightText = {
+    background: `linear-gradient(90deg, ${colors.goldenYellow}, ${colors.orange})`,
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
   }
 
   const handleSubmit = (e) => {
@@ -79,7 +95,7 @@ export default function ContactPage() {
       line1: 'Apendans 5, 2511ED',
       line2: 'The Netherlands',
       border: colors.darkBrown,
-      gradient: `linear-gradient(135deg, ${colors.darkBrown}, ${colors.darkOrange})`,
+      gradient: `linear-gradient(135deg, ${brownTransparent}, ${colors.darkOrange})`,
     },
     {
       icon: Clock,
@@ -103,15 +119,12 @@ export default function ContactPage() {
                   Contact KVA Logistics
                 </span>
               </h1>
-
-          <p
-  className="text-lg sm:text-xl md:text-1xl max-w-3xl mx-auto text-transparent bg-clip-text"
-  style={{
-    backgroundImage: `linear-gradient(90deg, ${colors.darkBrown}, ${colors.goldenYellow}, ${colors.orange})`,
-  }}
->
-  Reach out for inquiries, support, or logistics solutions
-</p>
+              <p
+                className="text-lg sm:text-xl md:text-1xl max-w-3xl mx-auto"
+                style={highlightText}
+              >
+                Reach out for inquiries, support, or logistics solutions
+              </p>
             </div>
           </div>
         </div>
@@ -126,8 +139,8 @@ export default function ContactPage() {
                   className="p-5 md:p-6 rounded-xl border"
                   style={{
                     backgroundColor: colors.lightTan,
-                    borderColor: colors.goldenYellow,
-                    boxShadow: '0 4px 20px rgba(235, 144, 3, 0.15)',
+                    borderColor: colors.orange,
+                    boxShadow: brownShinyShadow,
                   }}
                 >
                   <h2
@@ -145,13 +158,11 @@ export default function ContactPage() {
                       >
                         Full Name
                       </label>
-
                       <div className="relative">
                         <User
                           className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4"
                           style={{ color: colors.darkOrange }}
                         />
-
                         <input
                           type="text"
                           name="name"
@@ -174,13 +185,11 @@ export default function ContactPage() {
                       >
                         Email Address
                       </label>
-
                       <div className="relative">
                         <Mail
                           className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4"
                           style={{ color: colors.darkOrange }}
                         />
-
                         <input
                           type="email"
                           name="email"
@@ -203,13 +212,11 @@ export default function ContactPage() {
                       >
                         Subject
                       </label>
-
                       <div className="relative">
                         <FileText
                           className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 pointer-events-none"
                           style={{ color: colors.darkOrange }}
                         />
-
                         <select
                           name="subject"
                           required
@@ -238,7 +245,6 @@ export default function ContactPage() {
                       >
                         Message
                       </label>
-
                       <textarea
                         name="message"
                         rows={4}
@@ -257,9 +263,9 @@ export default function ContactPage() {
                       type="submit"
                       className="w-full px-4 py-3 rounded-lg font-semibold transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2 text-base cursor-pointer"
                       style={{
-                        background: `linear-gradient(90deg, ${colors.goldenYellow}, ${colors.orange})`,
+                        background: shinyOrangeGradient,
                         color: '#FFFFFF',
-                        boxShadow: '0 4px 12px rgba(235, 144, 3, 0.3)',
+                        boxShadow: brownShinyShadow,
                       }}
                     >
                       <Send className="h-4 w-4" />
@@ -288,11 +294,10 @@ export default function ContactPage() {
 
                 {/* Right Side */}
                 <div className="space-y-4">
-                  {/* 4 Contact Boxes moved here */}
+                  {/* 4 Contact Boxes */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {contactCards.map((card) => {
                       const Icon = card.icon
-
                       return (
                         <div
                           key={card.title}
@@ -300,7 +305,7 @@ export default function ContactPage() {
                           style={{
                             backgroundColor: colors.lightTan,
                             borderColor: card.border,
-                            boxShadow: '0 4px 12px rgba(197, 85, 0, 0.1)',
+                            boxShadow: brownShinyShadow,
                           }}
                         >
                           <div className="flex flex-col items-center text-center">
@@ -310,24 +315,21 @@ export default function ContactPage() {
                             >
                               <Icon
                                 className="h-5 w-5"
-                                style={{ color: colors.darkBrown }}
+                                style={{ color: '#FFFFFF' }}
                               />
                             </div>
-
                             <h3
                               className="text-lg font-semibold mb-1"
                               style={{ color: colors.darkBrown }}
                             >
                               {card.title}
                             </h3>
-
                             <p
                               className="text-base font-semibold break-all"
                               style={{ color: colors.darkOrange }}
                             >
                               {card.line1}
                             </p>
-
                             {card.line2 && (
                               <p
                                 className="text-base"
@@ -348,7 +350,7 @@ export default function ContactPage() {
                     style={{
                       backgroundColor: colors.lightTan,
                       borderColor: colors.orange,
-                      boxShadow: '0 4px 20px rgba(197, 85, 0, 0.12)',
+                      boxShadow: brownShinyShadow,
                     }}
                   >
                     <div className="text-center">
@@ -356,21 +358,18 @@ export default function ContactPage() {
                         className="h-10 w-10 mx-auto mb-3"
                         style={{ color: colors.goldenYellow }}
                       />
-
                       <p
                         className="text-xl font-bold"
                         style={{ color: colors.darkOrange }}
                       >
                         Apendans 5
                       </p>
-
                       <p
                         className="text-base font-medium"
                         style={{ color: colors.darkBrown }}
                       >
                         2511ED&apos; s-Gravenhage
                       </p>
-
                       <p
                         className="text-lg mt-2 font-semibold"
                         style={{ color: colors.darkOrange }}
@@ -386,22 +385,18 @@ export default function ContactPage() {
                     style={{
                       backgroundColor: colors.lightTan,
                       borderColor: colors.orange,
-                      boxShadow: '0 4px 12px rgba(197, 85, 0, 0.1)',
+                      boxShadow: brownShinyShadow,
                     }}
                   >
                     <div className="flex items-center gap-4">
                       <div
                         className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0"
                         style={{
-                          background: `linear-gradient(90deg, ${colors.orange}, ${colors.darkOrange})`,
+                          background: shinyOrangeGradient,
                         }}
                       >
-                        <Mail
-                          className="h-5 w-5"
-                          style={{ color: colors.darkBrown }}
-                        />
+                        <Mail className="h-5 w-5 text-white" />
                       </div>
-
                       <div>
                         <p
                           className="text-lg font-semibold"
@@ -409,10 +404,9 @@ export default function ContactPage() {
                         >
                           Sales
                         </p>
-
                         <p
                           className="text-base sm:text-lg font-bold break-all"
-                          style={{ color: '#8A3200' }}
+                          style={{ color: colors.darkOrange }}
                         >
                           info@kvalogistics.nl
                         </p>

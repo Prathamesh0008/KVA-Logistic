@@ -13,13 +13,28 @@ import {
 } from "lucide-react";
 
 export default function AboutPage() {
-  // Color palette (exactly as provided)
+  // Updated color palette – orange is #EB9003, brown becomes transparent + shiny
   const colors = {
-    darkBrown: "#521903",
+    darkBrown: "#3d1202",           // Base for transparent brown
     goldenYellow: "#f8b936",
-    orange: "#dc8c18",
-    darkOrange: "#9f4409",
+    orange: "#EB9003",              // New orange as requested
+    darkOrange: "#c25500",
     lightTan: "#c29f85",
+  };
+
+  // Transparent brown with shiny shadow effect
+  const brownTransparent = "rgba(61, 18, 2, 0.92)";
+  const brownShinyShadow = "0 4px 20px rgba(197,85,0,0.3)";
+
+  // Shiny orange gradient (glossy metallic look)
+  const shinyOrangeGradient = `radial-gradient(circle at 30% 20%, rgba(255,255,240,0.35), rgba(255,200,100,0.1) 80%), linear-gradient(135deg, ${colors.orange}, ${colors.darkOrange})`;
+
+  // Highlight text style (gold to orange gradient)
+  const highlightText = {
+    background: `linear-gradient(90deg, ${colors.goldenYellow}, ${colors.orange})`,
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+    backgroundClip: "text",
   };
 
   // Helper component for mission/vision details
@@ -87,7 +102,6 @@ export default function AboutPage() {
     { name: "Olusegun Adebayo", role: "CTO", bg: colors.darkBrown },
   ];
 
-
   const awards = [
     "Best Logistics Company 2022 (African Business Awards)",
     "Green Supply Chain Award 2023",
@@ -112,7 +126,10 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="flex flex-col bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50">
+    <div
+      className="flex flex-col"
+      style={{ background: "linear-gradient(135deg, #fef8ed, #fffaf0)" }}
+    >
       {/* Hero Section */}
       <section className="relative py-12 md:py-16 overflow-hidden">
         <div className="absolute inset-0 opacity-5">
@@ -129,7 +146,7 @@ export default function AboutPage() {
               <span
                 className="block"
                 style={{
-                  background: "linear-gradient(90deg, #521903, #7a2b0a)",
+                  background: `linear-gradient(90deg, ${colors.darkBrown}, ${colors.goldenYellow})`,
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
@@ -137,25 +154,17 @@ export default function AboutPage() {
               >
                 About
               </span>
-              <span
-                className="block mt-1"
-                style={{
-                  background: "linear-gradient(90deg, #521903, #EB9003)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
+              <span className="block mt-1" style={highlightText}>
                 KVA Logistics
               </span>
             </h1>
-        <p
-  className="text-lg md:text-xl font-medium max-w-3xl mx-auto leading-relaxed"
-  style={{ color: colors.darkBrown, opacity: 0.9 }}
->
-  Leading the logistics industry with innovation, reliability, and
-  a customer-first approach for over two decades.
-</p>
+            <p
+              className="text-lg md:text-xl font-medium max-w-3xl mx-auto leading-relaxed"
+              style={{ color: colors.darkBrown, opacity: 0.9 }}
+            >
+              Leading the logistics industry with innovation, reliability, and a
+              customer-first approach for over two decades.
+            </p>
           </div>
         </div>
       </section>
@@ -165,10 +174,26 @@ export default function AboutPage() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
             {[
-              { value: "25+", label: "Years Exp", gradient: [colors.goldenYellow, colors.orange] },
-              { value: "150+", label: "Countries", gradient: [colors.orange, colors.darkOrange] },
-              { value: "99.8%", label: "On-Time", gradient: [colors.goldenYellow, colors.orange] },
-              { value: "500M+", label: "Shipments", gradient: [colors.orange, colors.darkOrange] },
+              {
+                value: "25+",
+                label: "Years Exp",
+                gradient: [colors.goldenYellow, colors.orange],
+              },
+              {
+                value: "150+",
+                label: "Countries",
+                gradient: [colors.orange, colors.darkOrange],
+              },
+              {
+                value: "99.8%",
+                label: "On-Time",
+                gradient: [colors.goldenYellow, colors.orange],
+              },
+              {
+                value: "500M+",
+                label: "Shipments",
+                gradient: [colors.orange, colors.darkOrange],
+              },
             ].map((stat, i) => (
               <div
                 key={i}
@@ -187,7 +212,10 @@ export default function AboutPage() {
                 >
                   {stat.value}
                 </div>
-                <div className="text-l font-light uppercase tracking-wider mt-1" style={{ color: colors.darkBrown, opacity: 0.7 }}>
+                <div
+                  className="text-l font-light uppercase tracking-wider mt-1"
+                  style={{ color: colors.darkBrown, opacity: 0.7 }}
+                >
                   {stat.label}
                 </div>
               </div>
@@ -196,82 +224,109 @@ export default function AboutPage() {
         </div>
       </section>
 
-    {/* Mission & Vision */}
-<section className="py-10">
-  <div className="container mx-auto px-4">
-    <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6">
-      {/* Mission */}
-      <div
-        className="p-8 rounded-2xl bg-white shadow-md hover:shadow-lg transition-all duration-300"
-        style={{ border: `1px solid ${colors.lightTan}40` }}
-      >
-        <div className="flex items-center gap-3 mb-6">
-          <div
-            className="w-12 h-12 rounded-xl flex items-center justify-center"
-            style={{
-              background: `linear-gradient(135deg, ${colors.goldenYellow}, ${colors.orange})`,
-            }}
-          >
-            <Target className="h-6 w-6 text-white" />
+      {/* Mission & Vision */}
+      <section className="py-10">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Mission */}
+            <div
+              className="p-8 rounded-2xl bg-white shadow-md hover:shadow-lg transition-all duration-300"
+              style={{ border: `1px solid ${colors.lightTan}40` }}
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <div
+                  className="w-12 h-12 rounded-xl flex items-center justify-center"
+                  style={{
+                    background: `linear-gradient(135deg, ${colors.goldenYellow}, ${colors.orange})`,
+                    boxShadow: brownShinyShadow,
+                  }}
+                >
+                  <Target className="h-6 w-6 text-white" />
+                </div>
+                <h2 className="text-3xl font-semibold" style={{ color: colors.darkBrown }}>
+                  Our Mission
+                </h2>
+              </div>
+              <p
+                className="mb-7 text-base md:text-lg font-medium leading-relaxed"
+                style={{ color: colors.darkBrown, opacity: 0.9 }}
+              >
+                To revolutionize global logistics through innovative technology and
+                sustainable practices, making world-class shipping accessible to
+                businesses of all sizes.
+              </p>
+              <div className="space-y-5">
+                <MissionDetail
+                  icon={<Target />}
+                  color={colors.goldenYellow}
+                  title="Precision & Accuracy"
+                  subtitle="99.8% on-time delivery"
+                />
+                <MissionDetail
+                  icon={<Shield />}
+                  color={colors.orange}
+                  title="Security & Trust"
+                  subtitle="$500M cargo insurance"
+                />
+                <MissionDetail
+                  icon={<Clock />}
+                  color={colors.darkBrown}
+                  title="24/7 Reliability"
+                  subtitle="Round-the-clock support"
+                />
+              </div>
+            </div>
+
+            {/* Vision */}
+            <div
+              className="p-8 rounded-2xl bg-white shadow-md hover:shadow-lg transition-all duration-300"
+              style={{ border: `1px solid ${colors.lightTan}40` }}
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <div
+                  className="w-12 h-12 rounded-xl flex items-center justify-center"
+                  style={{
+                    background: shinyOrangeGradient,
+                    boxShadow: brownShinyShadow,
+                  }}
+                >
+                  <Globe className="h-6 w-6 text-white" />
+                </div>
+                <h2 className="text-3xl font-semibold" style={{ color: colors.darkBrown }}>
+                  Our Vision
+                </h2>
+              </div>
+              <p
+                className="mb-7 text-base md:text-lg font-medium leading-relaxed"
+                style={{ color: colors.darkBrown, opacity: 0.9 }}
+              >
+                To create a seamlessly connected global supply chain network that drives
+                economic growth while minimizing environmental impact.
+              </p>
+              <div className="space-y-5">
+                <MissionDetail
+                  icon={<TrendingUp />}
+                  color={colors.orange}
+                  title="Sustainable Growth"
+                  subtitle="Carbon-neutral options"
+                />
+                <MissionDetail
+                  icon={<Users />}
+                  color={colors.goldenYellow}
+                  title="Global Community"
+                  subtitle="150+ countries served"
+                />
+                <MissionDetail
+                  icon={<Truck />}
+                  color={colors.darkOrange}
+                  title="Innovation Driven"
+                  subtitle="Advancing technology"
+                />
+              </div>
+            </div>
           </div>
-
-          <h2 className="text-3xl font-semibold" style={{ color: colors.darkBrown }}>
-            Our Mission
-          </h2>
         </div>
-
-        <p
-          className="mb-7 text-base md:text-lg font-medium leading-relaxed"
-          style={{ color: colors.darkBrown, opacity: 0.9 }}
-        >
-          To revolutionize global logistics through innovative technology and sustainable
-          practices, making world-class shipping accessible to businesses of all sizes.
-        </p>
-
-        <div className="space-y-5">
-          <MissionDetail icon={<Target />} color={colors.goldenYellow} title="Precision & Accuracy" subtitle="99.8% on-time delivery" />
-          <MissionDetail icon={<Shield />} color={colors.orange} title="Security & Trust" subtitle="$500M cargo insurance" />
-          <MissionDetail icon={<Clock />} color={colors.darkBrown} title="24/7 Reliability" subtitle="Round-the-clock support" />
-        </div>
-      </div>
-
-      {/* Vision */}
-      <div
-        className="p-8 rounded-2xl bg-white shadow-md hover:shadow-lg transition-all duration-300"
-        style={{ border: `1px solid ${colors.lightTan}40` }}
-      >
-        <div className="flex items-center gap-3 mb-6">
-          <div
-            className="w-12 h-12 rounded-xl flex items-center justify-center"
-            style={{
-              background: `linear-gradient(135deg, ${colors.orange}, ${colors.darkOrange})`,
-            }}
-          >
-            <Globe className="h-6 w-6 text-white" />
-          </div>
-
-          <h2 className="text-3xl font-semibold" style={{ color: colors.darkBrown }}>
-            Our Vision
-          </h2>
-        </div>
-
-        <p
-          className="mb-7 text-base md:text-lg font-medium leading-relaxed"
-          style={{ color: colors.darkBrown, opacity: 0.9 }}
-        >
-          To create a seamlessly connected global supply chain network that drives economic
-          growth while minimizing environmental impact.
-        </p>
-
-        <div className="space-y-5">
-          <MissionDetail icon={<TrendingUp />} color={colors.orange} title="Sustainable Growth" subtitle="Carbon-neutral options" />
-          <MissionDetail icon={<Users />} color={colors.goldenYellow} title="Global Community" subtitle="150+ countries served" />
-          <MissionDetail icon={<Truck />} color={colors.darkOrange} title="Innovation Driven" subtitle="Advancing technology" />
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+      </section>
 
       {/* Our History (Timeline) */}
       <section className="py-10">
@@ -289,6 +344,7 @@ export default function AboutPage() {
                   className="w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0 shadow-md"
                   style={{
                     background: `linear-gradient(135deg, ${colors.goldenYellow}, ${colors.orange})`,
+                    boxShadow: brownShinyShadow,
                   }}
                 >
                   <Calendar className="h-7 w-7 text-white" />
@@ -300,7 +356,10 @@ export default function AboutPage() {
                   <h3 className="text-xl font-light mb-1" style={{ color: colors.darkBrown }}>
                     {item.year}
                   </h3>
-                  <p className="text-sm font-light" style={{ color: colors.darkBrown, opacity: 0.8 }}>
+                  <p
+                    className="text-sm font-light"
+                    style={{ color: colors.darkBrown, opacity: 0.8 }}
+                  >
                     {item.event}
                   </p>
                 </div>
@@ -330,7 +389,10 @@ export default function AboutPage() {
                 <h3 className="text-lg font-light mb-2" style={{ color: colors.darkBrown }}>
                   {value.title}
                 </h3>
-                <p className="text-sm font-light" style={{ color: colors.darkBrown, opacity: 0.7 }}>
+                <p
+                  className="text-sm font-light"
+                  style={{ color: colors.darkBrown, opacity: 0.7 }}
+                >
                   {value.desc}
                 </p>
               </div>
@@ -357,14 +419,17 @@ export default function AboutPage() {
               >
                 <div
                   className="w-28 h-28 rounded-full mx-auto mb-4 flex items-center justify-center text-white text-3xl font-light shadow-md"
-                  style={{ background: member.bg }}
+                  style={{ background: member.bg, boxShadow: brownShinyShadow }}
                 >
                   {member.name.charAt(0)}
                 </div>
                 <h3 className="text-lg font-light mb-1" style={{ color: colors.darkBrown }}>
                   {member.name}
                 </h3>
-                <p className="text-sm font-light" style={{ color: colors.darkBrown, opacity: 0.7 }}>
+                <p
+                  className="text-sm font-light"
+                  style={{ color: colors.darkBrown, opacity: 0.7 }}
+                >
                   {member.role}
                 </p>
               </div>
@@ -372,32 +437,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-
-      {/* Awards & Certifications
-      <section className="py-10">
-        <div className="container mx-auto px-4">
-          <h2
-            className="text-3xl md:text-4xl font-light text-center mb-10"
-            style={{ color: colors.darkBrown }}
-          >
-            Awards & Certifications
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
-            {awards.map((award, i) => (
-              <div
-                key={i}
-                className="p-5 rounded-xl bg-white/70 backdrop-blur-sm shadow-sm flex items-center gap-4 hover:shadow-md transition"
-                style={{ border: `1px solid ${colors.goldenYellow}20` }}
-              >
-                <Award className="h-8 w-8 flex-shrink-0" style={{ color: colors.goldenYellow }} />
-                <span className="text-sm font-light" style={{ color: colors.darkBrown }}>
-                  {award}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section> */}
 
       {/* Customer Testimonials */}
       <section className="py-10">
@@ -416,13 +455,19 @@ export default function AboutPage() {
                 style={{ border: `1px solid ${colors.lightTan}20` }}
               >
                 <Star className="h-5 w-5 mb-4" style={{ color: colors.goldenYellow }} />
-                <p className="text-sm font-light italic mb-4 leading-relaxed" style={{ color: colors.darkBrown, opacity: 0.9 }}>
+                <p
+                  className="text-sm font-light italic mb-4 leading-relaxed"
+                  style={{ color: colors.darkBrown, opacity: 0.9 }}
+                >
                   "{t.quote}"
                 </p>
                 <div className="font-light" style={{ color: colors.darkBrown }}>
                   {t.author}
                 </div>
-                <div className="text-l font-light" style={{ color: colors.darkBrown, opacity: 0.6 }}>
+                <div
+                  className="text-l font-light"
+                  style={{ color: colors.darkBrown, opacity: 0.6 }}
+                >
                   {t.company}
                 </div>
               </div>
@@ -430,40 +475,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-
-      {/* Global Network (Map placeholder) */}
-      {/* <section className="py-10">
-        <div className="container mx-auto px-4">
-          <h2
-            className="text-3xl md:text-4xl font-light text-center mb-4"
-            style={{ color: colors.darkBrown }}
-          >
-            Global Network
-          </h2>
-          <p
-            className="text-center mb-8 max-w-2xl mx-auto text-sm font-light leading-relaxed"
-            style={{ color: colors.darkBrown, opacity: 0.8 }}
-          >
-            We operate in over 150 countries with regional hubs in Africa, Europe, Asia, and the
-            Americas.
-          </p>
-          <div
-            className="h-72 md:h-96 rounded-2xl bg-white/70 backdrop-blur-sm shadow-sm flex items-center justify-center"
-            style={{
-              border: `1px solid ${colors.lightTan}20`,
-              backgroundImage: "radial-gradient(circle at 20px 20px, #e5e7eb 2px, transparent 2px)",
-              backgroundSize: "40px 40px",
-            }}
-          >
-            <div className="flex flex-col items-center gap-3">
-              <Globe className="h-16 w-16" style={{ color: colors.goldenYellow }} />
-              <span className="text-lg font-light" style={{ color: colors.darkBrown }}>
-                Interactive map coming soon
-              </span>
-            </div>
-          </div>
-        </div>
-      </section> */}
     </div>
   );
 }

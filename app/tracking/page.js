@@ -43,14 +43,18 @@ const fontStyle = `
   }
 `
 
-// Color palette matching your logo
+// Updated color palette – orange #EB9003, brown transparent + shiny
 const colors = {
-  darkBrown: '#521903',
+  darkBrown: '#3d1202',                // Base for transparent brown
   goldenYellow: '#f8b936',
-  orange: '#dc8c18',
-  darkOrange: '#9f4409',
+  orange: '#EB9003',                   // New orange as requested
+  darkOrange: '#c25500',
   lightTan: '#c29f85',
 }
+
+// Transparent brown with shiny shadow effect
+const brownTransparent = 'rgba(61, 18, 2, 0.92)'
+const brownShinyShadow = '0 4px 20px rgba(197,85,0,0.3)'
 
 // Light background colors
 const backgroundColors = {
@@ -68,7 +72,7 @@ const highlightText = {
   backgroundClip: 'text',
 }
 
-// Mock tracking data (unchanged)...
+// Mock tracking data (unchanged)
 const mockTrackingData = {
   'LGSW123456789': {
     status: 'in-transit',
@@ -155,7 +159,7 @@ export default function Tracking() {
   const [shareUrl, setShareUrl] = useState('')
   const fileInputRef = useRef(null)
 
-  // Mock tracking function (unchanged)...
+  // Mock tracking function
   const mockTrackPackage = (id) => {
     if (mockTrackingData[id]) {
       const data = mockTrackingData[id];
@@ -317,7 +321,6 @@ export default function Tracking() {
 
   const timelineSteps = [
     {
-
       id: 1,
       status: 'Order Confirmed',
       location: 'Los Angeles, CA',
@@ -419,9 +422,10 @@ export default function Tracking() {
       {/* Inject font-face and global font override */}
       {/* <style dangerouslySetInnerHTML={{ __html: fontStyle }} /> */}
       
-<div className="flex flex-col font-light tracking-wide">   {/* Hero Section */}
+      <div className="flex flex-col font-light tracking-wide">
+        {/* Hero Section */}
         <section className="relative py-10 md:py-12 bg-gray-50 overflow-hidden flex-shrink-0">
-          {/* Subtle background pattern (unchanged) */}
+          {/* Subtle background pattern */}
           <div className="absolute inset-0 opacity-5">
             <div
               className="absolute inset-0"
@@ -433,7 +437,7 @@ export default function Tracking() {
 
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-3xl mx-auto text-center">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-light tracking-wide mb-3">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-light tracking-wide mb-3">
                 <span
                   className="block"
                   style={{
@@ -447,12 +451,7 @@ export default function Tracking() {
                 </span>
                 <span
                   className="block"
-                  style={{
-                    background: `linear-gradient(90deg, ${colors.goldenYellow}, ${colors.orange})`,
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                  }}
+                  style={highlightText}
                 >
                   Shipment in Real-Time
                 </span>
@@ -460,13 +459,7 @@ export default function Tracking() {
 
               <p
                 className="text-base md:text-lg max-w-2xl mx-auto"
-                style={{
-                  background: "linear-gradient(90deg, #8B5A2B 200%, #D99A3E 100%, #F4A261 200%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                  opacity: 0.95,
-                }}
+                style={highlightText}
               >
                 Enter your tracking number for live updates and detailed shipment information
               </p>
@@ -475,7 +468,7 @@ export default function Tracking() {
         </section>
 
         {/* Main Tracking Section */}
-      <section className="py-8 md:py-10 bg-white">
+        <section className="py-8 md:py-10 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               {/* Stats Banner */}
@@ -488,7 +481,7 @@ export default function Tracking() {
                     color: colors.darkBrown,
                   }}
                 >
-                <div className="text-xl md:text-2xl font-normal tracking-wide">24/7</div>
+                  <div className="text-xl md:text-2xl font-normal tracking-wide" style={highlightText}>24/7</div>
                   <div className="text-l md:text-sm">Live Tracking</div>
                 </div>
                 <div
@@ -499,7 +492,7 @@ export default function Tracking() {
                     color: colors.darkBrown,
                   }}
                 >
-                <div className="text-xl md:text-2xl font-normal tracking-wide">150+</div>
+                  <div className="text-xl md:text-2xl font-normal tracking-wide" style={highlightText}>150+</div>
                   <div className="text-l md:text-sm">Countries</div>
                 </div>
                 <div
@@ -510,7 +503,7 @@ export default function Tracking() {
                     color: colors.darkBrown,
                   }}
                 >
-                  <div className="text-xl md:text-2xl font-bold">99.8%</div>
+                  <div className="text-xl md:text-2xl font-bold" style={highlightText}>99.8%</div>
                   <div className="text-l md:text-sm">Accuracy</div>
                 </div>
                 <div
@@ -521,7 +514,7 @@ export default function Tracking() {
                     color: colors.darkBrown,
                   }}
                 >
-                  <div className="text-xl md:text-2xl font-bold">1M+</div>
+                  <div className="text-xl md:text-2xl font-bold" style={highlightText}>1M+</div>
                   <div className="text-l md:text-sm">Packages Tracked</div>
                 </div>
               </div>
@@ -535,13 +528,13 @@ export default function Tracking() {
                     style={{
                       backgroundColor: 'white',
                       border: `1px solid ${colors.lightTan}50`,
-                      bolhadow: "0 4px 12px rgba(0,0,0,0.05)",
+                      boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
                     }}
                   >
                     {/* Tracking Form */}
                     <div className="mb-4">
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
-                      <h3 className="text-lg font-normal tracking-wide" style={{ color: colors.darkBrown }}>
+                        <h3 className="text-lg font-normal tracking-wide" style={{ color: colors.darkBrown }}>
                           Enter Tracking Number
                         </h3>
 
@@ -550,8 +543,9 @@ export default function Tracking() {
                             onClick={generateMockTracking}
                             className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all hover:scale-105 text-l font-bold"
                             style={{
-                              backgroundColor: colors.darkBrown,
+                              backgroundColor: brownTransparent,
                               color: 'white',
+                              boxShadow: brownShinyShadow,
                             }}
                           >
                             <RefreshCw className="h-3 w-3" />
@@ -592,9 +586,17 @@ export default function Tracking() {
                               style={{ color: colors.darkBrown, opacity: 0.5 }}
                             />
                           </div>
-<h3 className="text-lg font-semibold tracking-wide" style={highlightText}>
-Track
-</h3>
+                          <button
+                            type="submit"
+                            className="flex items-center gap-1.5 px-4 py-2.5 rounded-lg font-normal tracking-wide transition-all hover:scale-105"
+                            style={{
+                              background: `linear-gradient(90deg, ${colors.goldenYellow}, ${colors.orange})`,
+                              color: colors.darkBrown,
+                              boxShadow: brownShinyShadow,
+                            }}
+                          >
+                            Track
+                          </button>
                         </div>
                       </form>
 
@@ -610,8 +612,9 @@ Track
                               onClick={() => loadSampleTracking(sampleId)}
                               className="text-l px-2 py-1 rounded-lg transition-colors flex items-center gap-1 hover:opacity-80"
                               style={{
-                                backgroundColor: colors.darkBrown,
+                                backgroundColor: brownTransparent,
                                 color: 'white',
+                                boxShadow: brownShinyShadow,
                               }}
                             >
                               <span>{sampleId}</span>
@@ -689,7 +692,7 @@ Track
                               Tracking ID
                             </div>
                             <div className="flex items-center gap-2">
-                            <h3 className="text-lg font-normal tracking-wide font-mono" style={highlightText}>
+                              <h3 className="text-lg font-normal tracking-wide font-mono" style={highlightText}>
                                 {trackingId || 'LGSW123456789'}
                               </h3>
                               <button
@@ -771,7 +774,7 @@ Track
                                 <div className="text-l uppercase tracking-wider" style={{ color: colors.darkBrown, opacity: 0.5 }}>
                                   {key}
                                 </div>
-                        <div className="text-l font-normal tracking-wide" style={highlightText}>
+                                <div className="text-l font-normal tracking-wide" style={highlightText}>
                                   {value}
                                 </div>
                               </div>
@@ -787,6 +790,7 @@ Track
                             style={{
                               backgroundColor: notificationsEnabled ? colors.goldenYellow : colors.lightTan,
                               color: colors.darkBrown,
+                              boxShadow: brownShinyShadow,
                             }}
                           >
                             <Bell className="h-3.5 w-3.5" />
@@ -800,6 +804,7 @@ Track
                               backgroundColor: colors.goldenYellow,
                               color: colors.darkBrown,
                               border: `1px solid ${colors.lightTan}`,
+                              boxShadow: brownShinyShadow,
                             }}
                           >
                             <Share2 className="h-3.5 w-3.5" />
@@ -813,6 +818,7 @@ Track
                               backgroundColor: colors.goldenYellow,
                               color: colors.darkBrown,
                               border: `1px solid ${colors.lightTan}`,
+                              boxShadow: brownShinyShadow,
                             }}
                           >
                             <Download className="h-3.5 w-3.5" />
@@ -826,6 +832,7 @@ Track
                               backgroundColor: autoRefresh ? colors.goldenYellow : colors.lightTan,
                               color: colors.darkBrown,
                               border: `1px solid ${autoRefresh ? colors.goldenYellow : colors.lightTan}`,
+                              boxShadow: brownShinyShadow,
                             }}
                           >
                             <Radio className="h-3.5 w-3.5" />
@@ -844,13 +851,13 @@ Track
                     style={{
                       backgroundColor: 'white',
                       border: `1px solid ${colors.lightTan}50`,
-                      bolhadow: "0 4px 12px rgba(0,0,0,0.05)",
+                      boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
                     }}
                   >
                     <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-semibold tracking-wide" style={highlightText}>
-  Shipment Timeline
-</h3>
+                      <h3 className="text-lg font-semibold tracking-wide" style={highlightText}>
+                        Shipment Timeline
+                      </h3>
                       <button
                         onClick={() => alert('Package is insured and protected by our security system.')}
                         className="p-1.5 hover:bg-gray-100 rounded-lg transition-colors"
@@ -936,8 +943,6 @@ Track
                   </div>
                 </div>
               </div>
-
-              {/* Quick Help Section (commented out) */}
             </div>
           </div>
         </section>
@@ -963,8 +968,9 @@ Track
                 onClick={() => setShowQRScanner(false)}
                 className="w-full py-2.5 rounded-lg font-bold text-sm transition-all"
                 style={{
-                  backgroundColor: colors.darkBrown,
+                  backgroundColor: brownTransparent,
                   color: 'white',
+                  boxShadow: brownShinyShadow,
                 }}
               >
                 Cancel Scan

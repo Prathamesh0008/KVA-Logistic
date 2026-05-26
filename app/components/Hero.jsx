@@ -148,10 +148,9 @@ export default function Hero() {
   };
 
   return (
-    <section
-      className="relative w-full min-h-[90vh] md:min-h-screen flex items-center overflow-hidden font-light tracking-wide bg-[#0B4B55]"
-      style={{ fontFamily: "var(--font-snasm)" }}
-    >
+<section
+className="relative w-full min-h-[calc(100vh-84px)] md:h-[calc(100vh-84px)] flex items-center overflow-hidden font-light tracking-wide bg-[#0B4B55]"  style={{ fontFamily: "var(--font-snasm)" }}
+>
       {/* Background Video Banner */}
       {!videoError && (
         <video
@@ -210,10 +209,10 @@ export default function Hero() {
 
       {/* Content */}
       <div className="relative z-10 w-full">
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-16 md:py-20">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-8 md:py-10 lg:py-8">
         <div className="max-w-[900px]">
             {/* Badge */}
-            <div className="mb-6">
+            {/* <div className="mb-6">
               <div
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-xl"
                 style={{
@@ -233,115 +232,95 @@ export default function Hero() {
                   TRUSTED SINCE 1998
                 </span>
               </div>
-            </div>
+            </div> */}
 
             {/* Heading */}
-            <h1
-              className="
-                mb-6 overflow-visible
-                text-[52px] sm:text-[60px] md:text-5xl lg:text-6xl xl:text-7xl
-                font-light tracking-wide
-                leading-[1.18]
-              "
-              style={{ fontFamily: "var(--font-snasm)" }}
-            >
-              <span
-                className="
-                  block overflow-visible pb-1
-                  bg-gradient-to-r from-yellow-100 via-[#EB9003] to-[#9F4100]
-                  bg-clip-text text-transparent
-                  leading-[1.18]
-                "
-              >
-                Global Logistics
-              </span>
+<h1 className="mb-3 overflow-visible text-[38px] sm:text-[46px] md:text-5xl lg:text-[58px] xl:text-[68px] font-light tracking-wide leading-[1.05] drop-shadow-[0_4px_18px_rgba(235,144,3,0.35)]">  <span
+    className="
+      block overflow-visible pb-1
+      bg-gradient-to-r from-yellow-50 via-[#EB9003] to-[#9F4100]
+      bg-clip-text text-transparent
+      leading-[1.18]
+    "
+  >
+    Global Logistics
+  </span>
 
-              <span
-                className="
-                  block overflow-visible pb-3
-                  bg-gradient-to-r from-[#EB9003] via-[#EB9003] to-yellow-100
-                  bg-clip-text text-transparent
-                  leading-[1.18]
-                "
-              >
-                Storage Solution
-              </span>
-            </h1>
+  <span
+    className="
+      block overflow-visible pb-3
+      bg-gradient-to-r from-[#EB9003] via-yellow-100 to-[#9F4100]
+      bg-clip-text text-transparent
+      leading-[1.18]
+    "
+  >
+    Storage Solution
+  </span>
+</h1>
 
 {/* Paragraph */}
 {/* Paragraph */}
 {/* Paragraph */}
-<p
-  className="
-    text-lg sm:text-xl md:text-2xl lg:text-[28px]
-    leading-[1.55] mb-10
-    max-w-[880px]
-    font-light
-    drop-shadow-[0_2px_8px_rgba(0,0,0,0.18)]
-    bg-gradient-to-r from-yellow-100 via-[#EB9003] to-[#9F4100]
-    bg-clip-text text-transparent
-  "
-  style={{ fontFamily: "var(--font-snasm)" }}
->
+<p className="text-lg sm:text-xl md:text-2xl lg:text-[28px] leading-[1.45] mb-8 max-w-[880px] font-light drop-shadow-[0_2px_10px_rgba(248,185,54,0.35)] text-[#f8b936]">
   Professional warehousing, distribution, and transportation services
   <br />
   secure, efficient &amp; reliable.
 </p>
             {/* Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 mb-8">
-              <Link
-                href="/contact"
-                className="
-                  group flex items-center justify-center gap-3
-                 px-8 py-5 rounded-xl
-                 text-base sm:text-lg
-                  transition hover:scale-[1.03] active:scale-95
-                  bg-[#EB9003] text-white border-2 border-[#EB9003]
-                "
-                style={{
-                  boxShadow: "0 4px 20px rgba(235,144,3,0.3)",
-                  fontFamily: "var(--font-snasm)",
-                  fontWeight: 400,
-                }}
-              >
-                <Truck className="w-5 h-5" />
-                Get Storage Quote
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
+         <div className="flex flex-col sm:flex-row gap-3 mb-5">
+           <Link
+  href="/contact"
+  className="
+    group flex items-center justify-center gap-3
+    px-8 py-5 rounded-xl
+    text-xl sm:text-2xl
+    transition hover:scale-[1.03] active:scale-95
+    bg-[#EB9003] text-white border-2 border-[#EB9003]
+  "
+  style={{
+    boxShadow: "0 4px 20px rgba(235,144,3,0.3)",
+    fontFamily: "var(--font-snasm)",
+    fontWeight: 400,
+  }}
+>
+  <Truck className="w-6 h-6" />
+  Get Storage Quote
+  <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+</Link>
 
-              <Link
-                href="/tracking"
-                className="
-                  group flex items-center justify-center gap-2
-                  px-6 py-4 rounded-xl
-                  text-sm sm:text-base
-                  border-2 transition hover:scale-[1.03] active:scale-95
-                "
-                style={{
-                  background: uiGradient,
-                  borderColor: "#EB9003",
-                  color: "#FFFFFF",
-                  boxShadow: "0 4px 20px rgba(197,85,0,0.3)",
-                  fontFamily: "var(--font-snasm)",
-                  fontWeight: 400,
-                }}
-              >
-                <Package className="w-5 h-5" />
-                Track Shipment
-                <Sparkles className="w-4 h-4 animate-pulse" />
-              </Link>
+           <Link
+  href="/tracking"
+  className="
+    group flex items-center justify-center gap-3
+    px-8 py-5 rounded-xl
+    text-xl sm:text-2xl
+    border-2 transition hover:scale-[1.03] active:scale-95
+  "
+  style={{
+    background: uiGradient,
+    borderColor: "#EB9003",
+    color: "#FFFFFF",
+    boxShadow: "0 4px 20px rgba(197,85,0,0.3)",
+    fontFamily: "var(--font-snasm)",
+    fontWeight: 400,
+  }}
+>
+  <Package className="w-6 h-6" />
+  Track Shipment
+  <Sparkles className="w-5 h-5 animate-pulse" />
+</Link>
             </div>
 
 {/* Stats + Support */}
-<div className="w-full max-w-[775px] space-y-3">
-  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<div className="w-full max-w-[650px] space-y-2">
+<div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
     {statsData.map((s, i) => {
       const Icon = s.icon;
 
       return (
         <div
           key={i}
-          className="group rounded-2xl px-4 py-4 transition-all duration-300 hover:-translate-y-1"
+        className="group rounded-2xl px-3 py-3 transition-all duration-300 hover:-translate-y-1"
           style={{
             background: "linear-gradient(135deg, #F8F3EA, #EFE8DD)",
             border: "1px solid rgba(159,65,0,0.9)",
@@ -350,26 +329,26 @@ export default function Hero() {
         >
           <div className="flex items-center gap-4">
             <div
-              className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
+            className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
               style={{
                 background: "linear-gradient(135deg, #7A2604, #310F0B)",
                 boxShadow: "0 7px 16px rgba(49,15,11,0.35)",
               }}
             >
-              <Icon className="w-6 h-6" style={{ color: "#FFFFFF" }} />
+      <Icon className="w-5 h-5" style={{ color: "#FFFFFF" }} />
             </div>
 
             <div>
               <div
-             className="text-2xl sm:text-3xl font-normal leading-none tracking-normal"
+            className="text-xl sm:text-2xl font-normal leading-none tracking-normal"
                 style={{ color: "#7A2604", fontFamily: "var(--font-snasm)" }}
               >
                 <CountUp end={s.end} suffix={s.suffix} decimals={s.decimals} />
               </div>
 
               <div
-                className="mt-1 text-sm sm:text-base normal-case tracking-normal leading-snug"
-                style={{ color: "#310F0B", fontFamily: "var(--font-snasm)", fontWeight: 600 }}
+             className="mt-1 text-base sm:text-lg normal-case tracking-normal leading-snug"
+                style={{ color: "#310F0B", fontFamily: "var(--font-snasm)", fontWeight: 300}}
               >
                 {s.label}
               </div>
@@ -382,7 +361,7 @@ export default function Hero() {
 
   {/* Support Card */}
   <div
-    className="rounded-2xl px-4 py-4 transition-all duration-300 hover:-translate-y-1"
+ className="rounded-2xl px-3 py-3 transition-all duration-300 hover:-translate-y-1"
     style={{
       background: "linear-gradient(135deg, #F8F3EA, #EFE8DD)",
       border: "1px solid rgba(159,65,0,0.9)",
@@ -401,21 +380,21 @@ export default function Hero() {
       </div>
 
       <div>
-        <div
-          className="text-sm sm:text-base normal-case tracking-normal leading-snug"
-          style={{ color: "#310F0B", fontFamily: "var(--font-snasm)", fontWeight: 600 }}
-        >
-          24/7 Customer Support
-        </div>
+       <div
+  className="text-lg sm:text-xl md:text-xl normal-case tracking-normal leading-snug"
+  style={{ color: "#310F0B", fontFamily: "var(--font-snasm)", fontWeight: 300 }}
+>
+  24/7 Customer Support
+</div>
 
-        <div
-          className="mt-1 text-sm sm:text-base leading-snug"
-          style={{ color: "#3A1811", fontFamily: "var(--font-snasm)", fontWeight: 500 }}
-        >
-          Free consultation{" "}
-          <span style={{ color: "#7A2604" }}>•</span>{" "}
-          No hidden fees
-        </div>
+<div
+  className="mt-2 text-lg sm:text-l md:text-1xl leading-snug"
+  style={{ color: "#3A1811", fontFamily: "var(--font-snasm)", fontWeight: 300 }}
+>
+  Free consultation{" "}
+  <span style={{ color: "#7A2604" }}>•</span>{" "}
+  No hidden fees
+</div>
       </div>
     </div>
   </div>

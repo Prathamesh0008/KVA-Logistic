@@ -28,14 +28,18 @@ import {
 } from 'lucide-react'
 import Link from 'next/link'
 
-// Color palette matching your logo
+// Updated color palette – orange is now #EB9003, brown is transparent + shiny
 const colors = {
-  darkBrown: '#521903',
+  darkBrown: '#3d1202',                // Kept as base but used with opacity for transparency
   goldenYellow: '#f8b936',
-  orange: '#dc8c18',
-  darkOrange: '#9f4409',
+  orange: '#EB9003',                   // New orange as requested
+  darkOrange: '#c25500',               // Adjusted to complement new orange
   lightTan: '#c29f85',
 }
+
+// Transparent brown with shiny shadow effect
+const brownTransparent = 'rgba(61, 18, 2, 0.92)'
+const brownShinyShadow = '0 4px 20px rgba(197,85,0,0.3)'
 
 // Light background colors
 const backgroundColors = {
@@ -45,7 +49,7 @@ const backgroundColors = {
   warmWhite: '#faf8f5',
 }
 
-// ✅ Reusable highlight style (gradient text)
+// Reusable highlight style (gradient text) – using new orange
 const highlightText = {
   background: `linear-gradient(90deg, ${colors.goldenYellow}, ${colors.orange})`,
   WebkitBackgroundClip: 'text',
@@ -314,16 +318,16 @@ export default function Services() {
                 Logistics Solutions
               </span>
             </h2>
-        <p
-  className="text-lg sm:text-xl md:text-1xl max-w-3xl mx-auto px-4 cursor-pointer leading-relaxed"
-  style={{ color: colors.darkBrown, opacity: 0.8 }}
->
-  End-to-end logistics services designed to optimize your supply chain
-  and deliver exceptional value
-</p>
+            <p
+              className="text-lg sm:text-xl md:text-1xl max-w-3xl mx-auto px-4 cursor-pointer leading-relaxed"
+              style={{ color: colors.darkBrown, opacity: 0.8 }}
+            >
+              End-to-end logistics services designed to optimize your supply chain
+              and deliver exceptional value
+            </p>
           </div>
 
-          {/* Why Choose Us Section (NEW) */}
+          {/* Why Choose Us Section – with shiny transparent brown effect on hover */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-5xl mx-auto mb-8">
             <div
               className="p-4 rounded-xl text-center transition-all duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer"
@@ -340,9 +344,9 @@ export default function Services() {
                   <Zap className="h-5 w-5" style={{ color: colors.goldenYellow }} />
                 </div>
               </div>
-           <h4 className="text-lg sm:text-xl font-bold mb-2" style={darkText}>
-  Speed & Reliability
-</h4>
+              <h4 className="text-lg sm:text-xl font-bold mb-2" style={darkText}>
+                Speed & Reliability
+              </h4>
               <p className="text-l" style={lightText}>
                 99.8% on-time delivery across all services, with real-time tracking and proactive alerts.
               </p>
@@ -363,9 +367,9 @@ export default function Services() {
                   <Shield className="h-5 w-5" style={{ color: colors.orange }} />
                 </div>
               </div>
-             <h4 className="text-lg sm:text-xl font-bold mb-2" style={darkText}>
-  Security & Compliance
-</h4>
+              <h4 className="text-lg sm:text-xl font-bold mb-2" style={darkText}>
+                Security & Compliance
+              </h4>
               <p className="text-l" style={lightText}>
                 ISO 9001 certified with full cargo insurance and compliance with all international regulations.
               </p>
@@ -375,20 +379,20 @@ export default function Services() {
               className="p-4 rounded-xl text-center transition-all duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer"
               style={{
                 backgroundColor: 'white',
-                border: `1px solid ${colors.darkBrown}20`,
+                border: `1px solid ${brownTransparent}20`,
               }}
             >
               <div className="flex justify-center mb-2">
                 <div
                   className="p-2 rounded-full"
-                  style={{ backgroundColor: colors.darkBrown + '20' }}
+                  style={{ backgroundColor: brownTransparent + '20' }}
                 >
                   <Users className="h-5 w-5" style={{ color: colors.darkBrown }} />
                 </div>
               </div>
-            <h4 className="text-lg sm:text-xl font-bold mb-2" style={darkText}>
-  24/7 Dedicated Support
-</h4>
+              <h4 className="text-lg sm:text-xl font-bold mb-2" style={darkText}>
+                24/7 Dedicated Support
+              </h4>
               <p className="text-l" style={lightText}>
                 Personal account managers and round-the-clock customer service in 12 languages.
               </p>
@@ -449,7 +453,7 @@ export default function Services() {
               className="rounded-lg p-3 sm:p-4 text-center shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 cursor-pointer"
               style={{
                 backgroundColor: 'white',
-                border: `1px solid ${colors.darkBrown}20`,
+                border: `1px solid ${brownTransparent}20`,
                 color: colors.darkBrown,
               }}
             >
@@ -515,7 +519,7 @@ export default function Services() {
                     </div>
 
                     <div className="text-right">
-                      <div className="text-lg sm:text-xl font-bold  mb-2 cursor-pointer" style={highlightText}>
+                      <div className="text-lg sm:text-xl font-bold mb-2 cursor-pointer" style={highlightText}>
                         {service.stats}
                       </div>
                     </div>
@@ -551,20 +555,21 @@ export default function Services() {
                     ))}
                   </ul>
 
-                  {/* Hover Tooltip with Key Metrics (NEW) */}
+                  {/* Hover Tooltip with Key Metrics */}
                   {hoveredIndex === index && (
                     <div
                       className="absolute -top-12 left-1/2 transform -translate-x-1/2 z-30 px-3 py-1.5 rounded-lg text-l whitespace-nowrap shadow-lg"
                       style={{
-                        backgroundColor: colors.darkBrown,
+                        backgroundColor: brownTransparent,
                         color: 'white',
+                        boxShadow: brownShinyShadow,
                       }}
                     >
                       <div className="flex items-center gap-2">
                         <span>🚚 {service.details.transitTime || 'Fast delivery'}</span>
                         <span>🌍 {service.details.coverage?.split(' ')[0] || 'Global'}</span>
                       </div>
-                      <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 rotate-45" style={{ backgroundColor: colors.darkBrown }} />
+                      <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 rotate-45" style={{ backgroundColor: brownTransparent }} />
                     </div>
                   )}
 
@@ -587,7 +592,7 @@ export default function Services() {
             ))}
           </div>
 
-          {/* Testimonials Section (NEW) */}
+          {/* Testimonials Section */}
           <div className="mt-10 max-w-5xl mx-auto">
             <h3 className="text-xl sm:text-2xl font-light tracking-wide text-center mb-4">
               <span className="block cursor-pointer" style={highlightText}>
@@ -637,11 +642,12 @@ export default function Services() {
             </div>
           </div>
 
-          {/* Call-to-Action Banner (NEW) */}
+          {/* Call-to-Action Banner – with transparent brown background and shiny shadow */}
           <div
             className="mt-8 p-6 rounded-xl text-center transition-all duration-300 hover:shadow-xl"
             style={{
-              background: `linear-gradient(90deg, ${colors.darkBrown}, ${colors.darkOrange})`,
+              background: `linear-gradient(90deg, ${brownTransparent}, ${colors.darkOrange})`,
+              boxShadow: brownShinyShadow,
             }}
           >
             <h4 className="text-lg sm:text-xl font-light tracking-wide text-white mb-2">
@@ -666,7 +672,7 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Service Details Modal (unchanged) */}
+      {/* Service Details Modal */}
       {selectedService && (
         <div
           className={`
