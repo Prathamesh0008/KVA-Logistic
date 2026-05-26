@@ -68,9 +68,9 @@ export default function Header() {
                 <Link
                   key={item.name}
                   href={item.href}
-                 className="relative text-lg font-semibold tracking-wide transition hover:opacity-70"
+             className="relative text-lg tracking-[0.02em] transition hover:opacity-70"
 style={{
-  color: "#3A1811",
+  color: "#3A1811f",
   fontFamily: "Arial, Helvetica, sans-serif",
 }}
                 >
@@ -86,29 +86,28 @@ style={{
               );
             })}
           </nav>
+<div className="hidden items-center gap-4 lg:flex">
+  <Link
+    href="/login"
+    className="rounded-full border px-7 py-3.5 text-lg font-black tracking-wide transition hover:bg-[#F5E6D3]"
+    style={{
+      color: colors.darkBrown,
+      borderColor: colors.darkBrown + "30",
+    }}
+  >
+    Login
+  </Link>
 
-          <div className="hidden items-center gap-3 lg:flex">
-            <Link
-              href="/login"
-              className="rounded-full border px-5 py-2.5 text-sm font-bold transition hover:bg-[#F5E6D3]"
-              style={{
-                color: colors.darkBrown,
-                borderColor: colors.darkBrown + "30",
-              }}
-            >
-              Login
-            </Link>
-
-            <Link
-              href="/contact"
-              className="rounded-full px-6 py-3 text-sm font-bold text-white shadow-md transition hover:scale-105"
-              style={{
-                background: `linear-gradient(135deg, ${colors.orange}, ${colors.darkOrange})`,
-              }}
-            >
-              Get Quote
-            </Link>
-          </div>
+  <Link
+    href="/contact"
+    className="rounded-full px-8 py-4 text-lg font-black tracking-wide text-white shadow-md transition hover:scale-105"
+    style={{
+      background: `linear-gradient(135deg, ${colors.orange}, ${colors.darkOrange})`,
+    }}
+  >
+    Get Quote
+  </Link>
+</div>
 
           <button
             type="button"
