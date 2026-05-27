@@ -3,14 +3,36 @@ import {
   Shield,
   Users,
   TrendingUp,
-  Award,
   Globe,
   Clock,
   Truck,
   Heart,
   Calendar,
-  Star,
 } from "lucide-react";
+import TestimonialsSection from "../components/Stats";
+
+function MissionDetail({ icon, color, title, subtitle, textColor }) {
+  return (
+    <div className="flex items-start gap-3">
+      <div
+        className="p-2 rounded-lg flex items-center justify-center"
+        style={{ backgroundColor: `${color}15` }}
+      >
+        <div className="h-4 w-4" style={{ color }}>
+          {icon}
+        </div>
+      </div>
+      <div>
+        <h4 className="font-normal text-sm" style={{ color: textColor }}>
+          {title}
+        </h4>
+        <p className="text-l" style={{ color: textColor, opacity: 0.6 }}>
+          {subtitle}
+        </p>
+      </div>
+    </div>
+  );
+}
 
 export default function AboutPage() {
   // Updated color palette – orange is #EB9003, brown becomes transparent + shiny
@@ -36,30 +58,6 @@ export default function AboutPage() {
     WebkitTextFillColor: "transparent",
     backgroundClip: "text",
   };
-
-  // Helper component for mission/vision details
-  function MissionDetail({ icon, color, title, subtitle }) {
-    return (
-      <div className="flex items-start gap-3">
-        <div
-          className="p-2 rounded-lg flex items-center justify-center"
-          style={{ backgroundColor: `${color}15` }}
-        >
-          <div className="h-4 w-4" style={{ color }}>
-            {icon}
-          </div>
-        </div>
-        <div>
-          <h4 className="font-normal text-sm" style={{ color: colors.darkBrown }}>
-            {title}
-          </h4>
-          <p className="text-l" style={{ color: colors.darkBrown, opacity: 0.6 }}>
-            {subtitle}
-          </p>
-        </div>
-      </div>
-    );
-  }
 
   // Timeline data
   const timeline = [
@@ -100,29 +98,6 @@ export default function AboutPage() {
     { name: "Chidi Eze", role: "COO", bg: colors.orange },
     { name: "Fatima Yusuf", role: "CFO", bg: colors.darkOrange },
     { name: "Olusegun Adebayo", role: "CTO", bg: colors.darkBrown },
-  ];
-
-  const awards = [
-    "Best Logistics Company 2022 (African Business Awards)",
-    "Green Supply Chain Award 2023",
-    "ISO 9001:2015 Certified",
-    "Customer Service Excellence 2024",
-  ];
-
-  // Testimonials
-  const testimonials = [
-    {
-      quote:
-        "KVA handles our pan-African shipments with unmatched reliability. They're a true partner.",
-      author: "Margaret Mwangi",
-      company: "AfriTrade Ltd",
-    },
-    {
-      quote:
-        "Their real-time tracking and dedicated support save us hours every week.",
-      author: "James Omondi",
-      company: "Nairobi Exports",
-    },
   ];
 
   return (
@@ -261,18 +236,21 @@ export default function AboutPage() {
                   color={colors.goldenYellow}
                   title="Precision & Accuracy"
                   subtitle="99.8% on-time delivery"
+                  textColor={colors.darkBrown}
                 />
                 <MissionDetail
                   icon={<Shield />}
                   color={colors.orange}
                   title="Security & Trust"
                   subtitle="$500M cargo insurance"
+                  textColor={colors.darkBrown}
                 />
                 <MissionDetail
                   icon={<Clock />}
                   color={colors.darkBrown}
                   title="24/7 Reliability"
                   subtitle="Round-the-clock support"
+                  textColor={colors.darkBrown}
                 />
               </div>
             </div>
@@ -309,18 +287,21 @@ export default function AboutPage() {
                   color={colors.orange}
                   title="Sustainable Growth"
                   subtitle="Carbon-neutral options"
+                  textColor={colors.darkBrown}
                 />
                 <MissionDetail
                   icon={<Users />}
                   color={colors.goldenYellow}
                   title="Global Community"
                   subtitle="150+ countries served"
+                  textColor={colors.darkBrown}
                 />
                 <MissionDetail
                   icon={<Truck />}
                   color={colors.darkOrange}
                   title="Innovation Driven"
                   subtitle="Advancing technology"
+                  textColor={colors.darkBrown}
                 />
               </div>
             </div>
@@ -438,43 +419,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Customer Testimonials */}
-      <section className="py-10">
-        <div className="container mx-auto px-4">
-          <h2
-            className="text-3xl md:text-4xl font-light text-center mb-10"
-            style={{ color: colors.darkBrown }}
-          >
-            What Our Clients Say
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {testimonials.map((t, i) => (
-              <div
-                key={i}
-                className="p-8 rounded-xl bg-white/70 backdrop-blur-sm shadow-sm hover:shadow-md transition"
-                style={{ border: `1px solid ${colors.lightTan}20` }}
-              >
-                <Star className="h-5 w-5 mb-4" style={{ color: colors.goldenYellow }} />
-                <p
-                  className="text-sm font-light italic mb-4 leading-relaxed"
-                  style={{ color: colors.darkBrown, opacity: 0.9 }}
-                >
-                  "{t.quote}"
-                </p>
-                <div className="font-light" style={{ color: colors.darkBrown }}>
-                  {t.author}
-                </div>
-                <div
-                  className="text-l font-light"
-                  style={{ color: colors.darkBrown, opacity: 0.6 }}
-                >
-                  {t.company}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <TestimonialsSection />
     </div>
   );
 }

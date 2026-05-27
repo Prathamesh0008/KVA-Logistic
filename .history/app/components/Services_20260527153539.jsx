@@ -280,10 +280,107 @@ export default function ServicesPage() {
 </section>
 
 {/* Testimonials */}
+{/* <section className="py-12 overflow-hidden">
+  {/* <div className="max-w-6xl mx-auto px-4">
+    <h2
+      className="text-3xl md:text-4xl font-semibold text-center mb-12"
+      style={{ color: colors.darkBrown }}
+    >
+      What Our Clients Say
+    </h2>
 
+    <div className="relative w-full overflow-hidden">
+      <div className="flex w-max gap-6 animate-[slideRightToLeft_28s_linear_infinite] hover:[animation-play-state:paused]">
+        {[
+          {
+            quote:
+              "Their road freight service reduced our transit times by 30%. The real-time tracking is a game-changer.",
+            author: "— Maria G., Logistics Manager",
+          },
+          {
+            quote:
+              "Outstanding ocean freight support – customs clearance was handled flawlessly. Highly professional team.",
+            author: "— James T., Supply Chain Director",
+          },
+          {
+            quote:
+              "Reliable, professional and fast support for our international shipments.",
+            author: "— David R., Operations Head",
+          },
+          {
+            quote:
+              "Excellent logistics partner with smooth communication and secure handling.",
+            author: "— Sarah K., Import Manager",
+          },
+          {
+            quote:
+              "Their road freight service reduced our transit times by 30%. The real-time tracking is a game-changer.",
+            author: "— Maria G., Logistics Manager",
+          },
+          {
+            quote:
+              "Outstanding ocean freight support – customs clearance was handled flawlessly. Highly professional team.",
+            author: "— James T., Supply Chain Director",
+          },
+          {
+            quote:
+              "Reliable, professional and fast support for our international shipments.",
+            author: "— David R., Operations Head",
+          },
+          {
+            quote:
+              "Excellent logistics partner with smooth communication and secure handling.",
+            author: "— Sarah K., Import Manager",
+          },
+        ].map((testimonial, idx) => (
+          <div
+            key={idx}
+            className="w-[520px] shrink-0 p-8 rounded-xl border relative"
+            style={{
+              backgroundColor: "white",
+              borderColor: colors.lightTan + "60",
+            }}
+          >
+            <div
+              className="absolute top-0 left-5 -translate-y-1/2 text-5xl"
+              style={{ color: colors.goldenYellow, opacity: 0.45 }}
+            >
+              "
+            </div>
+
+            <p
+              className="text-base md:text-lg italic mb-5 leading-relaxed"
+              style={{ color: colors.darkBrown, opacity: 0.88 }}
+            >
+              {testimonial.quote}
+            </p>
+
+            <p
+              className="text-lg md:text-xl font-semibold"
+              style={{ color: colors.darkBrown }}
+            >
+              {testimonial.author}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div> */}
+
+  <style jsx>{`
+    @keyframes slideRightToLeft {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-50%);
+      }
+    }
+  `}</style>
+</section> */}
 
       {/* Call-to-Action */}
-      <section className="py-5">
+      <section className="py-0">
         <div className="max-w-3xl mx-auto px-4 text-center">
           <h2
             className="text-2xl md:text-3xl font-light mb-4"

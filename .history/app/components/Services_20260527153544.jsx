@@ -283,7 +283,7 @@ export default function ServicesPage() {
 
 
       {/* Call-to-Action */}
-      <section className="py-5">
+      <section className="py-0">
         <div className="max-w-3xl mx-auto px-4 text-center">
           <h2
             className="text-2xl md:text-3xl font-light mb-4"

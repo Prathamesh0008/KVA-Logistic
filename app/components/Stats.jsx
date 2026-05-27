@@ -1,6 +1,7 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import Image from 'next/image'
+import { useEffect, useRef, useState } from 'react'
 import { Star, Quote } from 'lucide-react'
 
 const colors = {
@@ -86,6 +87,7 @@ const StarRating = ({ rating }) => (
 export default function TestimonialsSection() {
   const sliderItems = [...testimonials, ...testimonials]
   const sliderRef = useRef(null)
+  const autoScrollRef = useRef(true)
 
   const [isDragging, setIsDragging] = useState(false)
   const [startX, setStartX] = useState(0)
@@ -95,6 +97,7 @@ export default function TestimonialsSection() {
     if (!sliderRef.current) return
 
     setIsDragging(true)
+    autoScrollRef.current = false
 
     const pageX = e.pageX || e.touches?.[0]?.pageX
     setStartX(pageX)
@@ -114,7 +117,33 @@ export default function TestimonialsSection() {
 
   const stopDrag = () => {
     setIsDragging(false)
+    autoScrollRef.current = true
   }
+
+  useEffect(() => {
+    const el = sliderRef.current
+    if (!el) return
+
+    const speed = 0.7
+    let rafId
+
+    const tick = () => {
+      if (autoScrollRef.current && !isDragging) {
+        el.scrollLeft += speed
+
+        // Reset at halfway point since items are duplicated.
+        if (el.scrollLeft >= el.scrollWidth / 2) {
+          el.scrollLeft = 0
+        }
+      }
+
+      rafId = requestAnimationFrame(tick)
+    }
+
+    rafId = requestAnimationFrame(tick)
+
+    return () => cancelAnimationFrame(rafId)
+  }, [isDragging])
 
   return (
     <section
@@ -122,29 +151,6 @@ export default function TestimonialsSection() {
       style={{ backgroundColor: colors.warmWhite }}
     >
       <style jsx global>{`
-        @keyframes scrollRightToLeft {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
-        }
-
-        .testimonial-slider {
-          animation: scrollRightToLeft 22s linear infinite;
-          will-change: transform;
-        }
-
-        .testimonial-slider:hover {
-          animation-play-state: paused;
-        }
-
-        .testimonial-wrapper:hover .testimonial-slider,
-        .testimonial-wrapper.dragging .testimonial-slider {
-          animation-play-state: paused;
-        }
-
         .scrollbar-hide::-webkit-scrollbar {
           display: none;
         }
@@ -190,15 +196,21 @@ export default function TestimonialsSection() {
           className={`testimonial-wrapper scrollbar-hide w-full cursor-grab overflow-x-auto overflow-y-hidden ${
             isDragging ? 'dragging cursor-grabbing' : ''
           }`}
+          onMouseEnter={() => {
+            autoScrollRef.current = false
+          }}
+          onMouseLeave={() => {
+            stopDrag()
+            autoScrollRef.current = true
+          }}
           onMouseDown={startDrag}
           onMouseMove={moveDrag}
           onMouseUp={stopDrag}
-          onMouseLeave={stopDrag}
           onTouchStart={startDrag}
           onTouchMove={moveDrag}
           onTouchEnd={stopDrag}
         >
-          <div className="testimonial-slider flex w-max gap-6 px-4">
+          <div className="flex w-max gap-6 px-4">
             {sliderItems.map((testimonial, idx) => (
               <div
                 key={`${testimonial.id}-${idx}`}
@@ -227,11 +239,13 @@ export default function TestimonialsSection() {
                       className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full border-2 shadow-sm"
                       style={{ borderColor: colors.goldenYellow }}
                     >
-                      <img
+                      <Image
                         src={testimonial.image}
                         alt={testimonial.name}
+                        width={48}
+                        height={48}
                         className="h-full w-full object-cover"
-                        draggable="false"
+                        draggable={false}
                       />
                     </div>
 
