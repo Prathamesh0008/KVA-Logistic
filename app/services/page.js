@@ -593,7 +593,7 @@ export default function Services() {
           </div>
 
           {/* Testimonials Section */}
-          <div className="mt-10 max-w-5xl mx-auto">
+          {/* <div className="mt-10 max-w-5xl mx-auto">
             <h3 className="text-xl sm:text-2xl font-light tracking-wide text-center mb-4">
               <span className="block cursor-pointer" style={highlightText}>
                 What Our Clients Say
@@ -640,7 +640,7 @@ export default function Services() {
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
 
           {/* Call-to-Action Banner – with transparent brown background and shiny shadow */}
           <div

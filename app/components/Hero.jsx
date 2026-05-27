@@ -261,7 +261,7 @@ className="relative w-full min-h-[calc(100vh-84px)] md:h-[calc(100vh-84px)] flex
 {/* Paragraph */}
 {/* Paragraph */}
 {/* Paragraph */}
-<p className="text-lg sm:text-xl md:text-2xl lg:text-[28px] leading-[1.45] mb-8 max-w-[880px] font-light drop-shadow-[0_2px_10px_rgba(248,185,54,0.35)] text-[#f8b936]">
+<p className="text-lg sm:text-xl md:text-2xl lg:text-[28px] leading-[1.45] mb-8 max-w-[880px] font-light text-yellow-400">
   Professional warehousing, distribution, and transportation services
   <br />
   secure, efficient &amp; reliable.

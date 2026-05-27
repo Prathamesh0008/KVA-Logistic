@@ -86,13 +86,13 @@ style={{
               );
             })}
           </nav>
-<div className="hidden items-center gap-4 lg:flex">
+<div className="hidden items-center gap-3 lg:flex">
   <Link
     href="/login"
-    className="rounded-full border px-7 py-3.5 text-lg font-black tracking-wide transition hover:bg-[#F5E6D3]"
+    className="rounded-md border px-5 py-2.5 text-base font-medium tracking-wide transition hover:bg-[#F5E6D3]"
     style={{
       color: colors.darkBrown,
-      borderColor: colors.darkBrown + "30",
+      borderColor: colors.darkBrown + "40",
     }}
   >
     Login
@@ -100,7 +100,7 @@ style={{
 
   <Link
     href="/contact"
-    className="rounded-full px-8 py-4 text-lg font-black tracking-wide text-white shadow-md transition hover:scale-105"
+    className="rounded-md px-6 py-2.5 text-base font-medium tracking-wide text-white shadow-sm transition hover:scale-105"
     style={{
       background: `linear-gradient(135deg, ${colors.orange}, ${colors.darkOrange})`,
     }}

@@ -281,7 +281,7 @@ export default function ServicesPage() {
 
 {/* Testimonials */}
 <section className="py-12 overflow-hidden">
-  <div className="max-w-6xl mx-auto px-4">
+  {/* <div className="max-w-6xl mx-auto px-4">
     <h2
       className="text-3xl md:text-4xl font-semibold text-center mb-12"
       style={{ color: colors.darkBrown }}
@@ -365,7 +365,7 @@ export default function ServicesPage() {
         ))}
       </div>
     </div>
-  </div>
+  </div> */}
 
   <style jsx>{`
     @keyframes slideRightToLeft {
